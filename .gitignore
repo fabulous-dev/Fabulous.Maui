@@ -351,3 +351,4 @@ MigrationBackup/
 
 .idea/
 .DS_Store
+*.designer.cs
