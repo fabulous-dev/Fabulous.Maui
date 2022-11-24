@@ -1,0 +1,4 @@
+namespace CounterApp
+
+module App =
+    ()

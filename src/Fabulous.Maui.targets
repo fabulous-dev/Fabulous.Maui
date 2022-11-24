@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <ItemGroup Condition="$(TargetPlatformIdentifier) == 'android'">
+        <AndroidManifest Include="$(AndroidProjectFolder)AndroidManifest.xml" />
+        <AndroidResource Include="$(MonoAndroidResourcePrefix)/*/*" Exclude="$(MonoAndroidResourcePrefix)/raw/.*" />
+        <AndroidAsset Include="$(MonoAndroidAssetsPrefix)/**/*" Exclude="$(MonoAndroidAssetsPrefix)/**/.*/**" />
+        <PackageReference Include="FSharp.Android.Resource" Version="1.0.4" />
+    </ItemGroup>
+</Project>
