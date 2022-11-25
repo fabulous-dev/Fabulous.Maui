@@ -14,6 +14,7 @@ module FabulousHandlers =
             .AddHandler<FabApplication, ApplicationHandler>()
             .AddHandler<FabWindow, WindowHandler>()
             .AddHandler<FabLabel, LabelHandler>()
+            .AddHandler<FabButton, ButtonHandler>()
         |> ignore
 
 [<Extension>]

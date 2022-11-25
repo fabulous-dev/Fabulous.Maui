@@ -21,6 +21,9 @@
     <Compile Include="Widgets\Label.fs" />
     <Compile Include="Widgets\Window.fs" />
     <Compile Include="Widgets\Application.fs" />
+    <Compile Include="Widgets\_ButtonStroke.fs" />
+    <Compile Include="Widgets\_Button.fs" />
+    <Compile Include="Widgets\TextButton.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>

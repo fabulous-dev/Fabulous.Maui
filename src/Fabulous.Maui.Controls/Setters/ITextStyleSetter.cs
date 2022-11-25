@@ -11,7 +11,7 @@ public static class TextStyleDefaults
 
 public interface ITextStyleSetter
 {
-    void SetTextColor(Microsoft.Maui.Graphics.Color? value);
+    void SetTextColor(Microsoft.Maui.Graphics.Color value);
     void SetFont(Font value);
     void SetCharacterSpacing(double value);
 }
