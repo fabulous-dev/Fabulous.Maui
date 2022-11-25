@@ -2,11 +2,12 @@ namespace CounterApp.Android
 
 open Android.App
 open Microsoft.Maui
+open CounterApp
 
 [<Application>]
 type MainApplication(handle, ownership) =
     inherit MauiApplication(handle, ownership)
 
-    do CounterApp.Android.Resource.UpdateIdValues()
+    do CounterApp.Resource.UpdateIdValues()
     
     override _.CreateMauiApp() = MauiProgram.CreateMauiApp()

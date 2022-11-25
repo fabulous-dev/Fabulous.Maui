@@ -4,17 +4,30 @@
     <TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UseMauiCore>true</UseMauiCore>
+    <UseMauiEssentials>true</UseMauiEssentials>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="ViewNode.fs" />
     <Compile Include="Attributes.fs" />
     <Compile Include="Widgets.fs" />
+    <Compile Include="Widgets\_TitledElement.fs" />
+    <Compile Include="Widgets\_Transform.fs" />
+    <Compile Include="Widgets\_View.fs" />
+    <Compile Include="Widgets\_TextStyle.fs" />
+    <Compile Include="Widgets\_Text.fs" />
+    <Compile Include="Widgets\_TextAlignment.fs" />
+    <Compile Include="Widgets\_Padding.fs" />
+    <Compile Include="Widgets\Label.fs" />
+    <Compile Include="Widgets\Window.fs" />
+    <Compile Include="Widgets\Application.fs" />
     <Compile Include="Program.fs" />
+    <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
+    <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" />
   </ItemGroup>
 
 </Project>

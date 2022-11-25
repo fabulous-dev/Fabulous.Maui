@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
     <ItemGroup Condition="$(TargetPlatformIdentifier) == 'android'">
-        <AndroidManifest Include="$(AndroidProjectFolder)AndroidManifest.xml" />
-        <AndroidResource Include="$(MonoAndroidResourcePrefix)/*/*" Exclude="$(MonoAndroidResourcePrefix)/raw/.*" />
-        <AndroidAsset Include="$(MonoAndroidAssetsPrefix)/**/*" Exclude="$(MonoAndroidAssetsPrefix)/**/.*/**" />
+        <None Include="Platforms\Android\AndroidManifest.xml" />
+        <AndroidResource Include="Platforms\Android\Resources\**\*" Exclude="Platforms\Android\Resources\raw\.*" />
+        <AndroidAsset Include="Platforms\Android\Assets\**\*" Exclude="Platforms\Android\Assets\**\.*\**" />
         <PackageReference Include="FSharp.Android.Resource" Version="1.0.4" />
     </ItemGroup>
 </Project>

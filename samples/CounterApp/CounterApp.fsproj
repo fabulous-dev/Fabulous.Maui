@@ -7,8 +7,7 @@
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
     <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
     <OutputType>Exe</OutputType>
-    <UseMauiCore>true</UseMauiCore>
-    <UseMauiEssentials>true</UseMauiEssentials>
+    <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     
     <!-- Display name -->
@@ -34,7 +33,7 @@
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appconfig.svg" Color="#512BD4" />
 
     <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />

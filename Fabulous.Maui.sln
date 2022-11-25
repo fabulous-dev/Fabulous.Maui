@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution files", "_Solutio
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabulous.Maui.Controls", "src\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj", "{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +46,14 @@ Global
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{43C59611-F941-4F99-AA53-7DAC43E2A80A} = {6255FC2D-3C2A-46CF-84FF-4C1860895F16}
 		{EA9333F1-4603-49E5-B841-1726D47FF16C} = {A2CFF48D-2180-464A-ADB2-67254AEB4BD5}
+		{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8} = {6255FC2D-3C2A-46CF-84FF-4C1860895F16}
 	EndGlobalSection
 EndGlobal

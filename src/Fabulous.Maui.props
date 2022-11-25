@@ -11,4 +11,8 @@
         -->
         <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <AndroidManifest>Platforms\Android\AndroidManifest.xml</AndroidManifest>
+    </PropertyGroup>
 </Project>
