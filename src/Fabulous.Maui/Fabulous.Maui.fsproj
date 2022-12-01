@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
+    <TargetFramework>net7.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UseMauiCore>true</UseMauiCore>
     <UseMauiEssentials>true</UseMauiEssentials>
@@ -11,25 +11,29 @@
     <Compile Include="ViewNode.fs" />
     <Compile Include="Attributes.fs" />
     <Compile Include="Widgets.fs" />
-    <Compile Include="Widgets\_TitledElement.fs" />
-    <Compile Include="Widgets\_Transform.fs" />
-    <Compile Include="Widgets\_View.fs" />
-    <Compile Include="Widgets\_TextStyle.fs" />
-    <Compile Include="Widgets\_Text.fs" />
-    <Compile Include="Widgets\_TextAlignment.fs" />
-    <Compile Include="Widgets\_Padding.fs" />
+    <Compile Include="Widgets\Partials\_Button.fs" />
+    <Compile Include="Widgets\Partials\_ButtonStroke.fs" />
+    <Compile Include="Widgets\Partials\_Container.fs" />
+    <Compile Include="Widgets\Partials\_ContentView.fs" />
+    <Compile Include="Widgets\Partials\_ImageSourcePart.fs" />
+    <Compile Include="Widgets\Partials\_Layout.fs" />
+    <Compile Include="Widgets\Partials\_Padding.fs" />
+    <Compile Include="Widgets\Partials\_SafeAreaView.fs" />
+    <Compile Include="Widgets\Partials\_StackLayout.fs" />
+    <Compile Include="Widgets\Partials\_Transform.fs" />
+    <Compile Include="Widgets\Partials\_Text.fs" />
+    <Compile Include="Widgets\Partials\_TextAlignment.fs" />
+    <Compile Include="Widgets\Partials\_TitledElement.fs" />
+    <Compile Include="Widgets\Partials\_TextStyle.fs" />
+    <Compile Include="Widgets\Partials\_View.fs" />
+    <Compile Include="Widgets\Image.fs" />
     <Compile Include="Widgets\Label.fs" />
-    <Compile Include="Widgets\Window.fs" />
-    <Compile Include="Widgets\Application.fs" />
-    <Compile Include="Widgets\_ButtonStroke.fs" />
-    <Compile Include="Widgets\_Button.fs" />
     <Compile Include="Widgets\TextButton.fs" />
-    <Compile Include="Widgets\_SafeAreaView.fs" />
-    <Compile Include="Widgets\_Container.fs" />
-    <Compile Include="Widgets\_Layout.fs" />
-    <Compile Include="Widgets\_StackLayout.fs" />
+    <Compile Include="Widgets\ScrollView.fs" />
     <Compile Include="Widgets\HStack.fs" />
     <Compile Include="Widgets\VStack.fs" />
+    <Compile Include="Widgets\Window.fs" />
+    <Compile Include="Widgets\Application.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>

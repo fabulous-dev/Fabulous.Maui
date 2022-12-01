@@ -10,8 +10,16 @@ module HStack =
 [<AutoOpen>]
 module HStackBuilders =
     type Fabulous.Maui.View with
-        static member inline HStack<'msg>() =
-            CollectionBuilder<'msg, IStackLayout, IView>(
-                HStack.WidgetKey,
-                Container.Children
-            )
+        static member inline HStack<'msg>(?spacing: float) =
+            match spacing with
+            | None ->
+                CollectionBuilder<'msg, IStackLayout, IView>(
+                    HStack.WidgetKey,
+                    Container.Children
+                )
+            | Some spacing ->
+                CollectionBuilder<'msg, IStackLayout, IView>(
+                    HStack.WidgetKey,
+                    Container.Children,
+                    StackLayout.Spacing.WithValue(spacing)
+                )

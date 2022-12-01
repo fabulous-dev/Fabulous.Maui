@@ -22,12 +22,25 @@ module App =
     let view model =
         Application() {
             Window(
-                VStack() {
-                    Label("Hello, Fabulous!")
-                    
-                    let text = if model.Count = 0 then "Click me!" else $"Clicked: {model.Count} times"
-                    TextButton(text, Increment)
-                }
+                ScrollView(
+                    VStack(25.) {
+                        Image("dotnet_bot.png")
+                            .height(200.)
+                            .centerHorizontal()
+                        
+                        Label("Hello, World!")
+                            .centerHorizontal()
+                            
+                        Label("Welcome to .NET Multi-platform App UI")
+                            .centerHorizontal()
+                        
+                        let text = if model.Count = 0 then "Click me!" else $"Clicked: {model.Count} times"
+                        TextButton(text, Increment)
+                            .centerHorizontal()
+                    }
+                )
+                    .centerVertical()
+                    .padding(30., 0.)
             )
         }
         
