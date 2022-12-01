@@ -15,6 +15,8 @@ module FabulousHandlers =
             .AddHandler<FabWindow, WindowHandler>()
             .AddHandler<FabLabel, LabelHandler>()
             .AddHandler<FabButton, ButtonHandler>()
+            .AddHandler<FabHorizontalStackLayout, LayoutHandler>()
+            .AddHandler<FabVerticalStackLayout, LayoutHandler>()
         |> ignore
 
 [<Extension>]
@@ -23,7 +25,8 @@ type AppHostBuilderExtensions =
     [<Extension>]
     static member UseFabulousApp<'args, 'model, 'msg, 'marker when 'marker :> IApplication>(this: MauiAppBuilder, program: Program<'args, 'model, 'msg, 'marker>, args: 'args) =
         this.Services.TryAddSingleton<IApplication>(fun _ ->
-            Program.startApplicationWithArgs args program
+            let app = Program.startApplicationWithArgs args program
+            app
         )
         this.ConfigureMauiHandlers(FabulousHandlers.register)
         

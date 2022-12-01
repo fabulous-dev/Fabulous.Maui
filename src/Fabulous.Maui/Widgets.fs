@@ -11,7 +11,7 @@ type View =
     end
 
 module Widgets =
-    let registerWithAdditionalSetup<'T when 'T :> BaseNode and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
+    let registerWithAdditionalSetup<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
         let key = WidgetDefinitionStore.getNextKey()
 
         let definition =
@@ -32,7 +32,7 @@ module Widgets =
 
                     match parentNode with
                     | None -> ()
-                    | Some node -> view.Parent <- node.Target :?> Microsoft.Maui.IElement
+                    | Some node -> view.Parent <- node.Target :?> FabElement
 
                     let node = ViewNode(parentNode, treeContext, weakReference)
 
@@ -46,5 +46,5 @@ module Widgets =
         WidgetDefinitionStore.set key definition
         key
 
-    let register<'T when 'T :> BaseNode and 'T: (new: unit -> 'T)> () =
+    let register<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> () =
         registerWithAdditionalSetup<'T>(fun _ _ -> ())

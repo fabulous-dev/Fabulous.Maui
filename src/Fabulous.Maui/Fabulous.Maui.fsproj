@@ -24,6 +24,12 @@
     <Compile Include="Widgets\_ButtonStroke.fs" />
     <Compile Include="Widgets\_Button.fs" />
     <Compile Include="Widgets\TextButton.fs" />
+    <Compile Include="Widgets\_SafeAreaView.fs" />
+    <Compile Include="Widgets\_Container.fs" />
+    <Compile Include="Widgets\_Layout.fs" />
+    <Compile Include="Widgets\_StackLayout.fs" />
+    <Compile Include="Widgets\HStack.fs" />
+    <Compile Include="Widgets\VStack.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>

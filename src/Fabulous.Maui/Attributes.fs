@@ -9,7 +9,7 @@ module Attributes =
             name
             ScalarAttributeComparers.noCompare
             (fun prevOpt currOpt node ->
-                let target = node.Target :?> BaseNode
+                let target = node.Target :?> FabElement
                 match currOpt with
                 | ValueNone -> unset target
                 | ValueSome curr ->
@@ -20,16 +20,16 @@ module Attributes =
                 if target.Handler <> null then target.Handler.UpdateValue(propertyName)
             )
 
-    let defineMauiSimpleScalarWithEquality (name: string) (propertyName: string) (updateNode: 'T voption -> 'T voption -> BaseNode -> unit) =
+    let defineMauiSimpleScalarWithEquality (name: string) (propertyName: string) (updateNode: 'T voption -> 'T voption -> FabElement -> unit) =
         Attributes.defineSimpleScalarWithEquality name (fun prevOpt currOpt node ->
-            let target = node.Target :?> BaseNode
+            let target = node.Target :?> FabElement
             updateNode prevOpt currOpt target
             if target.Handler <> null then target.Handler.UpdateValue(propertyName)
         )
         
     let defineMauiPropertyWidget (name: string) (propertyName: string) (get: obj -> obj) (set: obj -> 'T -> unit) =
         Attributes.definePropertyWidget name get (fun target value ->
-            let target = target :?> BaseNode
+            let target = target :?> FabElement
             set target value
             if target.Handler <> null then target.Handler.UpdateValue(propertyName)
         )

@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
+      <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" />
     </ItemGroup>
 
 </Project>

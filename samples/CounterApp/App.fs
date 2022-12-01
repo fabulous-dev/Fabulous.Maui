@@ -1,5 +1,6 @@
 namespace CounterApp
 
+open Microsoft.Maui.Graphics
 open Fabulous.Maui
 
 open type Fabulous.Maui.View
@@ -21,8 +22,12 @@ module App =
     let view model =
         Application() {
             Window(
-                let text = if model.Count = 0 then "Click me!" else $"Clicked: {model.Count} times"
-                TextButton(text, Increment)
+                VStack() {
+                    Label("Hello, Fabulous!")
+                    
+                    let text = if model.Count = 0 then "Click me!" else $"Clicked: {model.Count} times"
+                    TextButton(text, Increment)
+                }
             )
         }
         

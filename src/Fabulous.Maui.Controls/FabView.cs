@@ -9,8 +9,8 @@ public static class ViewDefaults
 {
     public const string AutomationId = "";
     public const FlowDirection FlowDirection = Microsoft.Maui.FlowDirection.MatchParent;
-    public const LayoutAlignment HorizontalLayoutAlignment = LayoutAlignment.Start;
-    public const LayoutAlignment VerticalLayoutAlignment = LayoutAlignment.Start;
+    public const LayoutAlignment HorizontalLayoutAlignment = LayoutAlignment.Fill;
+    public const LayoutAlignment VerticalLayoutAlignment = LayoutAlignment.Fill;
     public static Semantics CreateDefaultSemantics() => new();
     public const IShape Clip = null!;
     public const IShadow Shadow = null!;
@@ -19,14 +19,14 @@ public static class ViewDefaults
     public const Visibility Visibility = Microsoft.Maui.Visibility.Visible;
     public const double Opacity = 1.0;
     public const Paint Background = null!;
-    public const double Width = -1.0;
-    public const double MinimumWidth = -1.0;
-    public const double MaximumWidth = -1.0;
-    public const double Height = -1.0;
-    public const double MinimumHeight = -1.0;
-    public const double MaximumHeight = -1.0;
+    public const double Width = Dimension.Unset;
+    public const double MinimumWidth = Dimension.Unset;
+    public const double MaximumWidth = Dimension.Maximum;
+    public const double Height = Dimension.Unset;
+    public const double MinimumHeight = Dimension.Unset;
+    public const double MaximumHeight = Dimension.Maximum;
     public static Thickness CreateDefaultMargin() => Thickness.Zero;
-    public const int ZIndex = -1;
+    public const int ZIndex = 0;
     public const bool InputTransparent = false;
 }
 
@@ -53,13 +53,13 @@ public class FabView: FabElement, IView, ITransformSetter
         return Frame.Size;
     }
 
-    public Size Measure(double widthConstraint, double heightConstraint)
+    public virtual Size Measure(double widthConstraint, double heightConstraint)
     {
         DesiredSize = this.ComputeDesiredSize(widthConstraint, heightConstraint);
         return DesiredSize;
     }
-
-    public void InvalidateMeasure()
+    
+    public virtual void InvalidateMeasure()
     {
         Handler?.Invoke(nameof(InvalidateMeasure));
     }
@@ -99,7 +99,13 @@ public class FabView: FabElement, IView, ITransformSetter
     public double MaximumHeight { get; set; } = ViewDefaults.MaximumHeight;
     public Thickness Margin { get; set; } = ViewDefaults.CreateDefaultMargin();
     public int ZIndex { get; set; } = ViewDefaults.ZIndex;
-    public new IViewHandler? Handler { get; set; } = null;
+
+    public new IViewHandler? Handler
+    {
+        get => base.Handler as IViewHandler;
+        set => base.Handler = value;
+    }
+    
     public bool InputTransparent { get; set; } = ViewDefaults.InputTransparent;
 
     public void SetTranslationX(double value) => TranslationX = value;
