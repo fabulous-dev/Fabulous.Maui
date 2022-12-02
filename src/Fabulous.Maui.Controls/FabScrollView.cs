@@ -1,24 +1,25 @@
 using Microsoft.Maui;
+using Microsoft.Maui.Handlers.Defaults;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public static class ScrollViewDefaults
+public interface IFabScrollView : IScrollView
 {
-    public const Action? OnScrollFinished = null;
-    public const ScrollBarVisibility HorizontalScrollBarVisibility = ScrollBarVisibility.Default;
-    public const ScrollBarVisibility VerticalScrollBarVisibility = ScrollBarVisibility.Default;
-    public const ScrollOrientation Orientation = ScrollOrientation.Vertical;
-    public const double HorizontalOffset = 0.0;
-    public const double VerticalOffset = 0.0;
-    public static Size CreateContentSize() => Size.Zero;
+    Action? OnScrollFinished { get; set; }
+    new ScrollBarVisibility HorizontalScrollBarVisibility { get; set; }
+    new ScrollBarVisibility VerticalScrollBarVisibility { get; set; }
+    new ScrollOrientation Orientation { get; set; }
+    new Size ContentSize { get; set; }
+    new double HorizontalOffset { get; set; }
+    new double VerticalOffset { get; set; }
 }
 
-public class FabScrollView: FabContentView, IScrollView
+public class FabScrollView: FabContentView, IFabScrollView
 {
-    public Action? OnScrollFinsihed { get; set; } = ScrollViewDefaults.OnScrollFinished;
-    public void ScrollFinished() => OnScrollFinsihed?.Invoke();
+    public Action? OnScrollFinished { get; set; } = ScrollViewDefaults.OnScrollFinished;
+    public void ScrollFinished() => OnScrollFinished?.Invoke();
     
     public void RequestScrollTo(double horizontalOffset, double verticalOffset, bool instant)
     {
@@ -78,4 +79,15 @@ public class FabScrollView: FabContentView, IScrollView
 
         return bounds.Size;
     }
+}
+
+public static class FabScrollViewSetters
+{
+    public static void SetOnScrollFinished(FabElement target, Action? value) => ((IFabScrollView)target).OnScrollFinished = value;
+    public static void SetHorizontalScrollBarVisibility(FabElement target, ScrollBarVisibility value) => ((IFabScrollView)target).HorizontalScrollBarVisibility = value;
+    public static void SetVerticalScrollBarVisibility(FabElement target, ScrollBarVisibility value) => ((IFabScrollView)target).VerticalScrollBarVisibility = value;
+    public static void SetOrientation(FabElement target, ScrollOrientation value) => ((IFabScrollView)target).Orientation = value;
+    public static void SetHorizontalOffset(FabElement target, double value) => ((IFabScrollView)target).HorizontalOffset = value;
+    public static void SetVerticalOffset(FabElement target, double value) => ((IFabScrollView)target).VerticalOffset = value;
+    public static void SetContentSize(FabElement target, Size value) => ((IFabScrollView)target).ContentSize = value;
 }

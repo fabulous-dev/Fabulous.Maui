@@ -1,13 +1,15 @@
 using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public static class ApplicationDefaults
+public interface IFabApplication: IApplication
 {
-    public const Action? OnThemeChanged = null;
+    Action<AppTheme>? OnThemeChanged { get; set; }
 }
 
-public class FabApplication: FabElement, IApplication
+public class FabApplication: FabElement, IFabApplication
 {
     private readonly List<IWindow> _windows = new();
 
@@ -17,10 +19,14 @@ public class FabApplication: FabElement, IApplication
 
     public void CloseWindow(IWindow window) => _windows.Remove(window);
 
-    public Action? OnThemeChanged { get; set; } = ApplicationDefaults.OnThemeChanged;
-    public void ThemeChanged() => OnThemeChanged?.Invoke();
+    public Action<AppTheme>? OnThemeChanged { get; set; } = ApplicationDefaults.OnThemeChanged;
+    public void ThemeChanged() => OnThemeChanged?.Invoke(AppInfo.RequestedTheme);
 
     public IReadOnlyList<IWindow> Windows => _windows;
     public IList<IWindow> EditableWindows => _windows;
-    
+}
+
+public static class FabApplicationSetters
+{
+    public static void SetOnThemeChanged(FabElement target, Action<AppTheme>? value) => ((IFabApplication)target).OnThemeChanged = value;
 }

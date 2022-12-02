@@ -2,16 +2,12 @@ namespace Fabulous.Maui
 
 open System.Runtime.CompilerServices
 open Microsoft.Maui
+open Microsoft.Maui.Handlers.Defaults
 open Fabulous
 open Fabulous.Maui.Controls
 
 module Padding =
-    let Padding = Attributes.defineMauiSimpleScalarWithEquality "Padding_Padding" "Padding" (fun _ currOpt target ->
-        let target = unbox<IPaddingSetter> target
-        match currOpt with
-        | ValueNone -> target.SetPadding(PaddingDefaults.CreateDefaultPadding())
-        | ValueSome curr -> target.SetPadding(curr)
-    )
+    let Padding = Attributes.defineMauiSimpleScalarWithEquality "Padding" "Padding" PaddingDefaults.CreateDefaultPadding FabPaddingSetters.SetPadding
 
 [<Extension>]
 type PaddingModifiers =

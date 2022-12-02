@@ -2,38 +2,39 @@ using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 using Microsoft.Maui.Primitives;
+using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public static class ViewDefaults
+public interface IFabView : IView, IFabTransform
 {
-    public const string AutomationId = "";
-    public const FlowDirection FlowDirection = Microsoft.Maui.FlowDirection.MatchParent;
-    public const LayoutAlignment HorizontalLayoutAlignment = LayoutAlignment.Fill;
-    public const LayoutAlignment VerticalLayoutAlignment = LayoutAlignment.Fill;
-    public static Semantics CreateDefaultSemantics() => new();
-    public const IShape Clip = null!;
-    public const IShadow Shadow = null!;
-    public const bool IsEnabled = true;
-    public const bool IsFocused = false;
-    public const Visibility Visibility = Microsoft.Maui.Visibility.Visible;
-    public const double Opacity = 1.0;
-    public const Paint Background = null!;
-    public const double Width = Dimension.Unset;
-    public const double MinimumWidth = Dimension.Unset;
-    public const double MaximumWidth = Dimension.Maximum;
-    public const double Height = Dimension.Unset;
-    public const double MinimumHeight = Dimension.Unset;
-    public const double MaximumHeight = Dimension.Maximum;
-    public static Thickness CreateDefaultMargin() => Thickness.Zero;
-    public const int ZIndex = 0;
-    public const bool InputTransparent = false;
+    new string AutomationId { get; set; }
+    new FlowDirection FlowDirection { get; set; }
+    new LayoutAlignment HorizontalLayoutAlignment { get; set; }
+    new LayoutAlignment VerticalLayoutAlignment { get; set; }
+    new Semantics? Semantics { get; set; }
+    new IShape? Clip { get; set; }
+    new IShadow? Shadow { get; set; }
+    new bool IsEnabled { get; set; }
+    new bool IsFocused { get; set; }
+    new Visibility Visibility { get; set; }
+    new double Opacity { get; set; }
+    new Paint? Background { get; set; }
+    new double Width { get; set; }
+    new double MinimumWidth { get; set; }
+    new double MaximumWidth { get; set; }
+    new double Height { get; set; }
+    new double MinimumHeight { get; set; }
+    new double MaximumHeight { get; set; }
+    new Thickness Margin { get; set; }
+    new int ZIndex { get; set; }
+    new bool InputTransparent { get; set; }
 }
 
-public class FabView: FabElement, IView, ITransformSetter
+public class FabView: FabElement, IFabView
 {
     public Rect Frame { get; set; }
-    public Size DesiredSize { get; set; }
+    public Size DesiredSize { get; private set; }
     
     public double TranslationX { get; set; } = TransformDefaults.TranslationX;
     public double TranslationY { get; set; } = TransformDefaults.TranslationY;
@@ -107,15 +108,29 @@ public class FabView: FabElement, IView, ITransformSetter
     }
     
     public bool InputTransparent { get; set; } = ViewDefaults.InputTransparent;
+}
 
-    public void SetTranslationX(double value) => TranslationX = value;
-    public void SetTranslationY(double value) => TranslationY = value;
-    public void SetScale(double value) => Scale = value;
-    public void SetScaleX(double value) => ScaleX = value;
-    public void SetScaleY(double value) => ScaleY = value;
-    public void SetRotation(double value) => Rotation = value;
-    public void SetRotationX(double value) => RotationX = value;
-    public void SetRotationY(double value) => RotationY = value;
-    public void SetAnchorX(double value) => AnchorX = value;
-    public void SetAnchorY(double value) => AnchorY = value;
+public static class FabViewSetters
+{
+    public static void SetAutomationId(FabElement target, string value) => ((IFabView)target).AutomationId = value;
+    public static void SetFlowDirection(FabElement target, FlowDirection value) => ((IFabView)target).FlowDirection = value;
+    public static void SetHorizontalLayoutAlignment(FabElement target, LayoutAlignment value) => ((IFabView)target).HorizontalLayoutAlignment = value;
+    public static void SetVerticalLayoutAlignment(FabElement target, LayoutAlignment value) => ((IFabView)target).VerticalLayoutAlignment = value;
+    public static void SetSemantics(FabElement target, Semantics value) => ((IFabView)target).Semantics = value;
+    public static void SetClip(FabElement target, IShape value) => ((IFabView)target).Clip = value;
+    public static void SetShadow(FabElement target, IShadow value) => ((IFabView)target).Shadow = value;
+    public static void SetIsEnabled(FabElement target, bool value) => ((IFabView)target).IsEnabled = value;
+    public static void SetIsFocused(FabElement target, bool value) => ((IFabView)target).IsFocused = value;
+    public static void SetVisibility(FabElement target, Visibility value) => ((IFabView)target).Visibility = value;
+    public static void SetOpacity(FabElement target, double value) => ((IFabView)target).Opacity = value;
+    public static void SetBackground(FabElement target, Paint value) => ((IFabView)target).Background = value;
+    public static void SetWidth(FabElement target, double value) => ((IFabView)target).Width = value;
+    public static void SetMinimumWidth(FabElement target, double value) => ((IFabView)target).MinimumWidth = value;
+    public static void SetMaximumWidth(FabElement target, double value) => ((IFabView)target).MaximumWidth = value;
+    public static void SetHeight(FabElement target, double value) => ((IFabView)target).Height = value;
+    public static void SetMinimumHeight(FabElement target, double value) => ((IFabView)target).MinimumHeight = value;
+    public static void SetMaximumHeight(FabElement target, double value) => ((IFabView)target).MaximumHeight = value;
+    public static void SetMargin(FabElement target, Thickness value) => ((IFabView)target).Margin = value;
+    public static void SetZIndex(FabElement target, int value) => ((IFabView)target).ZIndex = value;
+    public static void SetInputTransparent(FabElement target, bool value) => ((IFabView)target).InputTransparent = value;
 }

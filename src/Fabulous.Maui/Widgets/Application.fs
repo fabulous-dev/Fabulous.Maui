@@ -2,6 +2,7 @@ namespace Fabulous.Maui
 
 open System.Runtime.CompilerServices
 open Microsoft.Maui
+open Microsoft.Maui.Handlers.Defaults
 open Fabulous
 open Fabulous.Maui.Controls
 open Fabulous.StackAllocatedCollections
@@ -10,12 +11,7 @@ module Application =
     let WidgetKey = Widgets.register<FabApplication>()
     
     let Windows = Attributes.defineListWidgetCollection "Application_Windows" (fun target -> (target :?> FabApplication).EditableWindows)
-    let ThemeChanged =
-        Attributes.defineMauiEvent
-            "Application_ThemeChanged"
-            "ThemeChanged"
-            (fun target fn -> (target :?> FabApplication).OnThemeChanged <- fn)
-            (fun target -> (target :?> FabApplication).OnThemeChanged <- ApplicationDefaults.OnThemeChanged)
+    let ThemeChanged = Attributes.defineMauiAction' "Application" "ThemeChanged" ApplicationDefaults.OnThemeChanged FabApplicationSetters.SetOnThemeChanged
     
 [<AutoOpen>]
 module ApplicationBuilders =

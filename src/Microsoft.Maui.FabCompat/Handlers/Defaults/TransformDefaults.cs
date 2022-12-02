@@ -1,4 +1,4 @@
-namespace Fabulous.Maui.Controls;
+namespace Microsoft.Maui.Handlers.Defaults;
 
 public static class TransformDefaults
 {
@@ -12,18 +12,4 @@ public static class TransformDefaults
     public const double ScaleY = 1.0;
     public const double TranslationX = 0.0;
     public const double TranslationY = 0.0;
-}
-
-public interface ITransformSetter
-{
-    void SetTranslationX(double value);
-    void SetTranslationY(double value);
-    void SetScale(double value);
-    void SetScaleX(double value);
-    void SetScaleY(double value);
-    void SetRotation(double value);
-    void SetRotationX(double value);
-    void SetRotationY(double value);
-    void SetAnchorX(double value);
-    void SetAnchorY(double value);
 }

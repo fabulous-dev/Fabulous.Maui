@@ -19,13 +19,13 @@
     <Compile Include="Widgets\Partials\_Layout.fs" />
     <Compile Include="Widgets\Partials\_Padding.fs" />
     <Compile Include="Widgets\Partials\_SafeAreaView.fs" />
-    <Compile Include="Widgets\Partials\_StackLayout.fs" />
     <Compile Include="Widgets\Partials\_Transform.fs" />
     <Compile Include="Widgets\Partials\_Text.fs" />
     <Compile Include="Widgets\Partials\_TextAlignment.fs" />
     <Compile Include="Widgets\Partials\_TitledElement.fs" />
     <Compile Include="Widgets\Partials\_TextStyle.fs" />
     <Compile Include="Widgets\Partials\_View.fs" />
+    <Compile Include="Widgets\Partials\_StackLayout.fs" />
     <Compile Include="Widgets\Image.fs" />
     <Compile Include="Widgets\Label.fs" />
     <Compile Include="Widgets\TextButton.fs" />

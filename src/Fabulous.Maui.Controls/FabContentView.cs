@@ -1,10 +1,17 @@
 using Microsoft.Maui;
+using Microsoft.Maui.Handlers.Defaults;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public class FabContentView: FabView, IContentView, IPaddingSetter
+public interface IFabContentView: IContentView, IFabPadding
+{
+    new object? Content { get; set; }
+    new IView? PresentedContent { get; set; }
+}
+
+public class FabContentView: FabView, IFabContentView
 {
     public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
     
@@ -19,14 +26,18 @@ public class FabContentView: FabView, IContentView, IPaddingSetter
         return bounds.Size;
     }
 
-    public object? Content { get; set; }
+    public object? Content { get; set; } = ContentViewDefaults.Content;
 
-    private IView? _presentedContent;
+    private IView? _presentedContent = ContentViewDefaults.PresentedContent;
     public IView? PresentedContent
     {
         get => _presentedContent ?? Content as IView;
         set => _presentedContent = value;
     }
+}
 
-    public void SetPadding(Thickness value) => Padding = value;
+public static class FabContentViewSetters
+{
+    public static void SetContent(FabElement target, object? value) => ((IFabContentView)target).Content = value;
+    public static void SetPresentedContent(FabElement target, IView? value) => ((IFabContentView)target).PresentedContent = value;
 }

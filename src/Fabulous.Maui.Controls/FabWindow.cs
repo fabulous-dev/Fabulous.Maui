@@ -1,33 +1,34 @@
 using Microsoft.Maui;
+using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public static class WindowDefaults
+public interface IFabWindow : IWindow
 {
-    public const Action? OnCreated = null;
-    public const Action? OnResumed = null;
-    public const Action? OnActivated = null;
-    public const Action? OnDeactivated = null;
-    public const Action? OnStopped = null;
-    public const Action? OnDestroying = null;
-    public const Action<IPersistedState>? OnBackgrounding = null;
-    public const Func<bool>? OnBackButtonClicked = null;
-    public const Action<float>? OnDisplayDensityChanged = null;
-    public const Action<Microsoft.Maui.Graphics.Rect>? OnFrameChanged = null;
-    public const IView? Content = null;
-    public const IVisualDiagnosticsOverlay? VisualDiagnosticsOverlay = null;
-    public const double X = -1.0;
-    public const double Y = -1.0;
-    public const double Width = -1.0;
-    public const double MinimumWidth = -1.0;
-    public const double MaximumWidth = -1.0;
-    public const double Height = -1.0;
-    public const double MinimumHeight = -1.0;
-    public const double MaximumHeight = -1.0;
-    public static FlowDirection CreateFlowDirection() => FlowDirection.MatchParent;
+    Action? OnCreated { get; set; }
+    Action? OnResumed { get; set; }
+    Action? OnActivated { get; set; }
+    Action? OnDeactivated { get; set; }
+    Action? OnStopped { get; set; }
+    Action? OnDestroying { get; set; }
+    Action<IPersistedState>? OnBackgrounding { get; set; }
+    Func<bool>? OnBackButtonClicked { get; set; }
+    Action<float>? OnDisplayDensityChanged { get; set; }
+    Action<Microsoft.Maui.Graphics.Rect>? OnFrameChanged { get; set; }
+    new IView Content { get; set; }
+    new IVisualDiagnosticsOverlay VisualDiagnosticsOverlay { get; set; }
+    new double X { get; set; }
+    new double Y { get; set; }
+    new double Width { get; set; }
+    new double MinimumWidth { get; set; }
+    new double MaximumWidth { get; set; }
+    new double Height { get; set; }
+    new double MinimumHeight { get; set; }
+    new double MaximumHeight { get; set; }
+    new FlowDirection FlowDirection { get; set; }
 }
 
-public class FabWindow: FabTitledElement, IWindow
+public class FabWindow: FabTitledElement, IFabWindow
 {
     private readonly List<IWindowOverlay> _overlays = new();
 
@@ -91,4 +92,29 @@ public class FabWindow: FabTitledElement, IWindow
     public double MinimumHeight { get; set; } = WindowDefaults.MinimumHeight;
     public double MaximumHeight { get; set; } = WindowDefaults.MaximumHeight;
     public FlowDirection FlowDirection { get; set; } = WindowDefaults.CreateFlowDirection();
+}
+
+public static class FabWindowSetters
+{
+    public static void SetOnCreated(FabElement target, Action? value) => ((FabWindow)target).OnCreated = value;
+    public static void SetOnResumed(FabElement target, Action? value) => ((FabWindow)target).OnResumed = value;
+    public static void SetOnActivated(FabElement target, Action? value) => ((FabWindow)target).OnActivated = value;
+    public static void SetOnDeactivated(FabElement target, Action? value) => ((FabWindow)target).OnDeactivated = value;
+    public static void SetOnStopped(FabElement target, Action? value) => ((FabWindow)target).OnStopped = value;
+    public static void SetOnDestroying(FabElement target, Action? value) => ((FabWindow)target).OnDestroying = value;
+    public static void SetOnBackgrounding(FabElement target, Action<IPersistedState>? value) => ((FabWindow)target).OnBackgrounding = value;
+    public static void SetOnBackButtonClicked(FabElement target, Func<bool>? value) => ((FabWindow)target).OnBackButtonClicked = value;
+    public static void SetOnDisplayDensityChanged(FabElement target, Action<float>? value) => ((FabWindow)target).OnDisplayDensityChanged = value;
+    public static void SetOnFrameChanged(FabElement target, Action<Microsoft.Maui.Graphics.Rect>? value) => ((FabWindow)target).OnFrameChanged = value;
+    public static void SetContent(FabElement target, IView? value) => ((FabWindow)target).Content = value;
+    public static void SetVisualDiagnosticsOverlay(FabElement target, IVisualDiagnosticsOverlay? value) => ((FabWindow)target).VisualDiagnosticsOverlay = value;
+    public static void SetX(FabElement target, double value) => ((FabWindow)target).X = value;
+    public static void SetY(FabElement target, double value) => ((FabWindow)target).Y = value;
+    public static void SetWidth(FabElement target, double value) => ((FabWindow)target).Width = value;
+    public static void SetMinimumWidth(FabElement target, double value) => ((FabWindow)target).MinimumWidth = value;
+    public static void SetMaximumWidth(FabElement target, double value) => ((FabWindow)target).MaximumWidth = value;
+    public static void SetHeight(FabElement target, double value) => ((FabWindow)target).Height = value;
+    public static void SetMinimumHeight(FabElement target, double value) => ((FabWindow)target).MinimumHeight = value;
+    public static void SetMaximumHeight(FabElement target, double value) => ((FabWindow)target).MaximumHeight = value;
+    public static void SetFlowDirection(FabElement target, FlowDirection value) => ((FabWindow)target).FlowDirection = value;
 }

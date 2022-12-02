@@ -2,39 +2,17 @@ namespace Fabulous.Maui
 
 open System.Runtime.CompilerServices
 open Microsoft.Maui
+open Microsoft.Maui.Handlers.Defaults
 open Microsoft.Maui.Graphics
 open Microsoft.Maui.Primitives
 open Fabulous
 open Fabulous.Maui.Controls
 
 module View' =
-    let Background = Attributes.defineMauiSimpleScalarWithEquality "View_Background" "Background" (fun _ (currOpt: Paint voption) target ->
-        let target = target :?> FabView
-        match currOpt with
-        | ValueNone -> target.Background <- ViewDefaults.Background
-        | ValueSome curr -> target.Background <- curr
-    )
-    
-    let Height = Attributes.defineMauiSimpleScalarWithEquality "View_Height" "Height" (fun _ currOpt target ->
-        let target = target :?> FabView
-        match currOpt with
-        | ValueNone -> target.Height <- ViewDefaults.Height
-        | ValueSome curr -> target.Height <- curr
-    )
-    
-    let HorizontalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality "View_HorizontalLayoutAlignment" "HorizontalLayoutAlignment" (fun _ currOpt target ->
-        let target = target :?> FabView
-        match currOpt with
-        | ValueNone -> target.HorizontalLayoutAlignment <- ViewDefaults.HorizontalLayoutAlignment
-        | ValueSome curr -> target.HorizontalLayoutAlignment <- curr
-    )
-    
-    let VerticalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality "View_HorizontalLayoutAlignment" "HorizontalLayoutAlignment" (fun _ currOpt target ->
-        let target = target :?> FabView
-        match currOpt with
-        | ValueNone -> target.VerticalLayoutAlignment <- ViewDefaults.VerticalLayoutAlignment
-        | ValueSome curr -> target.VerticalLayoutAlignment <- curr
-    )
+    let Background = Attributes.defineMauiSimpleScalarWithEquality' "View" "Background" ViewDefaults.Background FabViewSetters.SetBackground
+    let Height = Attributes.defineMauiSimpleScalarWithEquality' "View" "Height" ViewDefaults.Height FabViewSetters.SetHeight
+    let HorizontalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality' "View" "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabViewSetters.SetHorizontalLayoutAlignment
+    let VerticalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality' "View" "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabViewSetters.SetVerticalLayoutAlignment
     
 [<Extension>]
 type ViewModifiers =

@@ -1,13 +1,8 @@
 namespace Fabulous.Maui
 
-open Microsoft.Maui
+open Microsoft.Maui.Handlers.Defaults
 open Fabulous.Maui.Controls
 
 module ImageSourcePart =
-    let Source = Attributes.defineMauiSimpleScalarWithEquality "ImageSourcePart_Source" "Source" (fun _ (currOpt: IImageSource voption) target ->
-        let target = unbox<IImageSourcePartSetter> target
-        match currOpt with
-        | ValueNone -> target.SetSource(ImageSourcePartDefaults.Source)
-        | ValueSome curr -> target.SetSource(curr)
-    )
+    let Source = Attributes.defineMauiSimpleScalarWithEquality' "ImageSourcePart" "Source" ImageSourcePartDefaults.Source FabImageSourcePartSetters.SetSource
 

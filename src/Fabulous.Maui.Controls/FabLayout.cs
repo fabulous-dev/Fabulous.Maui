@@ -2,16 +2,17 @@ using System.Collections;
 using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Handlers;
+using Microsoft.Maui.Handlers.Defaults;
 using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public static class LayoutDefaults
+public interface IFabLayout : ILayout, IFabSafeAreaView, IFabPadding
 {
-    public const bool ClipsToBounds = false;
+    new bool ClipsToBounds { get; set; }
 }
 
-public abstract class FabLayout: FabView, ILayout, ISafeAreaViewSetter, IPaddingSetter
+public abstract class FabLayout: FabView, IFabLayout
 {
     private readonly List<IView> _children = new();
     private ILayoutManager? _layoutManager;
@@ -101,7 +102,9 @@ public abstract class FabLayout: FabView, ILayout, ISafeAreaViewSetter, IPadding
     {
         return LayoutManager.ArrangeChildren(bounds);
     }
+}
 
-    public void SetIgnoreSafeArea(bool value) => IgnoreSafeArea = value;
-    public void SetPadding(Thickness value) => Padding = value;
+public static class FabLayoutSetters
+{
+    public static void SetClipsToBounds(FabElement target, bool value) => ((IFabLayout)target).ClipsToBounds = value;
 }

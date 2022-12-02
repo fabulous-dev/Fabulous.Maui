@@ -1,11 +1,7 @@
 namespace Fabulous.Maui
 
+open Microsoft.Maui.Handlers.Defaults;
 open Fabulous.Maui.Controls
 
 module Button =
-    let Clicked =
-        Attributes.defineMauiEvent<unit>
-            "Button_Clicked"
-            "Clicked"
-            (fun target fn -> (target :?> FabButton).OnClicked <- fn)
-            (fun target -> (target :?> FabButton).OnClicked <- ButtonDefaults.OnClicked)
+    let Clicked = Attributes.defineMauiAction "Button" "Clicked" ButtonDefaults.OnClicked FabButtonSetters.SetOnClicked
