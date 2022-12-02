@@ -6,6 +6,12 @@ open Microsoft.Maui
 open Microsoft.Maui.ApplicationModel
 open Fabulous
 
+module Cmd =
+    let ignore (fn: unit -> unit) =
+        Cmd.ofSub (fun _ ->
+            fn()
+        )
+
 module ViewHelpers =
     let canReuseView (prev: Widget) (curr: Widget) =
         ViewHelpers.canReuseView prev curr
@@ -138,14 +144,24 @@ module Program =
                 reraise()
 
         { program with
-              Init = traceInit
-              Update = traceUpdate
-              View = traceView }
+            Init = traceInit
+            Update = traceUpdate
+            View = traceView }
 
     /// Configure how the unhandled exceptions happening during the execution of a Fabulous app with be handled
     let withExceptionHandler (handler: exn -> bool) (program: Program<'arg, 'model, 'msg, 'marker>) =
         { program with
               ExceptionHandler = handler }
+        
+    let withThemeAwareness (program: Program<'arg, 'model, 'msg, #IApplication>) =
+        { Init = ThemeAwareProgram.init program.Init
+          Update = ThemeAwareProgram.update program.Update
+          Subscribe = fun model -> program.Subscribe model.Model |> Cmd.map ThemeAwareProgram.Msg.ModelMsg
+          View = ThemeAwareProgram.view program.View
+          CanReuseView = program.CanReuseView
+          SyncAction = program.SyncAction
+          Logger = program.Logger
+          ExceptionHandler = program.ExceptionHandler }
 
 [<RequireQualifiedAccess>]
 module CmdMsg =

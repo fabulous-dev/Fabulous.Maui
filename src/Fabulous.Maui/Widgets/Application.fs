@@ -2,6 +2,7 @@ namespace Fabulous.Maui
 
 open System.Runtime.CompilerServices
 open Microsoft.Maui
+open Microsoft.Maui.ApplicationModel
 open Microsoft.Maui.Handlers.Defaults
 open Fabulous
 open Fabulous.Maui.Controls
@@ -21,6 +22,12 @@ module ApplicationBuilders =
                 Application.WidgetKey,
                 Application.Windows
             )
+            
+[<Extension>]
+type ApplicationModifiers =
+    [<Extension>]
+    static member inline onThemeChanged(this: WidgetBuilder<'msg, #IApplication>, value: AppTheme -> 'msg) =
+        this.AddScalar(Application.ThemeChanged.WithValue(fun args -> value args |> box))
             
 [<Extension>]
  type ApplicationCollectionExtensions =

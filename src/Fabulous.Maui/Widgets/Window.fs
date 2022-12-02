@@ -8,7 +8,7 @@ open Microsoft.Maui
 module Window =
     let WidgetKey = Widgets.register<FabWindow>()
     
-    let Content = Attributes.defineMauiPropertyWidget "Window_Content" "Content" (fun target -> (target :?> FabWindow).Content) (fun target value -> (target :?> FabWindow).Content <- value)
+    let Content = Attributes.defineMauiPropertyWidget "Window" "Content" (fun target -> (target :?> FabWindow).Content) (fun target value -> (target :?> FabWindow).Content <- value)
     
 [<AutoOpen>]
 module WindowBuilders =

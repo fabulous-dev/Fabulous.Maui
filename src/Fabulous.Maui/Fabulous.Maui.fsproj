@@ -14,7 +14,6 @@
     <Compile Include="Widgets\Partials\_Button.fs" />
     <Compile Include="Widgets\Partials\_ButtonStroke.fs" />
     <Compile Include="Widgets\Partials\_Container.fs" />
-    <Compile Include="Widgets\Partials\_ContentView.fs" />
     <Compile Include="Widgets\Partials\_ImageSourcePart.fs" />
     <Compile Include="Widgets\Partials\_Layout.fs" />
     <Compile Include="Widgets\Partials\_Padding.fs" />
@@ -26,6 +25,7 @@
     <Compile Include="Widgets\Partials\_TextStyle.fs" />
     <Compile Include="Widgets\Partials\_View.fs" />
     <Compile Include="Widgets\Partials\_StackLayout.fs" />
+    <Compile Include="Widgets\ContentView.fs" />
     <Compile Include="Widgets\Image.fs" />
     <Compile Include="Widgets\Label.fs" />
     <Compile Include="Widgets\TextButton.fs" />
@@ -34,6 +34,7 @@
     <Compile Include="Widgets\VStack.fs" />
     <Compile Include="Widgets\Window.fs" />
     <Compile Include="Widgets\Application.fs" />
+    <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>

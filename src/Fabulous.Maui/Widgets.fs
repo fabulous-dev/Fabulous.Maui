@@ -1,8 +1,10 @@
 namespace Fabulous.Maui
 
 open System
+open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui.Controls
+open Microsoft.Maui.ApplicationModel
 
 /// Holds all widgets definitions
 [<AbstractClass; Sealed>]
@@ -48,3 +50,9 @@ module Widgets =
 
     let register<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> () =
         registerWithAdditionalSetup<'T>(fun _ _ -> ())
+        
+[<Extension>]
+type FabElementExtensions =
+    [<Extension>]
+    static member inline style(this: WidgetBuilder<'msg, #Microsoft.Maui.IElement>, fn: WidgetBuilder<'msg, #Microsoft.Maui.IElement> -> WidgetBuilder<'msg, #Microsoft.Maui.IElement>) =
+        fn this

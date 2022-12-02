@@ -1,5 +1,6 @@
 using Microsoft.Maui;
 using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.FabCompat;
 using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
@@ -20,7 +21,7 @@ public class FabApplication: FabElement, IFabApplication
     public void CloseWindow(IWindow window) => _windows.Remove(window);
 
     public Action<AppTheme>? OnThemeChanged { get; set; } = ApplicationDefaults.OnThemeChanged;
-    public void ThemeChanged() => OnThemeChanged?.Invoke(AppInfo.RequestedTheme);
+    public void ThemeChanged() => OnThemeChanged?.Invoke(AppInfoFixed.RequestedTheme);
 
     public IReadOnlyList<IWindow> Windows => _windows;
     public IList<IWindow> EditableWindows => _windows;

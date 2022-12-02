@@ -10,4 +10,5 @@ type MainApplication(handle, ownership) =
 
     do CounterApp.Resource.UpdateIdValues()
     
-    override _.CreateMauiApp() = MauiProgram.CreateMauiApp()
+    override this.CreateMauiApp() =
+        MauiProgram.CreateMauiApp()

@@ -12,9 +12,10 @@ public interface IFabImage: IImage, IFabImageSourcePart
 
 public class FabImage: FabView, IFabImage
 {
+    private bool _isLoading; // TODO: What is this for?
     public void UpdateIsLoading(bool isLoading)
     {
-        throw new NotImplementedException();
+        _isLoading = isLoading;
     }
 
     public IImageSource? Source { get; set; } = ImageSourcePartDefaults.Source;

@@ -11,8 +11,11 @@ open Fabulous.Maui.Controls
 module View' =
     let Background = Attributes.defineMauiProperty "View" "Background" ViewDefaults.Background FabViewSetters.SetBackground
     let Height = Attributes.defineMauiProperty "View" "Height" ViewDefaults.Height FabViewSetters.SetHeight
+    let MinimumHeight = Attributes.defineMauiProperty "View" "MinimumHeight" ViewDefaults.MinimumHeight FabViewSetters.SetMinimumHeight
+    let MinimumWidth = Attributes.defineMauiProperty "View" "MinimumWidth" ViewDefaults.MinimumWidth FabViewSetters.SetMinimumWidth
     let HorizontalLayoutAlignment = Attributes.defineMauiProperty "View" "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabViewSetters.SetHorizontalLayoutAlignment
     let VerticalLayoutAlignment = Attributes.defineMauiProperty "View" "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabViewSetters.SetVerticalLayoutAlignment
+    let Semantics = Attributes.defineMauiProperty' "View" "Semantics" ViewDefaults.CreateDefaultSemantics FabViewSetters.SetSemantics
     
 [<Extension>]
 type ViewModifiers =
@@ -25,8 +28,20 @@ type ViewModifiers =
         this.AddScalar(View'.Height.WithValue(value))
         
     [<Extension>]
+    static member minimumHeight(this: WidgetBuilder<'msg, #IView>, value: float) =
+        this.AddScalar(View'.MinimumHeight.WithValue(value))
+        
+    [<Extension>]
+    static member minimumWidth(this: WidgetBuilder<'msg, #IView>, value: float) =
+        this.AddScalar(View'.MinimumWidth.WithValue(value))
+        
+    [<Extension>]
     static member horizontalLayoutAlignment(this: WidgetBuilder<'msg, #IView>, value: LayoutAlignment) =
         this.AddScalar(View'.HorizontalLayoutAlignment.WithValue(value))
+        
+    [<Extension>]
+    static member semantics(this: WidgetBuilder<'msg, #IView>, value: Semantics) =
+        this.AddScalar(View'.Semantics.WithValue(value))
         
 [<Extension>]
 type ViewExtraModifiers =
