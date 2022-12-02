@@ -6,5 +6,5 @@ open Fabulous.Maui.Controls
 
 module TitledElement =
     let Title =
-        Attributes.defineMauiSimpleScalarWithEquality' "TitledElement" "Title" TitledElementDefaults.Title FabTitledElementSetters.SetTitle
+        Attributes.defineMauiProperty "TitledElement" "Title" TitledElementDefaults.Title FabTitledElementSetters.SetTitle
         

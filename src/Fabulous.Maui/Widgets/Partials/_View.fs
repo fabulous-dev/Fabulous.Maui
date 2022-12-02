@@ -9,10 +9,10 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module View' =
-    let Background = Attributes.defineMauiSimpleScalarWithEquality' "View" "Background" ViewDefaults.Background FabViewSetters.SetBackground
-    let Height = Attributes.defineMauiSimpleScalarWithEquality' "View" "Height" ViewDefaults.Height FabViewSetters.SetHeight
-    let HorizontalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality' "View" "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabViewSetters.SetHorizontalLayoutAlignment
-    let VerticalLayoutAlignment = Attributes.defineMauiSimpleScalarWithEquality' "View" "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabViewSetters.SetVerticalLayoutAlignment
+    let Background = Attributes.defineMauiProperty "View" "Background" ViewDefaults.Background FabViewSetters.SetBackground
+    let Height = Attributes.defineMauiProperty "View" "Height" ViewDefaults.Height FabViewSetters.SetHeight
+    let HorizontalLayoutAlignment = Attributes.defineMauiProperty "View" "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabViewSetters.SetHorizontalLayoutAlignment
+    let VerticalLayoutAlignment = Attributes.defineMauiProperty "View" "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabViewSetters.SetVerticalLayoutAlignment
     
 [<Extension>]
 type ViewModifiers =

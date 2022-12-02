@@ -53,7 +53,7 @@ module Attributes =
                 if target.Handler <> null then target.Handler.UpdateValue(propertyName)
             )
 
-    let defineMauiSimpleScalarWithEquality (containerName: string) (propertyName: string) (defaultValueFn: unit -> 'T) (set: FabElement * 'T -> unit) =
+    let defineMauiProperty' (containerName: string) (propertyName: string) (defaultValueFn: unit -> 'T) (set: FabElement * 'T -> unit) =
         Attributes.defineSimpleScalarWithEquality $"{containerName}_{propertyName}" (fun _ currOpt node ->
             let target = node.Target :?> FabElement
             match currOpt with
@@ -62,8 +62,8 @@ module Attributes =
             if target.Handler <> null then target.Handler.UpdateValue(propertyName)
         )
         
-    let defineMauiSimpleScalarWithEquality' (containerName: string) (propertyName: string) (defaultValue: 'T) (set: FabElement * 'T -> unit) =
-        defineMauiSimpleScalarWithEquality containerName propertyName (fun () -> defaultValue) set
+    let defineMauiProperty (containerName: string) (propertyName: string) (defaultValue: 'T) (set: FabElement * 'T -> unit) =
+        defineMauiProperty' containerName propertyName (fun () -> defaultValue) set
         
     let defineMauiPropertyWidget (name: string) (propertyName: string) (get: obj -> obj) (set: obj -> 'T -> unit) =
         Attributes.definePropertyWidget name get (fun target value ->
