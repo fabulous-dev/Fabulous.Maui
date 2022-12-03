@@ -1,6 +1,7 @@
 namespace DotnetPodcasts
 
 open System.Runtime.CompilerServices
+open DotnetPodcasts.Resources
 open Microsoft.Maui
 open Microsoft.Maui.Devices
 open Fabulous
@@ -22,10 +23,21 @@ type WindowExtensions =
             this
 
 module App =
+    let mobileShell () =
+        Shell() {
+            TabBar() {
+                Tab(AppResource.Discover, ThemeImages.discover(), discoverView)
+                Tab(AppResource.Subscriptions, ThemeImages.subscriptions(), subscriptionsView)
+                Tab(AppResource.Listen_Later, ThemeImages.listenLater(), listenLaterView)
+                Tab(AppResource.Listen_Together, ThemeImages.listenTogether(), listenTogetherView)
+                Tab(AppResource.Settings, ThemeImages.settings(), settingsView)
+            }
+        }
+    
     let view () =
         Application() {
             Window(
-                Label("")
+                mobileShell()
             )
                 .defaultSizesOnDesktop()
         }

@@ -13,6 +13,8 @@ module View' =
     let Height = Attributes.defineMauiProperty "Height" ViewDefaults.Height FabView.SetHeight
     let MinimumHeight = Attributes.defineMauiProperty "MinimumHeight" ViewDefaults.MinimumHeight FabView.SetMinimumHeight
     let MinimumWidth = Attributes.defineMauiProperty "MinimumWidth" ViewDefaults.MinimumWidth FabView.SetMinimumWidth
+    let MaximumHeight = Attributes.defineMauiProperty "MaximumHeight" ViewDefaults.MaximumHeight FabView.SetMaximumHeight
+    let MaximumWidth = Attributes.defineMauiProperty "MaximumWidth" ViewDefaults.MaximumWidth FabView.SetMaximumWidth
     let HorizontalLayoutAlignment = Attributes.defineMauiProperty "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabView.SetHorizontalLayoutAlignment
     let VerticalLayoutAlignment = Attributes.defineMauiProperty "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabView.SetVerticalLayoutAlignment
     let Semantics = Attributes.defineMauiProperty' "Semantics" ViewDefaults.CreateDefaultSemantics FabView.SetSemantics
@@ -30,6 +32,14 @@ type ViewModifiers =
     [<Extension>]
     static member minimumHeight(this: WidgetBuilder<'msg, #IView>, value: float) =
         this.AddScalar(View'.MinimumHeight.WithValue(value))
+        
+    [<Extension>]
+    static member maximumWidth(this: WidgetBuilder<'msg, #IView>, value: float) =
+        this.AddScalar(View'.MaximumWidth.WithValue(value))
+        
+    [<Extension>]
+    static member maximumHeight(this: WidgetBuilder<'msg, #IView>, value: float) =
+        this.AddScalar(View'.MaximumHeight.WithValue(value))
         
     [<Extension>]
     static member minimumWidth(this: WidgetBuilder<'msg, #IView>, value: float) =

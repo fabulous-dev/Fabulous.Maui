@@ -47,6 +47,9 @@
 
     <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <EmbeddedResource Include="Resources\AppResource.resx" />
+    <Compile Include="Resources\AppResource.fs" />
+    <Compile Include="Resources\Images.fs" />
   </ItemGroup>
 
   <ItemGroup>
