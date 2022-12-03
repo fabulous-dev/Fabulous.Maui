@@ -8,12 +8,12 @@ public interface IFabStackLayout : IStackLayout
     new double Spacing { get; set; }
 }
 
-public abstract class FabStackLayout: FabLayout, IFabStackLayout
+public abstract partial class FabStackLayout: FabLayout, IFabStackLayout
 {
     public double Spacing { get; set; } = StackLayoutDefaults.Spacing;
 }
 
-public static class FabStackLayoutSetters
+public partial class FabStackLayout
 {
-    public static void SetSpacing(FabElement target, double value) => ((IFabStackLayout)target).Spacing = value;
+    public static void SetSpacing(IFabStackLayout target, double value) => target.Spacing = value;
 }

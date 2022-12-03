@@ -8,8 +8,8 @@ public interface IFabTextAlignment: ITextAlignment
     new TextAlignment VerticalTextAlignment { get; set; }
 }
 
-public static class FabTextAlignmentSetters
+public static class FabTextAlignment
 {
-    public static void SetHorizontalTextAlignment(FabElement target, TextAlignment value) => ((IFabTextAlignment)target).HorizontalTextAlignment = value;
-    public static void SetVerticalTextAlignment(FabElement target, TextAlignment value) => ((IFabTextAlignment)target).VerticalTextAlignment = value;
+    public static void SetHorizontalTextAlignment(IFabTextAlignment target, TextAlignment value) => target.HorizontalTextAlignment = value;
+    public static void SetVerticalTextAlignment(IFabTextAlignment target, TextAlignment value) => target.VerticalTextAlignment = value;
 }

@@ -7,7 +7,7 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module ButtonStroke =
-    let CornerRadius = Attributes.defineMauiProperty "ButtonStroke" "CornerRadius" ButtonStrokeDefaults.CornerRadius FabButtonStrokeSetters.SetCornerRadius
+    let CornerRadius = Attributes.defineMauiProperty "CornerRadius" ButtonStrokeDefaults.CornerRadius FabButtonStroke.SetCornerRadius
 
 [<Extension>]
 type ButtonStrokeModifiers =

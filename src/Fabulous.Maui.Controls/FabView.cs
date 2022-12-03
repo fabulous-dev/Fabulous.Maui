@@ -31,7 +31,7 @@ public interface IFabView : IView, IFabTransform
     new bool InputTransparent { get; set; }
 }
 
-public class FabView: FabElement, IFabView
+public partial class FabView: FabElement, IFabView
 {
     public Rect Frame { get; set; }
     public Size DesiredSize { get; private set; }
@@ -110,27 +110,27 @@ public class FabView: FabElement, IFabView
     public bool InputTransparent { get; set; } = ViewDefaults.InputTransparent;
 }
 
-public static class FabViewSetters
+public partial class FabView
 {
-    public static void SetAutomationId(FabElement target, string value) => ((IFabView)target).AutomationId = value;
-    public static void SetFlowDirection(FabElement target, FlowDirection value) => ((IFabView)target).FlowDirection = value;
-    public static void SetHorizontalLayoutAlignment(FabElement target, LayoutAlignment value) => ((IFabView)target).HorizontalLayoutAlignment = value;
-    public static void SetVerticalLayoutAlignment(FabElement target, LayoutAlignment value) => ((IFabView)target).VerticalLayoutAlignment = value;
-    public static void SetSemantics(FabElement target, Semantics value) => ((IFabView)target).Semantics = value;
-    public static void SetClip(FabElement target, IShape value) => ((IFabView)target).Clip = value;
-    public static void SetShadow(FabElement target, IShadow value) => ((IFabView)target).Shadow = value;
-    public static void SetIsEnabled(FabElement target, bool value) => ((IFabView)target).IsEnabled = value;
-    public static void SetIsFocused(FabElement target, bool value) => ((IFabView)target).IsFocused = value;
-    public static void SetVisibility(FabElement target, Visibility value) => ((IFabView)target).Visibility = value;
-    public static void SetOpacity(FabElement target, double value) => ((IFabView)target).Opacity = value;
-    public static void SetBackground(FabElement target, Paint value) => ((IFabView)target).Background = value;
-    public static void SetWidth(FabElement target, double value) => ((IFabView)target).Width = value;
-    public static void SetMinimumWidth(FabElement target, double value) => ((IFabView)target).MinimumWidth = value;
-    public static void SetMaximumWidth(FabElement target, double value) => ((IFabView)target).MaximumWidth = value;
-    public static void SetHeight(FabElement target, double value) => ((IFabView)target).Height = value;
-    public static void SetMinimumHeight(FabElement target, double value) => ((IFabView)target).MinimumHeight = value;
-    public static void SetMaximumHeight(FabElement target, double value) => ((IFabView)target).MaximumHeight = value;
-    public static void SetMargin(FabElement target, Thickness value) => ((IFabView)target).Margin = value;
-    public static void SetZIndex(FabElement target, int value) => ((IFabView)target).ZIndex = value;
-    public static void SetInputTransparent(FabElement target, bool value) => ((IFabView)target).InputTransparent = value;
+    public static void SetAutomationId(IFabView target, string value) => target.AutomationId = value;
+    public static void SetFlowDirection(IFabView target, FlowDirection value) => target.FlowDirection = value;
+    public static void SetHorizontalLayoutAlignment(IFabView target, LayoutAlignment value) => target.HorizontalLayoutAlignment = value;
+    public static void SetVerticalLayoutAlignment(IFabView target, LayoutAlignment value) => target.VerticalLayoutAlignment = value;
+    public static void SetSemantics(IFabView target, Semantics value) => target.Semantics = value;
+    public static void SetClip(IFabView target, IShape value) => target.Clip = value;
+    public static void SetShadow(IFabView target, IShadow value) => target.Shadow = value;
+    public static void SetIsEnabled(IFabView target, bool value) => target.IsEnabled = value;
+    public static void SetIsFocused(IFabView target, bool value) => target.IsFocused = value;
+    public static void SetVisibility(IFabView target, Visibility value) => target.Visibility = value;
+    public static void SetOpacity(IFabView target, double value) => target.Opacity = value;
+    public static void SetBackground(IFabView target, Paint value) => target.Background = value;
+    public static void SetWidth(IFabView target, double value) => target.Width = value;
+    public static void SetMinimumWidth(IFabView target, double value) => target.MinimumWidth = value;
+    public static void SetMaximumWidth(IFabView target, double value) => target.MaximumWidth = value;
+    public static void SetHeight(IFabView target, double value) => target.Height = value;
+    public static void SetMinimumHeight(IFabView target, double value) => target.MinimumHeight = value;
+    public static void SetMaximumHeight(IFabView target, double value) => target.MaximumHeight = value;
+    public static void SetMargin(IFabView target, Thickness value) => target.Margin = value;
+    public static void SetZIndex(IFabView target, int value) => target.ZIndex = value;
+    public static void SetInputTransparent(IFabView target, bool value) => target.InputTransparent = value;
 }

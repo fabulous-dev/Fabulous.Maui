@@ -16,7 +16,7 @@ public interface IFabScrollView : IScrollView
     new double VerticalOffset { get; set; }
 }
 
-public class FabScrollView: FabContentView, IFabScrollView
+public partial class FabScrollView: FabContentView, IFabScrollView
 {
     public Action? OnScrollFinished { get; set; } = ScrollViewDefaults.OnScrollFinished;
     public void ScrollFinished() => OnScrollFinished?.Invoke();
@@ -81,13 +81,13 @@ public class FabScrollView: FabContentView, IFabScrollView
     }
 }
 
-public static class FabScrollViewSetters
+public partial class FabScrollView
 {
-    public static void SetOnScrollFinished(FabElement target, Action? value) => ((IFabScrollView)target).OnScrollFinished = value;
-    public static void SetHorizontalScrollBarVisibility(FabElement target, ScrollBarVisibility value) => ((IFabScrollView)target).HorizontalScrollBarVisibility = value;
-    public static void SetVerticalScrollBarVisibility(FabElement target, ScrollBarVisibility value) => ((IFabScrollView)target).VerticalScrollBarVisibility = value;
-    public static void SetOrientation(FabElement target, ScrollOrientation value) => ((IFabScrollView)target).Orientation = value;
-    public static void SetHorizontalOffset(FabElement target, double value) => ((IFabScrollView)target).HorizontalOffset = value;
-    public static void SetVerticalOffset(FabElement target, double value) => ((IFabScrollView)target).VerticalOffset = value;
-    public static void SetContentSize(FabElement target, Size value) => ((IFabScrollView)target).ContentSize = value;
+    public static void SetOnScrollFinished(IFabScrollView target, Action? value) => target.OnScrollFinished = value;
+    public static void SetHorizontalScrollBarVisibility(IFabScrollView target, ScrollBarVisibility value) => target.HorizontalScrollBarVisibility = value;
+    public static void SetVerticalScrollBarVisibility(IFabScrollView target, ScrollBarVisibility value) => target.VerticalScrollBarVisibility = value;
+    public static void SetOrientation(IFabScrollView target, ScrollOrientation value) => target.Orientation = value;
+    public static void SetHorizontalOffset(IFabScrollView target, double value) => target.HorizontalOffset = value;
+    public static void SetVerticalOffset(IFabScrollView target, double value) => target.VerticalOffset = value;
+    public static void SetContentSize(IFabScrollView target, Size value) => target.ContentSize = value;
 }

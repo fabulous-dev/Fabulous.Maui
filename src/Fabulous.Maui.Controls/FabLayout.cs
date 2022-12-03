@@ -12,7 +12,7 @@ public interface IFabLayout : ILayout, IFabSafeAreaView, IFabPadding
     new bool ClipsToBounds { get; set; }
 }
 
-public abstract class FabLayout: FabView, IFabLayout
+public abstract partial class FabLayout: FabView, IFabLayout
 {
     private readonly List<IView> _children = new();
     private ILayoutManager? _layoutManager;
@@ -104,7 +104,7 @@ public abstract class FabLayout: FabView, IFabLayout
     }
 }
 
-public static class FabLayoutSetters
+public partial class FabLayout
 {
-    public static void SetClipsToBounds(FabElement target, bool value) => ((IFabLayout)target).ClipsToBounds = value;
+    public static void SetClipsToBounds(IFabLayout target, bool value) => target.ClipsToBounds = value;
 }

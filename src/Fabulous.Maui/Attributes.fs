@@ -5,12 +5,12 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module Attributes =
-    let defineMauiAction (containerName: string) (propertyName: string) (defaultValue: Action) (set: FabElement * Action -> unit) =
+    let defineMauiAction<'target> (propertyName: string) (defaultValue: Action) (set: 'target * Action -> unit) =
         Attributes.defineSimpleScalar
-            $"{containerName}_{propertyName}"
+            $"{typeof<'target>.Name}_{propertyName}"
             ScalarAttributeComparers.noCompare
             (fun _ (currOpt: (unit -> obj) voption) node ->
-                let target = node.Target :?> FabElement
+                let target = node.Target :?> 'target
                 match currOpt with
                 | ValueNone -> set(target, defaultValue)
                 | ValueSome curr ->
@@ -18,15 +18,17 @@ module Attributes =
                         let r = curr args
                         Dispatcher.dispatch node r
                     set(target, fn)
-                if target.Handler <> null then target.Handler.UpdateValue(propertyName)
+                    
+                let element = node.Target :?> FabElement
+                if element.Handler <> null then element.Handler.UpdateValue(propertyName)
             )
             
-    let defineMauiAction'<'args> (containerName: string) (propertyName: string) (defaultValue: Action<'args>) (set: FabElement * Action<'args> -> unit) =
+    let defineMauiAction'<'target, 'args> (propertyName: string) (defaultValue: Action<'args>) (set: 'target * Action<'args> -> unit) =
         Attributes.defineSimpleScalar
-            $"{containerName}_{propertyName}"
+            $"{typeof<'target>.Name}_{propertyName}"
             ScalarAttributeComparers.noCompare
             (fun _ (currOpt: ('args -> obj) voption) node ->
-                let target = node.Target :?> FabElement
+                let target = node.Target :?> 'target
                 match currOpt with
                 | ValueNone -> set(target, defaultValue)
                 | ValueSome curr ->
@@ -34,10 +36,12 @@ module Attributes =
                         let r = curr args
                         Dispatcher.dispatch node r
                     set(target, fn)
-                if target.Handler <> null then target.Handler.UpdateValue(propertyName)
+                    
+                let element = node.Target :?> FabElement
+                if element.Handler <> null then element.Handler.UpdateValue(propertyName)
             )
     
-    let defineMauiEvent<'args> (containerName: string) (propertyName: string) (defaultValue: 'args -> unit) (set: FabElement * ('args -> unit) -> unit) =
+    let inline defineMauiEvent<'args> (containerName: string) (propertyName: string) (defaultValue: 'args -> unit) ([<InlineIfLambda>] set: FabElement * ('args -> unit) -> unit) =
         Attributes.defineSimpleScalar
             $"{containerName}_{propertyName}"
             ScalarAttributeComparers.noCompare
@@ -53,21 +57,30 @@ module Attributes =
                 if target.Handler <> null then target.Handler.UpdateValue(propertyName)
             )
 
-    let defineMauiProperty' (containerName: string) (propertyName: string) (defaultValueFn: unit -> 'T) (set: FabElement * 'T -> unit) =
-        Attributes.defineSimpleScalarWithEquality $"{containerName}_{propertyName}" (fun _ currOpt node ->
-            let target = node.Target :?> FabElement
-            match currOpt with
-            | ValueNone -> set(target, defaultValueFn ())
-            | ValueSome curr -> set(target, curr)
-            if target.Handler <> null then target.Handler.UpdateValue(propertyName)
-        )
+    let inline defineMauiProperty'<'target, 'value when 'value : equality> (propertyName: string) (defaultValueFn: unit -> 'value) ([<InlineIfLambda>] set: 'target * 'value -> unit) =
+        Attributes.defineSimpleScalarWithEquality
+           $"{typeof<'target>.Name}_{propertyName}"
+           (fun _ currOpt node ->
+                let target = node.Target :?> 'target
+                match currOpt with
+                | ValueNone -> set(target, defaultValueFn ())
+                | ValueSome curr -> set(target, curr)
+                
+                let element = node.Target :?> FabElement
+                if element.Handler <> null then element.Handler.UpdateValue(propertyName)
+            )
         
-    let defineMauiProperty (containerName: string) (propertyName: string) (defaultValue: 'T) (set: FabElement * 'T -> unit) =
-        defineMauiProperty' containerName propertyName (fun () -> defaultValue) set
+    let inline defineMauiProperty<'target, 'value when 'value : equality> (propertyName: string) (defaultValue: 'value) ([<InlineIfLambda>] set: 'target * 'value -> unit) =
+        defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) set
         
-    let defineMauiPropertyWidget (name: string) (propertyName: string) (get: obj -> obj) (set: obj -> 'T -> unit) =
-        Attributes.definePropertyWidget name get (fun target value ->
-            let target = target :?> FabElement
-            set target value
-            if target.Handler <> null then target.Handler.UpdateValue(propertyName)
-        )
+    let inline defineMauiPropertyWidget<'target, 'value when 'value : null> (propertyName: string) ([<InlineIfLambda>] get: 'target -> obj) ([<InlineIfLambda>] set: 'target -> 'value -> unit) =
+        Attributes.definePropertyWidget
+            $"{typeof<'target>.Name}_{propertyName}"
+            (fun target -> get (target :?> 'target))
+            (fun t value ->
+                let target = t :?> 'target
+                set target value
+                
+                let element = t :?> FabElement
+                if element.Handler <> null then element.Handler.UpdateValue(propertyName)
+            )

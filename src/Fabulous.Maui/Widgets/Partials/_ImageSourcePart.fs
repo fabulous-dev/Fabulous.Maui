@@ -4,5 +4,5 @@ open Microsoft.Maui.Handlers.Defaults
 open Fabulous.Maui.Controls
 
 module ImageSourcePart =
-    let Source = Attributes.defineMauiProperty "ImageSourcePart" "Source" ImageSourcePartDefaults.Source FabImageSourcePartSetters.SetSource
+    let Source = Attributes.defineMauiProperty "Source" ImageSourcePartDefaults.Source FabImageSourcePart.SetSource
 

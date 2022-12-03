@@ -7,7 +7,7 @@ public interface IFabText: IText
     new string Text { get; set; }
 }
 
-public static class FabTextSetters
+public static class FabText
 {
-    public static void SetText(FabElement target, string value) => ((IFabText)target).Text = value;
+    public static void SetText(IFabText target, string value) => target.Text = value;
 }

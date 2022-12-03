@@ -16,16 +16,16 @@ public interface IFabTransform: ITransform
     new double AnchorY { get; set; }
 }
 
-public static class FabTransformSetters
+public static class FabTransform
 {
-    public static void SetTranslationX(FabElement target, double value) => ((IFabTransform)target).TranslationX = value;
-    public static void SetTranslationY(FabElement target, double value) => ((IFabTransform)target).TranslationY = value;
-    public static void SetScale(FabElement target, double value) => ((IFabTransform)target).Scale = value;
-    public static void SetScaleX(FabElement target, double value) => ((IFabTransform)target).ScaleX = value;
-    public static void SetScaleY(FabElement target, double value) => ((IFabTransform)target).ScaleY = value;
-    public static void SetRotation(FabElement target, double value) => ((IFabTransform)target).Rotation = value;
-    public static void SetRotationX(FabElement target, double value) => ((IFabTransform)target).RotationX = value;
-    public static void SetRotationY(FabElement target, double value) => ((IFabTransform)target).RotationY = value;
-    public static void SetAnchorX(FabElement target, double value) => ((IFabTransform)target).AnchorX = value;
-    public static void SetAnchorY(FabElement target, double value) => ((IFabTransform)target).AnchorY = value;
+    public static void SetTranslationX(IFabTransform target, double value) => target.TranslationX = value;
+    public static void SetTranslationY(IFabTransform target, double value) => target.TranslationY = value;
+    public static void SetScale(IFabTransform target, double value) => target.Scale = value;
+    public static void SetScaleX(IFabTransform target, double value) => target.ScaleX = value;
+    public static void SetScaleY(IFabTransform target, double value) => target.ScaleY = value;
+    public static void SetRotation(IFabTransform target, double value) => target.Rotation = value;
+    public static void SetRotationX(IFabTransform target, double value) => target.RotationX = value;
+    public static void SetRotationY(IFabTransform target, double value) => target.RotationY = value;
+    public static void SetAnchorX(IFabTransform target, double value) => target.AnchorX = value;
+    public static void SetAnchorY(IFabTransform target, double value) => target.AnchorY = value;
 }

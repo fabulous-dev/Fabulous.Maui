@@ -10,7 +10,7 @@ public interface IFabImage: IImage, IFabImageSourcePart
     new bool IsOpaque { get; set; }
 }
 
-public class FabImage: FabView, IFabImage
+public partial class FabImage: FabView, IFabImage
 {
     private bool _isLoading; // TODO: What is this for?
     public void UpdateIsLoading(bool isLoading)
@@ -24,9 +24,9 @@ public class FabImage: FabView, IFabImage
     public bool IsOpaque { get; set; } = ImageDefaults.IsOpaque;
 }
 
-public static class FabImageSetters
+public partial class FabImage
 {
-    public static void SetIsAnimationPlaying(FabElement target, bool value) => ((IFabImage)target).IsAnimationPlaying = value;
-    public static void SetAspect(FabElement target, Aspect value) => ((IFabImage)target).Aspect = value;
-    public static void SetIsOpaque(FabElement target, bool value) => ((IFabImage)target).IsOpaque = value;
+    public static void SetIsAnimationPlaying(IFabImage target, bool value) => target.IsAnimationPlaying = value;
+    public static void SetAspect(IFabImage target, Aspect value) => target.Aspect = value;
+    public static void SetIsOpaque(IFabImage target, bool value) => target.IsOpaque = value;
 }

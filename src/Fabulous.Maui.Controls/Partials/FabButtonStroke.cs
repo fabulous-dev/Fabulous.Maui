@@ -10,9 +10,9 @@ public interface IFabButtonStroke: IButtonStroke
     new int CornerRadius { get; set; }
 }
 
-public static class FabButtonStrokeSetters
+public static class FabButtonStroke
 {
-    public static void SetStrokeColor(FabElement target, Color value) => ((IFabButtonStroke)target).StrokeColor = value;
-    public static void SetStrokeThickness(FabElement target, double value) => ((IFabButtonStroke)target).StrokeThickness = value;
-    public static void SetCornerRadius(FabElement target, int value) => ((IFabButtonStroke)target).CornerRadius = value;
+    public static void SetStrokeColor(IFabButtonStroke target, Color value) => target.StrokeColor = value;
+    public static void SetStrokeThickness(IFabButtonStroke target, double value) => target.StrokeThickness = value;
+    public static void SetCornerRadius(IFabButtonStroke target, int value) => target.CornerRadius = value;
 }

@@ -4,6 +4,6 @@ open Microsoft.Maui.Handlers.Defaults
 open Fabulous.Maui.Controls
 
 module TextAlignment =
-    let HorizontalTextAlignment = Attributes.defineMauiProperty "TextAlignment" "HorizontalTextAlignment" TextAlignmentDefaults.HorizontalTextAlignment FabTextAlignmentSetters.SetHorizontalTextAlignment
-    let VerticalTextAlignment = Attributes.defineMauiProperty "TextAlignment" "VerticalTextAlignment" TextAlignmentDefaults.VerticalTextAlignment FabTextAlignmentSetters.SetVerticalTextAlignment
+    let HorizontalTextAlignment = Attributes.defineMauiProperty "HorizontalTextAlignment" TextAlignmentDefaults.HorizontalTextAlignment FabTextAlignment.SetHorizontalTextAlignment
+    let VerticalTextAlignment = Attributes.defineMauiProperty "VerticalTextAlignment" TextAlignmentDefaults.VerticalTextAlignment FabTextAlignment.SetVerticalTextAlignment
     

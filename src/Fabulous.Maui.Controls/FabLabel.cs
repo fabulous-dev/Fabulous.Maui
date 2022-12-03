@@ -10,7 +10,7 @@ public interface IFabLabel: ILabel, IFabText, IFabTextStyle, IFabPadding
     new double LineHeight { get; set; }
 }
 
-public class FabLabel : FabView, IFabLabel
+public partial class FabLabel : FabView, IFabLabel
 {
     public Color TextColor { get; set; } = TextStyleDefaults.TextColor;
     public Microsoft.Maui.Font Font { get; set; } = TextStyleDefaults.CreateDefaultFont();
@@ -23,8 +23,8 @@ public class FabLabel : FabView, IFabLabel
     public double LineHeight { get; set; } = LabelDefaults.LineHeight;
 }
 
-public static class FabLabelSetters
+public partial class FabLabel
 {
-    public static void SetTextDecorations(FabElement target, TextDecorations value) => ((IFabLabel)target).TextDecorations = value;
-    public static void SetLineHeight(FabElement target, double value) => ((IFabLabel)target).LineHeight = value;
+    public static void SetTextDecorations(IFabLabel target, TextDecorations value) => target.TextDecorations = value;
+    public static void SetLineHeight(IFabLabel target, double value) => target.LineHeight = value;
 }

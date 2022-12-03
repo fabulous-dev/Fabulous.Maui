@@ -11,7 +11,7 @@ public interface IFabContentView: IContentView, IFabPadding
     new IView? PresentedContent { get; set; }
 }
 
-public class FabContentView: FabView, IFabContentView
+public partial class FabContentView: FabView, IFabContentView
 {
     public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
     
@@ -36,8 +36,8 @@ public class FabContentView: FabView, IFabContentView
     }
 }
 
-public static class FabContentViewSetters
+public partial class FabContentView
 {
-    public static void SetContent(FabElement target, object? value) => ((IFabContentView)target).Content = value;
-    public static void SetPresentedContent(FabElement target, IView? value) => ((IFabContentView)target).PresentedContent = value;
+    public static void SetContent(IFabContentView target, object? value) => target.Content = value;
+    public static void SetPresentedContent(IFabContentView target, IView? value) => target.PresentedContent = value;
 }

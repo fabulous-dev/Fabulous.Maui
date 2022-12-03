@@ -9,13 +9,13 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module View' =
-    let Background = Attributes.defineMauiProperty "View" "Background" ViewDefaults.Background FabViewSetters.SetBackground
-    let Height = Attributes.defineMauiProperty "View" "Height" ViewDefaults.Height FabViewSetters.SetHeight
-    let MinimumHeight = Attributes.defineMauiProperty "View" "MinimumHeight" ViewDefaults.MinimumHeight FabViewSetters.SetMinimumHeight
-    let MinimumWidth = Attributes.defineMauiProperty "View" "MinimumWidth" ViewDefaults.MinimumWidth FabViewSetters.SetMinimumWidth
-    let HorizontalLayoutAlignment = Attributes.defineMauiProperty "View" "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabViewSetters.SetHorizontalLayoutAlignment
-    let VerticalLayoutAlignment = Attributes.defineMauiProperty "View" "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabViewSetters.SetVerticalLayoutAlignment
-    let Semantics = Attributes.defineMauiProperty' "View" "Semantics" ViewDefaults.CreateDefaultSemantics FabViewSetters.SetSemantics
+    let Background = Attributes.defineMauiProperty "Background" ViewDefaults.Background FabView.SetBackground
+    let Height = Attributes.defineMauiProperty "Height" ViewDefaults.Height FabView.SetHeight
+    let MinimumHeight = Attributes.defineMauiProperty "MinimumHeight" ViewDefaults.MinimumHeight FabView.SetMinimumHeight
+    let MinimumWidth = Attributes.defineMauiProperty "MinimumWidth" ViewDefaults.MinimumWidth FabView.SetMinimumWidth
+    let HorizontalLayoutAlignment = Attributes.defineMauiProperty "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabView.SetHorizontalLayoutAlignment
+    let VerticalLayoutAlignment = Attributes.defineMauiProperty "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabView.SetVerticalLayoutAlignment
+    let Semantics = Attributes.defineMauiProperty' "Semantics" ViewDefaults.CreateDefaultSemantics FabView.SetSemantics
     
 [<Extension>]
 type ViewModifiers =

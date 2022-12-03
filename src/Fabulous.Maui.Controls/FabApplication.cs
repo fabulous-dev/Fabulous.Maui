@@ -10,7 +10,7 @@ public interface IFabApplication: IApplication
     Action<AppTheme>? OnThemeChanged { get; set; }
 }
 
-public class FabApplication: FabElement, IFabApplication
+public partial class FabApplication: FabElement, IFabApplication
 {
     private readonly List<IWindow> _windows = new();
 
@@ -27,7 +27,7 @@ public class FabApplication: FabElement, IFabApplication
     public IList<IWindow> EditableWindows => _windows;
 }
 
-public static class FabApplicationSetters
+public partial class FabApplication
 {
-    public static void SetOnThemeChanged(FabElement target, Action<AppTheme>? value) => ((IFabApplication)target).OnThemeChanged = value;
+    public static void SetOnThemeChanged(IFabApplication target, Action<AppTheme>? value) => target.OnThemeChanged = value;
 }

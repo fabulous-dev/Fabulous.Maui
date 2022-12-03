@@ -9,9 +9,9 @@ public interface IFabTextStyle: ITextStyle
     new double CharacterSpacing { get; set; }
 }
 
-public static class FabTextStyleSetters
+public static class FabTextStyle
 {
-    public static void SetTextColor(FabElement target, Microsoft.Maui.Graphics.Color value) => ((IFabTextStyle)target).TextColor = value;
-    public static void SetFont(FabElement target, Font value) => ((IFabTextStyle)target).Font = value;
-    public static void SetCharacterSpacing(FabElement target, double value) => ((IFabTextStyle)target).CharacterSpacing = value;
+    public static void SetTextColor(IFabTextStyle target, Microsoft.Maui.Graphics.Color value) => target.TextColor = value;
+    public static void SetFont(IFabTextStyle target, Font value) => target.Font = value;
+    public static void SetCharacterSpacing(IFabTextStyle target, double value) => target.CharacterSpacing = value;
 }

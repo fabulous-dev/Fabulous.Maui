@@ -11,7 +11,7 @@ public interface IFabButton: IButton, IFabPadding, IFabButtonStroke
     Action? OnClicked { get; set; }
 }
 
-public abstract class FabButton : FabView, IFabButton
+public abstract partial class FabButton : FabView, IFabButton
 {
     public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
     public Color StrokeColor { get; set; } = ButtonStrokeDefaults.StrokeColor;
@@ -27,7 +27,7 @@ public abstract class FabButton : FabView, IFabButton
     public void Clicked() => OnClicked?.Invoke();
 }
 
-public static class FabButtonSetters
+public partial class FabButton
 {
     public static void SetOnPressed(FabElement target, Action? value) => ((IFabButton)target).OnPressed = value;
     public static void SetOnReleased(FabElement target, Action? value) => ((IFabButton)target).OnReleased = value;

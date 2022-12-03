@@ -7,7 +7,7 @@ public interface IFabTextButton : ITextButton, IFabText, IFabTextStyle
 {
 }
 
-public class FabTextButton: FabButton, IFabTextButton
+public partial class FabTextButton: FabButton, IFabTextButton
 {
     public Microsoft.Maui.Graphics.Color TextColor { get; set; } = TextStyleDefaults.TextColor;
     public Font Font { get; set; } = TextStyleDefaults.CreateDefaultFont();
