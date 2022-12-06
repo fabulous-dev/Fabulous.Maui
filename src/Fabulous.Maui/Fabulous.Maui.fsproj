@@ -25,6 +25,7 @@
     <Compile Include="Widgets\Partials\_TextStyle.fs" />
     <Compile Include="Widgets\Partials\_View.fs" />
     <Compile Include="Widgets\Partials\_StackLayout.fs" />
+    <Compile Include="Widgets\Partials\_Range.fs" />
     <Compile Include="Widgets\ContentView.fs" />
     <Compile Include="Widgets\Image.fs" />
     <Compile Include="Widgets\Label.fs" />
@@ -34,6 +35,8 @@
     <Compile Include="Widgets\VStack.fs" />
     <Compile Include="Widgets\Window.fs" />
     <Compile Include="Widgets\Application.fs" />
+    <Compile Include="Widgets\Switch.fs" />
+    <Compile Include="Widgets\Slider.fs" />
     <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />

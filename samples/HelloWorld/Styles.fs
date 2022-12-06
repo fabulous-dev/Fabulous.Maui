@@ -1,4 +1,4 @@
-namespace DotnetPodcasts
+namespace HelloWorld
 
 open Microsoft.Maui
 open Microsoft.Maui.Graphics

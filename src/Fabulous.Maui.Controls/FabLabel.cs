@@ -4,7 +4,7 @@ using Microsoft.Maui.Graphics;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabLabel: ILabel, IFabText, IFabTextStyle, IFabPadding
+public interface IFabLabel: ILabel, IFabText, IFabPadding, IFabTextAlignment
 {
     new TextDecorations TextDecorations { get; set; }
     new double LineHeight { get; set; }

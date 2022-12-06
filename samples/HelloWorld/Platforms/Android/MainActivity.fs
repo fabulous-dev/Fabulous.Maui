@@ -1,4 +1,4 @@
-namespace DotnetPodcasts.Android
+namespace HelloWorld.Android
 
 open Android.App
 open Android.Content.PM

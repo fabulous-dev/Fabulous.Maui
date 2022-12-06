@@ -1,9 +1,9 @@
-namespace CounterApp.iOS
+namespace HelloWorld.iOS
 
 open Foundation
 open UIKit
 open Fabulous.Avalonia
-open CounterApp
+open HelloWorld
 
 [<Register("AppDelegate")>]
 type AppDelegate() =

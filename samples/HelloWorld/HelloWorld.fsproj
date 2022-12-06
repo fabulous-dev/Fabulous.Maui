@@ -11,11 +11,11 @@
     <SingleProject>true</SingleProject>
     
     <!-- Display name -->
-    <ApplicationTitle>DotnetPodcasts</ApplicationTitle>
+    <ApplicationTitle>HelloWorld</ApplicationTitle>
     
     <!-- App Identifier -->
-    <ApplicationId>org.fabulous.maui.DotnetPodcasts</ApplicationId>
-    <ApplicationIdGuid>50938FF5-6E33-4CD6-BDE4-D41E21F73F19</ApplicationIdGuid>
+    <ApplicationId>org.fabulous.maui.HelloWorld</ApplicationId>
+    <ApplicationIdGuid>1A23030F-BBA0-4B40-8544-FA2145077502</ApplicationIdGuid>
     
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -47,9 +47,6 @@
 
     <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-    <EmbeddedResource Include="Resources\AppResource.resx" />
-    <Compile Include="Resources\AppResource.fs" />
-    <Compile Include="Resources\Images.fs" />
   </ItemGroup>
 
   <ItemGroup>

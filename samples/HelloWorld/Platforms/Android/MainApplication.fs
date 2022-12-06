@@ -1,14 +1,14 @@
-namespace DotnetPodcasts.Android
+namespace HelloWorld.Android
 
 open Android.App
 open Microsoft.Maui
-open DotnetPodcasts
+open HelloWorld
 
 [<Application>]
 type MainApplication(handle, ownership) =
     inherit MauiApplication(handle, ownership)
 
-    do DotnetPodcasts.Resource.UpdateIdValues()
+    do HelloWorld.Resource.UpdateIdValues()
     
     override this.CreateMauiApp() =
         MauiProgram.CreateMauiApp()

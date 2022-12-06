@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabulous.Maui.Controls", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maui.FabCompat", "src\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj", "{FC3662D3-CBC9-4CEF-825C-EA40CFAF475E}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DotnetPodcasts", "samples\DotnetPodcasts\DotnetPodcasts.fsproj", "{05730BDC-A8BD-4E8E-8832-54D25A789330}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWorld", "samples\HelloWorld\HelloWorld.fsproj", "{05730BDC-A8BD-4E8E-8832-54D25A789330}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

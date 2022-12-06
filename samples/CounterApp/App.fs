@@ -8,64 +8,80 @@ open Fabulous.Maui
 open type Fabulous.Maui.View
 
 module App =
-    let semanticAnnounce text =
-        fun () -> SemanticScreenReader.Announce(text)
-        |> Cmd.ignore
-            
     type Model =
         { Count: int
-          ButtonText: string }
+          Step: int
+          TimerOn: bool }
         
     type Msg =
         | Increment
+        | Decrement
+        | Reset
+        | SetStep of float
+        | TimerToggled of bool
+        | TimedTick
+        
+    let initModel = { Count = 0; Step = 1; TimerOn = false }
+    
+    let timerCmd () =
+        async {
+            do! Async.Sleep 200
+            return TimedTick
+        }
+        |> Cmd.ofAsyncMsg
         
     let init() =
-        { Count = 0; ButtonText = "Click me!" }, Cmd.none
+        initModel, Cmd.none
         
     let update msg model =
         match msg with
         | Increment ->
-            let newCount = model.Count + 1
-            let text =
-                match newCount with
-                | 1 -> "Clicked: 1 time"
-                | count -> $"Clicked: {count} times"
-            
-            { model with Count = newCount; ButtonText = text }, semanticAnnounce text
+            { model with
+                Count = model.Count + model.Step }, Cmd.none
+        | Decrement ->
+            { model with
+                Count = model.Count - model.Step }, Cmd.none
+        | Reset -> initModel, Cmd.none
+        | SetStep n -> { model with Step = int(n + 0.5) }, Cmd.none
+        | TimerToggled on ->
+            { model with TimerOn = on },
+            if on then timerCmd() else Cmd.none
+        | TimedTick ->
+            if model.TimerOn then
+                { model with Count = model.Count + model.Step },
+                timerCmd()
+            else
+                model, Cmd.none
     
     let view model =
         Application() {
             Window(
                 ContentView(
-                    ScrollView(
-                        VStack(25.) {
-                            Image("dotnet_bot.png")
-                                .semantics(Semantics(Description = "Cute dotnet bot waving hi to you!"))
-                                .height(200.)
-                                .centerHorizontal()
+                    (VStack() {
+                        Label($"%d{model.Count}")
+                            .centerHorizontal()
                             
-                            Label("Hello, World!")
-                                .style(Styles.label)
-                                .semantics(Semantics(HeadingLevel = SemanticHeadingLevel.Level1))
-                                .font(Font.SystemFontOfSize(32.))
-                                .centerHorizontal()
-                                
-                            Label("Welcome to .NET Multi-platform App UI")
-                                .style(Styles.label)
-                                .semantics(Semantics(HeadingLevel = SemanticHeadingLevel.Level2, Description = "Welcome to dot net Multi platform App U I"))
-                                .font(Font.SystemFontOfSize(18.))
-                                .centerHorizontal()
-                                
-                            TextButton(model.ButtonText, Increment)
-                                .style(Styles.textButton)
-                                .semantics(Semantics(Hint = "Counts the number of times you click"))
-                                .centerHorizontal()
-                        }
-                    )
+                        TextButton("Increment", Increment)
+                        
+                        TextButton("Decrement", Decrement)
+                        
+                        (HStack() {
+                            Label("Timer")
+                            Switch(model.TimerOn, TimerToggled)
+                        })
+                            .padding(20.)
+                            .centerHorizontal()
+                            
+                        Slider(0., 10., double model.Step, SetStep)
+                        
+                        Label($"Step size: %d{model.Step}")
+                            .centerTextHorizontal()
+                            
+                        TextButton("Reset", Reset)
+                    })
+                        .padding(30.)
                         .centerVertical()
-                        .padding(30., 0.)
                 )
-                    .style(Styles.contentView)
             )
         }
         

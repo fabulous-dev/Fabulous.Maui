@@ -2,7 +2,7 @@ using Microsoft.Maui;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabText: IText
+public interface IFabText: IText, IFabTextStyle
 {
     new string Text { get; set; }
 }

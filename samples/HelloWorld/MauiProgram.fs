@@ -1,4 +1,4 @@
-namespace DotnetPodcasts
+namespace HelloWorld
 
 open Microsoft.Maui.Hosting
 open Fabulous.Maui
