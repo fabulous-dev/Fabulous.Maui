@@ -6,6 +6,7 @@ open System
 open System.IO
 open System.Runtime.CompilerServices
 open Fabulous
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.PlatformConfiguration
 
@@ -79,8 +80,8 @@ type CustomNavigationPage() as this =
         else
             false
 
-type IFabNavigationPage =
-    inherit IFabPage
+type IFabCompatNavigationPage =
+    inherit IFabCompatPage
 
 module NavigationPageUpdaters =
     /// NOTE: Would be better to have a custom diff logic for Navigation
@@ -279,7 +280,7 @@ module NavigationPageBuilders =
     type Fabulous.Maui.View with
 
         static member inline NavigationPage<'msg>() =
-            CollectionBuilder<'msg, IFabNavigationPage, IFabPage>(NavigationPage.WidgetKey, NavigationPage.Pages)
+            CollectionBuilder<'msg, IFabCompatNavigationPage, IFabCompatPage>(NavigationPage.WidgetKey, NavigationPage.Pages)
 
 [<Extension>]
 type NavigationPageModifiers =
@@ -287,52 +288,52 @@ type NavigationPageModifiers =
     /// <param name="light">The color of the barBackgroundColor in the light theme.</param>
     /// <param name="dark">The color of the barBackgroundColor in the dark theme.</param>
     [<Extension>]
-    static member inline barBackgroundColor(this: WidgetBuilder<'msg, #IFabNavigationPage>, light: FabColor, ?dark: FabColor) =
+    static member inline barBackgroundColor(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(NavigationPage.BarBackgroundColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the color of the BarBackground.</summary>
     /// <param name="light">The color of the barBackground in the light theme.</param>
     /// <param name="dark">The color of the barBackground in the dark theme.</param>
     [<Extension>]
-    static member inline barBackground(this: WidgetBuilder<'msg, #IFabNavigationPage>, light: Brush, ?dark: Brush) =
+    static member inline barBackground(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, light: Brush, ?dark: Brush) =
         this.AddScalar(NavigationPage.BarBackground.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the color of the BarTextColor.</summary>
     /// <param name="light">The color of the barTextColor in the light theme.</param>
     /// <param name="dark">The color of the barTextColor in the dark theme.</param>
     [<Extension>]
-    static member inline barTextColor(this: WidgetBuilder<'msg, #IFabNavigationPage>, light: FabColor, ?dark: FabColor) =
+    static member inline barTextColor(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(NavigationPage.BarTextColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Event that is fired when the user back navigated.</summary>
     /// <param name="onBackNavigated">Msg to dispatch when the user back navigated.</param>
     [<Extension>]
-    static member inline onBackNavigated(this: WidgetBuilder<'msg, #IFabNavigationPage>, onBackNavigated: 'msg) =
+    static member inline onBackNavigated(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, onBackNavigated: 'msg) =
         this.AddScalar(NavigationPage.BackNavigated.WithValue(onBackNavigated))
 
     /// <summary>Event that is fired when the user presses the system back button. Doesn't support the iOS back button</summary>
     /// <param name="onBackButtonPressed">Msg to dispatch when the user presses the system back button.</param>
     /// <remarks>Setting this modifier will prevent the default behavior of the system back button. It's up to you to update the navigation stack.</remarks>
     [<Extension>]
-    static member inline onBackButtonPressed(this: WidgetBuilder<'msg, #IFabNavigationPage>, onBackButtonPressed: 'msg) =
+    static member inline onBackButtonPressed(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, onBackButtonPressed: 'msg) =
         this.AddScalar(NavigationPage.BackButtonPressed.WithValue(onBackButtonPressed))
 
     /// <summary>Event that is fired when the page is popped.</summary>
     /// <param name="onPopped">Msg to dispatch when then page is popped.</param>
     [<Extension; Obsolete("Use onBackNavigated instead")>]
-    static member inline onPopped(this: WidgetBuilder<'msg, #IFabNavigationPage>, onPopped: 'msg) =
+    static member inline onPopped(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, onPopped: 'msg) =
         this.AddScalar(NavigationPage.Popped.WithValue(fun _ -> box onPopped))
 
     /// <summary>Event that is fired when the page is pushed.</summary>
     /// <param name="onPushed">Msg to dispatch when then page is pushed.</param>
     [<Extension; Obsolete("Will be removed in next major version")>]
-    static member inline onPushed(this: WidgetBuilder<'msg, #IFabNavigationPage>, onPushed: 'msg) =
+    static member inline onPushed(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, onPushed: 'msg) =
         this.AddScalar(NavigationPage.Pushed.WithValue(fun _ -> box onPushed))
 
     /// <summary>Event that is fired when the page is popped to root.</summary>
     /// <param name="onPoppedToRoot">Msg to dispatch when then page is popped to root.</param>
     [<Extension; Obsolete("Use BackNavigated instead")>]
-    static member inline onPoppedToRoot(this: WidgetBuilder<'msg, #IFabNavigationPage>, onPoppedToRoot: 'msg) =
+    static member inline onPoppedToRoot(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, onPoppedToRoot: 'msg) =
         this.AddScalar(NavigationPage.PoppedToRoot.WithValue(fun _ -> box onPoppedToRoot))
 
 [<Extension>]
@@ -340,40 +341,40 @@ type NavigationPageAttachedModifiers =
     /// <summary>Set the value for HasNavigationBar</summary>
     /// <param name= "value">true if the page has navigation bar ; otherwise, false.</param>
     [<Extension>]
-    static member inline hasNavigationBar(this: WidgetBuilder<'msg, #IFabPage>, value: bool) =
+    static member inline hasNavigationBar(this: WidgetBuilder<'msg, #IFabCompatPage>, value: bool) =
         this.AddScalar(NavigationPage.HasNavigationBar.WithValue(value))
 
     /// <summary>Set the value for HasBackButton</summary>
     /// <param name= "value">true if the page has back button ; otherwise, false.</param>
     [<Extension>]
-    static member inline hasBackButton(this: WidgetBuilder<'msg, #IFabPage>, value: bool) =
+    static member inline hasBackButton(this: WidgetBuilder<'msg, #IFabCompatPage>, value: bool) =
         this.AddScalar(NavigationPage.HasBackButton.WithValue(value))
 
     /// <summary>Set the value for BackButtonTitle</summary>
     /// <param name= "value">The title of the back button for the specified page.</param>
     [<Extension>]
-    static member inline backButtonTitle(this: WidgetBuilder<'msg, #IFabPage>, value: string) =
+    static member inline backButtonTitle(this: WidgetBuilder<'msg, #IFabCompatPage>, value: string) =
         this.AddScalar(NavigationPage.BackButtonTitle.WithValue(value))
 
     /// <summary>Set the color of the IconColor.</summary>
     /// <param name="light">The color of the iconColor in the light theme.</param>
     /// <param name="dark">The color of the iconColor in the dark theme.</param>
     [<Extension>]
-    static member inline iconColor(this: WidgetBuilder<'msg, #IFabPage>, light: FabColor, ?dark: FabColor) =
+    static member inline iconColor(this: WidgetBuilder<'msg, #IFabCompatPage>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(NavigationPage.IconColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the source of the TitleIconImageSource.</summary>
     /// <param name="light">The source of the titleIcon in the light theme.</param>
     /// <param name="dark">The source of the titleIcon in the dark theme.</param>
     [<Extension>]
-    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabPage>, light: ImageSource, ?dark: ImageSource) =
+    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabCompatPage>, light: ImageSource, ?dark: ImageSource) =
         this.AddScalar(NavigationPage.TitleIconImageSource.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the source of the TitleIconImageSource.</summary>
     /// <param name="light">The source of the titleIcon in the light theme.</param>
     /// <param name="dark">The source of the titleIcon in the dark theme.</param>
     [<Extension>]
-    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabPage>, light: string, ?dark: string) =
+    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabCompatPage>, light: string, ?dark: string) =
         let light = ImageSource.FromFile(light)
 
         let dark =
@@ -387,7 +388,7 @@ type NavigationPageAttachedModifiers =
     /// <param name="light">The source of the titleIcon in the light theme.</param>
     /// <param name="dark">The source of the titleIcon in the dark theme.</param>
     [<Extension>]
-    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabPage>, light: Uri, ?dark: Uri) =
+    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabCompatPage>, light: Uri, ?dark: Uri) =
         let light = ImageSource.FromUri(light)
 
         let dark =
@@ -401,7 +402,7 @@ type NavigationPageAttachedModifiers =
     /// <param name="light">The source of the titleIcon in the light theme.</param>
     /// <param name="dark">The source of the titleIcon in the dark theme.</param>
     [<Extension>]
-    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabPage>, light: Stream, ?dark: Stream) =
+    static member inline titleIcon(this: WidgetBuilder<'msg, #IFabCompatPage>, light: Stream, ?dark: Stream) =
         let light = ImageSource.FromStream(fun () -> light)
 
         let dark =
@@ -414,7 +415,7 @@ type NavigationPageAttachedModifiers =
     /// <summary>Sets the value for TitleView</summary>
     /// <param name= "content">View to use as a title for the navigation page.</param>
     [<Extension>]
-    static member inline titleView<'msg, 'marker, 'contentMarker when 'marker :> IFabPage and 'contentMarker :> IFabView>
+    static member inline titleView<'msg, 'marker, 'contentMarker when 'marker :> IFabCompatPage and 'contentMarker :> IView>
         (
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>
@@ -423,7 +424,7 @@ type NavigationPageAttachedModifiers =
 
     /// <summary>Link a ViewRef to access the direct NavigationPage control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabNavigationPage>, value: ViewRef<NavigationPage>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatNavigationPage>, value: ViewRef<NavigationPage>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]
@@ -431,13 +432,13 @@ type NavigationPagePlatformModifiers =
     /// <summary>iOS platform specific. Sets a value that hides the navigation bar separator.</summary>
     /// <param name="value">true to hide the separator. Otherwise, false.</param>
     [<Extension>]
-    static member inline hideNavigationBarSeparator(this: WidgetBuilder<'msg, #IFabNavigationPage>, value: bool) =
+    static member inline hideNavigationBarSeparator(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, value: bool) =
         this.AddScalar(NavigationPage.HideNavigationBarSeparator.WithValue(value))
 
     [<Extension>]
-    static member inline isNavigationBarTranslucent(this: WidgetBuilder<'msg, #IFabNavigationPage>, value: bool) =
+    static member inline isNavigationBarTranslucent(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, value: bool) =
         this.AddScalar(NavigationPage.IsNavigationBarTranslucent.WithValue(value))
 
     [<Extension>]
-    static member inline prefersLargeTitles(this: WidgetBuilder<'msg, #IFabNavigationPage>, value: bool) =
+    static member inline prefersLargeTitles(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, value: bool) =
         this.AddScalar(NavigationPage.PrefersLargeTitles.WithValue(value))

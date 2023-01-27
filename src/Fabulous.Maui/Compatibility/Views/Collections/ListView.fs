@@ -97,11 +97,11 @@ module ListView =
 module ListViewBuilders =
     type Fabulous.Maui.View with
 
-        static member inline ListView<'msg, 'itemData, 'itemMarker when 'itemMarker :> IFabCell>(items: seq<'itemData>) =
+        static member inline ListView<'msg, 'itemData, 'itemMarker when 'itemMarker :> IFabCompatCell>(items: seq<'itemData>) =
             WidgetHelpers.buildItems<'msg, IFabListView, 'itemData, 'itemMarker> ListView.WidgetKey ItemsViewOfCell.ItemsSource items
 
         static member inline GroupedListView<'msg, 'groupData, 'groupMarker, 'itemData, 'itemMarker
-            when 'itemMarker :> IFabCell and 'groupMarker :> IFabCell and 'groupData :> System.Collections.Generic.IEnumerable<'itemData>>
+            when 'itemMarker :> IFabCompatCell and 'groupMarker :> IFabCompatCell and 'groupData :> System.Collections.Generic.IEnumerable<'itemData>>
             (items: seq<'groupData>)
             =
             WidgetHelpers.buildGroupItemsNoFooter<'msg, IFabListView, 'groupData, 'itemData, 'groupMarker, 'itemMarker>

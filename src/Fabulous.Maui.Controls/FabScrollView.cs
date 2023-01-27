@@ -5,7 +5,7 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabScrollView : IScrollView
+public interface IFabScrollView : IScrollView, IFabContentView
 {
     Action? OnScrollFinished { get; set; }
     new ScrollBarVisibility HorizontalScrollBarVisibility { get; set; }

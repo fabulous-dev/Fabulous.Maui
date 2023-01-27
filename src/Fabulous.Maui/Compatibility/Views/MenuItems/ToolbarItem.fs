@@ -4,8 +4,8 @@ open System.Runtime.CompilerServices
 open Fabulous
 open Microsoft.Maui.Controls
 
-type IFabToolbarItem =
-    inherit IFabMenuItem
+type IFabCompatToolbarItem =
+    inherit IFabCompatMenuItem
 
 module ToolbarItem =
     let WidgetKey = CompatWidgets.register<ToolbarItem>()
@@ -31,19 +31,19 @@ module ToolbarItemBuilders =
     type Fabulous.Maui.View with
 
         static member inline ToolbarItem<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IFabToolbarItem>(ToolbarItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
+            WidgetBuilder<'msg, IFabCompatToolbarItem>(ToolbarItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
 
 [<Extension>]
 type ToolbarItemModifiers =
     [<Extension>]
-    static member inline order(this: WidgetBuilder<'msg, #IFabToolbarItem>, value: ToolbarItemOrder) =
+    static member inline order(this: WidgetBuilder<'msg, #IFabCompatToolbarItem>, value: ToolbarItemOrder) =
         this.AddScalar(ToolbarItem.Order.WithValue(value))
 
     [<Extension>]
-    static member inline priority(this: WidgetBuilder<'msg, #IFabToolbarItem>, value: int) =
+    static member inline priority(this: WidgetBuilder<'msg, #IFabCompatToolbarItem>, value: int) =
         this.AddScalar(ToolbarItem.Priority.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct ToolbarItem control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabToolbarItem>, value: ViewRef<ToolbarItem>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatToolbarItem>, value: ViewRef<ToolbarItem>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

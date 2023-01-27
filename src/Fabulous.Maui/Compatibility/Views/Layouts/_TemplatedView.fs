@@ -1,4 +1,7 @@
 namespace Fabulous.Maui.Compatibility
 
-type IFabTemplatedView =
-    inherit IFabLayout
+open Microsoft.Maui
+
+type IFabCompatTemplatedView =
+    inherit IFabCompatLayout
+    inherit IContentView

@@ -9,7 +9,7 @@ open Microsoft.Maui.Controls
 open System
 
 type IFabImageButton =
-    inherit IFabView
+    inherit IFabCompatView
 
 module ImageButton =
     let WidgetKey = CompatWidgets.register<ImageButton>()

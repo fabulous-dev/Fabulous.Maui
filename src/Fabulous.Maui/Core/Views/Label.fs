@@ -12,7 +12,7 @@ module Label =
 module LabelBuilders =
     type Fabulous.Maui.View with
         static member inline Label<'msg>(text: string) =
-            WidgetBuilder<'msg, ILabel>(
+            WidgetBuilder<'msg, IFabLabel>(
                 Label.WidgetKey,
                 Text.Text.WithValue(text)
             )

@@ -3,7 +3,7 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabStackLayout : IStackLayout
+public interface IFabStackLayout : IStackLayout, IFabLayout
 {
     new double Spacing { get; set; }
 }

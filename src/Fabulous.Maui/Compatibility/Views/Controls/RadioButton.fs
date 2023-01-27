@@ -8,7 +8,7 @@ open Microsoft.Maui
 open Microsoft.Maui.Controls
 
 type IFabRadioButton =
-    inherit IFabTemplatedView
+    inherit IFabCompatTemplatedView
 
 module RadioButton =
     let WidgetKey = CompatWidgets.register<RadioButton>()
@@ -157,5 +157,5 @@ type RadioButtonModifiers =
 [<Extension>]
 type RadioButtonAttachedModifiers =
     [<Extension>]
-    static member inline radioButtonGroupName(this: WidgetBuilder<'msg, #IFabLayoutOfView>, value: string) =
+    static member inline radioButtonGroupName(this: WidgetBuilder<'msg, #IFabCompatLayoutOfView>, value: string) =
         this.AddScalar(RadioButton.RadioButtonGroupName.WithValue(value))

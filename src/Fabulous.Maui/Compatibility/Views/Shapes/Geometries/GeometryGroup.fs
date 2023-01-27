@@ -5,7 +5,7 @@ open Microsoft.Maui.Controls.Shapes
 open Fabulous
 
 type IFabGeometryGroup =
-    inherit IFabGeometry
+    inherit IFabCompatGeometry
 
 module GeometryGroup =
 
@@ -23,9 +23,9 @@ module GeometryGroupBuilders =
 
         static member inline GeometryGroup<'msg>(?fillRule: FillRule) =
             match fillRule with
-            | None -> CollectionBuilder<'msg, IFabGeometryGroup, IFabGeometry>(GeometryGroup.WidgetKey, GeometryGroup.Children)
+            | None -> CollectionBuilder<'msg, IFabGeometryGroup, IFabCompatGeometry>(GeometryGroup.WidgetKey, GeometryGroup.Children)
             | Some fillRule ->
-                CollectionBuilder<'msg, IFabGeometryGroup, IFabGeometry>(
+                CollectionBuilder<'msg, IFabGeometryGroup, IFabCompatGeometry>(
                     GeometryGroup.WidgetKey,
                     GeometryGroup.Children,
                     GeometryGroup.FillRule.WithValue(fillRule)

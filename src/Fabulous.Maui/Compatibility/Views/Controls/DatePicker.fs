@@ -8,7 +8,7 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.PlatformConfiguration
 
 type IFabDatePicker =
-    inherit IFabView
+    inherit IFabCompatView
 
 module DatePicker =
     let WidgetKey = CompatWidgets.register<DatePicker>()

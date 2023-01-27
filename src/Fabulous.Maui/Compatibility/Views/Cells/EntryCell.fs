@@ -30,8 +30,8 @@ type CustomEntryCell() =
         if propertyName = EntryCell.TextProperty.PropertyName then
             oldText <- this.Text
 
-type IFabEntryCell =
-    inherit IFabCell
+type IFabCompatEntryCell =
+    inherit IFabCompatCell
 
 module EntryCell =
     let WidgetKey = CompatWidgets.register<CustomEntryCell>()
@@ -64,7 +64,7 @@ module EntryCellBuilders =
     type Fabulous.Maui.View with
 
         static member inline EntryCell<'msg>(label: string, text: string, onTextChanged: string -> 'msg) =
-            WidgetBuilder<'msg, IFabEntryCell>(
+            WidgetBuilder<'msg, IFabCompatEntryCell>(
                 EntryCell.WidgetKey,
                 EntryCell.Label.WithValue(label),
                 EntryCell.TextWithEvent.WithValue(ValueEventData.create text (fun args -> onTextChanged args.NewTextValue |> box))
@@ -76,38 +76,38 @@ type EntryCellModifiers =
     /// <param name="light">The color of the label in the light theme.</param>
     /// <param name="dark">The color of the label in the dark theme.</param>
     [<Extension>]
-    static member inline labelColor(this: WidgetBuilder<'msg, #IFabEntryCell>, light: FabColor, ?dark: FabColor) =
+    static member inline labelColor(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(EntryCell.LabelColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the horizontal text alignment</summary>
     /// param name="alignment">The horizontal text alignment</summary>
     [<Extension>]
-    static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #IFabEntryCell>, alignment: TextAlignment) =
+    static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, alignment: TextAlignment) =
         this.AddScalar(EntryCell.HorizontalTextAlignment.WithValue(alignment))
 
     /// <summary>Set the vertical text alignment</summary>
     /// param name="alignment">The vertical text alignment</summary>
     [<Extension>]
-    static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #IFabEntryCell>, alignment: TextAlignment) =
+    static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, alignment: TextAlignment) =
         this.AddScalar(EntryCell.VerticalTextAlignment.WithValue(alignment))
 
     /// <summary>Set the keyboard</summary>
     /// param name="keyboard">The keyboard type</summary>
     [<Extension>]
-    static member inline keyboard(this: WidgetBuilder<'msg, #IFabEntryCell>, keyboard: Keyboard) =
+    static member inline keyboard(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, keyboard: Keyboard) =
         this.AddScalar(EntryCell.Keyboard.WithValue(keyboard))
 
     /// <summary>Set the placeholder text</summary>
     /// param name="placeholder">The placeholder</summary>
     [<Extension>]
-    static member inline placeholder(this: WidgetBuilder<'msg, #IFabEntryCell>, placeholder: string) =
+    static member inline placeholder(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, placeholder: string) =
         this.AddScalar(EntryCell.Placeholder.WithValue(placeholder))
 
     [<Extension>]
-    static member inline onCompleted(this: WidgetBuilder<'msg, #IFabEntryCell>, onCompleted: 'msg) =
+    static member inline onCompleted(this: WidgetBuilder<'msg, #IFabCompatEntryCell>, onCompleted: 'msg) =
         this.AddScalar(EntryCell.OnCompleted.WithValue(onCompleted))
 
     /// <summary>Link a ViewRef to access the direct EntryCell control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabEntryCell>, value: ViewRef<EntryCell>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatEntryCell>, value: ViewRef<EntryCell>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

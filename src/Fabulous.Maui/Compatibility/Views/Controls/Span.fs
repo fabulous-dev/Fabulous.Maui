@@ -6,8 +6,8 @@ open Fabulous.Maui
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabSpan =
-    inherit IFabElement
+type IFabCompatSpan =
+    inherit IFabCompatGestureElement
 
 module Span =
     let WidgetKey = CompatWidgets.register<Span>()
@@ -42,29 +42,26 @@ module Span =
     let FontAutoScalingEnabled =
         Attributes.defineBindableBool Span.FontAutoScalingEnabledProperty
 
-    let GestureRecognizers =
-        Attributes.defineListWidgetCollection<IGestureRecognizer> "Span_GestureRecognizers" (fun target -> (target :?> Span).GestureRecognizers)
-
 [<AutoOpen>]
 module SpanBuilders =
     type Fabulous.Maui.View with
 
         static member inline Span<'msg>(text: string) =
-            WidgetBuilder<'msg, IFabSpan>(Span.WidgetKey, Span.Text.WithValue(text))
+            WidgetBuilder<'msg, IFabCompatSpan>(Span.WidgetKey, Span.Text.WithValue(text))
 
 [<Extension>]
 type SpanModifiers =
 
     [<Extension>]
-    static member inline backgroundColor(this: WidgetBuilder<'msg, #IFabSpan>, light: FabColor, ?dark: FabColor) =
+    static member inline backgroundColor(this: WidgetBuilder<'msg, #IFabCompatSpan>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(Span.BackgroundColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabSpan>, value: float) =
+    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabCompatSpan>, value: float) =
         this.AddScalar(Span.CharacterSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline font(this: WidgetBuilder<'msg, #IFabSpan>, ?size: float, ?attributes: FontAttributes, ?fontFamily: string, ?autoScalingEnabled: bool) =
+    static member inline font(this: WidgetBuilder<'msg, #IFabCompatSpan>, ?size: float, ?attributes: FontAttributes, ?fontFamily: string, ?autoScalingEnabled: bool) =
 
         let mutable res = this
 
@@ -87,30 +84,26 @@ type SpanModifiers =
         res
 
     [<Extension>]
-    static member inline lineHeight(this: WidgetBuilder<'msg, #IFabSpan>, value: float) =
+    static member inline lineHeight(this: WidgetBuilder<'msg, #IFabCompatSpan>, value: float) =
         this.AddScalar(Span.LineHeight.WithValue(value))
 
     [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IFabSpan>, value: Style) =
+    static member inline style(this: WidgetBuilder<'msg, #IFabCompatSpan>, value: Style) =
         this.AddScalar(Span.Style.WithValue(value))
 
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #IFabSpan>, light: FabColor, ?dark: FabColor) =
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabCompatSpan>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(Span.TextColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline textDecorations(this: WidgetBuilder<'msg, #IFabSpan>, value: TextDecorations) =
+    static member inline textDecorations(this: WidgetBuilder<'msg, #IFabCompatSpan>, value: TextDecorations) =
         this.AddScalar(Span.TextDecorations.WithValue(value))
 
     [<Extension>]
-    static member inline textTransform(this: WidgetBuilder<'msg, #IFabSpan>, value: TextTransform) =
+    static member inline textTransform(this: WidgetBuilder<'msg, #IFabCompatSpan>, value: TextTransform) =
         this.AddScalar(Span.TextTransform.WithValue(value))
-
-    [<Extension>]
-    static member inline gestureRecognizers<'msg, 'marker when 'marker :> IFabSpan>(this: WidgetBuilder<'msg, 'marker>) =
-        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IFabGestureRecognizer> Span.GestureRecognizers this
 
     /// <summary>Link a ViewRef to access the direct Span control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabSpan>, value: ViewRef<Span>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatSpan>, value: ViewRef<Span>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

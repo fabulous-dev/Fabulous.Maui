@@ -140,6 +140,7 @@
     <Compile Include="Compatibility\Views\Shapes\Polygon.fs" />
     <Compile Include="Compatibility\Views\Shapes\Polyline.fs" />
     <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
+    <Compile Include="Compatibility\Views\Controls\_GestureElement.fs" />
     <Compile Include="Compatibility\Views\Controls\Span.fs" />
     <Compile Include="Compatibility\Views\Controls\Button.fs" />
     <Compile Include="Compatibility\Views\Controls\Switch.fs" />
@@ -169,6 +170,7 @@
     <Compile Include="Compatibility\Views\Application.fs" />
     <Compile Include="Compatibility\Views\Any.fs" />
     <Compile Include="Compatibility\Views\_Semantics.fs" />
+    <Compile Include="Any.fs" />
     <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />

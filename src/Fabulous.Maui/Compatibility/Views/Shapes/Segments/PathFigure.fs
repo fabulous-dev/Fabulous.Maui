@@ -7,7 +7,7 @@ open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
 type IFabPathFigure =
-    inherit IFabElement
+    inherit IFabCompatElement
 
 module PathFigure =
     let WidgetKey = CompatWidgets.register<PathFigure>()

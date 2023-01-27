@@ -14,7 +14,7 @@ module Switch =
 module SwitchBuilders =
     type Fabulous.Maui.View with
         static member inline Switch<'msg>(isOn: bool, isOnChanged: bool -> 'msg) =
-            WidgetBuilder<'msg, ISwitch>(
+            WidgetBuilder<'msg, IFabSwitch>(
                 Switch.WidgetKey,
                 Switch.IsOn.WithValue(ValueEventData.create isOn (isOnChanged >> box))
             )

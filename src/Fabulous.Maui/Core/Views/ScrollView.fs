@@ -12,7 +12,7 @@ module ScrollView =
 module ScrollViewBuilders =
     type Fabulous.Maui.View with
         static member inline ScrollView(content: WidgetBuilder<'msg, #IView>) =
-            WidgetBuilder<'msg, IScrollView>(
+            WidgetBuilder<'msg, IFabScrollView>(
                 ScrollView.WidgetKey,
                 AttributesBundle(
                     StackList.empty(),

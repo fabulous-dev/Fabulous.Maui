@@ -7,7 +7,7 @@ open System.Runtime.CompilerServices
 open Fabulous
 
 type IFabProgressBar =
-    inherit IFabView
+    inherit IFabCompatView
 
 [<Struct>]
 type ProgressToData =

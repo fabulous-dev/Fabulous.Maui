@@ -13,9 +13,9 @@ module TextStyle =
 [<Extension>]
 type TextStyleModifiers =
     [<Extension>]
-    static member inline font(this: WidgetBuilder<'msg, #ITextStyle>, value: Font) =
+    static member inline font(this: WidgetBuilder<'msg, #IFabTextStyle>, value: Font) =
         this.AddScalar(TextStyle.Font.WithValue(value))
         
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #ITextStyle>, value: Microsoft.Maui.Graphics.Color) =
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabTextStyle>, value: Microsoft.Maui.Graphics.Color) =
         this.AddScalar(TextStyle.TextColor.WithValue(value))

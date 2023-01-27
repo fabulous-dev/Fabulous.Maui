@@ -30,35 +30,35 @@ type ViewModifiers =
         this.AddScalar(View'.Height.WithValue(value))
         
     [<Extension>]
-    static member minimumHeight(this: WidgetBuilder<'msg, #IView>, value: float) =
+    static member minimumHeight(this: WidgetBuilder<'msg, #IFabView>, value: float) =
         this.AddScalar(View'.MinimumHeight.WithValue(value))
         
     [<Extension>]
-    static member maximumWidth(this: WidgetBuilder<'msg, #IView>, value: float) =
+    static member maximumWidth(this: WidgetBuilder<'msg, #IFabView>, value: float) =
         this.AddScalar(View'.MaximumWidth.WithValue(value))
         
     [<Extension>]
-    static member maximumHeight(this: WidgetBuilder<'msg, #IView>, value: float) =
+    static member maximumHeight(this: WidgetBuilder<'msg, #IFabView>, value: float) =
         this.AddScalar(View'.MaximumHeight.WithValue(value))
         
     [<Extension>]
-    static member minimumWidth(this: WidgetBuilder<'msg, #IView>, value: float) =
+    static member minimumWidth(this: WidgetBuilder<'msg, #IFabView>, value: float) =
         this.AddScalar(View'.MinimumWidth.WithValue(value))
         
     [<Extension>]
-    static member horizontalLayoutAlignment(this: WidgetBuilder<'msg, #IView>, value: LayoutAlignment) =
+    static member horizontalLayoutAlignment(this: WidgetBuilder<'msg, #IFabView>, value: LayoutAlignment) =
         this.AddScalar(View'.HorizontalLayoutAlignment.WithValue(value))
         
     [<Extension>]
-    static member semantics(this: WidgetBuilder<'msg, #IView>, value: Semantics) =
+    static member semantics(this: WidgetBuilder<'msg, #IFabView>, value: Semantics) =
         this.AddScalar(View'.Semantics.WithValue(value))
         
 [<Extension>]
 type ViewExtraModifiers =
     [<Extension>]
-    static member inline centerHorizontal(this: WidgetBuilder<'msg, #IView>) =
+    static member inline centerHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
         this.AddScalar(View'.HorizontalLayoutAlignment.WithValue(LayoutAlignment.Center))
         
     [<Extension>]
-    static member inline centerVertical(this: WidgetBuilder<'msg, #IView>) =
+    static member inline centerVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.AddScalar(View'.VerticalLayoutAlignment.WithValue(LayoutAlignment.Center))

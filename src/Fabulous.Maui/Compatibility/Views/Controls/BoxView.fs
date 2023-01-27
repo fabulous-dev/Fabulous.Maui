@@ -5,7 +5,7 @@ open Fabulous
 open Microsoft.Maui.Controls
 
 type IFabBoxView =
-    inherit IFabView
+    inherit IFabCompatView
 
 module BoxView =
     let WidgetKey = CompatWidgets.register<BoxView>()

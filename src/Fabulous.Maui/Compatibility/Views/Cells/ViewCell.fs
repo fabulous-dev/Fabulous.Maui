@@ -5,8 +5,8 @@ open Fabulous
 open Fabulous.Maui
 open Microsoft.Maui.Controls
 
-type IFabViewCell =
-    inherit IFabCell
+type IFabCompatViewCell =
+    inherit IFabCompatCell
 
 module ViewCell =
     let WidgetKey = CompatWidgets.register<ViewCell>()
@@ -19,12 +19,12 @@ module ViewCell =
 module ViewCellBuilders =
     type Fabulous.Maui.View with
 
-        static member inline ViewCell<'msg, 'marker when 'marker :> IFabView>(view: WidgetBuilder<'msg, 'marker>) =
-            WidgetHelpers.buildWidgets<'msg, IFabViewCell> ViewCell.WidgetKey [| ViewCell.View.WithValue(view.Compile()) |]
+        static member inline ViewCell(view: WidgetBuilder<'msg, #IFabCompatView>) =
+            WidgetHelpers.buildWidgets<'msg, IFabCompatViewCell> ViewCell.WidgetKey [| ViewCell.View.WithValue(view.Compile()) |]
 
 [<Extension>]
 type ViewCellModifiers =
     /// <summary>Link a ViewRef to access the direct ViewCell control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabViewCell>, value: ViewRef<ViewCell>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatViewCell>, value: ViewRef<ViewCell>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

@@ -8,7 +8,7 @@ open Fabulous.Maui
 open Microsoft.Maui.Controls
 
 type IFabSlider =
-    inherit IFabView
+    inherit IFabCompatView
 
 module SliderUpdaters =
     let updateSliderMinMax _ (newValueOpt: struct (float * float) voption) (node: IViewNode) =

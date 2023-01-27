@@ -4,8 +4,8 @@ open Microsoft.Maui.Controls
 
 open Fabulous
 
-type IFabGradientStop =
-    inherit IFabElement
+type IFabCompatGradientStop =
+    inherit IFabCompatElement
 
 module GradientStop =
 
@@ -23,7 +23,7 @@ module GradientStopBuilders =
         /// <param name="light">The color in light theme.</param>
         /// <param name="dark">The color in dark theme.</param>
         static member inline GradientStop(offset: float, light: FabColor, ?dark: FabColor) =
-            WidgetBuilder<'msg, IFabGradientStop>(
+            WidgetBuilder<'msg, IFabCompatGradientStop>(
                 GradientStop.WidgetKey,
                 GradientStop.Color.WithValue(AppTheme.create light dark),
                 GradientStop.Offset.WithValue(offset)

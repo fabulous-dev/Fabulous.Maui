@@ -4,6 +4,7 @@ open System
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.StackAllocatedCollections.StackList
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 
 type SizeAllocatedEventArgs = { Width: float; Height: float }
@@ -22,8 +23,8 @@ type FabulousContentPage() as this =
         base.OnSizeAllocated(width, height)
         sizeAllocated.Trigger(this, { Width = width; Height = height })
 
-type IFabContentPage =
-    inherit IFabPage
+type IFabCompatContentPage =
+    inherit IFabCompatPage
 
 module ContentPage =
     let WidgetKey = CompatWidgets.register<FabulousContentPage>()
@@ -37,8 +38,8 @@ module ContentPage =
 module ContentPageBuilders =
     type Fabulous.Maui.View with
 
-        static member inline ContentPage<'msg, 'marker when 'marker :> IFabView>(title: string, content: WidgetBuilder<'msg, 'marker>) =
-            WidgetBuilder<'msg, IFabContentPage>(
+        static member inline ContentPage(title: string, content: WidgetBuilder<'msg, #IView>) =
+            WidgetBuilder<'msg, IFabCompatContentPage>(
                 ContentPage.WidgetKey,
                 AttributesBundle(StackList.one(Page.Title.WithValue(title)), ValueSome [| ContentPage.Content.WithValue(content.Compile()) |], ValueNone)
             )
@@ -46,10 +47,10 @@ module ContentPageBuilders =
 [<Extension>]
 type ContentPageModifiers =
     [<Extension>]
-    static member inline onSizeAllocated(this: WidgetBuilder<'msg, #IFabContentPage>, fn: SizeAllocatedEventArgs -> 'msg) =
+    static member inline onSizeAllocated(this: WidgetBuilder<'msg, #IFabCompatContentPage>, fn: SizeAllocatedEventArgs -> 'msg) =
         this.AddScalar(ContentPage.SizeAllocated.WithValue(fn >> box))
 
     /// <summary>Link a ViewRef to access the direct ContentPage control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabContentPage>, value: ViewRef<ContentPage>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatContentPage>, value: ViewRef<ContentPage>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

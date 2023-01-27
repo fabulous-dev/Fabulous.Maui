@@ -7,7 +7,7 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabLayout : ILayout, IFabSafeAreaView, IFabPadding
+public interface IFabLayout : ILayout, IFabView, IFabContainer, IFabSafeAreaView, IFabPadding
 {
     new bool ClipsToBounds { get; set; }
 }

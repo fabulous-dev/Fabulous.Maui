@@ -5,7 +5,7 @@ open Fabulous
 open Microsoft.Maui.Controls
 
 type IFabActivityIndicator =
-    inherit IFabView
+    inherit IFabCompatView
 
 module ActivityIndicator =
     let WidgetKey = CompatWidgets.register<ActivityIndicator>()

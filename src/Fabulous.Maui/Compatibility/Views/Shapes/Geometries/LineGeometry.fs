@@ -5,7 +5,7 @@ open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
 type IFabLineGeometry =
-    inherit IFabGeometry
+    inherit IFabCompatGeometry
 
 module LineGeometry =
     let WidgetKey = CompatWidgets.register<LineGeometry>()

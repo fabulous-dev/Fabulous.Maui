@@ -5,7 +5,7 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabContentView: IContentView, IFabPadding
+public interface IFabContentView: IContentView, IFabView, IFabPadding
 {
     new object? Content { get; set; }
     new IView? PresentedContent { get; set; }

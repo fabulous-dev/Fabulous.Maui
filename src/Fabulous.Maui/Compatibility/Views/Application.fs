@@ -30,7 +30,7 @@ type CustomApplication() =
     override this.OnResume() = resume.Trigger(this, EventArgs())
 
 type IFabApplication =
-    inherit IFabElement
+    inherit IFabCompatElement
 
 module Application =
     let WidgetKey = CompatWidgets.register<CustomApplication>()
@@ -89,7 +89,7 @@ module Application =
 module ApplicationBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Application<'msg, 'marker when 'marker :> IFabPage>(mainPage: WidgetBuilder<'msg, 'marker>) =
+        static member inline Application<'msg, 'marker when 'marker :> IFabCompatPage>(mainPage: WidgetBuilder<'msg, 'marker>) =
             WidgetHelpers.buildWidgets<'msg, IFabApplication> Application.WidgetKey [| Application.MainPage.WithValue(mainPage.Compile()) |]
 
 [<Extension>]

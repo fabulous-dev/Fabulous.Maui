@@ -2,11 +2,13 @@ namespace Fabulous.Maui.Compatibility
 
 open System.Runtime.CompilerServices
 open Fabulous
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Graphics
 
-type IFabShadow =
-    inherit IFabElement
+type IFabCompatShadow =
+    inherit IFabCompatElement
+    inherit IShadow
 
 module Shadow =
     let WidgetKey = CompatWidgets.register<Shadow>()
@@ -27,16 +29,16 @@ module ShadowBuilders =
         /// <param name="brush">Brush, of type Brush, represents the brush used to colorize the shadow.</param>
         /// <param name="offset">OffSet, of type Point, specifies the offset for the shadow, which represents the position of the light source that creates the shadow.</param>
         static member inline Shadow(brush: Brush, offset: Point) =
-            WidgetBuilder<'msg, IFabShadow>(Shadow.WidgetKey, Shadow.Brush.WithValue(brush), Shadow.Offset.WithValue(offset))
+            WidgetBuilder<'msg, IFabCompatShadow>(Shadow.WidgetKey, Shadow.Brush.WithValue(brush), Shadow.Offset.WithValue(offset))
 
 [<Extension>]
 type ShadowModifiers =
     /// <summary>Opacity, of type float, indicates the opacity of the shadow. The default value of this property is 1.</summary>
     [<Extension>]
-    static member inline opacity(this: WidgetBuilder<'msg, #IFabShadow>, value: float) =
+    static member inline opacity(this: WidgetBuilder<'msg, #IFabCompatShadow>, value: float) =
         this.AddScalar(Shadow.Opacity.WithValue(value))
 
     /// <summary>Radius, of type float, defines the radius of the blur used to generate the shadow. The default value of this property is 10.</summary>
     [<Extension>]
-    static member inline radius(this: WidgetBuilder<'msg, #IFabShadow>, value: float) =
+    static member inline radius(this: WidgetBuilder<'msg, #IFabCompatShadow>, value: float) =
         this.AddScalar(Shadow.Radius.WithValue(value))

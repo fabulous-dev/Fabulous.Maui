@@ -5,7 +5,7 @@ open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
 type IFabEllipseGeometry =
-    inherit IFabGeometry
+    inherit IFabCompatGeometry
 
 module EllipseGeometry =
     let WidgetKey = CompatWidgets.register<EllipseGeometry>()

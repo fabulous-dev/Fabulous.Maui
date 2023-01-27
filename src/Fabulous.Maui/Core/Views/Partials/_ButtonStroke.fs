@@ -12,5 +12,5 @@ module ButtonStroke =
 [<Extension>]
 type ButtonStrokeModifiers =
     [<Extension>]
-    static member inline cornerRadius(this: WidgetBuilder<'msg, #IButtonStroke>, value: int) =
+    static member inline cornerRadius(this: WidgetBuilder<'msg, #IFabButtonStroke>, value: int) =
         this.AddScalar(ButtonStroke.CornerRadius.WithValue(value))

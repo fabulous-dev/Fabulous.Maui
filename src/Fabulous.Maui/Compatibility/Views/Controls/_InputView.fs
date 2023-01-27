@@ -6,7 +6,7 @@ open Microsoft.Maui
 open Microsoft.Maui.Controls
 
 type IFabInputView =
-    inherit IFabView
+    inherit IFabCompatView
 
 module InputView =
 

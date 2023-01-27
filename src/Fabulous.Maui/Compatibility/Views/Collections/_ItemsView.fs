@@ -7,7 +7,7 @@ open Microsoft.Maui
 open Microsoft.Maui.Controls
 
 type IFabItemsView =
-    inherit IFabView
+    inherit IFabCompatView
 
 module ItemsView =
     let ItemsSource =

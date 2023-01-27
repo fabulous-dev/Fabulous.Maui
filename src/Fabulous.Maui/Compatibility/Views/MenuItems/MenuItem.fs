@@ -4,10 +4,12 @@ open System
 open System.IO
 open System.Runtime.CompilerServices
 open Fabulous
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabMenuItem =
-    inherit IFabElement
+type IFabCompatMenuItem =
+    inherit IFabCompatElement
+    inherit IMenuElement
 
 module MenuItem =
     let WidgetKey = CompatWidgets.register<MenuItem>()
@@ -32,26 +34,26 @@ module MenuItemBuilders =
     type Fabulous.Maui.View with
 
         static member inline MenuItem<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IFabMenuItem>(MenuItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
+            WidgetBuilder<'msg, IFabCompatMenuItem>(MenuItem.WidgetKey, MenuItem.Text.WithValue(text), MenuItem.Clicked.WithValue(onClicked))
 
 [<Extension>]
 type MenuItemModifiers =
     [<Extension>]
-    static member inline accelerator(this: WidgetBuilder<'msg, #IFabMenuItem>, value: Accelerator) =
+    static member inline accelerator(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, value: Accelerator) =
         this.AddScalar(MenuItem.Accelerator.WithValue(value))
 
     /// <summary>Set the source of the icon image.</summary>
     /// <param name="light">The source of the icon image in the light theme.</param>
     /// <param name="dark">The source of the icon image in the dark theme.</param>
     [<Extension>]
-    static member inline icon(this: WidgetBuilder<'msg, #IFabMenuItem>, light: ImageSource, ?dark: ImageSource) =
+    static member inline icon(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, light: ImageSource, ?dark: ImageSource) =
         this.AddScalar(MenuItem.IconImageSource.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the source of the icon image.</summary>
     /// <param name="light">The source of the icon image in the light theme.</param>
     /// <param name="dark">The source of the icon image in the dark theme.</param>
     [<Extension>]
-    static member inline icon(this: WidgetBuilder<'msg, #IFabMenuItem>, light: string, ?dark: string) =
+    static member inline icon(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, light: string, ?dark: string) =
         let light = ImageSource.FromFile(light)
 
         let dark =
@@ -65,7 +67,7 @@ type MenuItemModifiers =
     /// <param name="light">The source of the icon image in the light theme.</param>
     /// <param name="dark">The source of the icon image in the dark theme.</param>
     [<Extension>]
-    static member inline icon(this: WidgetBuilder<'msg, #IFabMenuItem>, light: Uri, ?dark: Uri) =
+    static member inline icon(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, light: Uri, ?dark: Uri) =
         let light = ImageSource.FromUri(light)
 
         let dark =
@@ -79,7 +81,7 @@ type MenuItemModifiers =
     /// <param name="light">The source of the icon image in the light theme.</param>
     /// <param name="dark">The source of the icon image in the dark theme.</param>
     [<Extension>]
-    static member inline icon(this: WidgetBuilder<'msg, #IFabMenuItem>, light: Stream, ?dark: Stream) =
+    static member inline icon(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, light: Stream, ?dark: Stream) =
         let light = ImageSource.FromStream(fun () -> light)
 
         let dark =
@@ -90,14 +92,14 @@ type MenuItemModifiers =
         MenuItemModifiers.icon(this, light, ?dark = dark)
 
     [<Extension>]
-    static member inline isDestructive(this: WidgetBuilder<'msg, #IFabMenuItem>, value: bool) =
+    static member inline isDestructive(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, value: bool) =
         this.AddScalar(MenuItem.IsDestructive.WithValue(value))
 
     [<Extension>]
-    static member inline isEnabled(this: WidgetBuilder<'msg, #IFabMenuItem>, value: bool) =
+    static member inline isEnabled(this: WidgetBuilder<'msg, #IFabCompatMenuItem>, value: bool) =
         this.AddScalar(MenuItem.IsEnabled.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct MenuItem control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabMenuItem>, value: ViewRef<MenuItem>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatMenuItem>, value: ViewRef<MenuItem>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

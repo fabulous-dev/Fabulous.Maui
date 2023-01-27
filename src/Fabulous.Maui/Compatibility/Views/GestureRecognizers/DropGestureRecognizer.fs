@@ -4,8 +4,8 @@ open System.Runtime.CompilerServices
 open Fabulous
 open Microsoft.Maui.Controls
 
-type IFabDropGestureRecognizer =
-    inherit IFabGestureRecognizer
+type IFabCompatDropGestureRecognizer =
+    inherit IFabCompatGestureRecognizer
 
 module DropGestureRecognizer =
     let WidgetKey = CompatWidgets.register<DropGestureRecognizer>()
@@ -27,7 +27,7 @@ module DropGestureRecognizerBuilders =
     type Fabulous.Maui.View with
 
         static member inline DropGestureRecognizer<'msg>(onDrop: DropEventArgs -> 'msg) =
-            WidgetBuilder<'msg, IFabDropGestureRecognizer>(
+            WidgetBuilder<'msg, IFabCompatDropGestureRecognizer>(
                 DropGestureRecognizer.WidgetKey,
                 DropGestureRecognizer.Drop.WithValue(fun args -> onDrop args |> box)
             )
@@ -38,13 +38,13 @@ type DropGestureRecognizerModifiers =
     /// <summary>Sets whether users are allowed to drop</summary>
     /// <param name="value">true to allow users to drop; otherwise, false</param>
     [<Extension>]
-    static member inline allowDrop(this: WidgetBuilder<'msg, #IFabDropGestureRecognizer>, value: bool) =
+    static member inline allowDrop(this: WidgetBuilder<'msg, #IFabCompatDropGestureRecognizer>, value: bool) =
         this.AddScalar(DropGestureRecognizer.AllowDrop.WithValue(value))
 
     [<Extension>]
-    static member inline onDragOver(this: WidgetBuilder<'msg, #IFabDropGestureRecognizer>, onDragOver: DragEventArgs -> 'msg) =
+    static member inline onDragOver(this: WidgetBuilder<'msg, #IFabCompatDropGestureRecognizer>, onDragOver: DragEventArgs -> 'msg) =
         this.AddScalar(DropGestureRecognizer.DragOver.WithValue(fun args -> onDragOver args |> box))
 
     [<Extension>]
-    static member inline onDragLeave(this: WidgetBuilder<'msg, #IFabDropGestureRecognizer>, onDragLeave: DragEventArgs -> 'msg) =
+    static member inline onDragLeave(this: WidgetBuilder<'msg, #IFabCompatDropGestureRecognizer>, onDragLeave: DragEventArgs -> 'msg) =
         this.AddScalar(DropGestureRecognizer.DragLeave.WithValue(fun args -> onDragLeave args |> box))

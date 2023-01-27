@@ -6,7 +6,7 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
 type IFabShape =
-    inherit IFabView
+    inherit IFabCompatView
 
 module Shape =
 
@@ -58,7 +58,7 @@ type ShapeModifiers =
         this.AddScalar(Shape.Fill.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline fill<'msg, 'marker, 'contentMarker when 'marker :> IFabShape and 'contentMarker :> IFabBrush>
+    static member inline fill<'msg, 'marker, 'contentMarker when 'marker :> IFabShape and 'contentMarker :> IFabCompatBrush>
         (
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>

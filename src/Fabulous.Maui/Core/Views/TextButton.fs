@@ -11,7 +11,7 @@ module TextButton =
 module TextButtonBuilders =
     type Fabulous.Maui.View with
         static member inline TextButton<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, ITextButton>(
+            WidgetBuilder<'msg, IFabTextButton>(
                 TextButton.WidgetKey,
                 Text.Text.WithValue(text),
                 Button.Clicked.WithValue(fun () -> box onClicked)

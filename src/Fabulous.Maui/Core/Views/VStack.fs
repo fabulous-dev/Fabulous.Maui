@@ -13,12 +13,12 @@ module VStackBuilders =
         static member inline VStack<'msg>(?spacing: float) =
             match spacing with
             | None ->
-                CollectionBuilder<'msg, IStackLayout, IView>(
+                CollectionBuilder<'msg, IFabStackLayout, IView>(
                     VStack.WidgetKey,
                     Container.Children
                 )
             | Some spacing ->
-                CollectionBuilder<'msg, IStackLayout, IView>(
+                CollectionBuilder<'msg, IFabStackLayout, IView>(
                     VStack.WidgetKey,
                     Container.Children,
                     StackLayout.Spacing.WithValue(spacing)

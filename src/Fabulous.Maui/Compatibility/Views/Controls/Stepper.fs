@@ -6,7 +6,7 @@ open Fabulous.Maui
 open Microsoft.Maui.Controls
 
 type IFabStepper =
-    inherit IFabView
+    inherit IFabCompatView
 
 module StepperUpdaters =
     let updateStepperMinMax _ (newValueOpt: struct (float * float) voption) (node: IViewNode) =

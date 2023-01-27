@@ -2,10 +2,12 @@ namespace Fabulous.Maui.Compatibility
 
 open System.Runtime.CompilerServices
 open Fabulous
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 
 type IFabSwipeItem =
-    inherit IFabMenuItem
+    inherit IFabCompatMenuItem
+    inherit ISwipeItemMenuItem
 
 module SwipeItem =
 

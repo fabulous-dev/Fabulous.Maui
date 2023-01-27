@@ -57,9 +57,10 @@ module App =
                                 .font(Font.SystemFontOfSize(18.))
                                 .centerHorizontal()
                                 
+                            // Compatibility button
                             Button(model.ButtonText, Increment)
                                 //.style(Styles.textButton)
-                                .semantics(Semantics(Hint = "Counts the number of times you click"))
+                                //.semantics(Semantics(Hint = "Counts the number of times you click"))
                                 .centerHorizontal()
                         }
                     )

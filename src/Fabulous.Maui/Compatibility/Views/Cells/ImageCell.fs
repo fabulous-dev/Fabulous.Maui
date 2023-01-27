@@ -7,8 +7,8 @@ open Fabulous
 open Fabulous.Maui
 open Microsoft.Maui.Controls
 
-type IFabImageCell =
-    inherit IFabTextCell
+type IFabCompatImageCell =
+    inherit IFabCompatTextCell
 
 module ImageCell =
     let WidgetKey = CompatWidgets.register<ImageCell>()
@@ -21,7 +21,7 @@ module ImageCellBuilders =
     type Fabulous.Maui.View with
 
         static member inline ImageCell<'msg>(text: string, light: ImageSource, ?dark: ImageSource) =
-            WidgetBuilder<'msg, IFabImageCell>(ImageCell.WidgetKey, TextCell.Text.WithValue(text), ImageCell.ImageSource.WithValue(AppTheme.create light dark))
+            WidgetBuilder<'msg, IFabCompatImageCell>(ImageCell.WidgetKey, TextCell.Text.WithValue(text), ImageCell.ImageSource.WithValue(AppTheme.create light dark))
 
         static member inline ImageCell<'msg>(text: string, light: string, ?dark: string) =
             let light = ImageSource.FromFile(light)
@@ -57,5 +57,5 @@ module ImageCellBuilders =
 type ImageCellModifiers =
     /// <summary>Link a ViewRef to access the direct ImageCell control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabImageCell>, value: ViewRef<ImageCell>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatImageCell>, value: ViewRef<ImageCell>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

@@ -5,8 +5,8 @@ open Microsoft.Maui.Controls
 
 open Fabulous
 
-type IFabGradientBrush =
-    inherit IFabBrush
+type IFabCompatGradientBrush =
+    inherit IFabCompatBrush
 
 module GradientBrush =
 

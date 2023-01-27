@@ -6,7 +6,7 @@ open Fabulous.Maui
 open Microsoft.Maui.Controls
 
 type IFabSwitch =
-    inherit IFabView
+    inherit IFabCompatView
 
 module Switch =
     let WidgetKey = CompatWidgets.register<Switch>()

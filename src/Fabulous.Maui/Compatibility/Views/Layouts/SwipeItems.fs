@@ -6,8 +6,9 @@ open Fabulous
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabSwipeItems =
-    inherit IFabElement
+type IFabCompatSwipeItems =
+    inherit IFabCompatElement
+    inherit ISwipeItems
 
 module SwipeItems =
 
@@ -28,18 +29,18 @@ module SwipeItemsBuilders =
     type Fabulous.Maui.View with
 
         static member inline SwipeItems<'msg>() =
-            CollectionBuilder<'msg, IFabSwipeItems, IFabSwipeItem>(SwipeItems.WidgetKey, SwipeItems.SwipeItems)
+            CollectionBuilder<'msg, IFabCompatSwipeItems, IFabSwipeItem>(SwipeItems.WidgetKey, SwipeItems.SwipeItems)
 
 [<Extension>]
 type SwipeItemsModifiers() =
     [<Extension>]
-    static member inline swipeMode(this: WidgetBuilder<'msg, #IFabSwipeItems>, value: SwipeMode) =
+    static member inline swipeMode(this: WidgetBuilder<'msg, #IFabCompatSwipeItems>, value: SwipeMode) =
         this.AddScalar(SwipeItems.SwipeMode.WithValue(value))
 
     [<Extension>]
-    static member inline swipeBehaviorOnInvoked(this: WidgetBuilder<'msg, #IFabSwipeItems>, value: SwipeBehaviorOnInvoked) =
+    static member inline swipeBehaviorOnInvoked(this: WidgetBuilder<'msg, #IFabCompatSwipeItems>, value: SwipeBehaviorOnInvoked) =
         this.AddScalar(SwipeItems.SwipeBehaviorOnInvoked.WithValue(value))
 
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabSwipeItems>, value: ViewRef<SwipeItems>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatSwipeItems>, value: ViewRef<SwipeItems>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

@@ -27,7 +27,7 @@ type FabulousTimePicker() =
             timeSelected.Trigger(this, TimeSelectedEventArgs(this.Time))
 
 type IFabTimePicker =
-    inherit IFabView
+    inherit IFabCompatView
 
 module TimePicker =
     let WidgetKey = CompatWidgets.register<FabulousTimePicker>()

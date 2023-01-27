@@ -5,8 +5,9 @@ open Fabulous
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabLayout =
-    inherit IFabView
+type IFabCompatLayout =
+    inherit IFabCompatView
+    inherit ILayout
 
 module Layout =
     let Padding =
@@ -21,21 +22,21 @@ module Layout =
 [<Extension>]
 type LayoutModifiers =
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabLayout>, value: Thickness) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: Thickness) =
         this.AddScalar(Layout.Padding.WithValue(value))
 
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabLayout>, value: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: float) =
         LayoutModifiers.padding(this, Thickness(value))
 
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabLayout>, left: float, top: float, right: float, bottom: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, left: float, top: float, right: float, bottom: float) =
         LayoutModifiers.padding(this, Thickness(left, top, right, bottom))
 
     [<Extension>]
-    static member inline cascadeInputTransparent(this: WidgetBuilder<'msg, #IFabLayout>, value: bool) =
+    static member inline cascadeInputTransparent(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: bool) =
         this.AddScalar(Layout.CascadeInputTransparent.WithValue(value))
 
     [<Extension>]
-    static member inline isClippedToBounds(this: WidgetBuilder<'msg, #IFabLayout>, value: bool) =
+    static member inline isClippedToBounds(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: bool) =
         this.AddScalar(Layout.IsClippedToBounds.WithValue(value))

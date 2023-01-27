@@ -14,7 +14,7 @@ module ContentView =
 module ContentViewBuilders =
     type Fabulous.Maui.View with
         static member inline ContentView(content: WidgetBuilder<'msg, #IView>) =
-            WidgetBuilder<'msg, IContentView>(
+            WidgetBuilder<'msg, IFabContentView>(
                 ContentView.WidgetKey,
                 AttributesBundle(
                     StackList.empty(),

@@ -11,7 +11,7 @@ module Slider =
 module SliderBuilders =
     type Fabulous.Maui.View with
         static member inline Slider<'msg>(min: float, max: float, value: float, onValueChanged: float -> 'msg) =
-            WidgetBuilder<'msg, ISlider>(
+            WidgetBuilder<'msg, IFabSlider>(
                 Slider.WidgetKey,
                 Range.MinimumMaximum.WithValue(struct (min, max)),
                 Range.Value.WithValue(ValueEventData.create value (onValueChanged >> box))

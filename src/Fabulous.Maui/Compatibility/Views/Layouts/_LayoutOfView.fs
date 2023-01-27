@@ -2,8 +2,8 @@ namespace Fabulous.Maui.Compatibility
 
 open Fabulous
 
-type IFabLayoutOfView =
-    inherit IFabLayout
+type IFabCompatLayoutOfView =
+    inherit IFabCompatLayout
 
 module LayoutOfView =
     let Children =

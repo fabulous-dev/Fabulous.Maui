@@ -4,8 +4,8 @@ open Fabulous
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Graphics
 
-type IFabRadialGradientBrush =
-    inherit IFabGradientBrush
+type IFabCompatRadialGradientBrush =
+    inherit IFabCompatGradientBrush
 
 module RadialGradientBrush =
 
@@ -26,21 +26,21 @@ module RadialGradientBrushBuilders =
         static member inline RadialGradientBrush<'msg>(?center: Point, ?radius: float) =
             match center, radius with
             | Some c, None ->
-                CollectionBuilder<'msg, IFabRadialGradientBrush, IFabGradientStop>(
+                CollectionBuilder<'msg, IFabCompatRadialGradientBrush, IFabCompatGradientStop>(
                     RadialGradientBrush.WidgetKey,
                     GradientBrush.Children,
                     RadialGradientBrush.Center.WithValue(c),
                     RadialGradientBrush.Radius.WithValue(0.5)
                 )
             | None, Some r ->
-                CollectionBuilder<'msg, IFabRadialGradientBrush, IFabGradientStop>(
+                CollectionBuilder<'msg, IFabCompatRadialGradientBrush, IFabCompatGradientStop>(
                     RadialGradientBrush.WidgetKey,
                     GradientBrush.Children,
                     RadialGradientBrush.Center.WithValue(Point(0.5, 0.5)),
                     RadialGradientBrush.Radius.WithValue(r)
                 )
             | Some c, Some r ->
-                CollectionBuilder<'msg, IFabRadialGradientBrush, IFabGradientStop>(
+                CollectionBuilder<'msg, IFabCompatRadialGradientBrush, IFabCompatGradientStop>(
                     RadialGradientBrush.WidgetKey,
                     GradientBrush.Children,
                     RadialGradientBrush.Center.WithValue(c),
@@ -48,7 +48,7 @@ module RadialGradientBrushBuilders =
                 )
 
             | None, None ->
-                CollectionBuilder<'msg, IFabRadialGradientBrush, IFabGradientStop>(
+                CollectionBuilder<'msg, IFabCompatRadialGradientBrush, IFabCompatGradientStop>(
                     RadialGradientBrush.WidgetKey,
                     GradientBrush.Children,
                     RadialGradientBrush.Center.WithValue(Point(0.5, 0.5)),

@@ -3,7 +3,7 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabImage: IImage, IFabImageSourcePart
+public interface IFabImage: IImage, IFabView, IFabImageSourcePart
 {
     new bool IsAnimationPlaying { get; set; }
     new Aspect Aspect { get; set; }

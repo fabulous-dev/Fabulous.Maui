@@ -39,7 +39,7 @@ module PathBuilders =
 
     type Fabulous.Maui.View with
 
-        static member inline Path<'msg, 'marker when 'marker :> IFabGeometry>(content: WidgetBuilder<'msg, 'marker>) =
+        static member inline Path<'msg, 'marker when 'marker :> IFabCompatGeometry>(content: WidgetBuilder<'msg, 'marker>) =
             WidgetHelpers.buildWidgets<'msg, IFabPath> Path.WidgetKey [| Path.DataWidget.WithValue(content.Compile()) |]
 
         static member inline Path<'msg>(content: string) =

@@ -8,7 +8,7 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
 type IFabBorder =
-    inherit IFabView
+    inherit IFabCompatView
 
 module Border =
     let WidgetKey = CompatWidgets.register<Border>()
@@ -80,7 +80,7 @@ module BorderBuilders =
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="light">The color of the stroke in the light theme.</param>
         /// <param name="dark">The color of the stroke in the dark theme.</param>
-        static member inline Border<'msg, 'marker when 'marker :> IFabView>(content: WidgetBuilder<'msg, 'marker>, light: Brush, ?dark: Brush) =
+        static member inline Border<'msg, 'marker when 'marker :> IFabCompatView>(content: WidgetBuilder<'msg, 'marker>, light: Brush, ?dark: Brush) =
             WidgetBuilder<'msg, IFabBorder>(
                 Border.WidgetKey,
                 AttributesBundle(
@@ -96,7 +96,7 @@ module BorderBuilders =
 
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="stroke">The stroke brush widget</param>
-        static member inline Border<'msg, 'marker, 'stroke when 'marker :> IFabView and 'stroke :> IFabBrush>
+        static member inline Border<'msg, 'marker, 'stroke when 'marker :> IFabCompatView and 'stroke :> IFabCompatBrush>
             (
                 content: WidgetBuilder<'msg, 'marker>,
                 stroke: WidgetBuilder<'msg, 'stroke>

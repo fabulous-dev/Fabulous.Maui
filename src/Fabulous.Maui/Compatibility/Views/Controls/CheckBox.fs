@@ -6,7 +6,7 @@ open Fabulous.Maui
 open Microsoft.Maui.Controls
 
 type IFabCheckBox =
-    inherit IFabView
+    inherit IFabCompatView
 
 module CheckBox =
 

@@ -4,8 +4,8 @@ open System.Runtime.CompilerServices
 open Fabulous
 open Microsoft.Maui.Controls
 
-type IFabNavigableElement =
-    inherit IFabElement
+type IFabCompatNavigableElement =
+    inherit IFabCompatElement
 
 module NavigableElement =
     let Style =
@@ -15,5 +15,5 @@ module NavigableElement =
 type NavigableElementModifiers =
 
     [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IFabNavigableElement>, style: Style) =
+    static member inline style(this: WidgetBuilder<'msg, #IFabCompatNavigableElement>, style: Style) =
         this.AddScalar(NavigableElement.Style.WithValue(style))

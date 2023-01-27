@@ -12,7 +12,7 @@ module Image =
 module ImageBuilders =
     type Fabulous.Maui.View with
         static member inline Image(file: string) =
-            WidgetBuilder<'msg, IImage>(
+            WidgetBuilder<'msg, IFabImage>(
                 Image.WidgetKey,
                 ImageSourcePart.Source.WithValue(FabFileImageSource(file))
             )

@@ -12,15 +12,15 @@ module Padding =
 [<Extension>]
 type PaddingModifiers =
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IPadding>, value: Thickness) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, value: Thickness) =
         this.AddScalar(Padding.Padding.WithValue(value))
 
 [<Extension>]
 type PaddingExtraModifiers =
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IPadding>, uniformSize: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, uniformSize: float) =
         this.padding(Thickness(uniformSize))
         
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IPadding>, horizontalSize: float, verticalSize: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, horizontalSize: float, verticalSize: float) =
         this.padding(Thickness(horizontalSize, verticalSize))

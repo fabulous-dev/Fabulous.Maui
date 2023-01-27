@@ -1,4 +1,7 @@
 namespace Fabulous.Maui.Compatibility
 
-type IFabGeometry =
-    inherit IFabElement
+open Microsoft.Maui.Controls.Shapes
+
+type IFabCompatGeometry =
+    inherit IFabCompatElement
+    inherit IGeometry

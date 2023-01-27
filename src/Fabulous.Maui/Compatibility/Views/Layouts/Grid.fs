@@ -17,8 +17,9 @@ type Dimension =
     /// Use the associated value as the number of device-specific units.
     | Absolute of float
 
-type IFabGrid =
-    inherit IFabLayoutOfView
+type IFabCompatGrid =
+    inherit IFabCompatLayoutOfView
+    inherit IGridLayout
 
 module GridUpdaters =
     let updateGridColumnDefinitions _ (newValueOpt: Dimension[] voption) (node: IViewNode) =
@@ -83,7 +84,7 @@ module GridBuilders =
     type Fabulous.Maui.View with
 
         static member inline Grid<'msg>(coldefs: seq<Dimension>, rowdefs: seq<Dimension>) =
-            CollectionBuilder<'msg, IFabGrid, IFabView>(
+            CollectionBuilder<'msg, IFabCompatGrid, IView>(
                 Grid.WidgetKey,
                 LayoutOfView.Children,
                 Grid.ColumnDefinitions.WithValue(Array.ofSeq coldefs),
@@ -95,32 +96,32 @@ module GridBuilders =
 [<Extension>]
 type GridModifiers =
     [<Extension>]
-    static member inline columnSpacing(this: WidgetBuilder<'msg, #IFabGrid>, value: float) =
+    static member inline columnSpacing(this: WidgetBuilder<'msg, #IFabCompatGrid>, value: float) =
         this.AddScalar(Grid.ColumnSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline rowSpacing(this: WidgetBuilder<'msg, #IFabGrid>, value: float) =
+    static member inline rowSpacing(this: WidgetBuilder<'msg, #IFabCompatGrid>, value: float) =
         this.AddScalar(Grid.RowSpacing.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct Grid control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabGrid>, value: ViewRef<Grid>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatGrid>, value: ViewRef<Grid>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]
 type GridAttachedModifiers =
     [<Extension>]
-    static member inline gridColumn(this: WidgetBuilder<'msg, #IFabView>, value: int) =
+    static member inline gridColumn(this: WidgetBuilder<'msg, #IFabCompatView>, value: int) =
         this.AddScalar(Grid.Column.WithValue(value))
 
     [<Extension>]
-    static member inline gridRow(this: WidgetBuilder<'msg, #IFabView>, value: int) =
+    static member inline gridRow(this: WidgetBuilder<'msg, #IFabCompatView>, value: int) =
         this.AddScalar(Grid.Row.WithValue(value))
 
     [<Extension>]
-    static member inline gridColumnSpan(this: WidgetBuilder<'msg, #IFabView>, value: int) =
+    static member inline gridColumnSpan(this: WidgetBuilder<'msg, #IFabCompatView>, value: int) =
         this.AddScalar(Grid.ColumnSpan.WithValue(value))
 
     [<Extension>]
-    static member inline gridRowSpan(this: WidgetBuilder<'msg, #IFabView>, value: int) =
+    static member inline gridRowSpan(this: WidgetBuilder<'msg, #IFabCompatView>, value: int) =
         this.AddScalar(Grid.RowSpan.WithValue(value))

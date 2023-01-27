@@ -15,7 +15,7 @@ module Window =
 module WindowBuilders =
     type Fabulous.Maui.View with
         static member inline Window(content: WidgetBuilder<'msg, #IView>) =
-            WidgetBuilder<'msg, IWindow>(
+            WidgetBuilder<'msg, IFabWindow>(
                 Window.WidgetKey,
                 AttributesBundle(
                     StackList.empty(),

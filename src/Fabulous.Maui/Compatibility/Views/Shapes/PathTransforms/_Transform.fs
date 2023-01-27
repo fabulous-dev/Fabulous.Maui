@@ -3,7 +3,7 @@ namespace Fabulous.Maui.Compatibility
 open Microsoft.Maui.Controls.Shapes
 
 type IFabTransform =
-    inherit IFabElement
+    inherit IFabCompatElement
 
 module Transform =
 

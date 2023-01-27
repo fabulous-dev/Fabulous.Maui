@@ -6,7 +6,7 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
 type IFabPathGeometry =
-    inherit IFabGeometry
+    inherit IFabCompatGeometry
 
 module PathGeometry =
     let WidgetKey = CompatWidgets.register<PathGeometry>()

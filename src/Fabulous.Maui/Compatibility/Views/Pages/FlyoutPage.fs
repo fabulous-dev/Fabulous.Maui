@@ -20,8 +20,8 @@ type CustomFlyoutPage() as this =
     member _.OnIsPresentedChanged(_) =
         isPresentedChanged.Trigger(this, this.IsPresented)
 
-type IFabFlyoutPage =
-    inherit IFabPage
+type IFabCompatFlyoutPage =
+    inherit IFabCompatPage
 
 module FlyoutPage =
     let WidgetKey = CompatWidgets.register<CustomFlyoutPage>()
@@ -51,12 +51,12 @@ module FlyoutPage =
 module FlyoutPageBuilders =
     type Fabulous.Maui.View with
 
-        static member inline FlyoutPage<'msg, 'flyout, 'detail when 'flyout :> IFabPage and 'detail :> IFabPage>
+        static member inline FlyoutPage<'msg, 'flyout, 'detail when 'flyout :> IFabCompatPage and 'detail :> IFabCompatPage>
             (
                 flyout: WidgetBuilder<'msg, 'flyout>,
                 detail: WidgetBuilder<'msg, 'detail>
             ) =
-            WidgetHelpers.buildWidgets<'msg, IFabFlyoutPage>
+            WidgetHelpers.buildWidgets<'msg, IFabCompatFlyoutPage>
                 FlyoutPage.WidgetKey
                 [| FlyoutPage.Flyout.WithValue(flyout.Compile())
                    FlyoutPage.Detail.WithValue(detail.Compile()) |]
@@ -65,22 +65,22 @@ module FlyoutPageBuilders =
 type FlyoutPageModifiers =
 
     [<Extension>]
-    static member inline isPresented(this: WidgetBuilder<'msg, #IFabFlyoutPage>, value: bool, onChanged: bool -> 'msg) =
+    static member inline isPresented(this: WidgetBuilder<'msg, #IFabCompatFlyoutPage>, value: bool, onChanged: bool -> 'msg) =
         this.AddScalar(FlyoutPage.IsPresented.WithValue(ValueEventData.create value (fun v -> onChanged v |> box)))
 
     [<Extension>]
-    static member inline isGestureEnabled(this: WidgetBuilder<'msg, #IFabFlyoutPage>, value: bool) =
+    static member inline isGestureEnabled(this: WidgetBuilder<'msg, #IFabCompatFlyoutPage>, value: bool) =
         this.AddScalar(FlyoutPage.IsGestureEnabled.WithValue(value))
 
     [<Extension>]
-    static member inline flyoutLayoutBehavior(this: WidgetBuilder<'msg, #IFabFlyoutPage>, value: FlyoutLayoutBehavior) =
+    static member inline flyoutLayoutBehavior(this: WidgetBuilder<'msg, #IFabCompatFlyoutPage>, value: FlyoutLayoutBehavior) =
         this.AddScalar(FlyoutPage.FlyoutLayoutBehavior.WithValue(value))
 
     [<Extension>]
-    static member inline onBackButtonPressed(this: WidgetBuilder<'msg, #IFabFlyoutPage>, onBackButtonPressed: bool -> 'msg) =
+    static member inline onBackButtonPressed(this: WidgetBuilder<'msg, #IFabCompatFlyoutPage>, onBackButtonPressed: bool -> 'msg) =
         this.AddScalar(FlyoutPage.BackButtonPressed.WithValue(fun args -> onBackButtonPressed args.Handled |> box))
 
     /// <summary>Link a ViewRef to access the direct ContentPage control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabFlyoutPage>, value: ViewRef<FlyoutPage>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatFlyoutPage>, value: ViewRef<FlyoutPage>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

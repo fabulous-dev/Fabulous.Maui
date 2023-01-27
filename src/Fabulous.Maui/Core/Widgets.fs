@@ -4,7 +4,6 @@ open System
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui.Controls
-open Microsoft.Maui
 
 module Widgets =
     let registerWithAdditionalSetup<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
@@ -68,5 +67,5 @@ module Widgets =
 [<Extension>]
 type FabElementExtensions =
     [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IElement>, fn: WidgetBuilder<'msg, #IElement> -> WidgetBuilder<'msg, #IElement>) =
+    static member inline style(this: WidgetBuilder<'msg, #IFabElement>, fn: WidgetBuilder<'msg, #IFabElement> -> WidgetBuilder<'msg, #IFabElement>) =
         fn this

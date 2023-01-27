@@ -37,7 +37,7 @@ type CustomPicker() =
             oldSelectedIndex <- this.SelectedIndex
 
 type IFabPicker =
-    inherit IFabView
+    inherit IFabCompatView
 
 module Picker =
     let WidgetKey = CompatWidgets.register<CustomPicker>()

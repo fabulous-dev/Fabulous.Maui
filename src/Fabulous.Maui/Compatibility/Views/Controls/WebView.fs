@@ -9,7 +9,7 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.PlatformConfiguration
 
 type IFabWebView =
-    inherit IFabView
+    inherit IFabCompatView
 
 module WebView =
 
