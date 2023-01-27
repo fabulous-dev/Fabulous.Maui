@@ -1,6 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\src\Fabulous.Maui.props" />
-  
+<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
     <TargetFrameworks>net7.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -66,6 +64,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fabulous.Maui\Fabulous.Maui.fsproj" />
   </ItemGroup>
-  
-  <Import Project="..\..\src\Fabulous.Maui.targets" />
 </Project>
