@@ -5,12 +5,14 @@ open Microsoft.Extensions.DependencyInjection.Extensions
 open Microsoft.Maui
 open Microsoft.Maui.Handlers
 open Microsoft.Maui.Hosting
+open Microsoft.Maui.Controls.Hosting
 open Fabulous
 open Fabulous.Maui.Controls
 
 module FabulousHandlers =
     let register (collection: IMauiHandlersCollection) =
         collection
+            .AddMauiControlsHandlers()
             .AddHandler<FabApplication, ApplicationHandler>()
             .AddHandler<FabWindow, WindowHandler>()
             .AddHandler<FabLabel, LabelHandler>()
@@ -33,7 +35,8 @@ type AppHostBuilderExtensions =
             let app = Program.startApplicationWithArgs args program
             app
         )
-        this.ConfigureMauiHandlers(FabulousHandlers.register)
+        this
+            .ConfigureMauiHandlers(FabulousHandlers.register)
         
     /// Start a Fabulous app taking no args
     [<Extension>]

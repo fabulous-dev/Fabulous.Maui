@@ -9,6 +9,7 @@ open Microsoft.Maui.Controls
 
 type IFabButton =
     inherit IFabView
+    inherit Fabulous.Maui.Controls.IFabButton
 
 module Button =
     let WidgetKey = CompatWidgets.register<Button>()

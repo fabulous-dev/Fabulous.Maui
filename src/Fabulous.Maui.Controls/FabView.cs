@@ -6,7 +6,7 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabView : IView, IFabTransform
+public interface IFabView : IView, IFabElement, IFabTransform
 {
     new string AutomationId { get; set; }
     new FlowDirection FlowDirection { get; set; }

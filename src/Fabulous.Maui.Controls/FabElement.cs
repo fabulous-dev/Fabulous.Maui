@@ -11,6 +11,10 @@ namespace Fabulous.Maui.Controls;
     updated during diffing. Even events are to be defined as properties holding a function.
 */
 
+public interface IFabElement : IElement
+{
+}
+
 public abstract class FabElement: IElement
 {
     private IElementHandler? _handler;

@@ -2,9 +2,11 @@ namespace Fabulous.Maui
 
 open System
 open System.Diagnostics
+open Fabulous.Maui.Controls
 open Microsoft.Maui
 open Microsoft.Maui.ApplicationModel
 open Fabulous
+open Microsoft.Maui.Controls
 
 module Cmd =
     let ignore (fn: unit -> unit) =
@@ -34,6 +36,12 @@ module ViewHelpers =
     let defaultExceptionHandler exn =
         Trace.WriteLine(String.Format("Unhandled exception: {0}", exn.ToString()), "Debug")
         false
+        
+    let getViewNode (target: obj) =
+        match target with
+        | :? FabElement as element -> Fabulous.Maui.ViewNode.get element
+        | :? BindableObject as bindableObject -> Fabulous.Maui.Compatibility.ViewNode.get bindableObject
+        | _ -> failwith "Unsupported target"
 
 module Program =
     let inline private define
@@ -88,7 +96,7 @@ module Program =
     let startApplicationWithArgs (arg: 'arg) (program: Program<'arg, 'model, 'msg, #IApplication>) : IApplication =
         let runner = Runners.create program
         runner.Start(arg)
-        let adapter = ViewAdapters.create ViewNode.get runner
+        let adapter = ViewAdapters.create ViewHelpers.getViewNode runner
         adapter.CreateView() |> unbox
 
     /// Start the program

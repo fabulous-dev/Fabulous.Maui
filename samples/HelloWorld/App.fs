@@ -3,6 +3,7 @@ namespace HelloWorld
 open Microsoft.Maui
 open Microsoft.Maui.Accessibility
 open Fabulous
+open Fabulous.Maui.Compatibility
 open Fabulous.Maui
 
 open type Fabulous.Maui.View
@@ -56,8 +57,8 @@ module App =
                                 .font(Font.SystemFontOfSize(18.))
                                 .centerHorizontal()
                                 
-                            TextButton(model.ButtonText, Increment)
-                                .style(Styles.textButton)
+                            Button(model.ButtonText, Increment)
+                                //.style(Styles.textButton)
                                 .semantics(Semantics(Hint = "Counts the number of times you click"))
                                 .centerHorizontal()
                         }

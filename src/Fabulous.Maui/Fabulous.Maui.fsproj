@@ -140,9 +140,7 @@
     <Compile Include="Compatibility\Views\Shapes\Polygon.fs" />
     <Compile Include="Compatibility\Views\Shapes\Polyline.fs" />
     <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
-    <Compile Include="Compatibility\Views\Controls\Label.fs" />
     <Compile Include="Compatibility\Views\Controls\Span.fs" />
-    <Compile Include="Compatibility\Views\Controls\FormattedLabel.fs" />
     <Compile Include="Compatibility\Views\Controls\Button.fs" />
     <Compile Include="Compatibility\Views\Controls\Switch.fs" />
     <Compile Include="Compatibility\Views\Controls\Border.fs" />

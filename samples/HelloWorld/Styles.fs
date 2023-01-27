@@ -4,6 +4,7 @@ open Microsoft.Maui
 open Microsoft.Maui.Graphics
 open Fabulous
 open Fabulous.Maui
+open Fabulous.Maui.Controls
 
 open type Fabulous.Maui.View
 
