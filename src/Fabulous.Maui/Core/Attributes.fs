@@ -4,14 +4,6 @@ open System
 open Fabulous
 open Fabulous.Maui.Controls
 
-[<Struct>]
-type ValueEventData<'data, 'eventArgs> =
-    { Value: 'data
-      Event: 'eventArgs -> obj }
-
-module ValueEventData =
-    let create (value: 'data) (event: 'eventArgs -> obj) = { Value = value; Event = event }
-
 module Attributes =
     let defineMauiAction<'target> (propertyName: string) (defaultValue: Action) (set: 'target * Action -> unit) =
         Attributes.defineSimpleScalar

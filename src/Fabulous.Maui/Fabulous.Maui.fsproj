@@ -1,50 +1,190 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <UseMauiCore>true</UseMauiCore>
-    <UseMauiEssentials>true</UseMauiEssentials>
+    <UseMaui>true</UseMaui>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-
+  <!-- NuGet Package -->
+  <PropertyGroup>
+    <Description>Declarative UIs for .NET MAUI with F# and MVU, using Fabulous</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+  <!-- SourceLink -->
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(GITHUB_ACTIONS) == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ViewNode.fs" />
-    <Compile Include="Attributes.fs" />
-    <Compile Include="Widgets.fs" />
-    <Compile Include="Widgets\Partials\_Button.fs" />
-    <Compile Include="Widgets\Partials\_ButtonStroke.fs" />
-    <Compile Include="Widgets\Partials\_Container.fs" />
-    <Compile Include="Widgets\Partials\_ImageSourcePart.fs" />
-    <Compile Include="Widgets\Partials\_Layout.fs" />
-    <Compile Include="Widgets\Partials\_Padding.fs" />
-    <Compile Include="Widgets\Partials\_SafeAreaView.fs" />
-    <Compile Include="Widgets\Partials\_Transform.fs" />
-    <Compile Include="Widgets\Partials\_Text.fs" />
-    <Compile Include="Widgets\Partials\_TextAlignment.fs" />
-    <Compile Include="Widgets\Partials\_TitledElement.fs" />
-    <Compile Include="Widgets\Partials\_TextStyle.fs" />
-    <Compile Include="Widgets\Partials\_View.fs" />
-    <Compile Include="Widgets\Partials\_StackLayout.fs" />
-    <Compile Include="Widgets\Partials\_Range.fs" />
-    <Compile Include="Widgets\ContentView.fs" />
-    <Compile Include="Widgets\Image.fs" />
-    <Compile Include="Widgets\Label.fs" />
-    <Compile Include="Widgets\TextButton.fs" />
-    <Compile Include="Widgets\ScrollView.fs" />
-    <Compile Include="Widgets\HStack.fs" />
-    <Compile Include="Widgets\VStack.fs" />
-    <Compile Include="Widgets\Window.fs" />
-    <Compile Include="Widgets\Application.fs" />
-    <Compile Include="Widgets\Switch.fs" />
-    <Compile Include="Widgets\Slider.fs" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\logo\nuget-icon.png" Pack="true" PackagePath="\" />
+    <Compile Include="ValueEventData.fs" />
+    <Compile Include="FabColor.fs" />
+    <Compile Include="VirtualizedCollection.fs" />
+    <Compile Include="WidgetHelpers.fs" />
+    <Compile Include="View.fs" />
+    <Compile Include="Core\ViewNode.fs" />
+    <Compile Include="Core\Attributes.fs" />
+    <Compile Include="Core\Widgets.fs" />
+    <Compile Include="Core\Views\Partials\_Button.fs" />
+    <Compile Include="Core\Views\Partials\_ButtonStroke.fs" />
+    <Compile Include="Core\Views\Partials\_Container.fs" />
+    <Compile Include="Core\Views\Partials\_ImageSourcePart.fs" />
+    <Compile Include="Core\Views\Partials\_Layout.fs" />
+    <Compile Include="Core\Views\Partials\_Padding.fs" />
+    <Compile Include="Core\Views\Partials\_SafeAreaView.fs" />
+    <Compile Include="Core\Views\Partials\_Transform.fs" />
+    <Compile Include="Core\Views\Partials\_Text.fs" />
+    <Compile Include="Core\Views\Partials\_TextAlignment.fs" />
+    <Compile Include="Core\Views\Partials\_TitledElement.fs" />
+    <Compile Include="Core\Views\Partials\_TextStyle.fs" />
+    <Compile Include="Core\Views\Partials\_View.fs" />
+    <Compile Include="Core\Views\Partials\_StackLayout.fs" />
+    <Compile Include="Core\Views\Partials\_Range.fs" />
+    <Compile Include="Core\Views\ContentView.fs" />
+    <Compile Include="Core\Views\Image.fs" />
+    <Compile Include="Core\Views\Label.fs" />
+    <Compile Include="Core\Views\TextButton.fs" />
+    <Compile Include="Core\Views\ScrollView.fs" />
+    <Compile Include="Core\Views\HStack.fs" />
+    <Compile Include="Core\Views\VStack.fs" />
+    <Compile Include="Core\Views\Window.fs" />
+    <Compile Include="Core\Views\Application.fs" />
+    <Compile Include="Core\Views\Switch.fs" />
+    <Compile Include="Core\Views\Slider.fs" />
+    <Compile Include="Compatibility\ViewNode.fs" />
+    <Compile Include="Compatibility\Attributes.fs" />
+    <Compile Include="Compatibility\VirtualizedCollection.fs" />
+    <Compile Include="Compatibility\Widgets.fs" />
+    <Compile Include="Compatibility\Views\_Element.fs" />
+    <Compile Include="Compatibility\Views\_Geometry.fs" />
+    <Compile Include="Compatibility\Views\_NavigableElement.fs" />
+    <Compile Include="Compatibility\Views\Shadow.fs" />
+    <Compile Include="Compatibility\Views\Brushes\_Brush.fs" />
+    <Compile Include="Compatibility\Views\Brushes\_GradientBrush.fs" />
+    <Compile Include="Compatibility\Views\Brushes\_GradientStop.fs" />
+    <Compile Include="Compatibility\Views\Brushes\SolidColorBrush.fs" />
+    <Compile Include="Compatibility\Views\Brushes\LinearGradientBrush.fs" />
+    <Compile Include="Compatibility\Views\Brushes\RadialGradientBrush.fs" />
+    <Compile Include="Compatibility\Views\_VisualElement.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\_GestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\TapGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\PinchGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\PanGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\SwipeGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\DragGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\GestureRecognizers\DropGestureRecognizer.fs" />
+    <Compile Include="Compatibility\Views\_View.fs" />
+    <Compile Include="Compatibility\Views\MenuItems\MenuItem.fs" />
+    <Compile Include="Compatibility\Views\MenuItems\ToolbarItem.fs" />
+    <Compile Include="Compatibility\Views\Cells\_Cell.fs" />
+    <Compile Include="Compatibility\Views\Cells\ViewCell.fs" />
+    <Compile Include="Compatibility\Views\Cells\TextCell.fs" />
+    <Compile Include="Compatibility\Views\Cells\ImageCell.fs" />
+    <Compile Include="Compatibility\Views\Cells\SwitchCell.fs" />
+    <Compile Include="Compatibility\Views\Cells\EntryCell.fs" />
+    <Compile Include="Compatibility\Views\Pages\_Page.fs" />
+    <Compile Include="Compatibility\Views\Pages\ContentPage.fs" />
+    <Compile Include="Compatibility\Views\Pages\NavigationPage.fs" />
+    <Compile Include="Compatibility\Views\Pages\_MultiPageOfPage.fs" />
+    <Compile Include="Compatibility\Views\Pages\TabbedPage.fs" />
+    <Compile Include="Compatibility\Views\Pages\FlyoutPage.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_Layout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_TemplatedView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\ContentView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\RefreshView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_LayoutOfView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_StackBase.fs" />
+    <Compile Include="Compatibility\Views\Layouts\VerticalStackLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\HorizontalStackLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\Grid.fs" />
+    <Compile Include="Compatibility\Views\Layouts\ScrollView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\Frame.fs" />
+    <Compile Include="Compatibility\Views\Layouts\AbsoluteLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\FlexLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\SwipeItem.fs" />
+    <Compile Include="Compatibility\Views\Layouts\SwipeItems.fs" />
+    <Compile Include="Compatibility\Views\Layouts\SwipeView.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\_PathSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\PathFigure.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\ArcSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\BezierSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\LineSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\PolyBezierSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\PolyLineSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\PolyQuadraticBezierSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Segments\QuadraticBezierSegment.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\EllipseGeometry.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\LineGeometry.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\RectangleGeometry.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\PathGeometry.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\GeometryGroup.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Geometries\RoundRectangleGeometry.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\_Transform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\RotateTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\ScaleTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\SkewTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\TranslateTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\CompositeTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\MatrixTransform.fs" />
+    <Compile Include="Compatibility\Views\Shapes\PathTransforms\TransformGroup.fs" />
+    <Compile Include="Compatibility\Views\Shapes\_Shape.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Ellipse.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Rectangle.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Path.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Line.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Polygon.fs" />
+    <Compile Include="Compatibility\Views\Shapes\Polyline.fs" />
+    <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
+    <Compile Include="Compatibility\Views\Controls\Label.fs" />
+    <Compile Include="Compatibility\Views\Controls\Span.fs" />
+    <Compile Include="Compatibility\Views\Controls\FormattedLabel.fs" />
+    <Compile Include="Compatibility\Views\Controls\Button.fs" />
+    <Compile Include="Compatibility\Views\Controls\Switch.fs" />
+    <Compile Include="Compatibility\Views\Controls\Border.fs" />
+    <Compile Include="Compatibility\Views\Controls\Slider.fs" />
+    <Compile Include="Compatibility\Views\Controls\ActivityIndicator.fs" />
+    <Compile Include="Compatibility\Views\Controls\Image.fs" />
+    <Compile Include="Compatibility\Views\Controls\BoxView.fs" />
+    <Compile Include="Compatibility\Views\Controls\_InputView.fs" />
+    <Compile Include="Compatibility\Views\Controls\Entry.fs" />
+    <Compile Include="Compatibility\Views\Controls\SearchBar.fs" />
+    <Compile Include="Compatibility\Views\Controls\Editor.fs" />
+    <Compile Include="Compatibility\Views\Controls\ImageButton.fs" />
+    <Compile Include="Compatibility\Views\Controls\DatePicker.fs" />
+    <Compile Include="Compatibility\Views\Controls\Picker.fs" />
+    <Compile Include="Compatibility\Views\Controls\TimePicker.fs" />
+    <Compile Include="Compatibility\Views\Controls\Stepper.fs" />
+    <Compile Include="Compatibility\Views\Controls\WebView.fs" />
+    <Compile Include="Compatibility\Views\Controls\CheckBox.fs" />
+    <Compile Include="Compatibility\Views\Controls\ProgressBar.fs" />
+    <Compile Include="Compatibility\Views\Controls\RadioButton.fs" />
+    <Compile Include="Compatibility\Views\Collections\_ItemsView.fs" />
+    <Compile Include="Compatibility\Views\Collections\_ItemsViewOfCell.fs" />
+    <Compile Include="Compatibility\Views\Collections\ListView.fs" />
+    <Compile Include="Compatibility\Views\Collections\CollectionView.fs" />
+    <Compile Include="Compatibility\Views\Collections\CarouselView.fs" />
+    <Compile Include="Compatibility\Views\Application.fs" />
+    <Compile Include="Compatibility\Views\Any.fs" />
+    <Compile Include="Compatibility\Views\_Semantics.fs" />
     <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>
-  
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
     <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <!--
+      FSharp.Core is fixed to a specific version that is not necessarily the latest one.
+      This version will be used as the lower bound in the NuGet package
+    -->
+    <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
+    <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

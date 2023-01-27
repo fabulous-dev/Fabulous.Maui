@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <UseMauiCore>true</UseMauiCore>
@@ -7,10 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
       <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" />
     </ItemGroup>
-
+    <ItemGroup>
+        <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
+    </ItemGroup>
 </Project>

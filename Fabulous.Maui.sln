@@ -4,14 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6255FC2D-3C2A-46CF-84FF-4C1860895F16}"
-	ProjectSection(SolutionItems) = preProject
-		src\Fabulous.Maui.props = src\Fabulous.Maui.props
-		src\Fabulous.Maui.targets = src\Fabulous.Maui.targets
-	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous.Maui", "src\Fabulous.Maui\Fabulous.Maui.fsproj", "{43C59611-F941-4F99-AA53-7DAC43E2A80A}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous", "..\Fabulous\src\Fabulous\Fabulous.fsproj", "{4DF3EB50-0637-42B9-AF6A-E1168FE55EDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A2CFF48D-2180-464A-ADB2-67254AEB4BD5}"
 EndProject
@@ -21,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution files", "_Solutio
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabulous.Maui.Controls", "src\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj", "{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}"
@@ -42,10 +38,6 @@ Global
 		{43C59611-F941-4F99-AA53-7DAC43E2A80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C59611-F941-4F99-AA53-7DAC43E2A80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C59611-F941-4F99-AA53-7DAC43E2A80A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DF3EB50-0637-42B9-AF6A-E1168FE55EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DF3EB50-0637-42B9-AF6A-E1168FE55EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DF3EB50-0637-42B9-AF6A-E1168FE55EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DF3EB50-0637-42B9-AF6A-E1168FE55EDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA9333F1-4603-49E5-B841-1726D47FF16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
