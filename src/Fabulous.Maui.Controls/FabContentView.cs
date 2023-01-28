@@ -5,16 +5,16 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabContentView: IContentView, IFabPadding
+public interface IFabContentView: IContentView, IFabView, IFabPadding
 {
-    new object? Content { get; set; }
-    new IView? PresentedContent { get; set; }
+    void SetContent(object? value);
+    void SetPresentedContent(IView? value);
 }
 
-public partial class FabContentView: FabView, IFabContentView
+public class FabContentView: FabView, IFabContentView
 {
-    public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
-    
+    public Thickness Padding { get; private set; } = PaddingDefaults.CreateDefaultPadding();
+
     public virtual Size CrossPlatformMeasure(double widthConstraint, double heightConstraint)
     {
         return this.MeasureContent(widthConstraint, heightConstraint);
@@ -26,7 +26,7 @@ public partial class FabContentView: FabView, IFabContentView
         return bounds.Size;
     }
 
-    public object? Content { get; set; } = ContentViewDefaults.Content;
+    public object? Content { get; private set; } = ContentViewDefaults.Content;
 
     private IView? _presentedContent = ContentViewDefaults.PresentedContent;
     public IView? PresentedContent
@@ -34,10 +34,9 @@ public partial class FabContentView: FabView, IFabContentView
         get => _presentedContent ?? Content as IView;
         set => _presentedContent = value;
     }
-}
-
-public partial class FabContentView
-{
-    public static void SetContent(IFabContentView target, object? value) => target.Content = value;
-    public static void SetPresentedContent(IFabContentView target, IView? value) => target.PresentedContent = value;
+    
+    
+    public void SetPadding(Thickness value) => Padding = value;
+    public void SetContent(object? value) => Content = value;
+    public void SetPresentedContent(IView? value) => PresentedContent = value;
 }

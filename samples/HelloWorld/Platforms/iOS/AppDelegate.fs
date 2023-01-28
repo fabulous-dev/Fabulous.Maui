@@ -1,19 +1,10 @@
-namespace HelloWorld.iOS
+namespace HelloWorld
 
 open Foundation
-open UIKit
-open Fabulous.Avalonia
-open HelloWorld
+open Microsoft.Maui
 
 [<Register("AppDelegate")>]
 type AppDelegate() =
-    inherit FabAppDelegate()
+    inherit MauiUIApplicationDelegate()
 
-    override this.CreateApp() =
-        Program.startApplication App.program
-        
-module Main =
-    [<EntryPoint>]
-    let main(args: string array) =
-        UIApplication.Main(args, null, typeof<AppDelegate>)
-        0
+    override _.CreateMauiApp() = MauiProgram.CreateMauiApp()

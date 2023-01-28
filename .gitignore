@@ -349,6 +349,8 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-.idea/
+.idea
+
+Resource.designer.cs
+nupkgs/
 .DS_Store
-*.designer.cs

@@ -5,20 +5,20 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabScrollView : IScrollView
+public interface IFabScrollView : IScrollView, IFabContentView
 {
-    Action? OnScrollFinished { get; set; }
-    new ScrollBarVisibility HorizontalScrollBarVisibility { get; set; }
-    new ScrollBarVisibility VerticalScrollBarVisibility { get; set; }
-    new ScrollOrientation Orientation { get; set; }
-    new Size ContentSize { get; set; }
-    new double HorizontalOffset { get; set; }
-    new double VerticalOffset { get; set; }
+    void SetOnScrollFinished(Action? value);
+    void SetHorizontalScrollBarVisibility(ScrollBarVisibility value);
+    void SetVerticalScrollBarVisibility(ScrollBarVisibility value);
+    void SetOrientation(ScrollOrientation value);
+    void SetContentSize(Size value);
+    void SetHorizontalOffset(double value);
+    void SetVerticalOffset(double value);
 }
 
-public partial class FabScrollView: FabContentView, IFabScrollView
+public class FabScrollView: FabContentView, IFabScrollView
 {
-    public Action? OnScrollFinished { get; set; } = ScrollViewDefaults.OnScrollFinished;
+    private Action? OnScrollFinished { get; set; } = ScrollViewDefaults.OnScrollFinished;
     public void ScrollFinished() => OnScrollFinished?.Invoke();
     
     public void RequestScrollTo(double horizontalOffset, double verticalOffset, bool instant)
@@ -27,10 +27,10 @@ public partial class FabScrollView: FabContentView, IFabScrollView
         Handler?.Invoke(nameof(IScrollView.RequestScrollTo), request);
     }
 
-    public ScrollBarVisibility HorizontalScrollBarVisibility { get; set; } = ScrollViewDefaults.HorizontalScrollBarVisibility;
-    public ScrollBarVisibility VerticalScrollBarVisibility { get; set; } = ScrollViewDefaults.VerticalScrollBarVisibility;
-    public ScrollOrientation Orientation { get; set; } = ScrollViewDefaults.Orientation;
-    public Size ContentSize { get; set; } = ScrollViewDefaults.CreateContentSize();
+    public ScrollBarVisibility HorizontalScrollBarVisibility { get; private set; } = ScrollViewDefaults.HorizontalScrollBarVisibility;
+    public ScrollBarVisibility VerticalScrollBarVisibility { get; private set; } = ScrollViewDefaults.VerticalScrollBarVisibility;
+    public ScrollOrientation Orientation { get; private set; } = ScrollViewDefaults.Orientation;
+    public Size ContentSize { get; private set; } = ScrollViewDefaults.CreateContentSize();
     public double HorizontalOffset { get; set; } = ScrollViewDefaults.HorizontalOffset;
     public double VerticalOffset { get; set; } = ScrollViewDefaults.VerticalOffset;
 
@@ -79,15 +79,13 @@ public partial class FabScrollView: FabContentView, IFabScrollView
 
         return bounds.Size;
     }
-}
-
-public partial class FabScrollView
-{
-    public static void SetOnScrollFinished(IFabScrollView target, Action? value) => target.OnScrollFinished = value;
-    public static void SetHorizontalScrollBarVisibility(IFabScrollView target, ScrollBarVisibility value) => target.HorizontalScrollBarVisibility = value;
-    public static void SetVerticalScrollBarVisibility(IFabScrollView target, ScrollBarVisibility value) => target.VerticalScrollBarVisibility = value;
-    public static void SetOrientation(IFabScrollView target, ScrollOrientation value) => target.Orientation = value;
-    public static void SetHorizontalOffset(IFabScrollView target, double value) => target.HorizontalOffset = value;
-    public static void SetVerticalOffset(IFabScrollView target, double value) => target.VerticalOffset = value;
-    public static void SetContentSize(IFabScrollView target, Size value) => target.ContentSize = value;
+    
+    
+    public void SetOnScrollFinished(Action? value) => OnScrollFinished = value;
+    public void SetHorizontalScrollBarVisibility(ScrollBarVisibility value) => HorizontalScrollBarVisibility = value;
+    public void SetVerticalScrollBarVisibility(ScrollBarVisibility value) => VerticalScrollBarVisibility = value;
+    public void SetOrientation(ScrollOrientation value) => Orientation = value;
+    public void SetContentSize(Size value) => ContentSize = value;
+    public void SetHorizontalOffset(double value) => HorizontalOffset = value;
+    public void SetVerticalOffset(double value) => VerticalOffset = value;
 }

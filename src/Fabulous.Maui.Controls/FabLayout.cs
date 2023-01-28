@@ -7,12 +7,12 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabLayout : ILayout, IFabSafeAreaView, IFabPadding
+public interface IFabLayout : ILayout, IFabView, IFabContainer, IFabSafeAreaView, IFabPadding
 {
-    new bool ClipsToBounds { get; set; }
+    void SetClipsToBounds(bool value);
 }
 
-public abstract partial class FabLayout: FabView, IFabLayout
+public abstract class FabLayout: FabView, IFabLayout
 {
     private readonly List<IView> _children = new();
     private ILayoutManager? _layoutManager;
@@ -74,9 +74,9 @@ public abstract partial class FabLayout: FabView, IFabLayout
         }
     }
 
-    public bool IgnoreSafeArea { get; set; } = SafeAreaViewDefaults.IgnoreSafeArea;
-    public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
-    public bool ClipsToBounds { get; set; } = LayoutDefaults.ClipsToBounds;
+    public bool IgnoreSafeArea { get; private set; } = SafeAreaViewDefaults.IgnoreSafeArea;
+    public Thickness Padding { get; private set; } = PaddingDefaults.CreateDefaultPadding();
+    public bool ClipsToBounds { get; private set; } = LayoutDefaults.ClipsToBounds;
 
     public override Size Measure(double widthConstraint, double heightConstraint)
     {
@@ -102,9 +102,9 @@ public abstract partial class FabLayout: FabView, IFabLayout
     {
         return LayoutManager.ArrangeChildren(bounds);
     }
-}
-
-public partial class FabLayout
-{
-    public static void SetClipsToBounds(IFabLayout target, bool value) => target.ClipsToBounds = value;
+    
+    
+    public void SetIgnoreSafeArea(bool value) => IgnoreSafeArea = value;
+    public void SetPadding(Thickness value) => Padding = value;
+    public void SetClipsToBounds(bool value) => ClipsToBounds = value;
 }

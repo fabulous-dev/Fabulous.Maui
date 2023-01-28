@@ -4,18 +4,18 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabSwitch : ISwitch, IFabTransform
+public interface IFabSwitch : ISwitch, IFabView
 {
-    Action<bool>? OnIsOnChanged { get; set; }
-    new Color TrackColor { get; set; }
-    new Color ThumbColor { get; set; }
+    void SetIsOn(bool value, Action<bool>? onValueChanged);
+    void SetTrackColor(Color value);
+    void SetThumbColor(Color value);
 }
 
-public partial class FabSwitch: FabView, IFabSwitch
+public class FabSwitch: FabView, IFabSwitch
 {
     private bool _isOn = SwitchDefaults.IsOn;
     
-    public Action<bool>? OnIsOnChanged { get; set; } = SwitchDefaults.OnIsOnChanged;
+    private Action<bool>? OnIsOnChanged { get; set; } = SwitchDefaults.OnIsOnChanged;
 
     public bool IsOn
     {
@@ -30,18 +30,16 @@ public partial class FabSwitch: FabView, IFabSwitch
         }
     }
     
-    public Color ThumbColor { get; set; } = SwitchDefaults.ThumbColor;
-    public Color TrackColor { get; set; } = SwitchDefaults.TrackColor;
-}
+    public Color ThumbColor { get; private set; } = SwitchDefaults.ThumbColor;
+    public Color TrackColor { get; private set; } = SwitchDefaults.TrackColor;
+    
 
-public partial class FabSwitch
-{
-    public static void SetIsOn(IFabSwitch target, bool value, Action<bool>? evt)
+    public void SetIsOn(bool value, Action<bool>? onValueChanged)
     {
-        target.OnIsOnChanged = null;
-        target.IsOn = value;
-        target.OnIsOnChanged = evt;
+        OnIsOnChanged = null;
+        IsOn = value;
+        OnIsOnChanged = onValueChanged;
     }
-    public static void SetThumbColor(IFabSwitch target, Color? value) => target.ThumbColor = value;
-    public static void SetTrackColor(IFabSwitch target, Color? value) => target.TrackColor = value;
+    public void SetTrackColor(Color value) => TrackColor = value;
+    public void SetThumbColor(Color value) => ThumbColor = value;
 }
