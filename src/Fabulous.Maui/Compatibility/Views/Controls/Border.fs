@@ -7,8 +7,9 @@ open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
-type IFabBorder =
+type IFabCompatBorder =
     inherit IFabCompatView
+    inherit IBorder
 
 module Border =
     let WidgetKey = CompatWidgets.register<Border>()
@@ -80,8 +81,8 @@ module BorderBuilders =
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="light">The color of the stroke in the light theme.</param>
         /// <param name="dark">The color of the stroke in the dark theme.</param>
-        static member inline Border<'msg, 'marker when 'marker :> IFabCompatView>(content: WidgetBuilder<'msg, 'marker>, light: Brush, ?dark: Brush) =
-            WidgetBuilder<'msg, IFabBorder>(
+        static member inline Border(content: WidgetBuilder<'msg, #IView>, light: Brush, ?dark: Brush) =
+            WidgetBuilder<'msg, IFabCompatBorder>(
                 Border.WidgetKey,
                 AttributesBundle(
                     StackList.two(
@@ -96,12 +97,12 @@ module BorderBuilders =
 
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="stroke">The stroke brush widget</param>
-        static member inline Border<'msg, 'marker, 'stroke when 'marker :> IFabCompatView and 'stroke :> IFabCompatBrush>
+        static member inline Border
             (
-                content: WidgetBuilder<'msg, 'marker>,
-                stroke: WidgetBuilder<'msg, 'stroke>
+                content: WidgetBuilder<'msg, #IView>,
+                stroke: WidgetBuilder<'msg, #IFabCompatBrush>
             ) =
-            WidgetBuilder<'msg, IFabBorder>(
+            WidgetBuilder<'msg, IFabCompatBorder>(
                 Border.WidgetKey,
                 AttributesBundle(
                     // By spec we need to set StrokeShape to Rectangle
@@ -117,58 +118,58 @@ module BorderBuilders =
 type BorderModifiers =
 
     [<Extension>]
-    static member inline strokeShape(this: WidgetBuilder<'msg, #IFabBorder>, content: string) =
+    static member inline strokeShape(this: WidgetBuilder<'msg, #IFabCompatBorder>, content: string) =
         this.AddScalar(Border.StrokeShapeString.WithValue(content))
 
     [<Extension>]
-    static member inline strokeShape<'msg, 'marker, 'contentMarker when 'marker :> IFabBorder and 'contentMarker :> IFabShape>
+    static member inline strokeShape
         (
-            this: WidgetBuilder<'msg, 'marker>,
-            content: WidgetBuilder<'msg, 'contentMarker>
+            this: WidgetBuilder<'msg, #IFabCompatBorder>,
+            content: WidgetBuilder<'msg, #IFabCompatShape>
         ) =
         this.AddWidget(Border.StrokeShapeWidget.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline strokeThickness(this: WidgetBuilder<'msg, #IFabBorder>, value: float) =
+    static member inline strokeThickness(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
         this.AddScalar(Border.StrokeThickness.WithValue(value))
 
     [<Extension>]
-    static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabBorder>, value: string) =
+    static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: string) =
         this.AddScalar(Border.StrokeDashArrayString.WithValue(value))
 
     [<Extension>]
-    static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabShape>, value: float list) =
+    static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabCompatShape>, value: float list) =
         this.AddScalar(Border.StrokeDashArrayList.WithValue(value))
 
     [<Extension>]
-    static member inline strokeDashOffset(this: WidgetBuilder<'msg, #IFabBorder>, value: float) =
+    static member inline strokeDashOffset(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
         this.AddScalar(Border.StrokeDashOffset.WithValue(value))
 
     [<Extension>]
-    static member inline strokeLineCap(this: WidgetBuilder<'msg, #IFabBorder>, value: PenLineCap) =
+    static member inline strokeLineCap(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: PenLineCap) =
         this.AddScalar(Border.StrokeLineCap.WithValue(value))
 
     [<Extension>]
-    static member inline strokeLineJoin(this: WidgetBuilder<'msg, #IFabBorder>, value: PenLineJoin) =
+    static member inline strokeLineJoin(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: PenLineJoin) =
         this.AddScalar(Border.StrokeLineJoin.WithValue(value))
 
     [<Extension>]
-    static member inline strokeMiterLimit(this: WidgetBuilder<'msg, #IFabBorder>, value: float) =
+    static member inline strokeMiterLimit(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
         this.AddScalar(Border.StrokeMiterLimit.WithValue(value))
 
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabBorder>, value: Thickness) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: Thickness) =
         this.AddScalar(Border.Padding.WithValue(value))
 
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabBorder>, value: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
         BorderModifiers.padding(this, Thickness(value))
 
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabBorder>, left: float, top: float, right: float, bottom: float) =
+    static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, left: float, top: float, right: float, bottom: float) =
         BorderModifiers.padding(this, Thickness(left, top, right, bottom))
 
     /// <summary>Link a ViewRef to access the direct Border control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabBorder>, value: ViewRef<Border>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatBorder>, value: ViewRef<Border>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

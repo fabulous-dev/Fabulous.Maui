@@ -11,8 +11,8 @@ open Microsoft.Maui.Controls
 type FabulousListView() =
     inherit ListView(ListViewCachingStrategy.RecycleElement)
 
-type IFabListView =
-    inherit IFabItemsViewOfCell
+type IFabCompatListView =
+    inherit IFabCompatItemsViewOfCell
 
 module ListView =
 
@@ -98,13 +98,13 @@ module ListViewBuilders =
     type Fabulous.Maui.View with
 
         static member inline ListView<'msg, 'itemData, 'itemMarker when 'itemMarker :> IFabCompatCell>(items: seq<'itemData>) =
-            WidgetHelpers.buildItems<'msg, IFabListView, 'itemData, 'itemMarker> ListView.WidgetKey ItemsViewOfCell.ItemsSource items
+            WidgetHelpers.buildItems<'msg, IFabCompatListView, 'itemData, 'itemMarker> ListView.WidgetKey ItemsViewOfCell.ItemsSource items
 
         static member inline GroupedListView<'msg, 'groupData, 'groupMarker, 'itemData, 'itemMarker
             when 'itemMarker :> IFabCompatCell and 'groupMarker :> IFabCompatCell and 'groupData :> System.Collections.Generic.IEnumerable<'itemData>>
             (items: seq<'groupData>)
             =
-            WidgetHelpers.buildGroupItemsNoFooter<'msg, IFabListView, 'groupData, 'itemData, 'groupMarker, 'itemMarker>
+            WidgetHelpers.buildGroupItemsNoFooter<'msg, IFabCompatListView, 'groupData, 'itemData, 'groupMarker, 'itemMarker>
                 ListView.WidgetKey
                 ListView.GroupedItemsSource
                 items
@@ -113,94 +113,94 @@ module ListViewBuilders =
 type ListViewModifiers =
 
     [<Extension>]
-    static member inline header<'msg, 'marker, 'contentMarker when 'marker :> IFabListView and 'contentMarker :> IView>
+    static member inline header
         (
-            this: WidgetBuilder<'msg, 'marker>,
-            content: WidgetBuilder<'msg, 'contentMarker>
+            this: WidgetBuilder<'msg, #IFabCompatListView>,
+            content: WidgetBuilder<'msg, #IView>
         ) =
         this.AddWidget(ListView.Header.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline footer<'msg, 'marker, 'contentMarker when 'marker :> IFabListView and 'contentMarker :> IView>
+    static member inline footer
         (
-            this: WidgetBuilder<'msg, 'marker>,
-            content: WidgetBuilder<'msg, 'contentMarker>
+            this: WidgetBuilder<'msg, #IFabCompatListView>,
+            content: WidgetBuilder<'msg, #IView>
         ) =
         this.AddWidget(ListView.Footer.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline hasUnevenRows(this: WidgetBuilder<'msg, #IFabListView>, value: bool) =
+    static member inline hasUnevenRows(this: WidgetBuilder<'msg, #IFabCompatListView>, value: bool) =
         this.AddScalar(ListView.HasUnevenRows.WithValue(value))
 
     [<Extension>]
-    static member inline horizontalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabListView>, value: ScrollBarVisibility) =
+    static member inline horizontalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatListView>, value: ScrollBarVisibility) =
         this.AddScalar(ListView.HorizontalScrollBarVisibility.WithValue(value))
 
     [<Extension>]
-    static member inline verticalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabListView>, value: ScrollBarVisibility) =
+    static member inline verticalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatListView>, value: ScrollBarVisibility) =
         this.AddScalar(ListView.VerticalScrollBarVisibility.WithValue(value))
 
     [<Extension>]
-    static member inline isPullToRefreshEnabled(this: WidgetBuilder<'msg, #IFabListView>, value: bool) =
+    static member inline isPullToRefreshEnabled(this: WidgetBuilder<'msg, #IFabCompatListView>, value: bool) =
         this.AddScalar(ListView.IsPullToRefreshEnabled.WithValue(value))
 
     [<Extension>]
-    static member inline isRefreshing(this: WidgetBuilder<'msg, #IFabListView>, value: bool) =
+    static member inline isRefreshing(this: WidgetBuilder<'msg, #IFabCompatListView>, value: bool) =
         this.AddScalar(ListView.IsRefreshing.WithValue(value))
 
     [<Extension>]
-    static member inline refreshControlColor(this: WidgetBuilder<'msg, #IFabListView>, light: FabColor, ?dark: FabColor) =
+    static member inline refreshControlColor(this: WidgetBuilder<'msg, #IFabCompatListView>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(ListView.RefreshControlColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline separatorColor(this: WidgetBuilder<'msg, #IFabListView>, light: FabColor, ?dark: FabColor) =
+    static member inline separatorColor(this: WidgetBuilder<'msg, #IFabCompatListView>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(ListView.SeparatorColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline separatorVisibility(this: WidgetBuilder<'msg, #IFabListView>, value: SeparatorVisibility) =
+    static member inline separatorVisibility(this: WidgetBuilder<'msg, #IFabCompatListView>, value: SeparatorVisibility) =
         this.AddScalar(ListView.SeparatorVisibility.WithValue(value))
 
     [<Extension>]
-    static member inline rowHeight(this: WidgetBuilder<'msg, #IFabListView>, value: int) =
+    static member inline rowHeight(this: WidgetBuilder<'msg, #IFabCompatListView>, value: int) =
         this.AddScalar(ListView.RowHeight.WithValue(value))
 
     [<Extension>]
-    static member inline selectionMode(this: WidgetBuilder<'msg, #IFabListView>, value: ListViewSelectionMode) =
+    static member inline selectionMode(this: WidgetBuilder<'msg, #IFabCompatListView>, value: ListViewSelectionMode) =
         this.AddScalar(ListView.SelectionMode.WithValue(value))
 
     [<Extension>]
-    static member inline onItemAppearing(this: WidgetBuilder<'msg, #IFabListView>, onItemAppearing: ItemVisibilityEventArgs -> 'msg) =
+    static member inline onItemAppearing(this: WidgetBuilder<'msg, #IFabCompatListView>, onItemAppearing: ItemVisibilityEventArgs -> 'msg) =
         this.AddScalar(ListView.ItemAppearing.WithValue(fun args -> onItemAppearing args |> box))
 
     [<Extension>]
-    static member inline onItemDisappearing(this: WidgetBuilder<'msg, #IFabListView>, onItemDisappearing: ItemVisibilityEventArgs -> 'msg) =
+    static member inline onItemDisappearing(this: WidgetBuilder<'msg, #IFabCompatListView>, onItemDisappearing: ItemVisibilityEventArgs -> 'msg) =
         this.AddScalar(ListView.ItemDisappearing.WithValue(fun args -> onItemDisappearing args |> box))
 
     [<Extension>]
-    static member inline onItemTapped(this: WidgetBuilder<'msg, #IFabListView>, onItemTapped: int -> 'msg) =
+    static member inline onItemTapped(this: WidgetBuilder<'msg, #IFabCompatListView>, onItemTapped: int -> 'msg) =
         this.AddScalar(ListView.ItemTapped.WithValue(fun args -> onItemTapped args.ItemIndex |> box))
 
     [<Extension; Obsolete("Use onItemSelected(int -> 'msg) instead")>]
-    static member inline onItemSelected(this: WidgetBuilder<'msg, #IFabListView>, onItemSelected: SelectedItemChangedEventArgs -> 'msg) =
+    static member inline onItemSelected(this: WidgetBuilder<'msg, #IFabCompatListView>, onItemSelected: SelectedItemChangedEventArgs -> 'msg) =
         this.AddScalar(ListView.ItemSelected.WithValue(fun args -> onItemSelected args |> box))
 
     [<Extension>]
-    static member inline onItemSelected(this: WidgetBuilder<'msg, #IFabListView>, onItemSelected: int -> 'msg) =
+    static member inline onItemSelected(this: WidgetBuilder<'msg, #IFabCompatListView>, onItemSelected: int -> 'msg) =
         this.AddScalar(ListView.ItemSelected.WithValue(fun args -> onItemSelected args.SelectedItemIndex |> box))
 
     [<Extension>]
-    static member inline onRefreshing(this: WidgetBuilder<'msg, #IFabListView>, onRefreshing: 'msg) =
+    static member inline onRefreshing(this: WidgetBuilder<'msg, #IFabCompatListView>, onRefreshing: 'msg) =
         this.AddScalar(ListView.Refreshing.WithValue(onRefreshing))
 
     [<Extension>]
-    static member inline onScrolled(this: WidgetBuilder<'msg, #IFabListView>, onScrolled: ScrolledEventArgs -> 'msg) =
+    static member inline onScrolled(this: WidgetBuilder<'msg, #IFabCompatListView>, onScrolled: ScrolledEventArgs -> 'msg) =
         this.AddScalar(ListView.Scrolled.WithValue(fun args -> onScrolled args |> box))
 
     [<Extension>]
-    static member inline onScrollToRequested(this: WidgetBuilder<'msg, #IFabListView>, onScrollToRequested: ScrollToRequestedEventArgs -> 'msg) =
+    static member inline onScrollToRequested(this: WidgetBuilder<'msg, #IFabCompatListView>, onScrollToRequested: ScrollToRequestedEventArgs -> 'msg) =
         this.AddScalar(ListView.ScrollToRequested.WithValue(fun args -> onScrollToRequested args |> box))
 
     /// <summary>Link a ViewRef to access the direct ListView control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabListView>, value: ViewRef<ListView>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatListView>, value: ViewRef<ListView>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

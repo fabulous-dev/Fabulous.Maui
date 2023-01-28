@@ -6,8 +6,9 @@ open Microsoft.Maui.Controls
 open System.Runtime.CompilerServices
 open Fabulous
 
-type IFabProgressBar =
+type IFabCompatProgressBar =
     inherit IFabCompatView
+    inherit IProgress
 
 [<Struct>]
 type ProgressToData =
@@ -37,10 +38,10 @@ module ProgressBarBuilders =
     type Fabulous.Maui.View with
 
         static member inline ProgressBar<'msg>(progress: float) =
-            WidgetBuilder<'msg, IFabProgressBar>(ProgressBar.WidgetKey, ProgressBar.Progress.WithValue(progress))
+            WidgetBuilder<'msg, IFabCompatProgressBar>(ProgressBar.WidgetKey, ProgressBar.Progress.WithValue(progress))
 
         static member inline ProgressBar<'msg>(progress: float, duration: int, easing: Easing) =
-            WidgetBuilder<'msg, IFabProgressBar>(
+            WidgetBuilder<'msg, IFabCompatProgressBar>(
                 ProgressBar.WidgetKey,
                 ProgressBar.ProgressTo.WithValue(
                     { Progress = progress
@@ -55,10 +56,10 @@ type ProgressBarModifiers =
     /// <param name="light">The color of the progress bar in the light theme.</param>
     /// <param name="dark">The color of the progress bar in the dark theme.</param>
     [<Extension>]
-    static member inline progressColor(this: WidgetBuilder<'msg, #IFabProgressBar>, light: FabColor, ?dark: FabColor) =
+    static member inline progressColor(this: WidgetBuilder<'msg, #IFabCompatProgressBar>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(ProgressBar.ProgressColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Link a ViewRef to access the direct ProgressBar control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabProgressBar>, value: ViewRef<ProgressBar>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatProgressBar>, value: ViewRef<ProgressBar>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

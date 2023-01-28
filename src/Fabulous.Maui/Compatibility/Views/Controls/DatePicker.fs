@@ -4,11 +4,13 @@ open System
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.PlatformConfiguration
 
-type IFabDatePicker =
+type IFabCompatDatePicker =
     inherit IFabCompatView
+    inherit IDatePicker
 
 module DatePicker =
     let WidgetKey = CompatWidgets.register<DatePicker>()
@@ -56,7 +58,7 @@ module DatePickerBuilders =
     type Fabulous.Maui.View with
 
         static member inline DatePicker<'msg>(date: DateTime, onDateSelected: DateTime -> 'msg) =
-            WidgetBuilder<'msg, IFabDatePicker>(
+            WidgetBuilder<'msg, IFabCompatDatePicker>(
                 DatePicker.WidgetKey,
                 DatePicker.DateWithEvent.WithValue(ValueEventData.create date (fun args -> onDateSelected args.NewDate |> box))
             )
@@ -65,13 +67,13 @@ module DatePickerBuilders =
 type DatePickerModifiers =
     /// <summary>CharacterSpacing, of type float, is the spacing between characters of the DatePicker text.</summary>
     [<Extension>]
-    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabDatePicker>, value: float) =
+    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, value: float) =
         this.AddScalar(DatePicker.CharacterSpacing.WithValue(value))
 
     [<Extension>]
     static member inline font
         (
-            this: WidgetBuilder<'msg, #IFabDatePicker>,
+            this: WidgetBuilder<'msg, #IFabCompatDatePicker>,
             ?size: float,
             ?attributes: FontAttributes,
             ?fontFamily: string,
@@ -100,27 +102,27 @@ type DatePickerModifiers =
 
     /// <summary>Format of type string, a standard or custom .NET formatting string, which defaults to "D", the long date pattern.</summary>
     [<Extension>]
-    static member inline format(this: WidgetBuilder<'msg, #IFabDatePicker>, value: string) =
+    static member inline format(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, value: string) =
         this.AddScalar(DatePicker.Format.WithValue(value))
 
     /// <summary>Date of type DateTime, which defaults to the first day of the year 1900.</summary>
     [<Extension>]
-    static member inline minimumDate(this: WidgetBuilder<'msg, #IFabDatePicker>, value: DateTime) =
+    static member inline minimumDate(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, value: DateTime) =
         this.AddScalar(DatePicker.MinimumDate.WithValue(value))
 
     /// <summary>Date of type DateTime, which defaults to the last day of the year 2100.</summary>
     [<Extension>]
-    static member inline maximumDate(this: WidgetBuilder<'msg, #IFabDatePicker>, value: DateTime) =
+    static member inline maximumDate(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, value: DateTime) =
         this.AddScalar(DatePicker.MaximumDate.WithValue(value))
 
     /// <summary>TextColor of type FabColor, the color used to display the selected date.</summary>
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #IFabDatePicker>, light: FabColor, ?dark: FabColor) =
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(DatePicker.TextColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Link a ViewRef to access the direct DatePicker control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabDatePicker>, value: ViewRef<DatePicker>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatDatePicker>, value: ViewRef<DatePicker>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]
@@ -128,5 +130,5 @@ type DatePickerPlatformModifiers =
     /// <summary>iOS platform specific. Sets a value that controls whether elements in the date picker are continuously updated while scrolling or updated once after scrolling has completed.</summary>
     /// <param name="mode">The new property value to assign.</param>
     [<Extension>]
-    static member inline updateMode(this: WidgetBuilder<'msg, #IFabDatePicker>, mode: iOSSpecific.UpdateMode) =
+    static member inline updateMode(this: WidgetBuilder<'msg, #IFabCompatDatePicker>, mode: iOSSpecific.UpdateMode) =
         this.AddScalar(DatePicker.UpdateMode.WithValue(mode))

@@ -41,7 +41,7 @@ module Attributes =
                 if element.Handler <> null then element.Handler.UpdateValue(propertyName)
             )
 
-    let inline defineMauiProperty'<'target, 'value when 'value : equality> (propertyName: string) (defaultValueFn: unit -> 'value) ([<InlineIfLambda>] set: 'target -> 'value -> unit) =
+    let defineMauiProperty'<'target, 'value when 'value : equality> (propertyName: string) (defaultValueFn: unit -> 'value) (set: 'target -> 'value -> unit) =
         Attributes.defineSimpleScalarWithEquality
            $"{typeof<'target>.Name}_{propertyName}"
            (fun _ currOpt node ->
@@ -54,7 +54,7 @@ module Attributes =
                 if element.Handler <> null then element.Handler.UpdateValue(propertyName)
             )
         
-    let inline defineMauiProperty<'target, 'value when 'value : equality> (propertyName: string) (defaultValue: 'value) ([<InlineIfLambda>] set: 'target -> 'value -> unit) =
+    let defineMauiProperty<'target, 'value when 'value : equality> (propertyName: string) (defaultValue: 'value) (set: 'target -> 'value -> unit) =
         defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) set
         
     let inline defineMauiPropertyWithEvent<'target, 'value when 'value : equality> (propertyName: string) (defaultValue: 'value) (defaultEvent: Action<'value>) ([<InlineIfLambda>] set: 'target -> 'value * Action<'value> -> unit) =

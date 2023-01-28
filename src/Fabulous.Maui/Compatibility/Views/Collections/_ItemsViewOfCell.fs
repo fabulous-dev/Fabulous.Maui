@@ -4,7 +4,7 @@ open Fabulous
 open Fabulous.Maui
 open Microsoft.Maui.Controls
 
-type IFabItemsViewOfCell =
+type IFabCompatItemsViewOfCell =
     inherit IFabCompatView
 
 module ItemsViewOfCell =

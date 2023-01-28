@@ -29,7 +29,7 @@ type CustomApplication() =
 
     override this.OnResume() = resume.Trigger(this, EventArgs())
 
-type IFabApplication =
+type IFabCompatApplication =
     inherit IFabCompatElement
 
 module Application =
@@ -90,54 +90,54 @@ module ApplicationBuilders =
     type Fabulous.Maui.View with
 
         static member inline Application<'msg, 'marker when 'marker :> IFabCompatPage>(mainPage: WidgetBuilder<'msg, 'marker>) =
-            WidgetHelpers.buildWidgets<'msg, IFabApplication> Application.WidgetKey [| Application.MainPage.WithValue(mainPage.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatApplication> Application.WidgetKey [| Application.MainPage.WithValue(mainPage.Compile()) |]
 
 [<Extension>]
 type ApplicationModifiers =
     [<Extension>]
-    static member inline userAppTheme(this: WidgetBuilder<'msg, #IFabApplication>, value: AppTheme) =
+    static member inline userAppTheme(this: WidgetBuilder<'msg, #IFabCompatApplication>, value: AppTheme) =
         this.AddScalar(Application.UserAppTheme.WithValue(value))
 
     [<Extension>]
-    static member inline resources(this: WidgetBuilder<'msg, #IFabApplication>, value: ResourceDictionary) =
+    static member inline resources(this: WidgetBuilder<'msg, #IFabCompatApplication>, value: ResourceDictionary) =
         this.AddScalar(Application.Resources.WithValue(value))
 
     [<Extension>]
-    static member inline onRequestedThemeChanged(this: WidgetBuilder<'msg, #IFabApplication>, onRequestedThemeChanged: AppTheme -> 'msg) =
+    static member inline onRequestedThemeChanged(this: WidgetBuilder<'msg, #IFabCompatApplication>, onRequestedThemeChanged: AppTheme -> 'msg) =
         this.AddScalar(Application.RequestedThemeChanged.WithValue(fun args -> onRequestedThemeChanged args.RequestedTheme |> box))
 
     [<Extension>]
-    static member inline onModalPopped(this: WidgetBuilder<'msg, #IFabApplication>, onModalPopped: ModalPoppedEventArgs -> 'msg) =
+    static member inline onModalPopped(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPopped: ModalPoppedEventArgs -> 'msg) =
         this.AddScalar(Application.ModalPopped.WithValue(onModalPopped >> box))
 
     [<Extension>]
-    static member inline onModalPopping(this: WidgetBuilder<'msg, #IFabApplication>, onModalPopping: ModalPoppingEventArgs -> 'msg) =
+    static member inline onModalPopping(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPopping: ModalPoppingEventArgs -> 'msg) =
         this.AddScalar(Application.ModalPopping.WithValue(onModalPopping >> box))
 
     [<Extension>]
-    static member inline onModalPushed(this: WidgetBuilder<'msg, #IFabApplication>, onModalPushed: ModalPushedEventArgs -> 'msg) =
+    static member inline onModalPushed(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPushed: ModalPushedEventArgs -> 'msg) =
         this.AddScalar(Application.ModalPushed.WithValue(onModalPushed >> box))
 
     [<Extension>]
-    static member inline onModalPushing(this: WidgetBuilder<'msg, #IFabApplication>, onModalPushing: ModalPushingEventArgs -> 'msg) =
+    static member inline onModalPushing(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPushing: ModalPushingEventArgs -> 'msg) =
         this.AddScalar(Application.ModalPushing.WithValue(onModalPushing >> box))
 
     /// Dispatch a message when the application starts
     [<Extension>]
-    static member inline onStart(this: WidgetBuilder<'msg, #IFabApplication>, onStart: 'msg) =
+    static member inline onStart(this: WidgetBuilder<'msg, #IFabCompatApplication>, onStart: 'msg) =
         this.AddScalar(Application.Start.WithValue(onStart))
 
     /// Dispatch a message when the application is paused by the OS
     [<Extension>]
-    static member inline onSleep(this: WidgetBuilder<'msg, #IFabApplication>, onSleep: 'msg) =
+    static member inline onSleep(this: WidgetBuilder<'msg, #IFabCompatApplication>, onSleep: 'msg) =
         this.AddScalar(Application.Sleep.WithValue(onSleep))
 
     /// Dispatch a message when the application is resumed by the OS
     [<Extension>]
-    static member inline onResume(this: WidgetBuilder<'msg, #IFabApplication>, onResume: 'msg) =
+    static member inline onResume(this: WidgetBuilder<'msg, #IFabCompatApplication>, onResume: 'msg) =
         this.AddScalar(Application.Resume.WithValue(onResume))
 
     /// Link a ViewRef to access the direct Application instance
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabApplication>, value: ViewRef<Application>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatApplication>, value: ViewRef<Application>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

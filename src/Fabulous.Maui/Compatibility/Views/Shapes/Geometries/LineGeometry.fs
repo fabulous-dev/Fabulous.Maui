@@ -4,7 +4,7 @@ open Fabulous
 open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
-type IFabLineGeometry =
+type IFabCompatLineGeometry =
     inherit IFabCompatGeometry
 
 module LineGeometry =
@@ -21,4 +21,4 @@ module LineGeometryBuilders =
     type Fabulous.Maui.View with
 
         static member inline LineGeometry<'msg>(start: Point, end': Point) =
-            WidgetBuilder<'msg, IFabLineGeometry>(LineGeometry.WidgetKey, LineGeometry.StartPoint.WithValue(start), LineGeometry.EndPoint.WithValue(end'))
+            WidgetBuilder<'msg, IFabCompatLineGeometry>(LineGeometry.WidgetKey, LineGeometry.StartPoint.WithValue(start), LineGeometry.EndPoint.WithValue(end'))

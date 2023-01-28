@@ -4,7 +4,7 @@ open Fabulous
 open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
-type IFabEllipseGeometry =
+type IFabCompatEllipseGeometry =
     inherit IFabCompatGeometry
 
 module EllipseGeometry =
@@ -23,7 +23,7 @@ module EllipseGeometryBuilders =
     type Fabulous.Maui.View with
 
         static member inline EllipseGeometry<'msg>(center: Point, radiusX: float, radiusY: float) =
-            WidgetBuilder<'msg, IFabEllipseGeometry>(
+            WidgetBuilder<'msg, IFabCompatEllipseGeometry>(
                 EllipseGeometry.WidgetKey,
                 EllipseGeometry.Center.WithValue(center),
                 EllipseGeometry.RadiusX.WithValue(radiusX),

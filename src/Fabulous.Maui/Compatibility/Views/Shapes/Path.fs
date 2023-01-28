@@ -7,8 +7,8 @@ open Microsoft.Maui.Controls.Shapes
 
 open Fabulous.Maui
 
-type IFabPath =
-    inherit IFabShape
+type IFabCompatPath =
+    inherit IFabCompatShape
 
 module Path =
     let WidgetKey = CompatWidgets.register<Path>()
@@ -40,15 +40,15 @@ module PathBuilders =
     type Fabulous.Maui.View with
 
         static member inline Path<'msg, 'marker when 'marker :> IFabCompatGeometry>(content: WidgetBuilder<'msg, 'marker>) =
-            WidgetHelpers.buildWidgets<'msg, IFabPath> Path.WidgetKey [| Path.DataWidget.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatPath> Path.WidgetKey [| Path.DataWidget.WithValue(content.Compile()) |]
 
         static member inline Path<'msg>(content: string) =
-            WidgetBuilder<'msg, IFabPath>(Path.WidgetKey, Path.DataString.WithValue(content))
+            WidgetBuilder<'msg, IFabCompatPath>(Path.WidgetKey, Path.DataString.WithValue(content))
 
 [<Extension>]
 type PathModifiers =
     [<Extension>]
-    static member inline renderTransform<'msg, 'marker, 'contentMarker when 'marker :> IFabPath and 'contentMarker :> IFabTransform>
+    static member inline renderTransform<'msg, 'marker, 'contentMarker when 'marker :> IFabCompatPath and 'contentMarker :> IFabCompatTransform>
         (
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>
@@ -56,10 +56,10 @@ type PathModifiers =
         this.AddWidget(Path.RenderTransformWidget.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline renderTransform(this: WidgetBuilder<'msg, #IFabPath>, value: string) =
+    static member inline renderTransform(this: WidgetBuilder<'msg, #IFabCompatPath>, value: string) =
         this.AddScalar(Path.RenderTransformString.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct Path control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabPath>, value: ViewRef<Path>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatPath>, value: ViewRef<Path>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

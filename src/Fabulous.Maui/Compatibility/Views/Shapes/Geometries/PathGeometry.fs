@@ -5,7 +5,7 @@ open Fabulous
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
-type IFabPathGeometry =
+type IFabCompatPathGeometry =
     inherit IFabCompatGeometry
 
 module PathGeometry =
@@ -31,9 +31,9 @@ module PathGeometryBuilders =
 
         static member inline PathGeometry<'msg>(?fillRule: FillRule) =
             match fillRule with
-            | None -> CollectionBuilder<'msg, IFabPathGeometry, IFabPathFigure>(PathGeometry.WidgetKey, PathGeometry.FiguresWidgets)
+            | None -> CollectionBuilder<'msg, IFabCompatPathGeometry, IFabCompatPathFigure>(PathGeometry.WidgetKey, PathGeometry.FiguresWidgets)
             | Some fillRule ->
-                CollectionBuilder<'msg, IFabPathGeometry, IFabPathFigure>(
+                CollectionBuilder<'msg, IFabCompatPathGeometry, IFabCompatPathFigure>(
                     PathGeometry.WidgetKey,
                     PathGeometry.FiguresWidgets,
                     PathGeometry.FillRule.WithValue(fillRule)
@@ -41,9 +41,9 @@ module PathGeometryBuilders =
 
         static member inline PathGeometry<'msg>(content: string, ?fillRule: FillRule) =
             match fillRule with
-            | None -> WidgetBuilder<'msg, IFabPathGeometry>(PathGeometry.WidgetKey, PathGeometry.FiguresString.WithValue(content))
+            | None -> WidgetBuilder<'msg, IFabCompatPathGeometry>(PathGeometry.WidgetKey, PathGeometry.FiguresString.WithValue(content))
             | Some fillRule ->
-                WidgetBuilder<'msg, IFabPathGeometry>(
+                WidgetBuilder<'msg, IFabCompatPathGeometry>(
                     PathGeometry.WidgetKey,
                     PathGeometry.FiguresString.WithValue(content),
                     PathGeometry.FillRule.WithValue(fillRule)

@@ -6,7 +6,7 @@ open Fabulous.Maui
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabItemsView =
+type IFabCompatItemsView =
     inherit IFabCompatView
 
 module ItemsView =
@@ -56,7 +56,7 @@ type ItemsViewModifiers =
     /// <param name="value">The threshold of items not yet visible in the list</param>
     /// <param="onThresholdReached">Event executed when the RemainingItemsThreshold is reached</param>
     [<Extension>]
-    static member inline remainingItemsThreshold(this: WidgetBuilder<'msg, #IFabItemsView>, value: int, onThresholdReached: 'msg) =
+    static member inline remainingItemsThreshold(this: WidgetBuilder<'msg, #IFabCompatItemsView>, value: int, onThresholdReached: 'msg) =
         this
             .AddScalar(ItemsView.RemainingItemsThreshold.WithValue(value))
             .AddScalar(ItemsView.RemainingItemsThresholdReached.WithValue(onThresholdReached))
@@ -64,31 +64,31 @@ type ItemsViewModifiers =
     /// <summary>Sets the visibility of the horizontal scroll bar.</summary>
     /// <param name="value">true if the horizontal scroll is enabled; otherwise, false.</param>
     [<Extension>]
-    static member inline horizontalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabItemsView>, value: ScrollBarVisibility) =
+    static member inline horizontalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatItemsView>, value: ScrollBarVisibility) =
         this.AddScalar(ItemsView.HorizontalScrollBarVisibility.WithValue(value))
 
     /// <summary>Sets the visibility of the vertical scroll bar.</summary>
     /// <param name="value">true if the vertical scroll is enabled; otherwise, false.</param>
     [<Extension>]
-    static member inline verticalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabItemsView>, value: ScrollBarVisibility) =
+    static member inline verticalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatItemsView>, value: ScrollBarVisibility) =
         this.AddScalar(ItemsView.VerticalScrollBarVisibility.WithValue(value))
 
     [<Extension>]
-    static member inline itemsUpdatingScrollMode(this: WidgetBuilder<'msg, #IFabItemsView>, value: ItemsUpdatingScrollMode) =
+    static member inline itemsUpdatingScrollMode(this: WidgetBuilder<'msg, #IFabCompatItemsView>, value: ItemsUpdatingScrollMode) =
         this.AddScalar(ItemsView.ItemsUpdatingScrollMode.WithValue(value))
 
     [<Extension>]
-    static member inline onScrollToRequested(this: WidgetBuilder<'msg, #IFabItemsView>, onScrollToRequested: ScrollToRequestEventArgs -> 'msg) =
+    static member inline onScrollToRequested(this: WidgetBuilder<'msg, #IFabCompatItemsView>, onScrollToRequested: ScrollToRequestEventArgs -> 'msg) =
         this.AddScalar(ItemsView.ScrollToRequested.WithValue(fun args -> onScrollToRequested args |> box))
 
     [<Extension>]
-    static member inline onScrolled(this: WidgetBuilder<'msg, #IFabItemsView>, onScrolled: ItemsViewScrolledEventArgs -> 'msg) =
+    static member inline onScrolled(this: WidgetBuilder<'msg, #IFabCompatItemsView>, onScrolled: ItemsViewScrolledEventArgs -> 'msg) =
         this.AddScalar(ItemsView.Scrolled.WithValue(fun args -> onScrolled args |> box))
 
     [<Extension>]
-    static member inline emptyView<'msg, 'marker, 'contentMarker when 'marker :> IFabItemsView and 'contentMarker :> IView>
+    static member inline emptyView
         (
-            this: WidgetBuilder<'msg, 'marker>,
-            content: WidgetBuilder<'msg, 'contentMarker>
+            this: WidgetBuilder<'msg, #IFabCompatItemsView>,
+            content: WidgetBuilder<'msg, #IView>
         ) =
         this.AddWidget(ItemsView.EmptyView.WithValue(content.Compile()))

@@ -4,7 +4,7 @@ open Fabulous
 open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
-type IFabRectangleGeometry =
+type IFabCompatRectangleGeometry =
     inherit IFabCompatGeometry
 
 module RectangleGeometry =
@@ -18,4 +18,4 @@ module RectangleGeometryBuilders =
     type Fabulous.Maui.View with
 
         static member inline RectangleGeometry<'msg>(rect: Rect) =
-            WidgetBuilder<'msg, IFabRectangleGeometry>(RectangleGeometry.WidgetKey, RectangleGeometry.Rect.WithValue(rect))
+            WidgetBuilder<'msg, IFabCompatRectangleGeometry>(RectangleGeometry.WidgetKey, RectangleGeometry.Rect.WithValue(rect))

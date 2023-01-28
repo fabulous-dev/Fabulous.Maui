@@ -6,8 +6,8 @@ open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 open Microsoft.Maui.Graphics
 
-type IFabPolyline =
-    inherit IFabShape
+type IFabCompatPolyline =
+    inherit IFabCompatShape
 
 module Polyline =
 
@@ -40,7 +40,7 @@ module PolylineBuilders =
     type Fabulous.Maui.View with
 
         static member inline Polyline<'msg>(points: string, strokeThickness: float, strokeLight: Brush, ?strokeDark: Brush) =
-            WidgetBuilder<'msg, IFabPolyline>(
+            WidgetBuilder<'msg, IFabCompatPolyline>(
                 Polyline.WidgetKey,
                 Polyline.PointsString.WithValue(points),
                 Shape.StrokeThickness.WithValue(strokeThickness),
@@ -48,7 +48,7 @@ module PolylineBuilders =
             )
 
         static member inline Polyline<'msg>(points: Point list, strokeThickness: float, strokeLight: Brush, ?strokeDark: Brush) =
-            WidgetBuilder<'msg, IFabPolyline>(
+            WidgetBuilder<'msg, IFabCompatPolyline>(
                 Polyline.WidgetKey,
                 Polyline.PointsList.WithValue(Array.ofList points),
                 Shape.StrokeThickness.WithValue(strokeThickness),
@@ -59,10 +59,10 @@ module PolylineBuilders =
 type PolylineModifiers =
 
     [<Extension>]
-    static member inline fillRule(this: WidgetBuilder<'msg, #IFabPolyline>, value: FillRule) =
+    static member inline fillRule(this: WidgetBuilder<'msg, #IFabCompatPolyline>, value: FillRule) =
         this.AddScalar(Polyline.FillRule.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct Polyline control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabPolyline>, value: ViewRef<Polyline>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatPolyline>, value: ViewRef<Polyline>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

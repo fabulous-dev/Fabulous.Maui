@@ -3,8 +3,8 @@ namespace Fabulous.Maui.Compatibility
 open Fabulous
 open Microsoft.Maui.Controls.Shapes
 
-type IFabRotateTransform =
-    inherit IFabTransform
+type IFabCompatRotateTransform =
+    inherit IFabCompatTransform
 
 module RotateTransform =
     let WidgetKey = CompatWidgets.register<RotateTransform>()
@@ -21,7 +21,7 @@ module RotateTransformBuilders =
     type Fabulous.Maui.View with
 
         static member inline RotateTransform<'msg>(angle: float, centerX: float, centerY: float) =
-            WidgetBuilder<'msg, IFabRotateTransform>(
+            WidgetBuilder<'msg, IFabCompatRotateTransform>(
                 RotateTransform.WidgetKey,
                 RotateTransform.Angle.WithValue(angle),
                 RotateTransform.CenterX.WithValue(centerX),

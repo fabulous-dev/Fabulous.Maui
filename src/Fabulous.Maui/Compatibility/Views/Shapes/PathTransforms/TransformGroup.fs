@@ -4,8 +4,8 @@ open System.Collections.Generic
 open Fabulous
 open Microsoft.Maui.Controls.Shapes
 
-type IFabTransformGroup =
-    inherit IFabTransform
+type IFabCompatTransformGroup =
+    inherit IFabCompatTransform
 
 module TransformGroup =
 
@@ -19,4 +19,4 @@ module TransformGroupBuilders =
     type Fabulous.Maui.View with
 
         static member inline TransformGroup<'msg>() =
-            CollectionBuilder<'msg, IFabTransformGroup, IFabTransform>(TransformGroup.WidgetKey, TransformGroup.Children)
+            CollectionBuilder<'msg, IFabCompatTransformGroup, IFabCompatTransform>(TransformGroup.WidgetKey, TransformGroup.Children)

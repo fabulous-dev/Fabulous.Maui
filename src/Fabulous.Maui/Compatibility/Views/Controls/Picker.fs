@@ -36,8 +36,9 @@ type CustomPicker() =
         if propertyName = Picker.SelectedIndexProperty.PropertyName then
             oldSelectedIndex <- this.SelectedIndex
 
-type IFabPicker =
+type IFabCompatPicker =
     inherit IFabCompatView
+    inherit IPicker
 
 module Picker =
     let WidgetKey = CompatWidgets.register<CustomPicker>()
@@ -96,7 +97,7 @@ module PickerBuilders =
     type Fabulous.Maui.View with
 
         static member inline Picker<'msg>(items: string list, selectedIndex: int, onSelectedIndexChanged: int -> 'msg) =
-            WidgetBuilder<'msg, IFabPicker>(
+            WidgetBuilder<'msg, IFabCompatPicker>(
                 Picker.WidgetKey,
                 Picker.ItemsSource.WithValue(Array.ofList items),
                 Picker.SelectedIndexWithEvent.WithValue(ValueEventData.create selectedIndex (fun args -> onSelectedIndexChanged args.CurrentPosition |> box))
@@ -105,21 +106,21 @@ module PickerBuilders =
 [<Extension>]
 type PickerModifiers =
     [<Extension>]
-    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabPicker>, value: float) =
+    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabCompatPicker>, value: float) =
         this.AddScalar(Picker.CharacterSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #IFabPicker>, value: TextAlignment) =
+    static member inline horizontalTextAlignment(this: WidgetBuilder<'msg, #IFabCompatPicker>, value: TextAlignment) =
         this.AddScalar(Picker.HorizontalTextAlignment.WithValue(value))
 
     [<Extension>]
-    static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #IFabPicker>, value: TextAlignment) =
+    static member inline verticalTextAlignment(this: WidgetBuilder<'msg, #IFabCompatPicker>, value: TextAlignment) =
         this.AddScalar(Picker.VerticalTextAlignment.WithValue(value))
 
     [<Extension>]
     static member inline font
         (
-            this: WidgetBuilder<'msg, #IFabPicker>,
+            this: WidgetBuilder<'msg, #IFabCompatPicker>,
             ?size: float,
             ?attributes: FontAttributes,
             ?fontFamily: string,
@@ -150,23 +151,23 @@ type PickerModifiers =
     /// <param name="light">The color of the text in the light theme.</param>
     /// <param name="dark">The color of the text in the dark theme.</param>
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #IFabPicker>, light: FabColor, ?dark: FabColor) =
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabCompatPicker>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(Picker.TextColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline title(this: WidgetBuilder<'msg, #IFabPicker>, value: string) =
+    static member inline title(this: WidgetBuilder<'msg, #IFabCompatPicker>, value: string) =
         this.AddScalar(Picker.Title.WithValue(value))
 
     /// <summary>Set the source of the thumbImage.</summary>
     /// <param name="light">The color of the title in the light theme.</param>
     /// <param name="dark">The color of the title in the dark theme.</param>
     [<Extension>]
-    static member inline titleColor(this: WidgetBuilder<'msg, #IFabPicker>, light: FabColor, ?dark: FabColor) =
+    static member inline titleColor(this: WidgetBuilder<'msg, #IFabCompatPicker>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(Picker.TitleColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Link a ViewRef to access the direct Picker control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabPicker>, value: ViewRef<Picker>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatPicker>, value: ViewRef<Picker>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]
@@ -174,5 +175,5 @@ type PickerPlatformModifiers =
     /// <summary>iOS platform specific. Sets a value that controls whether elements in the picker are continuously updated while scrolling or updated once after scrolling has completed.</summary>
     /// <param name="mode">The new property value to assign.</param>
     [<Extension>]
-    static member inline updateMode(this: WidgetBuilder<'msg, #IFabPicker>, mode: iOSSpecific.UpdateMode) =
+    static member inline updateMode(this: WidgetBuilder<'msg, #IFabCompatPicker>, mode: iOSSpecific.UpdateMode) =
         this.AddScalar(Picker.UpdateMode.WithValue(mode))

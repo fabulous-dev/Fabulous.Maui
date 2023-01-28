@@ -5,8 +5,8 @@ open Fabulous
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.Shapes
 
-type IFabRectangle =
-    inherit IFabShape
+type IFabCompatRectangle =
+    inherit IFabCompatShape
 
 module Rectangle =
 
@@ -22,7 +22,7 @@ module RectangleBuilders =
     type Fabulous.Maui.View with
 
         static member inline Rectangle<'msg>(strokeThickness: float, strokeLight: Brush, ?strokeDark: Brush) =
-            WidgetBuilder<'msg, IFabRectangle>(
+            WidgetBuilder<'msg, IFabCompatRectangle>(
                 Rectangle.WidgetKey,
                 Shape.StrokeThickness.WithValue(strokeThickness),
                 Shape.Stroke.WithValue(AppTheme.create strokeLight strokeDark)
@@ -32,12 +32,12 @@ module RectangleBuilders =
 type RectangleModifiers =
 
     [<Extension>]
-    static member inline radius(this: WidgetBuilder<'msg, #IFabRectangle>, x: float, y: float) =
+    static member inline radius(this: WidgetBuilder<'msg, #IFabCompatRectangle>, x: float, y: float) =
         this
             .AddScalar(Rectangle.RadiusX.WithValue(x))
             .AddScalar(Rectangle.RadiusY.WithValue(y))
 
     /// <summary>Link a ViewRef to access the direct Rectangle control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabRectangle>, value: ViewRef<Rectangle>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatRectangle>, value: ViewRef<Rectangle>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

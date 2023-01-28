@@ -7,8 +7,9 @@ open Fabulous.StackAllocatedCollections.StackList
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabRadioButton =
+type IFabCompatRadioButton =
     inherit IFabCompatTemplatedView
+    inherit IRadioButton
 
 module RadioButton =
     let WidgetKey = CompatWidgets.register<RadioButton>()
@@ -59,14 +60,14 @@ module RadioButtonBuilders =
     type Fabulous.Maui.View with
 
         static member inline RadioButton<'msg>(content: string, isChecked: bool, onChecked: bool -> 'msg) =
-            WidgetBuilder<'msg, IFabRadioButton>(
+            WidgetBuilder<'msg, IFabCompatRadioButton>(
                 RadioButton.WidgetKey,
                 RadioButton.IsCheckedWithEvent.WithValue(ValueEventData.create isChecked (fun args -> onChecked args.Value |> box)),
                 RadioButton.ContentString.WithValue(content)
             )
 
         static member inline RadioButton<'msg, 'marker when 'marker :> IView>(content: WidgetBuilder<'msg, 'marker>, isChecked: bool, onChecked: bool -> 'msg) =
-            WidgetBuilder<'msg, IFabRadioButton>(
+            WidgetBuilder<'msg, IFabCompatRadioButton>(
                 RadioButton.WidgetKey,
                 AttributesBundle(
                     StackList.one(RadioButton.IsCheckedWithEvent.WithValue(ValueEventData.create isChecked (fun args -> onChecked args.Value |> box))),
@@ -81,36 +82,36 @@ type RadioButtonModifiers =
     /// <param name="light">The border color of the radio button in the light theme.</param>
     /// <param name="dark">The border color of the radio button in the dark theme.</param>
     [<Extension>]
-    static member inline borderColor(this: WidgetBuilder<'msg, #IFabRadioButton>, light: FabColor, ?dark: FabColor) =
+    static member inline borderColor(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(RadioButton.BorderColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Sets the name that specifies which RadioButton controls are mutually exclusive.</summary>
     /// <param name="value">Name that specifies which RadioButton controls are mutually exclusive. This property has a default value of null.</param>
     [<Extension>]
-    static member inline groupName(this: WidgetBuilder<'msg, #IFabRadioButton>, value: string) =
+    static member inline groupName(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, value: string) =
         this.AddScalar(RadioButton.GroupName.WithValue(value))
 
     /// <summary>Sets the border width of the radio button.</summary>
     /// <param name="value">The border width of the radio button.</param>
     [<Extension>]
-    static member inline borderWidth(this: WidgetBuilder<'msg, #IFabRadioButton>, value: float) =
+    static member inline borderWidth(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, value: float) =
         this.AddScalar(RadioButton.BorderWidth.WithValue(value))
 
     /// <summary>Sets the spacing between characters of any displayed text.</summary>
     [<Extension>]
-    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabRadioButton>, spacing: float) =
+    static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, spacing: float) =
         this.AddScalar(RadioButton.CharacterSpacing.WithValue(spacing))
 
     /// <summary>Sets the corner Radius of the radio button.</summary>
     /// <param name="value">The corner Radius of the radio button.</param>
     [<Extension>]
-    static member inline cornerRadius(this: WidgetBuilder<'msg, #IFabRadioButton>, value: float) =
+    static member inline cornerRadius(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, value: float) =
         this.AddScalar(RadioButton.CornerRadius.WithValue(value))
 
     [<Extension>]
     static member inline font
         (
-            this: WidgetBuilder<'msg, #IFabRadioButton>,
+            this: WidgetBuilder<'msg, #IFabCompatRadioButton>,
             ?size: float,
             ?attributes: FontAttributes,
             ?fontFamily: string,
@@ -140,18 +141,18 @@ type RadioButtonModifiers =
     /// <param name="light">The text color of the radio button in the light theme.</param>
     /// <param name="dark">The text color of the radio button in the dark theme.</param>
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #IFabRadioButton>, light: FabColor, ?dark: FabColor) =
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(RadioButton.TextColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the casing of any displayed text</summary>
     /// <param name="value">The casing of any displayed text.</param>
     [<Extension>]
-    static member inline textTransform(this: WidgetBuilder<'msg, #IFabRadioButton>, value: TextTransform) =
+    static member inline textTransform(this: WidgetBuilder<'msg, #IFabCompatRadioButton>, value: TextTransform) =
         this.AddScalar(RadioButton.TextTransform.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct RadioButton control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IFabRadioButton>, value: ViewRef<RadioButton>) =
+    static member inline reference(this: WidgetBuilder<'msg, IFabCompatRadioButton>, value: ViewRef<RadioButton>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]

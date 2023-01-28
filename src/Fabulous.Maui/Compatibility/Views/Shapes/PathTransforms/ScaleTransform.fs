@@ -3,8 +3,8 @@ namespace Fabulous.Maui.Compatibility
 open Fabulous
 open Microsoft.Maui.Controls.Shapes
 
-type IFabScaleTransform =
-    inherit IFabTransform
+type IFabCompatScaleTransform =
+    inherit IFabCompatTransform
 
 module ScaleTransform =
     let WidgetKey = CompatWidgets.register<ScaleTransform>()
@@ -31,7 +31,7 @@ module ScaleTransformBuilders =
     type Fabulous.Maui.View with
 
         static member inline ScaleTransform<'msg>(scaleX: float, scaleY: float, centerX: float, centerY: float) =
-            WidgetBuilder<'msg, IFabScaleTransform>(
+            WidgetBuilder<'msg, IFabCompatScaleTransform>(
                 ScaleTransform.WidgetKey,
                 ScaleTransform.ScaleXY.WithValue((scaleX, scaleY)),
                 ScaleTransform.CenterX.WithValue(centerX),

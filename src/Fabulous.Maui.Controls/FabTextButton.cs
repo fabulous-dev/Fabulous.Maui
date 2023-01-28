@@ -5,11 +5,11 @@ using Font = Microsoft.Maui.Font;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabTextButton: IFabButton, IFabText
+public interface IFabTextButton: ITextButton, IFabButton, IFabText
 {
 }
 
-public class FabTextButton: FabButton, ITextButton
+public class FabTextButton: FabButton, IFabTextButton
 {
     public Color TextColor { get; private set; } = TextStyleDefaults.TextColor;
     public Font Font { get; private set; } = TextStyleDefaults.CreateDefaultFont();

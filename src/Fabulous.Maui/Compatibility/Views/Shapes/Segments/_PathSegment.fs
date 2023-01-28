@@ -1,4 +1,4 @@
 namespace Fabulous.Maui.Compatibility
 
-type IFabPathSegment =
+type IFabCompatPathSegment =
     inherit IFabCompatElement

@@ -24,6 +24,7 @@ module FabulousHandlers =
             .AddHandler<FabContentView, ContentViewHandler>()
             .AddHandler<FabSwitch, SwitchHandler>()
             .AddHandler<FabSlider, SliderHandler>()
+            .AddHandler<FabTextButton, ButtonHandler>()
         |> ignore
 
 [<Extension>]

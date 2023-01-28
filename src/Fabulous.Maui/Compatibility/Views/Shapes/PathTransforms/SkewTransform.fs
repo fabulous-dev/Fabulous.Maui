@@ -3,8 +3,8 @@ namespace Fabulous.Maui.Compatibility
 open Fabulous
 open Microsoft.Maui.Controls.Shapes
 
-type IFabSkewTransform =
-    inherit IFabTransform
+type IFabCompatSkewTransform =
+    inherit IFabCompatTransform
 
 module SkewTransform =
     let WidgetKey = CompatWidgets.register<SkewTransform>()
@@ -31,7 +31,7 @@ module SkewTransformBuilders =
     type Fabulous.Maui.View with
 
         static member inline SkewTransform<'msg>(angleX: float, angleY: float, centerX: float, centerY: float) =
-            WidgetBuilder<'msg, IFabSkewTransform>(
+            WidgetBuilder<'msg, IFabCompatSkewTransform>(
                 SkewTransform.WidgetKey,
                 SkewTransform.AnglesXY.WithValue((angleX, angleY)),
                 SkewTransform.CenterX.WithValue(centerX),
