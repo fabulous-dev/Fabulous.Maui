@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E62C834A-4B9
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous.Maui", "src\Fabulous.Maui\Fabulous.Maui.fsproj", "{026EE1F8-6BC0-4661-BEA6-FD60CC8ADE69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maui.FabCompat", "src\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj", "{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabulous.Maui.Controls", "src\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj", "{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,18 @@ Global
 		{026EE1F8-6BC0-4661-BEA6-FD60CC8ADE69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{026EE1F8-6BC0-4661-BEA6-FD60CC8ADE69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{026EE1F8-6BC0-4661-BEA6-FD60CC8ADE69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{026EE1F8-6BC0-4661-BEA6-FD60CC8ADE69} = {E62C834A-4B95-4B18-8E98-0FF30837B3C7}
+		{7A9DBBB8-73A9-430D-AE8C-367EE7DCFF3C} = {E62C834A-4B95-4B18-8E98-0FF30837B3C7}
+		{E14F0CAA-2ABA-4475-B9FC-C24EA7F79690} = {E62C834A-4B95-4B18-8E98-0FF30837B3C7}
 	EndGlobalSection
 EndGlobal
