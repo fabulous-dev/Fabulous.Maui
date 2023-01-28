@@ -31,7 +31,11 @@ module PathFigureBuilders =
             match start with
             | None -> CollectionBuilder<'msg, IFabCompatPathFigure, IFabCompatPathSegment>(PathFigure.WidgetKey, PathFigure.Segments)
             | Some start ->
-                CollectionBuilder<'msg, IFabCompatPathFigure, IFabCompatPathSegment>(PathFigure.WidgetKey, PathFigure.Segments, PathFigure.StartPoint.WithValue(start))
+                CollectionBuilder<'msg, IFabCompatPathFigure, IFabCompatPathSegment>(
+                    PathFigure.WidgetKey,
+                    PathFigure.Segments,
+                    PathFigure.StartPoint.WithValue(start)
+                )
 
 
 [<Extension>]

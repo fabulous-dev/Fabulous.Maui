@@ -86,9 +86,5 @@ type ItemsViewModifiers =
         this.AddScalar(ItemsView.Scrolled.WithValue(fun args -> onScrolled args |> box))
 
     [<Extension>]
-    static member inline emptyView
-        (
-            this: WidgetBuilder<'msg, #IFabCompatItemsView>,
-            content: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline emptyView(this: WidgetBuilder<'msg, #IFabCompatItemsView>, content: WidgetBuilder<'msg, #IView>) =
         this.AddWidget(ItemsView.EmptyView.WithValue(content.Compile()))

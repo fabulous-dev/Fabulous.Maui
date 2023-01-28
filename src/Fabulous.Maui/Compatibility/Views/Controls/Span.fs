@@ -61,7 +61,14 @@ type SpanModifiers =
         this.AddScalar(Span.CharacterSpacing.WithValue(value))
 
     [<Extension>]
-    static member inline font(this: WidgetBuilder<'msg, #IFabCompatSpan>, ?size: float, ?attributes: FontAttributes, ?fontFamily: string, ?autoScalingEnabled: bool) =
+    static member inline font
+        (
+            this: WidgetBuilder<'msg, #IFabCompatSpan>,
+            ?size: float,
+            ?attributes: FontAttributes,
+            ?fontFamily: string,
+            ?autoScalingEnabled: bool
+        ) =
 
         let mutable res = this
 

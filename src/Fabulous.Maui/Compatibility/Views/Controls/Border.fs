@@ -97,11 +97,7 @@ module BorderBuilders =
 
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="stroke">The stroke brush widget</param>
-        static member inline Border
-            (
-                content: WidgetBuilder<'msg, #IView>,
-                stroke: WidgetBuilder<'msg, #IFabCompatBrush>
-            ) =
+        static member inline Border(content: WidgetBuilder<'msg, #IView>, stroke: WidgetBuilder<'msg, #IFabCompatBrush>) =
             WidgetBuilder<'msg, IFabCompatBorder>(
                 Border.WidgetKey,
                 AttributesBundle(
@@ -122,11 +118,7 @@ type BorderModifiers =
         this.AddScalar(Border.StrokeShapeString.WithValue(content))
 
     [<Extension>]
-    static member inline strokeShape
-        (
-            this: WidgetBuilder<'msg, #IFabCompatBorder>,
-            content: WidgetBuilder<'msg, #IFabCompatShape>
-        ) =
+    static member inline strokeShape(this: WidgetBuilder<'msg, #IFabCompatBorder>, content: WidgetBuilder<'msg, #IFabCompatShape>) =
         this.AddWidget(Border.StrokeShapeWidget.WithValue(content.Compile()))
 
     [<Extension>]

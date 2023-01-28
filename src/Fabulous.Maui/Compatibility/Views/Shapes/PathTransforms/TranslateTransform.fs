@@ -19,4 +19,8 @@ module TranslateTransformBuilders =
     type Fabulous.Maui.View with
 
         static member inline TranslateTransform<'msg>(x: float, y: float) =
-            WidgetBuilder<'msg, IFabCompatTranslateTransform>(TranslateTransform.WidgetKey, TranslateTransform.X.WithValue(x), TranslateTransform.Y.WithValue(y))
+            WidgetBuilder<'msg, IFabCompatTranslateTransform>(
+                TranslateTransform.WidgetKey,
+                TranslateTransform.X.WithValue(x),
+                TranslateTransform.Y.WithValue(y)
+            )

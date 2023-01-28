@@ -11,8 +11,6 @@ module Image =
 [<AutoOpen>]
 module ImageBuilders =
     type Fabulous.Maui.View with
+
         static member inline Image(file: string) =
-            WidgetBuilder<'msg, IFabImage>(
-                Image.WidgetKey,
-                ImageSourcePart.Source.WithValue(FabFileImageSource(file))
-            )
+            WidgetBuilder<'msg, IFabImage>(Image.WidgetKey, ImageSourcePart.Source.WithValue(FabFileImageSource(file)))

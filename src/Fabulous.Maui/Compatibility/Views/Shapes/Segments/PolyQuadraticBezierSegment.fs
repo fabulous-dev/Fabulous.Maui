@@ -36,7 +36,10 @@ module PolyQuadraticBezierSegmentBuilders =
     type Fabulous.Maui.View with
 
         static member inline PolyQuadraticBezierSegment<'msg>(points: string) =
-            WidgetBuilder<'msg, IFabCompatPolyQuadraticBezierSegment>(PolyQuadraticBezierSegment.WidgetKey, PolyQuadraticBezierSegment.PointsString.WithValue(points))
+            WidgetBuilder<'msg, IFabCompatPolyQuadraticBezierSegment>(
+                PolyQuadraticBezierSegment.WidgetKey,
+                PolyQuadraticBezierSegment.PointsString.WithValue(points)
+            )
 
         static member inline PolyQuadraticBezierSegment<'msg>(points: Point list) =
             WidgetBuilder<'msg, IFabCompatPolyQuadraticBezierSegment>(

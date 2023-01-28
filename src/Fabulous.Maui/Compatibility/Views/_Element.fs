@@ -5,7 +5,8 @@ open Fabulous
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
-type IFabCompatElement = inherit IElement
+type IFabCompatElement =
+    inherit IElement
 
 module Element =
     let AutomationId =

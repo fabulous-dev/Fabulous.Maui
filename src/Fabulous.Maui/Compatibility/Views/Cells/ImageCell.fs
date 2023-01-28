@@ -21,7 +21,11 @@ module ImageCellBuilders =
     type Fabulous.Maui.View with
 
         static member inline ImageCell<'msg>(text: string, light: ImageSource, ?dark: ImageSource) =
-            WidgetBuilder<'msg, IFabCompatImageCell>(ImageCell.WidgetKey, TextCell.Text.WithValue(text), ImageCell.ImageSource.WithValue(AppTheme.create light dark))
+            WidgetBuilder<'msg, IFabCompatImageCell>(
+                ImageCell.WidgetKey,
+                TextCell.Text.WithValue(text),
+                ImageCell.ImageSource.WithValue(AppTheme.create light dark)
+            )
 
         static member inline ImageCell<'msg>(text: string, light: string, ?dark: string) =
             let light = ImageSource.FromFile(light)

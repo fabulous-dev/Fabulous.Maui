@@ -113,19 +113,11 @@ module ListViewBuilders =
 type ListViewModifiers =
 
     [<Extension>]
-    static member inline header
-        (
-            this: WidgetBuilder<'msg, #IFabCompatListView>,
-            content: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline header(this: WidgetBuilder<'msg, #IFabCompatListView>, content: WidgetBuilder<'msg, #IView>) =
         this.AddWidget(ListView.Header.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline footer
-        (
-            this: WidgetBuilder<'msg, #IFabCompatListView>,
-            content: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline footer(this: WidgetBuilder<'msg, #IFabCompatListView>, content: WidgetBuilder<'msg, #IView>) =
         this.AddWidget(ListView.Footer.WithValue(content.Compile()))
 
     [<Extension>]

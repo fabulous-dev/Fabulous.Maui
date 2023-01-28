@@ -31,14 +31,18 @@ module FabulousHandlers =
 type AppHostBuilderExtensions =
     /// Start a Fabulous app taking args
     [<Extension>]
-    static member UseFabulousApp<'args, 'model, 'msg, 'marker when 'marker :> IApplication>(this: MauiAppBuilder, program: Program<'args, 'model, 'msg, 'marker>, args: 'args) =
+    static member UseFabulousApp<'args, 'model, 'msg, 'marker when 'marker :> IApplication>
+        (
+            this: MauiAppBuilder,
+            program: Program<'args, 'model, 'msg, 'marker>,
+            args: 'args
+        ) =
         this.Services.TryAddSingleton<IApplication>(fun _ ->
             let app = Program.startApplicationWithArgs args program
-            app
-        )
-        this
-            .ConfigureMauiHandlers(FabulousHandlers.register)
-        
+            app)
+
+        this.ConfigureMauiHandlers(FabulousHandlers.register)
+
     /// Start a Fabulous app taking no args
     [<Extension>]
     static member UseFabulousApp<'model, 'msg, 'marker when 'marker :> IApplication>(this: MauiAppBuilder, program: Program<unit, 'model, 'msg, 'marker>) =

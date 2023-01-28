@@ -83,19 +83,11 @@ type CollectionViewModifiers =
         this.AddScalar(CollectionView.SelectionChanged.WithValue(fun args -> onSelectionChanged args |> box))
 
     [<Extension>]
-    static member inline header
-        (
-            this: WidgetBuilder<'msg, #IFabCompatCollectionView>,
-            content: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline header(this: WidgetBuilder<'msg, #IFabCompatCollectionView>, content: WidgetBuilder<'msg, #IView>) =
         this.AddWidget(CollectionView.Header.WithValue(content.Compile()))
 
     [<Extension>]
-    static member inline footer
-        (
-            this: WidgetBuilder<'msg, #IFabCompatCollectionView>,
-            content: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline footer(this: WidgetBuilder<'msg, #IFabCompatCollectionView>, content: WidgetBuilder<'msg, #IView>) =
         this.AddWidget(CollectionView.Footer.WithValue(content.Compile()))
 
     [<Extension>]

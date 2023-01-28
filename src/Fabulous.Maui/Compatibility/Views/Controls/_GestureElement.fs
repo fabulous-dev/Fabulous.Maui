@@ -11,7 +11,7 @@ type IFabCompatGestureElement =
 module GestureElement =
     let GestureRecognizers =
         Attributes.defineListWidgetCollection<IGestureRecognizer> "Span_GestureRecognizers" (fun target -> (target :?> Span).GestureRecognizers)
-        
+
 [<Extension>]
 type GestureElementModifiers =
     [<Extension>]

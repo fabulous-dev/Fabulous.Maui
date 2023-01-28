@@ -14,7 +14,7 @@ module Widgets =
               Name = typeof<'T>.Name
               TargetType = typeof<'T>
               CreateView =
-                  fun (widget, treeContext, parentNode) ->
+                fun (widget, treeContext, parentNode) ->
                     treeContext.Logger.Debug("Creating view for {0}", typeof<'T>.Name)
 
                     let view = new 'T()
@@ -63,9 +63,8 @@ module Widgets =
 
     let register<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> () =
         registerWithAdditionalSetup<'T>(fun _ _ -> ())
-        
+
 [<Extension>]
 type FabElementExtensions =
     [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IFabElement>, fn: WidgetBuilder<'msg, #IFabElement> -> WidgetBuilder<'msg, #IFabElement>) =
-        fn this
+    static member inline style(this: WidgetBuilder<'msg, #IFabElement>, fn: WidgetBuilder<'msg, #IFabElement> -> WidgetBuilder<'msg, #IFabElement>) = fn this

@@ -10,9 +10,6 @@ module TextButton =
 [<AutoOpen>]
 module TextButtonBuilders =
     type Fabulous.Maui.View with
+
         static member inline TextButton<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IFabTextButton>(
-                TextButton.WidgetKey,
-                Text.Text.WithValue(text),
-                Button.Clicked.WithValue(fun () -> box onClicked)
-            )
+            WidgetBuilder<'msg, IFabTextButton>(TextButton.WidgetKey, Text.Text.WithValue(text), Button.Clicked.WithValue(fun () -> box onClicked))

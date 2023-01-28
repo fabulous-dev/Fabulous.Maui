@@ -58,11 +58,7 @@ type ShapeModifiers =
         this.AddScalar(Shape.Fill.WithValue(AppTheme.create light dark))
 
     [<Extension>]
-    static member inline fill
-        (
-            this: WidgetBuilder<'msg, IFabCompatShape>,
-            content: WidgetBuilder<'msg, IFabCompatBrush>
-        ) =
+    static member inline fill(this: WidgetBuilder<'msg, IFabCompatShape>, content: WidgetBuilder<'msg, IFabCompatBrush>) =
         this.AddWidget(Shape.FillWidget.WithValue(content.Compile()))
 
     [<Extension>]

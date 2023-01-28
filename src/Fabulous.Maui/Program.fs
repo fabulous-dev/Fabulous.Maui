@@ -9,14 +9,10 @@ open Fabulous
 open Microsoft.Maui.Controls
 
 module Cmd =
-    let ignore (fn: unit -> unit) =
-        Cmd.ofSub (fun _ ->
-            fn()
-        )
+    let ignore (fn: unit -> unit) = Cmd.ofSub(fun _ -> fn())
 
 module ViewHelpers =
-    let canReuseView (prev: Widget) (curr: Widget) =
-        ViewHelpers.canReuseView prev curr
+    let canReuseView (prev: Widget) (curr: Widget) = ViewHelpers.canReuseView prev curr
 
     let defaultLogger () =
         let log (level, message) =
@@ -32,11 +28,11 @@ module ViewHelpers =
 
         { Log = log
           MinLogLevel = LogLevel.Error }
-        
+
     let defaultExceptionHandler exn =
         Trace.WriteLine(String.Format("Unhandled exception: {0}", exn.ToString()), "Debug")
         false
-        
+
     let getViewNode (target: obj) =
         match target with
         | :? FabElement as element -> Fabulous.Maui.ViewNode.get element
@@ -44,38 +40,26 @@ module ViewHelpers =
         | _ -> failwith "Unsupported target"
 
 module Program =
-    let inline private define
-        (init: 'arg -> 'model * Cmd<'msg>)
-        (update: 'msg -> 'model -> 'model * Cmd<'msg>)
-        (view: 'model -> WidgetBuilder<'msg, 'marker>)
-        =
-            { Init = init
-              Update = (fun (msg, model) -> update msg model)
-              Subscribe = fun _ -> Cmd.none
-              View = view
-              CanReuseView = ViewHelpers.canReuseView
-              SyncAction = MainThread.BeginInvokeOnMainThread
-              Logger = ViewHelpers.defaultLogger()
-              ExceptionHandler = ViewHelpers.defaultExceptionHandler }
-            
+    let inline private define (init: 'arg -> 'model * Cmd<'msg>) (update: 'msg -> 'model -> 'model * Cmd<'msg>) (view: 'model -> WidgetBuilder<'msg, 'marker>) =
+        { Init = init
+          Update = (fun (msg, model) -> update msg model)
+          Subscribe = fun _ -> Cmd.none
+          View = view
+          CanReuseView = ViewHelpers.canReuseView
+          SyncAction = MainThread.BeginInvokeOnMainThread
+          Logger = ViewHelpers.defaultLogger()
+          ExceptionHandler = ViewHelpers.defaultExceptionHandler }
+
     /// Create a program for a static view
     let stateless (view: unit -> WidgetBuilder<unit, 'marker>) =
-        define(fun () -> (), Cmd.none) (fun () () -> (), Cmd.none) view
+        define (fun () -> (), Cmd.none) (fun () () -> (), Cmd.none) view
 
     /// Create a program using an MVU loop
-    let stateful
-        (init: 'arg -> 'model)
-        (update: 'msg -> 'model -> 'model)
-        (view: 'model -> WidgetBuilder<'msg, 'marker>)
-        =
-        define(fun arg -> init arg, Cmd.none) (fun msg model -> update msg model, Cmd.none) view
+    let stateful (init: 'arg -> 'model) (update: 'msg -> 'model -> 'model) (view: 'model -> WidgetBuilder<'msg, 'marker>) =
+        define (fun arg -> init arg, Cmd.none) (fun msg model -> update msg model, Cmd.none) view
 
     /// Create a program using an MVU loop. Add support for Cmd
-    let statefulWithCmd
-        (init: 'arg -> 'model * Cmd<'msg>)
-        (update: 'msg -> 'model -> 'model * Cmd<'msg>)
-        (view: 'model -> WidgetBuilder<'msg, #IApplication>)
-        =
+    let statefulWithCmd (init: 'arg -> 'model * Cmd<'msg>) (update: 'msg -> 'model -> 'model * Cmd<'msg>) (view: 'model -> WidgetBuilder<'msg, #IApplication>) =
         define init update view
 
     /// Create a program using an MVU loop. Add support for CmdMsg
@@ -87,10 +71,7 @@ module Program =
         =
         let mapCmds cmdMsgs = cmdMsgs |> List.map mapCmd |> Cmd.batch
 
-        define
-            (fun arg -> let m, c = init arg in m, mapCmds c)
-            (fun msg model -> let m, c = update msg model in m, mapCmds c)
-            view
+        define (fun arg -> let m, c = init arg in m, mapCmds c) (fun msg model -> let m, c = update msg model in m, mapCmds c) view
 
     /// Start the program
     let startApplicationWithArgs (arg: 'arg) (program: Program<'arg, 'model, 'msg, #IApplication>) : IApplication =
@@ -100,15 +81,13 @@ module Program =
         adapter.CreateView() |> unbox
 
     /// Start the program
-    let startApplication (program: Program<unit, 'model, 'msg, #IApplication>) : IApplication =
-        startApplicationWithArgs() program
+    let startApplication (program: Program<unit, 'model, 'msg, #IApplication>) : IApplication = startApplicationWithArgs () program
 
     /// Subscribe to external source of events.
     /// The subscription is called once - with the initial model, but can dispatch new messages at any time.
     let withSubscription (subscribe: 'model -> Cmd<'msg>) (program: Program<'arg, 'model, 'msg, 'marker>) =
         let sub model =
-            Cmd.batch [ program.Subscribe model
-                        subscribe model ]
+            Cmd.batch [ program.Subscribe model; subscribe model ]
 
         { program with Subscribe = sub }
 
@@ -122,8 +101,7 @@ module Program =
                 let initModel, cmd = program.Init(arg)
                 trace("Initial model: {0}", $"%0A{initModel}")
                 initModel, cmd
-            with
-            | e ->
+            with e ->
                 trace("Error in init function: {0}", $"%0A{e}")
                 reraise()
 
@@ -134,8 +112,7 @@ module Program =
                 let newModel, cmd = program.Update(msg, model)
                 trace("Updated model: {0}", $"%0A{newModel}")
                 newModel, cmd
-            with
-            | e ->
+            with e ->
                 trace("Error in model function: {0}", $"%0A{e}")
                 reraise()
 
@@ -146,8 +123,7 @@ module Program =
                 let info = program.View(model)
                 trace("View result: {0}", $"%0A{info}")
                 info
-            with
-            | e ->
+            with e ->
                 trace("Error in view function: {0}", $"%0A{e}")
                 reraise()
 
@@ -159,8 +135,8 @@ module Program =
     /// Configure how the unhandled exceptions happening during the execution of a Fabulous app with be handled
     let withExceptionHandler (handler: exn -> bool) (program: Program<'arg, 'model, 'msg, 'marker>) =
         { program with
-              ExceptionHandler = handler }
-        
+            ExceptionHandler = handler }
+
     let withThemeAwareness (program: Program<'arg, 'model, 'msg, #IApplication>) =
         { Init = ThemeAwareProgram.init program.Init
           Update = ThemeAwareProgram.update program.Update
@@ -174,6 +150,4 @@ module Program =
 [<RequireQualifiedAccess>]
 module CmdMsg =
     let batch mapCmdMsgFn mapCmdFn cmdMsgs =
-        cmdMsgs
-        |> List.map(mapCmdMsgFn >> Cmd.map mapCmdFn)
-        |> Cmd.batch
+        cmdMsgs |> List.map(mapCmdMsgFn >> Cmd.map mapCmdFn) |> Cmd.batch

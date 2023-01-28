@@ -7,7 +7,8 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module Padding =
-    let Padding = Attributes.defineMauiProperty' "Padding" PaddingDefaults.CreateDefaultPadding (fun (target: IFabPadding) -> target.SetPadding)
+    let Padding =
+        Attributes.defineMauiProperty' "Padding" PaddingDefaults.CreateDefaultPadding (fun (target: IFabPadding) -> target.SetPadding)
 
 [<Extension>]
 type PaddingModifiers =
@@ -18,9 +19,8 @@ type PaddingModifiers =
 [<Extension>]
 type PaddingExtraModifiers =
     [<Extension>]
-    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, uniformSize: float) =
-        this.padding(Thickness(uniformSize))
-        
+    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, uniformSize: float) = this.padding(Thickness(uniformSize))
+
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, horizontalSize: float, verticalSize: float) =
         this.padding(Thickness(horizontalSize, verticalSize))

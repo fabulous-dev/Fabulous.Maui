@@ -2,7 +2,7 @@ namespace Fabulous.Maui.Compatibility
 
 open System
 open Fabulous
-    
+
 module CompatWidgets =
     let registerWithAdditionalSetup<'T when 'T :> Microsoft.Maui.Controls.BindableObject and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
         let key = WidgetDefinitionStore.getNextKey()
