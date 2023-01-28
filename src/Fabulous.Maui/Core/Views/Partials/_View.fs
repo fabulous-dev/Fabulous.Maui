@@ -9,16 +9,16 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module View' =
-    let Background = Attributes.defineMauiProperty "Background" ViewDefaults.Background FabView.SetBackground
-    let Height = Attributes.defineMauiProperty "Height" ViewDefaults.Height FabView.SetHeight
-    let MinimumHeight = Attributes.defineMauiProperty "MinimumHeight" ViewDefaults.MinimumHeight FabView.SetMinimumHeight
-    let MinimumWidth = Attributes.defineMauiProperty "MinimumWidth" ViewDefaults.MinimumWidth FabView.SetMinimumWidth
-    let MaximumHeight = Attributes.defineMauiProperty "MaximumHeight" ViewDefaults.MaximumHeight FabView.SetMaximumHeight
-    let MaximumWidth = Attributes.defineMauiProperty "MaximumWidth" ViewDefaults.MaximumWidth FabView.SetMaximumWidth
-    let HorizontalLayoutAlignment = Attributes.defineMauiProperty "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment FabView.SetHorizontalLayoutAlignment
-    let VerticalLayoutAlignment = Attributes.defineMauiProperty "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment FabView.SetVerticalLayoutAlignment
-    let Semantics = Attributes.defineMauiProperty' "Semantics" ViewDefaults.CreateDefaultSemantics FabView.SetSemantics
-    
+    let Background = Attributes.defineMauiProperty "Background" ViewDefaults.Background (fun (target: IFabView) -> target.SetBackground)
+    let Height = Attributes.defineMauiProperty "Height" ViewDefaults.Height (fun (target: IFabView) -> target.SetHeight)
+    let MinimumHeight = Attributes.defineMauiProperty "MinimumHeight" ViewDefaults.MinimumHeight (fun (target: IFabView) -> target.SetMinimumHeight)
+    let MinimumWidth = Attributes.defineMauiProperty "MinimumWidth" ViewDefaults.MinimumWidth (fun (target: IFabView) -> target.SetMinimumWidth)
+    let MaximumHeight = Attributes.defineMauiProperty "MaximumHeight" ViewDefaults.MaximumHeight (fun (target: IFabView) -> target.SetMaximumHeight)
+    let MaximumWidth = Attributes.defineMauiProperty "MaximumWidth" ViewDefaults.MaximumWidth (fun (target: IFabView) -> target.SetMaximumWidth)
+    let HorizontalLayoutAlignment = Attributes.defineMauiProperty "HorizontalLayoutAlignment" ViewDefaults.HorizontalLayoutAlignment (fun (target: IFabView) -> target.SetHorizontalLayoutAlignment)
+    let VerticalLayoutAlignment = Attributes.defineMauiProperty "VerticalLayoutAlignment" ViewDefaults.VerticalLayoutAlignment (fun (target: IFabView) -> target.SetVerticalLayoutAlignment)
+    let Semantics = Attributes.defineMauiProperty' "Semantics" ViewDefaults.CreateDefaultSemantics (fun (target: IFabView) -> target.SetSemantics)
+
 [<Extension>]
 type ViewModifiers =
     [<Extension>]

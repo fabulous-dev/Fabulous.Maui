@@ -12,7 +12,7 @@ module Application =
     let WidgetKey = Widgets.register<FabApplication>()
     
     let Windows = Attributes.defineListWidgetCollection "Application_Windows" (fun target -> (target :?> FabApplication).EditableWindows)
-    let ThemeChanged = Attributes.defineMauiAction' "ThemeChanged" ApplicationDefaults.OnThemeChanged FabApplication.SetOnThemeChanged
+    let ThemeChanged = Attributes.defineMauiAction' "ThemeChanged" ApplicationDefaults.OnThemeChanged (fun (target: IFabApplication) -> target.SetOnThemeChanged)
     
 [<AutoOpen>]
 module ApplicationBuilders =

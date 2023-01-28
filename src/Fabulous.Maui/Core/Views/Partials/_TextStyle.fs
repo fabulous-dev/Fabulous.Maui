@@ -7,8 +7,8 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module TextStyle =
-    let Font = Attributes.defineMauiProperty' "Font" TextStyleDefaults.CreateDefaultFont FabTextStyle.SetFont
-    let TextColor = Attributes.defineMauiProperty "TextColor" TextStyleDefaults.TextColor FabTextStyle.SetTextColor
+    let Font = Attributes.defineMauiProperty' "Font" TextStyleDefaults.CreateDefaultFont (fun (target: IFabTextStyle) -> target.SetFont)
+    let TextColor = Attributes.defineMauiProperty "TextColor" TextStyleDefaults.TextColor (fun (target: IFabTextStyle) -> target.SetTextColor)
 
 [<Extension>]
 type TextStyleModifiers =

@@ -4,32 +4,35 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabButton: IButton, IFabPadding, IFabButtonStroke
+public interface IFabButton: IButton, IFabView, IFabPadding, IFabButtonStroke
 {
-    Action? OnPressed { get; set; }
-    Action? OnReleased { get; set; }
-    Action? OnClicked { get; set; }
+    void SetOnPressed(Action? value);
+    void SetOnReleased(Action? value);
+    void SetOnClicked(Action? value);
 }
 
-public abstract partial class FabButton : FabView, IFabButton
+public abstract class FabButton : FabView, IFabButton
 {
-    public Thickness Padding { get; set; } = PaddingDefaults.CreateDefaultPadding();
-    public Color StrokeColor { get; set; } = ButtonStrokeDefaults.StrokeColor;
-    public double StrokeThickness { get; set; } = ButtonStrokeDefaults.StrokeThickness;
-    public int CornerRadius { get; set; } = ButtonStrokeDefaults.CornerRadius;
+    public Thickness Padding { get; private set; } = PaddingDefaults.CreateDefaultPadding();
+    public Color StrokeColor { get; private set; } = ButtonStrokeDefaults.StrokeColor;
+    public double StrokeThickness { get; private set; } = ButtonStrokeDefaults.StrokeThickness;
+    public int CornerRadius { get; private set; } = ButtonStrokeDefaults.CornerRadius;
 
-    public Action? OnPressed { get; set; } = ButtonDefaults.OnPressed;
-    public Action? OnReleased { get; set; } = ButtonDefaults.OnReleased;
-    public Action? OnClicked { get; set; } = ButtonDefaults.OnClicked;
+    private Action? OnPressed { get; set; } = ButtonDefaults.OnPressed;
+    private Action? OnReleased { get; set; } = ButtonDefaults.OnReleased;
+    private Action? OnClicked { get; set; } = ButtonDefaults.OnClicked;
     
     public void Pressed() => OnPressed?.Invoke();
     public void Released() => OnReleased?.Invoke();
     public void Clicked() => OnClicked?.Invoke();
-}
-
-public partial class FabButton
-{
-    public static void SetOnPressed(FabElement target, Action? value) => ((IFabButton)target).OnPressed = value;
-    public static void SetOnReleased(FabElement target, Action? value) => ((IFabButton)target).OnReleased = value;
-    public static void SetOnClicked(FabElement target, Action? value) => ((IFabButton)target).OnClicked = value;
+    
+    
+    
+    public void SetPadding(Thickness value) => Padding = value;
+    public void SetStrokeColor(Color value) => StrokeColor = value;
+    public void SetStrokeThickness(double value) => StrokeThickness = value;
+    public void SetCornerRadius(int value) => CornerRadius = value;
+    public void SetOnPressed(Action? value) => OnPressed = value;
+    public void SetOnReleased(Action? value) => OnReleased = value;
+    public void SetOnClicked(Action? value) => OnClicked = value;
 }

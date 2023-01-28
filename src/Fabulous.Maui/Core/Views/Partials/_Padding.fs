@@ -7,7 +7,7 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module Padding =
-    let Padding = Attributes.defineMauiProperty' "Padding" PaddingDefaults.CreateDefaultPadding FabPadding.SetPadding
+    let Padding = Attributes.defineMauiProperty' "Padding" PaddingDefaults.CreateDefaultPadding (fun (target: IFabPadding) -> target.SetPadding)
 
 [<Extension>]
 type PaddingModifiers =

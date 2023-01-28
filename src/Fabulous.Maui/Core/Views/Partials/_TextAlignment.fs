@@ -7,8 +7,8 @@ open Fabulous
 open Fabulous.Maui.Controls
 
 module TextAlignment =
-    let HorizontalTextAlignment = Attributes.defineMauiProperty "HorizontalTextAlignment" TextAlignmentDefaults.HorizontalTextAlignment FabTextAlignment.SetHorizontalTextAlignment
-    let VerticalTextAlignment = Attributes.defineMauiProperty "VerticalTextAlignment" TextAlignmentDefaults.VerticalTextAlignment FabTextAlignment.SetVerticalTextAlignment
+    let HorizontalTextAlignment = Attributes.defineMauiProperty "HorizontalTextAlignment" TextAlignmentDefaults.HorizontalTextAlignment (fun (target: IFabTextAlignment) -> target.SetHorizontalTextAlignment)
+    let VerticalTextAlignment = Attributes.defineMauiProperty "VerticalTextAlignment" TextAlignmentDefaults.VerticalTextAlignment (fun (target: IFabTextAlignment) -> target.SetVerticalTextAlignment)
     
 [<Extension>]
 type TextAlignmentModifiers =

@@ -5,12 +5,12 @@ namespace Fabulous.Maui.Controls;
 
 public interface IFabImage: IImage, IFabView, IFabImageSourcePart
 {
-    new bool IsAnimationPlaying { get; set; }
-    new Aspect Aspect { get; set; }
-    new bool IsOpaque { get; set; }
+    void SetIsAnimationPlaying(bool value);
+    void SetAspect(Aspect value);
+    void SetIsOpaque(bool value);
 }
 
-public partial class FabImage: FabView, IFabImage
+public class FabImage: FabView, IFabImage
 {
     private bool _isLoading; // TODO: What is this for?
     public void UpdateIsLoading(bool isLoading)
@@ -18,15 +18,13 @@ public partial class FabImage: FabView, IFabImage
         _isLoading = isLoading;
     }
 
-    public IImageSource? Source { get; set; } = ImageSourcePartDefaults.Source;
-    public bool IsAnimationPlaying { get; set; } = ImageDefaults.IsAnimationPlaying;
-    public Aspect Aspect { get; set; } = ImageDefaults.Aspect;
-    public bool IsOpaque { get; set; } = ImageDefaults.IsOpaque;
-}
+    public IImageSource? Source { get; private set; } = ImageSourcePartDefaults.Source;
+    public bool IsAnimationPlaying { get; private set; } = ImageDefaults.IsAnimationPlaying;
+    public Aspect Aspect { get; private set; } = ImageDefaults.Aspect;
+    public bool IsOpaque { get; private set; } = ImageDefaults.IsOpaque;
 
-public partial class FabImage
-{
-    public static void SetIsAnimationPlaying(IFabImage target, bool value) => target.IsAnimationPlaying = value;
-    public static void SetAspect(IFabImage target, Aspect value) => target.Aspect = value;
-    public static void SetIsOpaque(IFabImage target, bool value) => target.IsOpaque = value;
+    public void SetSource(IImageSource? value) => Source = value;
+    public void SetIsAnimationPlaying(bool value) => IsAnimationPlaying = value;
+    public void SetAspect(Aspect value) => Aspect = value;
+    public void SetIsOpaque(bool value) => IsOpaque = value;
 }

@@ -3,17 +3,14 @@ using Microsoft.Maui.Handlers.Defaults;
 
 namespace Fabulous.Maui.Controls;
 
-public interface IFabTitledElement : ITitledElement
+public interface IFabTitledElement : ITitledElement, IFabElement
 {
-    new string? Title { get; set; }
+    void SetTitle(string? value);
 }
 
-public abstract partial class FabTitledElement: FabElement, IFabTitledElement
+public abstract class FabTitledElement: FabElement, IFabTitledElement
 {
-    public string? Title { get; set; } = TitledElementDefaults.Title;
-}
-
-public partial class FabTitledElement
-{
-    public static void SetTitle(IFabTitledElement target, string? value) => target.Title = value;
+    public string? Title { get; private set; } = TitledElementDefaults.Title;
+    
+    public void SetTitle(string? value) => Title = value;
 }

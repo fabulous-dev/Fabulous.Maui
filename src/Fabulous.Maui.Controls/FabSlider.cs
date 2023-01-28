@@ -6,34 +6,32 @@ namespace Fabulous.Maui.Controls;
 
 public interface IFabSlider: ISlider, IFabRange
 {
-    Action? OnDragStarted { get; set; }
-    Action? OnDragCompleted { get; set; }
-    new Color MinimumTrackColor { get; set; }
-    new Color MaximumTrackColor { get; set; }
-    new Color ThumbColor { get; set; }
-    new IImageSource ThumbImageSource { get; set; }
+    void SetOnDragStarted(Action? value );
+    void SetOnDragCompleted(Action? value);
+    void SetMinimumTrackColor(Color value);
+    void SetMaximumTrackColor(Color value);
+    void SetThumbColor(Color value);
+    void SetThumbImageSource(IImageSource value);
 }
 
-public partial class FabSlider: FabRange, IFabSlider
+public class FabSlider: FabRange, IFabSlider
 {
-    public Action? OnDragStarted { get; set; } = SliderDefaults.OnDragStarted;
+    private Action? OnDragStarted { get; set; } = SliderDefaults.OnDragStarted;
     public void DragStarted() => OnDragStarted?.Invoke();
 
-    public Action? OnDragCompleted { get; set; } = SliderDefaults.OnDragCompleted;
+    private Action? OnDragCompleted { get; set; } = SliderDefaults.OnDragCompleted;
     public void DragCompleted() => OnDragCompleted?.Invoke();
 
-    public Color MinimumTrackColor { get; set; } = SliderDefaults.MinimumTrackColor;
-    public Color MaximumTrackColor { get; set; } = SliderDefaults.MaximumTrackColor;
-    public Color ThumbColor { get; set; } = SliderDefaults.ThumbColor;
-    public IImageSource ThumbImageSource { get; set; } = SliderDefaults.ThumbImageSource;
-}
-
-public partial class FabSlider
-{
-    public static void SetOnDragStarted(IFabSlider target, Action? value) => target.OnDragStarted = value;
-    public static void SetOnDragCompleted(IFabSlider target, Action? value) => target.OnDragCompleted = value;
-    public static void SetMinimumTrackColor(IFabSlider target, Color value) => target.MinimumTrackColor = value;
-    public static void SetMaximumTrackColor(IFabSlider target, Color value) => target.MaximumTrackColor = value;
-    public static void SetThumbColor(IFabSlider target, Color value) => target.ThumbColor = value;
-    public static void SetThumbImageSource(IFabSlider target, IImageSource value) => target.ThumbImageSource = value;
+    public Color MinimumTrackColor { get; private set; } = SliderDefaults.MinimumTrackColor;
+    public Color MaximumTrackColor { get; private set; } = SliderDefaults.MaximumTrackColor;
+    public Color ThumbColor { get; private set; } = SliderDefaults.ThumbColor;
+    public IImageSource ThumbImageSource { get; private set; } = SliderDefaults.ThumbImageSource;
+    
+    
+    public void SetOnDragStarted(Action? value) => OnDragStarted = value;
+    public void SetOnDragCompleted(Action? value) => OnDragCompleted = value;
+    public void SetMinimumTrackColor(Color value) => MinimumTrackColor = value;
+    public void SetMaximumTrackColor(Color value) => MaximumTrackColor = value;
+    public void SetThumbColor(Color value) => ThumbColor = value;
+    public void SetThumbImageSource(IImageSource value) => ThumbImageSource = value;
 }

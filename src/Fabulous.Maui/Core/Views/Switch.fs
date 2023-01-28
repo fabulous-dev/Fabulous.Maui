@@ -8,7 +8,7 @@ open Fabulous.Maui.Controls
 module Switch =
     let WidgetKey = Widgets.register<FabSwitch>()
 
-    let IsOn = Attributes.defineMauiPropertyWithEvent "IsOn" SwitchDefaults.IsOn SwitchDefaults.OnIsOnChanged FabSwitch.SetIsOn
+    let IsOn = Attributes.defineMauiPropertyWithEvent "IsOn" SwitchDefaults.IsOn SwitchDefaults.OnIsOnChanged (fun (target: IFabSwitch) -> target.SetIsOn)
     
 [<AutoOpen>]
 module SwitchBuilders =
