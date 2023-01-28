@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <!-- Shared NuGet Package info -->
-  <PropertyGroup>
+  <PropertyGroup Condition="$(IsPackable) == 'true'">
     <Authors>Fabulous contributors</Authors>
     <PackageTags>Fabulous;F#;Declarative UI;MVU;Maui;Android;iOS;macOS;Windows;Linux</PackageTags>
     <PackageIcon>nuget-icon.png</PackageIcon>

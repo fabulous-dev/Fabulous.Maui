@@ -5,6 +5,7 @@
         <UseMauiEssentials>true</UseMauiEssentials>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
     <ItemGroup>
       <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" />

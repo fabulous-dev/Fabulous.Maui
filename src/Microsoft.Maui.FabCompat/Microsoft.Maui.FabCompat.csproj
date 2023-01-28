@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <UseMauiCore>true</UseMauiCore>
         <UseMauiEssentials>true</UseMauiEssentials>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
 </Project>
