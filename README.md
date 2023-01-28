@@ -106,6 +106,8 @@ To allow to use both old and new widgets in a same app, we rely on marker interf
 graph LR;
     A[Microsoft.Maui.IButton]-->B[Fabulous.Maui.Controls.IFabButton]
     A-->C[Fabulous.Maui.Compatibility.IFabCompatTextButton]
+    B-->D[Fabulous.Maui.FabButton]
+    C-->E[Microsoft.Maui.Controls.Button]
 ```
 
 You need to make sure to apply the right kind of marker interfaces to avoid casting errors.  
