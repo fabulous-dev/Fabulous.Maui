@@ -9,4 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes_
 
-[unreleased]: https://github.com/fabulous-dev/Fabulous.MauiControls/compare/...HEAD
+## [2.2.0-preview.1]
+
+Initial release
+
+[unreleased]: https://github.com/fabulous-dev/Fabulous.Maui/compare/2.2.0-preview.1...HEAD
+[2.2.0-preview.1]: https://github.com/fabulous-dev/Fabulous.Maui/releases/tag/2.2.0-preview.1
