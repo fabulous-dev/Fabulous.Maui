@@ -24,6 +24,7 @@
     <None Include="..\..\logo\nuget-icon.png" Pack="true" PackagePath="\" />
     <Compile Include="ValueEventData.fs" />
     <Compile Include="FabColor.fs" />
+    <Compile Include="Dimension.fs" />
     <Compile Include="VirtualizedCollection.fs" />
     <Compile Include="WidgetHelpers.fs" />
     <Compile Include="View.fs" />
@@ -32,9 +33,7 @@
     <Compile Include="Core\Widgets.fs" />
     <Compile Include="Core\Views\Partials\_Button.fs" />
     <Compile Include="Core\Views\Partials\_ButtonStroke.fs" />
-    <Compile Include="Core\Views\Partials\_Container.fs" />
     <Compile Include="Core\Views\Partials\_ImageSourcePart.fs" />
-    <Compile Include="Core\Views\Partials\_Layout.fs" />
     <Compile Include="Core\Views\Partials\_Padding.fs" />
     <Compile Include="Core\Views\Partials\_SafeAreaView.fs" />
     <Compile Include="Core\Views\Partials\_Transform.fs" />
@@ -43,19 +42,22 @@
     <Compile Include="Core\Views\Partials\_TitledElement.fs" />
     <Compile Include="Core\Views\Partials\_TextStyle.fs" />
     <Compile Include="Core\Views\Partials\_View.fs" />
-    <Compile Include="Core\Views\Partials\_StackLayout.fs" />
     <Compile Include="Core\Views\Partials\_Range.fs" />
     <Compile Include="Core\Views\ContentView.fs" />
     <Compile Include="Core\Views\Image.fs" />
     <Compile Include="Core\Views\Label.fs" />
     <Compile Include="Core\Views\TextButton.fs" />
     <Compile Include="Core\Views\ScrollView.fs" />
-    <Compile Include="Core\Views\HStack.fs" />
-    <Compile Include="Core\Views\VStack.fs" />
     <Compile Include="Core\Views\Window.fs" />
     <Compile Include="Core\Views\Application.fs" />
     <Compile Include="Core\Views\Switch.fs" />
     <Compile Include="Core\Views\Slider.fs" />
+    <Compile Include="Core\Views\Layouts\Partials\_Container.fs" />
+    <Compile Include="Core\Views\Layouts\Partials\_Layout.fs" />
+    <Compile Include="Core\Views\Layouts\Partials\_StackLayout.fs" />
+    <Compile Include="Core\Views\Layouts\HStack.fs" />
+    <Compile Include="Core\Views\Layouts\VStack.fs" />
+    <Compile Include="Core\Views\Layouts\Grid.fs" />
     <Compile Include="Compatibility\ViewNode.fs" />
     <Compile Include="Compatibility\Attributes.fs" />
     <Compile Include="Compatibility\VirtualizedCollection.fs" />

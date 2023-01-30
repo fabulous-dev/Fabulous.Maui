@@ -1,9 +1,10 @@
 using Microsoft.Maui;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabTextAlignment: ITextAlignment
+namespace Fabulous.Maui
 {
-    void SetHorizontalTextAlignment(TextAlignment value);
-    void SetVerticalTextAlignment(TextAlignment value);
+    public interface IFabTextAlignment : ITextAlignment
+    {
+        void SetHorizontalTextAlignment(TextAlignment value);
+        void SetVerticalTextAlignment(TextAlignment value);
+    }
 }

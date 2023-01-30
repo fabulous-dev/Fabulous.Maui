@@ -3,6 +3,7 @@ namespace Fabulous.Maui
 open System
 open Fabulous
 open Fabulous.Maui.Controls
+open Microsoft.Maui
 
 module Attributes =
     let inline defineMauiAction<'target> (propertyName: string) (defaultValue: Action) ([<InlineIfLambda>] set: 'target -> Action -> unit) =
@@ -66,6 +67,11 @@ module Attributes =
 
     let defineMauiProperty<'target, 'value when 'value: equality> (propertyName: string) (defaultValue: 'value) (set: 'target -> 'value -> unit) =
         defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) set
+        
+    let defineMauiAttachedData<'target, 'value when 'target :> IView and 'value: equality> (propertyName: string) (defaultValue: 'value) =
+        defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) (fun target value ->
+            target.SetAttachedData(propertyName, value)
+        )
 
     let inline defineMauiPropertyWithEvent<'target, 'value when 'value: equality>
         (propertyName: string)

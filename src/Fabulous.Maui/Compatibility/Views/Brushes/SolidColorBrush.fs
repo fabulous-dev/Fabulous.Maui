@@ -1,6 +1,7 @@
 namespace Fabulous.Maui.Compatibility
 
 open Fabulous
+open Fabulous.Maui
 open Microsoft.Maui.Controls
 
 type IFabCompatSolidColorBrush =

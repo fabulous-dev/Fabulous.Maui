@@ -13,6 +13,7 @@ public static class ViewDefaults
     public const IShape? Clip = null;
     public const IShadow? Shadow = null;
     public const bool IsEnabled = true;
+    public const Action<bool>? OnFocusChanged = null;
     public const bool IsFocused = false;
     public const Visibility Visibility = Microsoft.Maui.Visibility.Visible;
     public const double Opacity = 1.0;

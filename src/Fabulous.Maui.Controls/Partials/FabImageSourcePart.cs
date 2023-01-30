@@ -1,8 +1,9 @@
 using Microsoft.Maui;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabImageSourcePart: IImageSourcePart
+namespace Fabulous.Maui
 {
-    void SetSource(IImageSource? value);
+    public interface IFabImageSourcePart : IImageSourcePart
+    {
+        void SetSource(IImageSource? value);
+    }
 }

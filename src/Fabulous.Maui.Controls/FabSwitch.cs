@@ -2,44 +2,49 @@ using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Handlers.Defaults;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabSwitch : ISwitch, IFabView
+namespace Fabulous.Maui
 {
-    void SetIsOn(bool value, Action<bool>? onValueChanged);
-    void SetTrackColor(Color value);
-    void SetThumbColor(Color value);
+    public interface IFabSwitch : ISwitch, IFabView
+    {
+        void SetIsOn(bool value, Action<bool>? onValueChanged);
+        void SetTrackColor(Color value);
+        void SetThumbColor(Color value);
+    }
 }
 
-public class FabSwitch: FabView, IFabSwitch
+namespace Fabulous.Maui.Controls
 {
-    private bool _isOn = SwitchDefaults.IsOn;
-    
-    private Action<bool>? OnIsOnChanged { get; set; } = SwitchDefaults.OnIsOnChanged;
-
-    public bool IsOn
+    public class FabSwitch : FabView, IFabSwitch
     {
-        get => _isOn;
-        set
+        private bool _isOn = SwitchDefaults.IsOn;
+
+        private Action<bool>? OnIsOnChanged { get; set; } = SwitchDefaults.OnIsOnChanged;
+
+        public bool IsOn
         {
-            if (_isOn == value)
-                return;
+            get => _isOn;
+            set
+            {
+                if (_isOn == value)
+                    return;
 
-            _isOn = value;
-            OnIsOnChanged?.Invoke(value);
+                _isOn = value;
+                OnIsOnChanged?.Invoke(value);
+            }
         }
-    }
-    
-    public Color ThumbColor { get; private set; } = SwitchDefaults.ThumbColor;
-    public Color TrackColor { get; private set; } = SwitchDefaults.TrackColor;
-    
 
-    public void SetIsOn(bool value, Action<bool>? onValueChanged)
-    {
-        OnIsOnChanged = null;
-        IsOn = value;
-        OnIsOnChanged = onValueChanged;
+        public Color ThumbColor { get; private set; } = SwitchDefaults.ThumbColor;
+        public Color TrackColor { get; private set; } = SwitchDefaults.TrackColor;
+
+
+        public void SetIsOn(bool value, Action<bool>? onValueChanged)
+        {
+            OnIsOnChanged = null;
+            IsOn = value;
+            OnIsOnChanged = onValueChanged;
+        }
+
+        public void SetTrackColor(Color value) => TrackColor = value;
+        public void SetThumbColor(Color value) => ThumbColor = value;
     }
-    public void SetTrackColor(Color value) => TrackColor = value;
-    public void SetThumbColor(Color value) => ThumbColor = value;
 }

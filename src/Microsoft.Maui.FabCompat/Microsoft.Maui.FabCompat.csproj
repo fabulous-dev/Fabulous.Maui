@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net7.0-android</TargetFrameworks>
+        <TargetFrameworks>net7.0;net7.0-ios;net7.0-android</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UseMauiCore>true</UseMauiCore>
         <UseMauiEssentials>true</UseMauiEssentials>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
+    
+    <ItemGroup Condition="$(TargetFramework) != 'net7.0-ios'">
+        <Compile Remove="**\*.iOS.cs" />
+    </ItemGroup>
 
 </Project>

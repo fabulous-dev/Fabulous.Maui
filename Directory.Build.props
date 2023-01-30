@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <RepositoryUrl>https://github.com/fabulous-dev/Fabulous.Maui</RepositoryUrl>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(MSBuildProjectExtension) == '.fsproj'">
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
     <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>

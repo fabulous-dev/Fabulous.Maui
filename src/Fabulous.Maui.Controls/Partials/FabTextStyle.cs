@@ -2,11 +2,12 @@ using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 using Font = Microsoft.Maui.Font;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabTextStyle: ITextStyle
+namespace Fabulous.Maui
 {
-    void SetTextColor(Color? value);
-    void SetFont(Font value);
-    void SetCharacterSpacing(double value);
+    public interface IFabTextStyle : ITextStyle
+    {
+        void SetTextColor(Color? value);
+        void SetFont(Font value);
+        void SetCharacterSpacing(double value);
+    }
 }
