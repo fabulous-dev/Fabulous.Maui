@@ -20,7 +20,7 @@ module FabulousHandlers =
         | FabGridLayoutAttachedDataKeys.Row -> Microsoft.Maui.Controls.Grid.RowProperty
         | FabGridLayoutAttachedDataKeys.RowSpan -> Microsoft.Maui.Controls.Grid.RowSpanProperty
         | _ -> failwith $"Unknown key {key}"
-        
+
     let getAttachedData (view: IView) (key: string) (defaultValue: obj) =
         match view with
         | :? IFabView as fabView -> fabView.GetAttachedData(key, defaultValue)
@@ -28,7 +28,7 @@ module FabulousHandlers =
             let bindableProperty = getBindablePropertyByKey key
             (fabCompatView :?> BindableObject).GetValue(bindableProperty)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
-        
+
     let setAttachedData (view: IView) (key: string) (value: obj) =
         match view with
         | :? IFabView as fabView -> fabView.SetAttachedData(key, value)
@@ -36,8 +36,8 @@ module FabulousHandlers =
             let bindableProperty = getBindablePropertyByKey key
             (fabCompatView :?> BindableObject).SetValue(bindableProperty, value)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
-    
-    let register (collection: IMauiHandlersCollection) =        
+
+    let register (collection: IMauiHandlersCollection) =
         collection
             .AddMauiControlsHandlers()
             .AddHandler<FabApplication, ApplicationHandler>()
@@ -66,13 +66,15 @@ type AppHostBuilderExtensions =
             program: Program<'args, 'model, 'msg, 'marker>,
             args: 'args
         ) =
-        AttachedData.Get <- System.Func<_,_,_,_>(FabulousHandlers.getAttachedData)
-        AttachedData.Set <- System.Action<_,_,_>(FabulousHandlers.setAttachedData)
-        
+        AttachedData.Get <- System.Func<_, _, _, _>(FabulousHandlers.getAttachedData)
+        AttachedData.Set <- System.Action<_, _, _>(FabulousHandlers.setAttachedData)
+
         this.ConfigureMauiHandlers(FabulousHandlers.register) |> ignore
+
         this.Services.TryAddSingleton<IApplication>(fun _ ->
             let app = Program.startApplicationWithArgs args program
             app)
+
         this
 
     /// Start a Fabulous app taking no args

@@ -81,10 +81,7 @@ module GridBuilders =
             )
 
         static member inline Grid<'msg>() =
-            CollectionBuilder<'msg, IFabCompatGrid, IView>(
-                Grid.WidgetKey,
-                LayoutOfView.Children
-            )
+            CollectionBuilder<'msg, IFabCompatGrid, IView>(Grid.WidgetKey, LayoutOfView.Children)
 
 [<Extension>]
 type GridModifiers =

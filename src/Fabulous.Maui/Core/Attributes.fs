@@ -67,11 +67,9 @@ module Attributes =
 
     let defineMauiProperty<'target, 'value when 'value: equality> (propertyName: string) (defaultValue: 'value) (set: 'target -> 'value -> unit) =
         defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) set
-        
+
     let defineMauiAttachedData<'target, 'value when 'target :> IView and 'value: equality> (propertyName: string) (defaultValue: 'value) =
-        defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) (fun target value ->
-            target.SetAttachedData(propertyName, value)
-        )
+        defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) (fun target value -> target.SetAttachedData(propertyName, value))
 
     let inline defineMauiPropertyWithEvent<'target, 'value when 'value: equality>
         (propertyName: string)
@@ -112,12 +110,16 @@ module Attributes =
 
             if element.Handler <> null then
                 element.Handler.UpdateValue(propertyName))
-        
-    let defineMauiWidgetCollection<'target, 'itemType> name (getCollection: 'target -> System.Collections.Generic.IList<'itemType>) (handlerUpdate: 'target -> unit) =
+
+    let defineMauiWidgetCollection<'target, 'itemType>
+        name
+        (getCollection: 'target -> System.Collections.Generic.IList<'itemType>)
+        (handlerUpdate: 'target -> unit)
+        =
         let applyDiff _ (diffs: WidgetCollectionItemChanges) (node: IViewNode) =
             let target = node.Target :?> 'target
             let targetColl = getCollection target
-                
+
             // If the collection is mutated (everything except Change.Update), we need to warn the handler
             let mutable shouldUpdateHandler = false
 
@@ -132,7 +134,7 @@ module Attributes =
 
                     // Remove the child from the UI tree
                     targetColl.RemoveAt(index)
-                    
+
                     shouldUpdateHandler <- true
 
                 | _ -> ()
@@ -147,7 +149,7 @@ module Attributes =
 
                     // Trigger the mounted event
                     Dispatcher.dispatchEventForAllChildren itemNode widget Lifecycle.Mounted
-                    
+
                     shouldUpdateHandler <- true
 
                 | WidgetCollectionItemChange.Update(index, widgetDiff) ->
@@ -169,11 +171,11 @@ module Attributes =
 
                     // Trigger the mounted event for the new child
                     Dispatcher.dispatchEventForAllChildren nextItemNode newWidget Lifecycle.Mounted
-                    
+
                     shouldUpdateHandler <- true
 
                 | _ -> ()
-                
+
             if shouldUpdateHandler then
                 handlerUpdate target
 
@@ -189,7 +191,7 @@ module Attributes =
                     let struct (_, view) = Helpers.createViewForWidget node widget
 
                     targetColl.Add(unbox view)
-                    
+
             handlerUpdate target
 
         Attributes.defineWidgetCollection name applyDiff updateNode

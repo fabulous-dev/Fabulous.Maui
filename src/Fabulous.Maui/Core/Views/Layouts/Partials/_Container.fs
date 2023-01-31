@@ -14,17 +14,9 @@ module Container =
 [<Extension>]
 type ContainerCollectionExtensions =
     [<Extension>]
-    static member inline Yield
-        (
-            _: CollectionBuilder<'msg, #IFabContainer, IView>,
-            x: WidgetBuilder<'msg, #IView>
-        ) =
+    static member inline Yield(_: CollectionBuilder<'msg, #IFabContainer, IView>, x: WidgetBuilder<'msg, #IView>) =
         { Widgets = MutStackArray1.One(x.Compile()) }: Content<'msg>
 
     [<Extension>]
-    static member inline Yield
-        (
-            _: CollectionBuilder<'msg, #IFabContainer, IView>,
-            x: WidgetBuilder<'msg, Memo.Memoized<#IView>>
-        ) =
+    static member inline Yield(_: CollectionBuilder<'msg, #IFabContainer, IView>, x: WidgetBuilder<'msg, Memo.Memoized<#IView>>) =
         { Widgets = MutStackArray1.One(x.Compile()) }: Content<'msg>

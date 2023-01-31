@@ -9,11 +9,11 @@ open Microsoft.Maui.Handlers.Defaults
 
 module Grid =
     let WidgetKey = Widgets.register<FabGridLayout>()
-    
+
     let ColumnDefinitions =
         Attributes.defineMauiProperty<IFabGridLayout, Dimension[]> "ColumnDefinitions" Array.empty (fun target value ->
             let definitions = List<IGridColumnDefinition>()
-            
+
             for d in value do
                 let gridLength =
                     match d with
@@ -21,16 +21,18 @@ module Grid =
                     | Star -> GridLength.Star
                     | Stars x -> GridLength(x, GridUnitType.Star)
                     | Absolute x -> GridLength(x, GridUnitType.Absolute)
-                    
-                definitions.Add({ new IGridColumnDefinition with member _.Width = gridLength })
-                
-            target.SetColumnDefinitions(definitions)
-        )
-        
+
+                definitions.Add(
+                    { new IGridColumnDefinition with
+                        member _.Width = gridLength }
+                )
+
+            target.SetColumnDefinitions(definitions))
+
     let RowDefinitions =
         Attributes.defineMauiProperty<IFabGridLayout, Dimension[]> "RowDefinitions" Array.empty (fun target value ->
             let definitions = List<IGridRowDefinition>()
-            
+
             for d in value do
                 let gridLength =
                     match d with
@@ -38,24 +40,33 @@ module Grid =
                     | Star -> GridLength.Star
                     | Stars x -> GridLength(x, GridUnitType.Star)
                     | Absolute x -> GridLength(x, GridUnitType.Absolute)
-                    
-                definitions.Add({ new IGridRowDefinition with member _.Height = gridLength })
-                
-            target.SetRowDefinitions(definitions)
-        )
-        
+
+                definitions.Add(
+                    { new IGridRowDefinition with
+                        member _.Height = gridLength }
+                )
+
+            target.SetRowDefinitions(definitions))
+
     let ColumnSpacing =
         Attributes.defineMauiProperty "ColumnSpacing" GridLayoutDefaults.ColumnSpacing (fun (target: IFabGridLayout) -> target.SetColumnSpacing)
-        
+
     let RowSpacing =
         Attributes.defineMauiProperty "RowSpacing" GridLayoutDefaults.RowSpacing (fun (target: IFabGridLayout) -> target.SetRowSpacing)
-        
+
 module GridAttachedData =
-    let Column = Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Column GridLayoutDefaults.Column
-    let ColumnSpan = Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.ColumnSpan GridLayoutDefaults.ColumnSpan
-    let Row = Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Row GridLayoutDefaults.Row
-    let RowSpan = Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.RowSpan GridLayoutDefaults.RowSpan
-        
+    let Column =
+        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Column GridLayoutDefaults.Column
+
+    let ColumnSpan =
+        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.ColumnSpan GridLayoutDefaults.ColumnSpan
+
+    let Row =
+        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Row GridLayoutDefaults.Row
+
+    let RowSpan =
+        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.RowSpan GridLayoutDefaults.RowSpan
+
 [<AutoOpen>]
 module GridBuilders =
     type Fabulous.Maui.View with
@@ -69,17 +80,14 @@ module GridBuilders =
             )
 
         static member inline Grid<'msg>() =
-            CollectionBuilder<'msg, IFabGridLayout, IView>(
-                Grid.WidgetKey,
-                Container.Children
-            )
-        
+            CollectionBuilder<'msg, IFabGridLayout, IView>(Grid.WidgetKey, Container.Children)
+
 [<Extension>]
 type GridModifiers =
     [<Extension>]
     static member columnSpacing(this: WidgetBuilder<'msg, #IFabGridLayout>, value: float) =
         this.AddScalar(Grid.ColumnSpacing.WithValue(value))
-        
+
     [<Extension>]
     static member rowSpacing(this: WidgetBuilder<'msg, #IFabGridLayout>, value: float) =
         this.AddScalar(Grid.RowSpacing.WithValue(value))
@@ -89,15 +97,15 @@ type GridAttachedDataModifiers =
     [<Extension>]
     static member gridColumn(this: WidgetBuilder<'msg, #IView>, value: int) =
         this.AddScalar(GridAttachedData.Column.WithValue(value))
-        
+
     [<Extension>]
     static member gridColumnSpan(this: WidgetBuilder<'msg, #IView>, value: int) =
         this.AddScalar(GridAttachedData.ColumnSpan.WithValue(value))
-        
+
     [<Extension>]
     static member gridRow(this: WidgetBuilder<'msg, #IView>, value: int) =
         this.AddScalar(GridAttachedData.Row.WithValue(value))
-        
+
     [<Extension>]
     static member gridRowSpan(this: WidgetBuilder<'msg, #IView>, value: int) =
         this.AddScalar(GridAttachedData.RowSpan.WithValue(value))

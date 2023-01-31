@@ -9,16 +9,15 @@ module TextButton =
     let view () =
         VStack(spacing = 15.) {
             TextButton("Regular button", ())
-            
-            TextButton("Disabled button", ())
-                .isEnabled(false)
-                
+
+            TextButton("Disabled button", ()).isEnabled(false)
+
             TextButton("White text, red background", ())
                 .background(SolidPaint(Colors.Red))
                 .textColor(Colors.White)
                 .width(200.)
         }
-        
+
     let sampleProgram = Helper.createStatelessProgram view
 
     let sample =

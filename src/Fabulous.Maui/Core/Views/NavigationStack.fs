@@ -10,34 +10,30 @@ open Microsoft.Maui
 
 module NavigationStack =
     let WidgetKey = Widgets.register<FabNavigationStack>()
-    
-    let Controller = Attributes.defineMauiProperty "Controller" NavigationStackDefaults.Controller (fun (target: IFabNavigationStack) -> target.SetController)
-    
-    let Stack = Attributes.defineMauiWidgetCollection "Stack" (fun (target: FabNavigationStack) -> target.Stack) (fun target -> target.NotifyStackChanged())
-    
+
+    let Controller =
+        Attributes.defineMauiProperty "Controller" NavigationStackDefaults.Controller (fun (target: IFabNavigationStack) -> target.SetController)
+
+    let Stack =
+        Attributes.defineMauiWidgetCollection "Stack" (fun (target: FabNavigationStack) -> target.Stack) (fun target -> target.NotifyStackChanged())
+
 [<AutoOpen>]
-module NavigationStackBuilders =    
+module NavigationStackBuilders =
     type Fabulous.Maui.View with
+
         static member inline NavigationStack(paths: seq<'path>, _, router: 'path -> WidgetBuilder<'msg, #IView>) =
-            let children =
-                paths
-                |> Seq.map (fun path -> (router path).Compile())
-                |> Array.ofSeq
-                
+            let children = paths |> Seq.map(fun path -> (router path).Compile()) |> Array.ofSeq
+
             let children =
                 match ArraySlice.fromArray children with
                 | ValueNone -> ArraySlice.emptyWithNull()
                 | ValueSome slice -> slice
-            
+
             WidgetBuilder<'msg, IFabNavigationStack>(
                 NavigationStack.WidgetKey,
-                AttributesBundle(
-                    StackList.empty(),
-                    ValueNone,
-                    ValueSome [| NavigationStack.Stack.WithValue(children) |]
-                )
+                AttributesBundle(StackList.empty(), ValueNone, ValueSome [| NavigationStack.Stack.WithValue(children) |])
             )
-            
+
 [<Extension>]
 type NavigationStackModifiers =
     [<Extension>]
