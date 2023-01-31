@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <UseMaui>true</UseMaui>
+        <IsPackable>false</IsPackable>
+        <GenerateProgramFile>false</GenerateProgramFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="NavigationStackTests.fs" />
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FsCheck.NUnit" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="FSharp.Core" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Fabulous.Maui\Fabulous.Maui.fsproj" />
+    </ItemGroup>
+</Project>

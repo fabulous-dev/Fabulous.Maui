@@ -58,6 +58,7 @@
     <Compile Include="Core\Views\Layouts\HStack.fs" />
     <Compile Include="Core\Views\Layouts\VStack.fs" />
     <Compile Include="Core\Views\Layouts\Grid.fs" />
+    <Compile Include="Core\Views\NavigationStack.fs" />
     <Compile Include="Compatibility\ViewNode.fs" />
     <Compile Include="Compatibility\Attributes.fs" />
     <Compile Include="Compatibility\VirtualizedCollection.fs" />

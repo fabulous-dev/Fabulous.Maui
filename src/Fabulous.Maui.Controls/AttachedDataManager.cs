@@ -10,9 +10,9 @@ public static class AttachedData
 
 public static class AttachedDataExtensions
 {
-    public static T? GetAttachedData<T>(this IView view, string key, T? defaultValue)
+    public static T GetAttachedData<T>(this IView view, string key, T defaultValue)
     {
-        return (T?)AttachedData.Get?.Invoke(view, key, defaultValue);
+        return (T?)AttachedData.Get?.Invoke(view, key, defaultValue) ?? defaultValue;
     }
     
     public static void SetAttachedData<T>(this IView view, string key, T value)

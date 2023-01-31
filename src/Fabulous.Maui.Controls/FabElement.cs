@@ -55,12 +55,18 @@ namespace Fabulous.Maui.Controls
 
                     if (_handler?.VirtualView != this)
                         _handler?.SetVirtualView(this);
+                    
+                    OnHandlerChanged();
                 }
                 finally
                 {
                     _previousHandler = null;
                 }
             }
+        }
+
+        protected virtual void OnHandlerChanged()
+        {
         }
 
         private readonly Dictionary<string, object> _attachedData = new ();
