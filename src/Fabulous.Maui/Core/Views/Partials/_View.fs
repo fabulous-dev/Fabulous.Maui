@@ -153,7 +153,7 @@ type ViewModifiers =
         this.AddScalar(View'.Visibility.WithValue(value))
         
     [<Extension>]
-    static member width(this: WidgetBuilder<'msg, #IFabView>, value: int) =
+    static member width(this: WidgetBuilder<'msg, #IFabView>, value: float) =
         this.AddScalar(View'.Width.WithValue(value))
         
     [<Extension>]
@@ -169,6 +169,14 @@ type ViewExtraModifiers =
     [<Extension>]
     static member inline centerVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.verticalLayoutAlignment(LayoutAlignment.Center)
+        
+    [<Extension>]
+    static member inline alignStartHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
+        this.horizontalLayoutAlignment(LayoutAlignment.Start)
+
+    [<Extension>]
+    static member inline alignStartVertical(this: WidgetBuilder<'msg, #IFabView>) =
+        this.verticalLayoutAlignment(LayoutAlignment.Start)
         
     [<Extension>]
     static member margin(this: WidgetBuilder<'msg, #IFabView>, uniformSize: float) =

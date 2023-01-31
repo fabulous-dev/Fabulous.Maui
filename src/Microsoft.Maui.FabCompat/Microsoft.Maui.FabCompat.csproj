@@ -13,4 +13,12 @@
         <Compile Remove="**\*.iOS.cs" />
     </ItemGroup>
 
+    <ItemGroup Condition="$(TargetFramework) != 'net7.0-android'">
+        <Compile Remove="**\*.Android.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework) == 'net7.0-ios' or $(TargetFramework) == 'net7.0-android'">
+        <Compile Remove="**\*.Standard.cs" />
+    </ItemGroup>
+
 </Project>

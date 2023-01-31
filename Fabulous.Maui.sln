@@ -29,6 +29,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Gallery", "samples\Gallery\
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous.Maui.Tests", "src\Fabulous.Maui.Tests\Fabulous.Maui.Tests.fsproj", "{3351F85D-049B-4E0A-A64B-CE3EC6AF1E8E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulous", "..\Fabulous\src\Fabulous\Fabulous.fsproj", "{9338D527-C1CF-4BDB-89C7-2F642AA7E98A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{3351F85D-049B-4E0A-A64B-CE3EC6AF1E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3351F85D-049B-4E0A-A64B-CE3EC6AF1E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3351F85D-049B-4E0A-A64B-CE3EC6AF1E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9338D527-C1CF-4BDB-89C7-2F642AA7E98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9338D527-C1CF-4BDB-89C7-2F642AA7E98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9338D527-C1CF-4BDB-89C7-2F642AA7E98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9338D527-C1CF-4BDB-89C7-2F642AA7E98A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{43C59611-F941-4F99-AA53-7DAC43E2A80A} = {6255FC2D-3C2A-46CF-84FF-4C1860895F16}

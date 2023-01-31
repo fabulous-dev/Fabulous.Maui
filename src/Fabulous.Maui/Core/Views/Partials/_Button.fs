@@ -5,4 +5,4 @@ open Fabulous.Maui.Controls
 
 module Button =
     let Clicked =
-        Attributes.defineMauiAction "Clicked" ButtonDefaults.OnClicked (fun (target: IFabButton) value -> target.SetOnClicked(value))
+        Attributes.defineMauiAction "Clicked" ButtonDefaults.OnClicked (fun (target: IFabButton) -> target.SetOnClicked)

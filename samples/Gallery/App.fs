@@ -1,49 +1,51 @@
 namespace Gallery
 
+open Microsoft.FSharp.Core
 open Microsoft.Maui.Accessibility
 open Fabulous
 open Fabulous.Maui
+open Gallery.Samples
 
 open type Fabulous.Maui.View
 
-module App =
+module App =    
     type Path =
-        | Home
-        | Details
+        | Overview
+        | Sample of sampleIndex: int * sampleModel: obj
     
     type Model = { Paths: Path list }
 
     type Msg =
-        | Navigated of Path list
-        | GoToDetails
+        | SampleMsg of obj
+        | GoToSample of int
         | GoBack
 
     let init () =
-        { Paths = [ Home ] }
+        { Paths = [ Overview ] }
 
     let update msg model =
         match msg with
-        | Navigated paths -> { model with Paths = paths }
-        | GoToDetails -> { model with Paths = Details :: model.Paths }
-        | GoBack -> { model with Paths = List.tail model.Paths }
+        | SampleMsg sMsg ->
+            match List.tryHead model.Paths with
+            | Some (Sample (index, sampleModel)) ->
+                let newSampleModel = RegisteredSamples.samples[index].Program.update sMsg sampleModel
+                { model with Paths = Sample (index, newSampleModel) :: List.tail model.Paths }
+            | _ -> model
+            
+        | GoToSample index ->
+            let sampleModel = RegisteredSamples.samples[index].Program.init()
+            let paths = Sample (index, sampleModel) :: model.Paths
+            { model with Paths = paths }
+            
+        | GoBack ->
+            { model with Paths = List.tail model.Paths }
     
     let view model =
         Application() {
             Window(
-                NavigationStack(List.rev model.Paths, Navigated, fun path ->
-                    match path with
-                    | Home ->
-                        VStack() {
-                            Label("Home")
-                            TextButton("Go to details", GoToDetails)
-                        }
-                        
-                    | Details ->
-                        VStack() {
-                            Label("Details")
-                            TextButton("Go back", GoBack)
-                        }
-                )
+                match List.head model.Paths with
+                | Overview -> AnyView(Overview.view GoToSample)
+                | Sample (index, sampleModel) -> AnyView(SamplePage.view GoBack SampleMsg index sampleModel)
             )
         }
 

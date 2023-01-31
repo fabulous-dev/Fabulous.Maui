@@ -46,8 +46,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Common.fs" />
     <Compile Include="Styles.fs" />
+    <Compile Include="Common.fs" />
+    <Compile Include="Samples\TextButton.fs" />
+    <Compile Include="Samples.fs" />
+    <Compile Include="Overview.fs" />
+    <Compile Include="SamplePage.fs" />
     <Compile Include="App.fs" />
     <Compile Include="MauiProgram.fs" />
   </ItemGroup>
@@ -97,4 +101,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fabulous.Maui\Fabulous.Maui.fsproj" />
   </ItemGroup>
+  
 </Project>

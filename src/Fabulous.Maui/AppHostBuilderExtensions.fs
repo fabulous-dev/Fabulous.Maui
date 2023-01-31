@@ -53,7 +53,7 @@ module FabulousHandlers =
             .AddHandler<FabSlider, SliderHandler>()
             .AddHandler<FabTextButton, ButtonHandler>()
             .AddHandler<FabGridLayout, LayoutHandler>()
-            .AddHandler<FabNavigationStack, NavigationViewHandler>()
+            .AddHandler<FabNavigationStack, FabNavigationViewHandler>()
         |> ignore
 
 [<Extension>]
