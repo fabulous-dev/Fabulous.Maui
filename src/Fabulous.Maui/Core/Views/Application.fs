@@ -5,6 +5,7 @@ open Microsoft.Maui
 open Microsoft.Maui.ApplicationModel
 open Microsoft.Maui.Handlers.Defaults
 open Fabulous
+open Fabulous.Maui
 open Fabulous.Maui.Controls
 open Fabulous.StackAllocatedCollections
 

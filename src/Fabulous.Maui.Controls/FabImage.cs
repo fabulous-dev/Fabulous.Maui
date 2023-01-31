@@ -1,30 +1,35 @@
 using Microsoft.Maui;
 using Microsoft.Maui.Handlers.Defaults;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabImage: IImage, IFabView, IFabImageSourcePart
+namespace Fabulous.Maui
 {
-    void SetIsAnimationPlaying(bool value);
-    void SetAspect(Aspect value);
-    void SetIsOpaque(bool value);
+    public interface IFabImage : IImage, IFabView, IFabImageSourcePart
+    {
+        void SetIsAnimationPlaying(bool value);
+        void SetAspect(Aspect value);
+        void SetIsOpaque(bool value);
+    }
 }
 
-public class FabImage: FabView, IFabImage
+namespace Fabulous.Maui.Controls
 {
-    private bool _isLoading; // TODO: What is this for?
-    public void UpdateIsLoading(bool isLoading)
+    public class FabImage : FabView, IFabImage
     {
-        _isLoading = isLoading;
+        private bool _isLoading; // TODO: What is this for?
+
+        public void UpdateIsLoading(bool isLoading)
+        {
+            _isLoading = isLoading;
+        }
+
+        public IImageSource? Source { get; private set; } = ImageSourcePartDefaults.Source;
+        public bool IsAnimationPlaying { get; private set; } = ImageDefaults.IsAnimationPlaying;
+        public Aspect Aspect { get; private set; } = ImageDefaults.Aspect;
+        public bool IsOpaque { get; private set; } = ImageDefaults.IsOpaque;
+
+        public void SetSource(IImageSource? value) => Source = value;
+        public void SetIsAnimationPlaying(bool value) => IsAnimationPlaying = value;
+        public void SetAspect(Aspect value) => Aspect = value;
+        public void SetIsOpaque(bool value) => IsOpaque = value;
     }
-
-    public IImageSource? Source { get; private set; } = ImageSourcePartDefaults.Source;
-    public bool IsAnimationPlaying { get; private set; } = ImageDefaults.IsAnimationPlaying;
-    public Aspect Aspect { get; private set; } = ImageDefaults.Aspect;
-    public bool IsOpaque { get; private set; } = ImageDefaults.IsOpaque;
-
-    public void SetSource(IImageSource? value) => Source = value;
-    public void SetIsAnimationPlaying(bool value) => IsAnimationPlaying = value;
-    public void SetAspect(Aspect value) => Aspect = value;
-    public void SetIsOpaque(bool value) => IsOpaque = value;
 }

@@ -4,6 +4,7 @@ open System
 open System.IO
 open System.Runtime.CompilerServices
 open Fabulous
+open Fabulous.Maui
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 

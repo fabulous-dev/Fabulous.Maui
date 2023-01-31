@@ -24,3 +24,7 @@ type PaddingExtraModifiers =
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, horizontalSize: float, verticalSize: float) =
         this.padding(Thickness(horizontalSize, verticalSize))
+
+    [<Extension>]
+    static member inline padding(this: WidgetBuilder<'msg, #IFabPadding>, left: float, top: float, right: float, bottom: float) =
+        this.padding(Thickness(left, top, right, bottom))

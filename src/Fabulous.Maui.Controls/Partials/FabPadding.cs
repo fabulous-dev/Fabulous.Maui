@@ -1,8 +1,9 @@
 using Microsoft.Maui;
 
-namespace Fabulous.Maui.Controls;
-
-public interface IFabPadding: IPadding
+namespace Fabulous.Maui
 {
-    void SetPadding(Thickness value);
+    public interface IFabPadding : IPadding
+    {
+        void SetPadding(Thickness value);
+    }
 }

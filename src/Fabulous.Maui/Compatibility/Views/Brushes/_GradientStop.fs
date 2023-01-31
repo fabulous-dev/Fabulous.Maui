@@ -3,6 +3,7 @@ namespace Fabulous.Maui.Compatibility
 open Microsoft.Maui.Controls
 
 open Fabulous
+open Fabulous.Maui
 
 type IFabCompatGradientStop =
     inherit IFabCompatElement
