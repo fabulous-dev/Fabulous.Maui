@@ -15,7 +15,7 @@ module TextButton =
             TextButton("White text, red background", ())
                 .background(SolidPaint(Colors.Red))
                 .textColor(Colors.White)
-                .width(200.)
+                .width(250.)
         }
 
     let sampleProgram = Helper.createStatelessProgram view
