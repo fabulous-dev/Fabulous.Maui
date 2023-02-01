@@ -34,7 +34,7 @@ namespace Fabulous.Maui
 
 namespace Fabulous.Maui.Controls
 {
-    public class FabView : FabElement, IFabView
+    public abstract class FabView : FabElement, IFabView
     {
         public Rect Frame { get; set; }
         public Size DesiredSize { get; private set; }

@@ -12,7 +12,7 @@ type IFabCompatImageButton =
     inherit IFabCompatView
     inherit IImageButton
 
-module ImageButton =
+module CompatImageButton =
     let WidgetKey = CompatWidgets.register<ImageButton>()
 
     let Aspect =
@@ -47,18 +47,18 @@ module ImageButton =
         Attributes.defineEventNoArg "ImageButton_Released" (fun target -> (target :?> ImageButton).Released)
 
 [<AutoOpen>]
-module ImageButtonBuilders =
+module CompatImageButtonBuilders =
     type Fabulous.Maui.View with
 
-        static member inline ImageButton<'msg>(aspect: Aspect, light: ImageSource, onClicked: 'msg, ?dark: ImageSource) =
+        static member inline CompatImageButton<'msg>(aspect: Aspect, light: ImageSource, onClicked: 'msg, ?dark: ImageSource) =
             WidgetBuilder<'msg, IFabCompatImageButton>(
-                ImageButton.WidgetKey,
-                ImageButton.Aspect.WithValue(aspect),
-                ImageButton.Clicked.WithValue(onClicked),
-                ImageButton.Source.WithValue(AppTheme.create light dark)
+                CompatImageButton.WidgetKey,
+                CompatImageButton.Aspect.WithValue(aspect),
+                CompatImageButton.Clicked.WithValue(onClicked),
+                CompatImageButton.Source.WithValue(AppTheme.create light dark)
             )
 
-        static member inline ImageButton<'msg>(aspect: Aspect, light: string, onClicked: 'msg, ?dark: string) =
+        static member inline CompatImageButton<'msg>(aspect: Aspect, light: string, onClicked: 'msg, ?dark: string) =
             let light = ImageSource.FromFile(light)
 
             let dark =
@@ -66,9 +66,9 @@ module ImageButtonBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromFile(v))
 
-            View.ImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
+            View.CompatImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
 
-        static member inline ImageButton<'msg>(aspect: Aspect, light: Uri, onClicked: 'msg, ?dark: Uri) =
+        static member inline CompatImageButton<'msg>(aspect: Aspect, light: Uri, onClicked: 'msg, ?dark: Uri) =
             let light = ImageSource.FromUri(light)
 
             let dark =
@@ -76,7 +76,7 @@ module ImageButtonBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromUri(v))
 
-            View.ImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
+            View.CompatImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
 
         static member inline ImageButton<'msg>(aspect: Aspect, light: Stream, onClicked: 'msg, ?dark: Stream) =
             let light = ImageSource.FromStream(fun () -> light)
@@ -86,64 +86,64 @@ module ImageButtonBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromStream(fun () -> v))
 
-            View.ImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
+            View.CompatImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
 
 [<Extension>]
-type ImageButtonModifiers =
+type CompatImageButtonModifiers =
     /// <summary>Set the color of the image button border color</summary>
     /// <param name="light">The color of the image button border in the light theme.</param>
     /// <param name="dark">The color of the image button border in the dark theme.</param>
     [<Extension>]
     static member inline borderColor(this: WidgetBuilder<'msg, #IFabCompatImageButton>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(ImageButton.BorderColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatImageButton.BorderColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the width of the image button border</summary>
     /// <param name="width">The width of the image button border.</param>
     [<Extension>]
     static member inline borderWidth(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: float) =
-        this.AddScalar(ImageButton.BorderWidth.WithValue(value))
+        this.AddScalar(CompatImageButton.BorderWidth.WithValue(value))
 
     /// <summary>Set the corner radius of the image button</summary>
     /// <param name="radius">The corner radius of the image button.</param>
     [<Extension>]
     static member inline cornerRadius(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: float) =
-        this.AddScalar(ImageButton.CornerRadius.WithValue(value))
+        this.AddScalar(CompatImageButton.CornerRadius.WithValue(value))
 
     [<Extension>]
     static member inline isLoading(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: bool) =
-        this.AddScalar(ImageButton.IsLoading.WithValue(value))
+        this.AddScalar(CompatImageButton.IsLoading.WithValue(value))
 
     [<Extension>]
     static member inline isOpaque(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: bool) =
-        this.AddScalar(ImageButton.IsOpaque.WithValue(value))
+        this.AddScalar(CompatImageButton.IsOpaque.WithValue(value))
 
     [<Extension>]
     static member inline isPressed(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: bool) =
-        this.AddScalar(ImageButton.IsPressed.WithValue(value))
+        this.AddScalar(CompatImageButton.IsPressed.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: Thickness) =
-        this.AddScalar(ImageButton.Padding.WithValue(value))
+        this.AddScalar(CompatImageButton.Padding.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatImageButton>, value: float) =
-        ImageButtonModifiers.padding(this, Thickness(value))
+        CompatImageButtonModifiers.padding(this, Thickness(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatImageButton>, left: float, top: float, right: float, bottom: float) =
-        ImageButtonModifiers.padding(this, Thickness(left, top, right, bottom))
+        CompatImageButtonModifiers.padding(this, Thickness(left, top, right, bottom))
 
     /// <summary>Event that is fired when image button is pressed.</summary>
     /// <param name="onPressed">Msg to dispatch when image button is pressed</param>
     [<Extension>]
     static member inline onPressed(this: WidgetBuilder<'msg, #IFabCompatImageButton>, onPressed: 'msg) =
-        this.AddScalar(ImageButton.Pressed.WithValue(onPressed))
+        this.AddScalar(CompatImageButton.Pressed.WithValue(onPressed))
 
     /// <summary>Event that is fired when image button is released.</summary>
     /// <param name="onReleased">Msg to dispatch when image button is released.</param>
     [<Extension>]
     static member inline onReleased(this: WidgetBuilder<'msg, #IFabCompatImageButton>, onReleased: 'msg) =
-        this.AddScalar(ImageButton.Released.WithValue(onReleased))
+        this.AddScalar(CompatImageButton.Released.WithValue(onReleased))
 
     /// <summary>Link a ViewRef to access the direct ImageButton control instance</summary>
     [<Extension>]

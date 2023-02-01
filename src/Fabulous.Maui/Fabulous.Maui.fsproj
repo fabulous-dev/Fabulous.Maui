@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <UseMaui>true</UseMaui>
@@ -57,11 +57,12 @@
     <Compile Include="Core\Views\Controls\Partials\_Text.fs" />
     <Compile Include="Core\Views\Controls\Partials\_TextAlignment.fs" />
     <Compile Include="Core\Views\Controls\Partials\_TextStyle.fs" />
-    <Compile Include="Core\Views\Controls\TextButton.fs" />
     <Compile Include="Core\Views\Controls\Label.fs" />
     <Compile Include="Core\Views\Controls\Image.fs" />
-    <Compile Include="Core\Views\Controls\Switch.fs" />
+    <Compile Include="Core\Views\Controls\ImageButton.fs" />
     <Compile Include="Core\Views\Controls\Slider.fs" />
+    <Compile Include="Core\Views\Controls\Switch.fs" />
+    <Compile Include="Core\Views\Controls\TextButton.fs" />
     <Compile Include="Compatibility\ViewNode.fs" />
     <Compile Include="Compatibility\Attributes.fs" />
     <Compile Include="Compatibility\VirtualizedCollection.fs" />
@@ -148,7 +149,8 @@
     <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
     <Compile Include="Compatibility\Views\Controls\_GestureElement.fs" />
     <Compile Include="Compatibility\Views\Controls\Span.fs" />
-    <Compile Include="Compatibility\Views\Controls\Button.fs" />
+    <Compile Include="Compatibility\Views\Controls\CompatButton.fs" />
+    <Compile Include="Compatibility\Views\Controls\CompatLabel.fs" />
     <Compile Include="Compatibility\Views\Controls\Switch.fs" />
     <Compile Include="Compatibility\Views\Controls\Border.fs" />
     <Compile Include="Compatibility\Views\Controls\Slider.fs" />
@@ -159,7 +161,7 @@
     <Compile Include="Compatibility\Views\Controls\Entry.fs" />
     <Compile Include="Compatibility\Views\Controls\SearchBar.fs" />
     <Compile Include="Compatibility\Views\Controls\Editor.fs" />
-    <Compile Include="Compatibility\Views\Controls\ImageButton.fs" />
+    <Compile Include="Compatibility\Views\Controls\CompatImageButton.fs" />
     <Compile Include="Compatibility\Views\Controls\DatePicker.fs" />
     <Compile Include="Compatibility\Views\Controls\Picker.fs" />
     <Compile Include="Compatibility\Views\Controls\TimePicker.fs" />

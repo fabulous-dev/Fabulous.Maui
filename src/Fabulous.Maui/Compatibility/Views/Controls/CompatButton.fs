@@ -12,7 +12,7 @@ type IFabCompatButton =
     inherit IFabCompatView
     inherit IButton
 
-module Button =
+module CompatButton =
     let WidgetKey = CompatWidgets.register<Button>()
 
     let BorderColor = Attributes.defineBindableAppThemeColor Button.BorderColorProperty
@@ -64,49 +64,49 @@ module Button =
         Attributes.defineEventNoArg "Button_Released" (fun target -> (target :?> Button).Released)
 
 [<AutoOpen>]
-module ButtonBuilders =
+module CompatButtonBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Button<'msg>(text: string, onClicked: 'msg) =
-            WidgetBuilder<'msg, IFabCompatButton>(Button.WidgetKey, Button.Text.WithValue(text), Button.Clicked.WithValue(onClicked))
+        static member inline CompatButton<'msg>(text: string, onClicked: 'msg) =
+            WidgetBuilder<'msg, IFabCompatButton>(CompatButton.WidgetKey, CompatButton.Text.WithValue(text), CompatButton.Clicked.WithValue(onClicked))
 
 [<Extension>]
-type ButtonModifiers =
+type CompatButtonModifiers =
     [<Extension>]
     static member inline textColor(this: WidgetBuilder<'msg, #IFabCompatButton>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Button.TextColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatButton.TextColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
     static member inline textTransform(this: WidgetBuilder<'msg, #IFabCompatButton>, value: TextTransform) =
-        this.AddScalar(Button.TextTransform.WithValue(value))
+        this.AddScalar(CompatButton.TextTransform.WithValue(value))
 
     [<Extension>]
     static member inline cornerRadius(this: WidgetBuilder<'msg, #IFabCompatButton>, value: int) =
-        this.AddScalar(Button.CornerRadius.WithValue(value))
+        this.AddScalar(CompatButton.CornerRadius.WithValue(value))
 
     [<Extension>]
     static member inline borderColor(this: WidgetBuilder<'msg, #IFabCompatButton>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Button.BorderColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatButton.BorderColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
     static member inline borderWidth(this: WidgetBuilder<'msg, #IFabCompatButton>, value: float) =
-        this.AddScalar(Button.BorderWidth.WithValue(value))
+        this.AddScalar(CompatButton.BorderWidth.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatButton>, value: Thickness) =
-        this.AddScalar(Button.Padding.WithValue(value))
+        this.AddScalar(CompatButton.Padding.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatButton>, value: float) =
-        ButtonModifiers.padding(this, Thickness(value))
+        CompatButtonModifiers.padding(this, Thickness(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatButton>, left: float, top: float, right: float, bottom: float) =
-        ButtonModifiers.padding(this, Thickness(left, top, right, bottom))
+        CompatButtonModifiers.padding(this, Thickness(left, top, right, bottom))
 
     [<Extension>]
     static member inline characterSpacing(this: WidgetBuilder<'msg, #IFabCompatButton>, value: float) =
-        this.AddScalar(Button.CharacterSpacing.WithValue(value))
+        this.AddScalar(CompatButton.CharacterSpacing.WithValue(value))
 
     [<Extension>]
     static member inline contentLayout
@@ -115,7 +115,7 @@ type ButtonModifiers =
             position: Microsoft.Maui.Controls.Button.ButtonContentLayout.ImagePosition,
             spacing: float
         ) =
-        this.AddScalar(Button.ContentLayout.WithValue(Button.ButtonContentLayout(position, spacing)))
+        this.AddScalar(CompatButton.ContentLayout.WithValue(Button.ButtonContentLayout(position, spacing)))
 
     [<Extension>]
     static member inline font
@@ -131,25 +131,25 @@ type ButtonModifiers =
 
         match size with
         | None -> ()
-        | Some v -> res <- res.AddScalar(Button.FontSize.WithValue(v))
+        | Some v -> res <- res.AddScalar(CompatButton.FontSize.WithValue(v))
 
         match attributes with
         | None -> ()
-        | Some v -> res <- res.AddScalar(Button.FontAttributes.WithValue(v))
+        | Some v -> res <- res.AddScalar(CompatButton.FontAttributes.WithValue(v))
 
         match fontFamily with
         | None -> ()
-        | Some v -> res <- res.AddScalar(Button.FontFamily.WithValue(v))
+        | Some v -> res <- res.AddScalar(CompatButton.FontFamily.WithValue(v))
 
         match autoScalingEnabled with
         | None -> ()
-        | Some v -> res <- res.AddScalar(Button.FontAutoScalingEnabled.WithValue(v))
+        | Some v -> res <- res.AddScalar(CompatButton.FontAutoScalingEnabled.WithValue(v))
 
         res
 
     [<Extension>]
     static member inline image(this: WidgetBuilder<'msg, #IFabCompatButton>, light: ImageSource, ?dark: ImageSource) =
-        this.AddScalar(Button.ImageSource.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatButton.ImageSource.WithValue(AppTheme.create light dark))
 
     [<Extension>]
     static member inline image(this: WidgetBuilder<'msg, #IFabCompatButton>, light: string, ?dark: string) =
@@ -160,7 +160,7 @@ type ButtonModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromFile(v))
 
-        ButtonModifiers.image(this, light, ?dark = dark)
+        CompatButtonModifiers.image(this, light, ?dark = dark)
 
     [<Extension>]
     static member inline image(this: WidgetBuilder<'msg, #IFabCompatButton>, light: Uri, ?dark: Uri) =
@@ -171,7 +171,7 @@ type ButtonModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromUri(v))
 
-        ButtonModifiers.image(this, light, ?dark = dark)
+        CompatButtonModifiers.image(this, light, ?dark = dark)
 
     [<Extension>]
     static member inline image(this: WidgetBuilder<'msg, #IFabCompatButton>, light: Stream, ?dark: Stream) =
@@ -182,21 +182,21 @@ type ButtonModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromStream(fun () -> v))
 
-        ButtonModifiers.image(this, light, ?dark = dark)
+        CompatButtonModifiers.image(this, light, ?dark = dark)
 
     [<Extension>]
     static member inline onPressed(this: WidgetBuilder<'msg, #IFabCompatButton>, onPressed: 'msg) =
-        this.AddScalar(Button.Pressed.WithValue(onPressed))
+        this.AddScalar(CompatButton.Pressed.WithValue(onPressed))
 
     [<Extension>]
     static member inline onReleased(this: WidgetBuilder<'msg, #IFabCompatButton>, onReleased: 'msg) =
-        this.AddScalar(Button.Released.WithValue(onReleased))
+        this.AddScalar(CompatButton.Released.WithValue(onReleased))
 
     /// <summary>Determines how text should be handled when it can't fit on one line.</summary>
     /// <param name="value">The default value of this property is LineBreakMode.NoWrap</param>
     [<Extension>]
     static member inline lineBreakMode(this: WidgetBuilder<'msg, #IFabCompatButton>, value: LineBreakMode) =
-        this.AddScalar(Button.LineBreakMode.WithValue(value))
+        this.AddScalar(CompatButton.LineBreakMode.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct Button control instance</summary>
     [<Extension>]

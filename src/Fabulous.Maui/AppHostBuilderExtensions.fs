@@ -40,19 +40,26 @@ module FabulousHandlers =
     let register (collection: IMauiHandlersCollection) =
         collection
             .AddMauiControlsHandlers()
+
+            // Controls
+            .AddHandler<FabLabel, FabLabelHandler>()
+            .AddHandler<FabImage, ImageHandler>()
+            .AddHandler<FabImageButton, ImageButtonHandler>()
+            .AddHandler<FabSlider, SliderHandler>()
+            .AddHandler<FabSwitch, SwitchHandler>()
+            .AddHandler<FabTextButton, ButtonHandler>()
+
+            // Layouts
+            .AddHandler<FabBorderView, BorderHandler>()
+            .AddHandler<FabContentView, ContentViewHandler>()
+            .AddHandler<FabGridLayout, LayoutHandler>()
+            .AddHandler<FabHorizontalStackLayout, LayoutHandler>()
+            .AddHandler<FabScrollView, ScrollViewHandler>()
+            .AddHandler<FabVerticalStackLayout, LayoutHandler>()
+
+            // Common
             .AddHandler<FabApplication, ApplicationHandler>()
             .AddHandler<FabWindow, WindowHandler>()
-            .AddHandler<FabLabel, FabLabelHandler>()
-            .AddHandler<FabButton, ButtonHandler>()
-            .AddHandler<FabHorizontalStackLayout, LayoutHandler>()
-            .AddHandler<FabVerticalStackLayout, LayoutHandler>()
-            .AddHandler<FabScrollView, ScrollViewHandler>()
-            .AddHandler<FabImage, ImageHandler>()
-            .AddHandler<FabContentView, ContentViewHandler>()
-            .AddHandler<FabSwitch, SwitchHandler>()
-            .AddHandler<FabSlider, SliderHandler>()
-            .AddHandler<FabTextButton, ButtonHandler>()
-            .AddHandler<FabGridLayout, LayoutHandler>()
             .AddHandler<FabNavigationStack, FabNavigationViewHandler>()
         |> ignore
 
