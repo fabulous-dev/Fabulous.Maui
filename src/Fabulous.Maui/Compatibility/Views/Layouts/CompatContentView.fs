@@ -9,17 +9,17 @@ open Microsoft.Maui.Controls
 type IFabCompatContentView =
     inherit IFabCompatTemplatedView
 
-module ContentView =
+module CompatContentView =
     let WidgetKey = CompatWidgets.register<ContentView>()
 
     let Content = Attributes.defineBindableWidget ContentView.ContentProperty
 
 [<AutoOpen>]
-module ContentViewBuilders =
+module CompatContentViewBuilders =
     type Fabulous.Maui.View with
 
         static member inline ContentView(content: WidgetBuilder<'msg, #IView>) =
-            WidgetHelpers.buildWidgets<'msg, IFabCompatContentView> ContentView.WidgetKey [| ContentView.Content.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatContentView> CompatContentView.WidgetKey [| CompatContentView.Content.WithValue(content.Compile()) |]
 
 [<Extension>]
 type ContentViewModifiers =

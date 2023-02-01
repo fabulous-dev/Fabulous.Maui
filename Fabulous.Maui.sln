@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution files", "_Solutio
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		docs\v2\docs\controls.md = docs\v2\docs\controls.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabulous.Maui.Controls", "src\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj", "{C5F1990F-0E4A-4619-B3B9-CB65856C7AF8}"

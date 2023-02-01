@@ -35,7 +35,7 @@ type RotateToData =
       AnimationDuration: uint32
       Easing: Easing }
 
-module VisualElementUpdaters =
+module CompatVisualElementUpdaters =
     let updateVisualElementFocus oldValueOpt (newValueOpt: ValueEventData<bool, bool> voption) (node: IViewNode) =
         let target = node.Target :?> VisualElement
 
@@ -94,7 +94,7 @@ module VisualElementUpdaters =
             node.SetHandler(offEventName, ValueSome offHandler)
             offEvent.AddHandler(offHandler)
 
-module VisualElement =
+module CompatVisualElement =
     let AnchorX = Attributes.defineBindableFloat VisualElement.AnchorXProperty
 
     let AnchorY = Attributes.defineBindableFloat VisualElement.AnchorYProperty
@@ -143,7 +143,7 @@ module VisualElement =
         Attributes.defineBindableWithEquality<IVisual> VisualElement.VisualProperty
 
     let FocusWithEvent =
-        Attributes.defineSimpleScalar "VisualElement_FocusWithEvent" ScalarAttributeComparers.noCompare VisualElementUpdaters.updateVisualElementFocus
+        Attributes.defineSimpleScalar "VisualElement_FocusWithEvent" ScalarAttributeComparers.noCompare CompatVisualElementUpdaters.updateVisualElementFocus
 
     let TranslateTo =
         Attributes.defineSimpleScalarWithEquality<TranslateToData> "View_TranslateTo" (fun _ newValueOpt node ->
@@ -226,19 +226,19 @@ type VisualElementModifiers =
 
     [<Extension>]
     static member inline anchorX(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.AnchorX.WithValue(value))
+        this.AddScalar(CompatVisualElement.AnchorX.WithValue(value))
 
     [<Extension>]
     static member inline anchorY(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.AnchorY.WithValue(value))
+        this.AddScalar(CompatVisualElement.AnchorY.WithValue(value))
 
     [<Extension>]
     static member inline backgroundColor(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(VisualElement.BackgroundColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatVisualElement.BackgroundColor.WithValue(AppTheme.create light dark))
 
     [<Extension>]
     static member inline background(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, light: Brush, ?dark: Brush) =
-        this.AddScalar(VisualElement.Background.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatVisualElement.Background.WithValue(AppTheme.create light dark))
 
     [<Extension>]
     static member inline background<'msg, 'marker, 'contentMarker when 'marker :> IFabCompatVisualElement and 'contentMarker :> IFabCompatBrush>
@@ -246,7 +246,7 @@ type VisualElementModifiers =
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>
         ) =
-        this.AddWidget(VisualElement.BackgroundWidget.WithValue(content.Compile()))
+        this.AddWidget(CompatVisualElement.BackgroundWidget.WithValue(content.Compile()))
 
     [<Extension>]
     static member inline clip<'msg, 'marker, 'contentMarker when 'marker :> IFabCompatVisualElement and 'contentMarker :> IFabCompatGeometry>
@@ -254,70 +254,70 @@ type VisualElementModifiers =
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>
         ) =
-        this.AddWidget(VisualElement.Clip.WithValue(content.Compile()))
+        this.AddWidget(CompatVisualElement.Clip.WithValue(content.Compile()))
 
     [<Extension>]
     static member inline flowDirection(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: FlowDirection) =
-        this.AddScalar(VisualElement.FlowDirection.WithValue(value))
+        this.AddScalar(CompatVisualElement.FlowDirection.WithValue(value))
 
     [<Extension>]
     static member inline size(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, ?width: float, ?height: float) =
         match width, height with
         | None, None -> this
-        | Some w, None -> this.AddScalar(VisualElement.WidthRequest.WithValue(w))
-        | None, Some h -> this.AddScalar(VisualElement.HeightRequest.WithValue(h))
+        | Some w, None -> this.AddScalar(CompatVisualElement.WidthRequest.WithValue(w))
+        | None, Some h -> this.AddScalar(CompatVisualElement.HeightRequest.WithValue(h))
         | Some w, Some h ->
             this
-                .AddScalar(VisualElement.WidthRequest.WithValue(w))
-                .AddScalar(VisualElement.HeightRequest.WithValue(h))
+                .AddScalar(CompatVisualElement.WidthRequest.WithValue(w))
+                .AddScalar(CompatVisualElement.HeightRequest.WithValue(h))
 
     [<Extension>]
     static member inline height(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.HeightRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.HeightRequest.WithValue(value))
 
     [<Extension>]
     static member inline width(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.WidthRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.WidthRequest.WithValue(value))
 
     [<Extension>]
     static member inline inputTransparent(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: bool) =
-        this.AddScalar(VisualElement.InputTransparent.WithValue(value))
+        this.AddScalar(CompatVisualElement.InputTransparent.WithValue(value))
 
     [<Extension>]
     static member inline isEnabled(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: bool) =
-        this.AddScalar(VisualElement.IsEnabled.WithValue(value))
+        this.AddScalar(CompatVisualElement.IsEnabled.WithValue(value))
 
     [<Extension>]
     static member inline isVisible(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: bool) =
-        this.AddScalar(VisualElement.IsVisible.WithValue(value))
+        this.AddScalar(CompatVisualElement.IsVisible.WithValue(value))
 
     [<Extension>]
     static member inline minimumHeight(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.MinimumHeightRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.MinimumHeightRequest.WithValue(value))
 
     [<Extension>]
     static member inline minimumWidth(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.MinimumWidthRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.MinimumWidthRequest.WithValue(value))
 
     [<Extension>]
     static member inline maximumHeight(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.MaximumHeightRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.MaximumHeightRequest.WithValue(value))
 
     [<Extension>]
     static member inline maximumWidth(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.MaximumWidthRequest.WithValue(value))
+        this.AddScalar(CompatVisualElement.MaximumWidthRequest.WithValue(value))
 
     [<Extension>]
     static member inline opacity(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.Opacity.WithValue(value))
+        this.AddScalar(CompatVisualElement.Opacity.WithValue(value))
 
     [<Extension>]
     static member inline visual(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: IVisual) =
-        this.AddScalar(VisualElement.Visual.WithValue(value))
+        this.AddScalar(CompatVisualElement.Visual.WithValue(value))
 
     [<Extension>]
     static member inline focus(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: bool, onFocusChanged: bool -> 'msg) =
-        this.AddScalar(VisualElement.FocusWithEvent.WithValue(ValueEventData.create value (fun args -> onFocusChanged args |> box)))
+        this.AddScalar(CompatVisualElement.FocusWithEvent.WithValue(ValueEventData.create value (fun args -> onFocusChanged args |> box)))
 
     /// <summary>Animates an elements TranslationX and TranslationY properties from their current values to the new values. This ensures that the input layout is in the same position as the visual layout.</summary>
     /// <param name="x">The x component of the final translation vector.</param>
@@ -327,7 +327,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline translateTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, x: float, y: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.TranslateTo.WithValue(
+            CompatVisualElement.TranslateTo.WithValue(
                 { X = x
                   Y = y
                   AnimationDuration = uint duration
@@ -339,13 +339,13 @@ type VisualElementModifiers =
     /// <param name="x">The x component of the final translation vector.</param>
     [<Extension>]
     static member inline translationX(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, x: float) =
-        this.AddScalar(VisualElement.TranslationX.WithValue(x))
+        this.AddScalar(CompatVisualElement.TranslationX.WithValue(x))
 
     /// <summary>Translates the Y position of the element.</summary>
     /// <param name="y">The y component of the final translation vector.</param>
     [<Extension>]
     static member inline translationY(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, y: float) =
-        this.AddScalar(VisualElement.TranslationY.WithValue(y))
+        this.AddScalar(CompatVisualElement.TranslationY.WithValue(y))
 
     /// <summary>Create a Shadow widget, that enables a shadow to be added to any layout or view.</summary>
     [<Extension>]
@@ -354,7 +354,7 @@ type VisualElementModifiers =
             this: WidgetBuilder<'msg, 'marker>,
             content: WidgetBuilder<'msg, 'contentMarker>
         ) =
-        this.AddWidget(VisualElement.Shadow.WithValue(content.Compile()))
+        this.AddWidget(CompatVisualElement.Shadow.WithValue(content.Compile()))
 
     /// <summary>Animates elements Scale property from their current values to the new values. This ensures that the input layout is in the same position as the visual layout.</summary>
     /// <param name="scale">The value of the final scale vector.</param>
@@ -363,7 +363,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline scaleTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.ScaleTo.WithValue(
+            CompatVisualElement.ScaleTo.WithValue(
                 { Scale = scale
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -374,7 +374,7 @@ type VisualElementModifiers =
     /// <param name="value">The value of the final scale vector.</param>
     [<Extension>]
     static member inline scaleX(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.ScaleX.WithValue(value))
+        this.AddScalar(CompatVisualElement.ScaleX.WithValue(value))
 
     /// <summary>Animates elements ScaleX property from their current value to the new value. This ensures that the input layout is in the same position as the visual layout.</summary>
     /// <param name="scale">The value of the final scale vector.</param>
@@ -383,7 +383,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline scaleXTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.ScaleXTo.WithValue(
+            CompatVisualElement.ScaleXTo.WithValue(
                 { Scale = scale
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -394,13 +394,13 @@ type VisualElementModifiers =
     /// <param name="value">The value of the final scale vector.</param>
     [<Extension>]
     static member inline scaleY(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: float) =
-        this.AddScalar(VisualElement.ScaleY.WithValue(value))
+        this.AddScalar(CompatVisualElement.ScaleY.WithValue(value))
 
     /// <summary>Sets the z-index of the element.</summary>
     /// <param name="value">The z-index of the element.</param>
     [<Extension>]
     static member inline zIndex(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, value: int) =
-        this.AddScalar(VisualElement.ZIndex.WithValue(value))
+        this.AddScalar(CompatVisualElement.ZIndex.WithValue(value))
 
     /// <summary>Animates elements ScaleY property from their current value to the new value. This ensures that the input layout is in the same position as the visual layout.</summary>
     /// <param name="scale">The value of the final scale vector.</param>
@@ -409,7 +409,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline scaleYTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, scale: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.ScaleYTo.WithValue(
+            CompatVisualElement.ScaleYTo.WithValue(
                 { Scale = scale
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -423,7 +423,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline fadeTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, opacity: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.FadeTo.WithValue(
+            CompatVisualElement.FadeTo.WithValue(
                 { Opacity = opacity
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -437,7 +437,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline rotateTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.RotateTo.WithValue(
+            CompatVisualElement.RotateTo.WithValue(
                 { Rotation = rotation
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -451,7 +451,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline rotateXTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.RotateXTo.WithValue(
+            CompatVisualElement.RotateXTo.WithValue(
                 { Rotation = rotation
                   AnimationDuration = uint duration
                   Easing = easing }
@@ -465,7 +465,7 @@ type VisualElementModifiers =
     [<Extension>]
     static member inline rotateYTo(this: WidgetBuilder<'msg, #IFabCompatVisualElement>, rotation: float, duration: int, easing: Easing) =
         this.AddScalar(
-            VisualElement.RotateYTo.WithValue(
+            CompatVisualElement.RotateYTo.WithValue(
                 { Rotation = rotation
                   AnimationDuration = uint duration
                   Easing = easing }

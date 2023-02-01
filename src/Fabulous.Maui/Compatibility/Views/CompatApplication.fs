@@ -7,7 +7,7 @@ open Fabulous.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.ApplicationModel
 
-type CustomApplication() =
+type CompatApplication() =
     inherit Application()
 
     let start = Event<EventHandler, EventArgs>()
@@ -32,8 +32,8 @@ type CustomApplication() =
 type IFabCompatApplication =
     inherit IFabCompatElement
 
-module Application =
-    let WidgetKey = CompatWidgets.register<CustomApplication>()
+module CompatApplication =
+    let WidgetKey = CompatWidgets.register<CompatApplication>()
 
     let MainPage =
         Attributes.definePropertyWidget "Application_MainPage" (fun target -> (target :?> Application).MainPage :> obj) (fun target value ->
@@ -77,65 +77,65 @@ module Application =
         Attributes.defineEvent<ModalPushingEventArgs> "Application_ModalPushing" (fun target -> (target :?> Application).ModalPushing)
 
     let Start =
-        Attributes.defineEventNoArg "Application_Start" (fun target -> (target :?> CustomApplication).Start)
+        Attributes.defineEventNoArg "Application_Start" (fun target -> (target :?> CompatApplication).Start)
 
     let Sleep =
-        Attributes.defineEventNoArg "Application_Sleep" (fun target -> (target :?> CustomApplication).Sleep)
+        Attributes.defineEventNoArg "Application_Sleep" (fun target -> (target :?> CompatApplication).Sleep)
 
     let Resume =
-        Attributes.defineEventNoArg "Application_Resume" (fun target -> (target :?> CustomApplication).Resume)
+        Attributes.defineEventNoArg "Application_Resume" (fun target -> (target :?> CompatApplication).Resume)
 
 [<AutoOpen>]
-module ApplicationBuilders =
+module CompatApplicationBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Application<'msg, 'marker when 'marker :> IFabCompatPage>(mainPage: WidgetBuilder<'msg, 'marker>) =
-            WidgetHelpers.buildWidgets<'msg, IFabCompatApplication> Application.WidgetKey [| Application.MainPage.WithValue(mainPage.Compile()) |]
+        static member inline CompatApplication<'msg, 'marker when 'marker :> IFabCompatPage>(mainPage: WidgetBuilder<'msg, 'marker>) =
+            WidgetHelpers.buildWidgets<'msg, IFabCompatApplication> CompatApplication.WidgetKey [| CompatApplication.MainPage.WithValue(mainPage.Compile()) |]
 
 [<Extension>]
-type ApplicationModifiers =
+type CompatApplicationModifiers =
     [<Extension>]
     static member inline userAppTheme(this: WidgetBuilder<'msg, #IFabCompatApplication>, value: AppTheme) =
-        this.AddScalar(Application.UserAppTheme.WithValue(value))
+        this.AddScalar(CompatApplication.UserAppTheme.WithValue(value))
 
     [<Extension>]
     static member inline resources(this: WidgetBuilder<'msg, #IFabCompatApplication>, value: ResourceDictionary) =
-        this.AddScalar(Application.Resources.WithValue(value))
+        this.AddScalar(CompatApplication.Resources.WithValue(value))
 
     [<Extension>]
     static member inline onRequestedThemeChanged(this: WidgetBuilder<'msg, #IFabCompatApplication>, onRequestedThemeChanged: AppTheme -> 'msg) =
-        this.AddScalar(Application.RequestedThemeChanged.WithValue(fun args -> onRequestedThemeChanged args.RequestedTheme |> box))
+        this.AddScalar(CompatApplication.RequestedThemeChanged.WithValue(fun args -> onRequestedThemeChanged args.RequestedTheme |> box))
 
     [<Extension>]
     static member inline onModalPopped(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPopped: ModalPoppedEventArgs -> 'msg) =
-        this.AddScalar(Application.ModalPopped.WithValue(onModalPopped >> box))
+        this.AddScalar(CompatApplication.ModalPopped.WithValue(onModalPopped >> box))
 
     [<Extension>]
     static member inline onModalPopping(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPopping: ModalPoppingEventArgs -> 'msg) =
-        this.AddScalar(Application.ModalPopping.WithValue(onModalPopping >> box))
+        this.AddScalar(CompatApplication.ModalPopping.WithValue(onModalPopping >> box))
 
     [<Extension>]
     static member inline onModalPushed(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPushed: ModalPushedEventArgs -> 'msg) =
-        this.AddScalar(Application.ModalPushed.WithValue(onModalPushed >> box))
+        this.AddScalar(CompatApplication.ModalPushed.WithValue(onModalPushed >> box))
 
     [<Extension>]
     static member inline onModalPushing(this: WidgetBuilder<'msg, #IFabCompatApplication>, onModalPushing: ModalPushingEventArgs -> 'msg) =
-        this.AddScalar(Application.ModalPushing.WithValue(onModalPushing >> box))
+        this.AddScalar(CompatApplication.ModalPushing.WithValue(onModalPushing >> box))
 
     /// Dispatch a message when the application starts
     [<Extension>]
     static member inline onStart(this: WidgetBuilder<'msg, #IFabCompatApplication>, onStart: 'msg) =
-        this.AddScalar(Application.Start.WithValue(onStart))
+        this.AddScalar(CompatApplication.Start.WithValue(onStart))
 
     /// Dispatch a message when the application is paused by the OS
     [<Extension>]
     static member inline onSleep(this: WidgetBuilder<'msg, #IFabCompatApplication>, onSleep: 'msg) =
-        this.AddScalar(Application.Sleep.WithValue(onSleep))
+        this.AddScalar(CompatApplication.Sleep.WithValue(onSleep))
 
     /// Dispatch a message when the application is resumed by the OS
     [<Extension>]
     static member inline onResume(this: WidgetBuilder<'msg, #IFabCompatApplication>, onResume: 'msg) =
-        this.AddScalar(Application.Resume.WithValue(onResume))
+        this.AddScalar(CompatApplication.Resume.WithValue(onResume))
 
     /// Link a ViewRef to access the direct Application instance
     [<Extension>]

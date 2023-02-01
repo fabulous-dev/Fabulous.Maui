@@ -9,7 +9,7 @@ type IFabCompatLayout =
     inherit IFabCompatView
     inherit ILayout
 
-module Layout =
+module CompatLayout =
     let Padding =
         Attributes.defineBindableWithEquality<Thickness> Layout.PaddingProperty
 
@@ -20,23 +20,23 @@ module Layout =
         Attributes.defineBindableBool Layout.IsClippedToBoundsProperty
 
 [<Extension>]
-type LayoutModifiers =
+type CompatLayoutModifiers =
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: Thickness) =
-        this.AddScalar(Layout.Padding.WithValue(value))
+        this.AddScalar(CompatLayout.Padding.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: float) =
-        LayoutModifiers.padding(this, Thickness(value))
+        CompatLayoutModifiers.padding(this, Thickness(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatLayout>, left: float, top: float, right: float, bottom: float) =
-        LayoutModifiers.padding(this, Thickness(left, top, right, bottom))
+        CompatLayoutModifiers.padding(this, Thickness(left, top, right, bottom))
 
     [<Extension>]
     static member inline cascadeInputTransparent(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: bool) =
-        this.AddScalar(Layout.CascadeInputTransparent.WithValue(value))
+        this.AddScalar(CompatLayout.CascadeInputTransparent.WithValue(value))
 
     [<Extension>]
     static member inline isClippedToBounds(this: WidgetBuilder<'msg, #IFabCompatLayout>, value: bool) =
-        this.AddScalar(Layout.IsClippedToBounds.WithValue(value))
+        this.AddScalar(CompatLayout.IsClippedToBounds.WithValue(value))

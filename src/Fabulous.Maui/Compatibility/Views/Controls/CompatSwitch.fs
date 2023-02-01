@@ -10,7 +10,7 @@ type IFabCompatSwitch =
     inherit IFabCompatView
     inherit ISwitch
 
-module Switch =
+module CompatSwitch =
     let WidgetKey = CompatWidgets.register<Switch>()
 
     let ColorOn = Attributes.defineBindableAppThemeColor Switch.OnColorProperty
@@ -24,10 +24,10 @@ module Switch =
 module SwitchBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Switch<'msg>(isToggled: bool, onToggled: bool -> 'msg) =
+        static member inline CompatSwitch<'msg>(isToggled: bool, onToggled: bool -> 'msg) =
             WidgetBuilder<'msg, IFabCompatSwitch>(
-                Switch.WidgetKey,
-                Switch.IsToggledWithEvent.WithValue(ValueEventData.create isToggled (fun args -> onToggled args.Value |> box))
+                CompatSwitch.WidgetKey,
+                CompatSwitch.IsToggledWithEvent.WithValue(ValueEventData.create isToggled (fun args -> onToggled args.Value |> box))
             )
 
 [<Extension>]
@@ -37,14 +37,14 @@ type SwitchModifiers =
     /// <param name="dark">The color of the thumbColor in the dark theme.</param>
     [<Extension>]
     static member inline thumbColor(this: WidgetBuilder<'msg, #IFabCompatSwitch>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Switch.ThumbColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSwitch.ThumbColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the color of the on state.</summary>
     /// <param name="light">The color of the on state in the light theme.</param>
     /// <param name="dark">The color of the on state in the dark theme.</param>
     [<Extension>]
     static member inline colorOn(this: WidgetBuilder<'msg, #IFabCompatSwitch>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Switch.ColorOn.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSwitch.ColorOn.WithValue(AppTheme.create light dark))
 
     /// <summary>Link a ViewRef to access the direct Switch control instance</summary>
     [<Extension>]

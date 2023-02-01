@@ -12,7 +12,7 @@ type IFabCompatSlider =
     inherit IFabCompatView
     inherit ISlider
 
-module SliderUpdaters =
+module CompatSliderUpdaters =
     let updateSliderMinMax _ (newValueOpt: struct (float * float) voption) (node: IViewNode) =
         let slider = node.Target :?> Slider
 
@@ -30,11 +30,11 @@ module SliderUpdaters =
                 slider.SetValue(Slider.MinimumProperty, min)
                 slider.SetValue(Slider.MaximumProperty, max)
 
-module Slider =
+module CompatSlider =
     let WidgetKey = CompatWidgets.register<Slider>()
 
     let MinimumMaximum =
-        Attributes.defineSimpleScalarWithEquality<struct (float * float)> "Slider_MinimumMaximum" SliderUpdaters.updateSliderMinMax
+        Attributes.defineSimpleScalarWithEquality<struct (float * float)> "Slider_MinimumMaximum" CompatSliderUpdaters.updateSliderMinMax
 
     let MaximumTrackColor =
         Attributes.defineBindableAppThemeColor Slider.MaximumTrackColorProperty
@@ -57,46 +57,46 @@ module Slider =
         Attributes.defineEventNoArg "Slider_DragStarted" (fun target -> (target :?> Slider).DragStarted)
 
 [<AutoOpen>]
-module SliderBuilders =
+module CompatSliderBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Slider<'msg>(min: float, max: float, value: float, onValueChanged: float -> 'msg) =
+        static member inline CompatSlider<'msg>(min: float, max: float, value: float, onValueChanged: float -> 'msg) =
             WidgetBuilder<'msg, IFabCompatSlider>(
-                Slider.WidgetKey,
-                Slider.MinimumMaximum.WithValue(struct (min, max)),
-                Slider.ValueWithEvent.WithValue(ValueEventData.create value (fun args -> onValueChanged args.NewValue |> box))
+                CompatSlider.WidgetKey,
+                CompatSlider.MinimumMaximum.WithValue(struct (min, max)),
+                CompatSlider.ValueWithEvent.WithValue(ValueEventData.create value (fun args -> onValueChanged args.NewValue |> box))
             )
 
 [<Extension>]
-type SliderModifiers =
+type CompatSliderModifiers =
 
     /// <summary>Set the color of the maximumTrackColor.</summary>
     /// <param name="light">The color of the text in the light theme.</param>
     /// <param name="dark">The color of the text in the dark theme.</param>
     [<Extension>]
     static member inline maximumTrackColor(this: WidgetBuilder<'msg, #IFabCompatSlider>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Slider.MaximumTrackColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSlider.MaximumTrackColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the color of the minimumTrackColor.</summary>
     /// <param name="light">The color of the minimumTrackColor in the light theme.</param>
     /// <param name="dark">The color of the minimumTrackColor in the dark theme.</param>
     [<Extension>]
     static member inline minimumTrackColor(this: WidgetBuilder<'msg, #IFabCompatSlider>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Slider.MinimumTrackColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSlider.MinimumTrackColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the color of the thumbColor.</summary>
     /// <param name="light">The color of the thumbColor in the light theme.</param>
     /// <param name="dark">The color of the thumbColor in the dark theme.</param>
     [<Extension>]
     static member inline thumbColor(this: WidgetBuilder<'msg, #IFabCompatSlider>, light: FabColor, ?dark: FabColor) =
-        this.AddScalar(Slider.ThumbColor.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSlider.ThumbColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the source of the thumbImage.</summary>
     /// <param name="light">The source of the thumbImage in the light theme.</param>
     /// <param name="dark">The source of the thumbImage in the dark theme.</param>
     [<Extension>]
     static member inline thumbImage(this: WidgetBuilder<'msg, #IFabCompatSlider>, light: ImageSource, ?dark: ImageSource) =
-        this.AddScalar(Slider.ThumbImageSource.WithValue(AppTheme.create light dark))
+        this.AddScalar(CompatSlider.ThumbImageSource.WithValue(AppTheme.create light dark))
 
     /// <summary>Set the source of the thumbImage.</summary>
     /// <param name="light">The source of the thumbImage in the light theme.</param>
@@ -110,7 +110,7 @@ type SliderModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromFile(v))
 
-        SliderModifiers.thumbImage(this, light, ?dark = dark)
+        CompatSliderModifiers.thumbImage(this, light, ?dark = dark)
 
     /// <summary>Set the source of the thumbImage.</summary>
     /// <param name="light">The source of the thumbImage in the light theme.</param>
@@ -124,7 +124,7 @@ type SliderModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromUri(v))
 
-        SliderModifiers.thumbImage(this, light, ?dark = dark)
+        CompatSliderModifiers.thumbImage(this, light, ?dark = dark)
 
     /// <summary>Set the source of the thumbImage.</summary>
     /// <param name="light">The source of the thumbImage in the light theme.</param>
@@ -138,15 +138,15 @@ type SliderModifiers =
             | None -> None
             | Some v -> Some(ImageSource.FromStream(fun () -> v))
 
-        SliderModifiers.thumbImage(this, light, ?dark = dark)
+        CompatSliderModifiers.thumbImage(this, light, ?dark = dark)
 
     [<Extension>]
     static member inline onDragCompleted(this: WidgetBuilder<'msg, #IFabCompatSlider>, onDragCompleted: 'msg) =
-        this.AddScalar(Slider.DragCompleted.WithValue(onDragCompleted))
+        this.AddScalar(CompatSlider.DragCompleted.WithValue(onDragCompleted))
 
     [<Extension>]
     static member inline onDragStarted(this: WidgetBuilder<'msg, #IFabCompatSlider>, onDragStarted: 'msg) =
-        this.AddScalar(Slider.DragStarted.WithValue(onDragStarted))
+        this.AddScalar(CompatSlider.DragStarted.WithValue(onDragStarted))
 
     /// <summary>Link a ViewRef to access the direct Slider control instance</summary>
     [<Extension>]

@@ -8,16 +8,16 @@ open Microsoft.Maui.Controls
 type IFabCompatElement =
     inherit IElement
 
-module Element =
+module CompatElement =
     let AutomationId =
         Attributes.defineBindableWithEquality<string> Element.AutomationIdProperty
 
 [<Extension>]
-type ElementModifiers =
+type CompatElementModifiers =
     /// Sets a value that allows the automation framework to find and interact with this element.
     [<Extension>]
     static member inline automationId(this: WidgetBuilder<'msg, #IFabCompatElement>, value: string) =
-        this.AddScalar(Element.AutomationId.WithValue(value))
+        this.AddScalar(CompatElement.AutomationId.WithValue(value))
 
     [<Extension>]
     static member inline onMounted(this: WidgetBuilder<'msg, #IFabCompatElement>, value: 'msg) =

@@ -13,7 +13,7 @@ type IFabCompatScrollView =
     inherit IFabCompatLayout
     inherit IScrollView
 
-module ScrollView =
+module CompatScrollView =
     let WidgetKey = CompatWidgets.register<ScrollView>()
 
     let Orientation =
@@ -49,7 +49,7 @@ module ScrollViewBuilders =
     type Fabulous.Maui.View with
 
         static member inline ScrollView(content: WidgetBuilder<'msg, #IView>) =
-            WidgetHelpers.buildWidgets<'msg, IFabCompatScrollView> ScrollView.WidgetKey [| ScrollView.Content.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatScrollView> CompatScrollView.WidgetKey [| CompatScrollView.Content.WithValue(content.Compile()) |]
 
 [<Extension>]
 type ScrollViewModifiers =
@@ -58,37 +58,37 @@ type ScrollViewModifiers =
     /// <param name="orientation">of type ScrollOrientation. The default value of this property is Vertical</param>
     [<Extension>]
     static member inline orientation(this: WidgetBuilder<'msg, #IFabCompatScrollView>, value: ScrollOrientation) =
-        this.AddScalar(ScrollView.Orientation.WithValue(value))
+        this.AddScalar(CompatScrollView.Orientation.WithValue(value))
 
     /// <summary>Sets when the horizontal scroll bar is visible.</summary>
     /// <param name="value">of type ScrollBarVisibility.</param>
     [<Extension>]
     static member inline horizontalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatScrollView>, value: ScrollBarVisibility) =
-        this.AddScalar(ScrollView.HorizontalScrollBarVisibility.WithValue(value))
+        this.AddScalar(CompatScrollView.HorizontalScrollBarVisibility.WithValue(value))
 
     /// <summary>Sets when the vertical scroll bar is visible.</summary>
     /// <param name="value">of type ScrollBarVisibility.</param>
     [<Extension>]
     static member inline verticalScrollBarVisibility(this: WidgetBuilder<'msg, #IFabCompatScrollView>, value: ScrollBarVisibility) =
-        this.AddScalar(ScrollView.VerticalScrollBarVisibility.WithValue(value))
+        this.AddScalar(CompatScrollView.VerticalScrollBarVisibility.WithValue(value))
 
     /// <summary>Sets the current X scroll position.</summary>
     /// <param name="value">of type float, The default value of this read-only property is 0.</param>
     [<Extension>]
     static member inline scrollX(this: WidgetBuilder<'msg, #IFabCompatScrollView>, value: float) =
-        this.AddScalar(ScrollView.ScrollX.WithValue(value))
+        this.AddScalar(CompatScrollView.ScrollX.WithValue(value))
 
     /// <summary>Sets the current Y scroll position.</summary>
     /// <param name="value">of type float, The default value of this read-only property is 0.</param>
     [<Extension>]
     static member inline scrollY(this: WidgetBuilder<'msg, #IFabCompatScrollView>, value: float) =
-        this.AddScalar(ScrollView.ScrollY.WithValue(value))
+        this.AddScalar(CompatScrollView.ScrollY.WithValue(value))
 
     /// <summary>Event that is fired when the scrollView is scrolled.</summary>
     /// <param name="onScrolled">Msg to dispatch when the scrollView is scrolled.</param>
     [<Extension>]
     static member inline onScrolled(this: WidgetBuilder<'msg, #IFabCompatScrollView>, onScrolled: ScrolledEventArgs -> 'msg) =
-        this.AddScalar(ScrollView.Scrolled.WithValue(fun args -> onScrolled args |> box))
+        this.AddScalar(CompatScrollView.Scrolled.WithValue(fun args -> onScrolled args |> box))
 
     /// <summary>Returns a task that scrolls the scroll view to a position asynchronously.</summary>
     /// <param name="x">The X position of the finished scroll.</param>
@@ -96,7 +96,7 @@ type ScrollViewModifiers =
     /// <param name="animated">Whether or not to animate the scroll.</param>
     [<Extension>]
     static member inline scrollTo(this: WidgetBuilder<'msg, #IFabCompatScrollView>, x: float, y: float, animated: bool) =
-        this.AddScalar(ScrollView.ScrollTo.WithValue({ X = x; Y = y; Animated = animated }))
+        this.AddScalar(CompatScrollView.ScrollTo.WithValue({ X = x; Y = y; Animated = animated }))
 
     /// <summary>Link a ViewRef to access the direct ScrollView control instance</summary>
     [<Extension>]

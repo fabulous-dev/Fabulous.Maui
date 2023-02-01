@@ -31,7 +31,11 @@ module CompatImageBuilders =
     type Fabulous.Maui.View with
 
         static member inline CompatImage<'msg>(aspect: Aspect, light: ImageSource, ?dark: ImageSource) =
-            WidgetBuilder<'msg, IFabCompatImage>(CompatImage.WidgetKey, CompatImage.Aspect.WithValue(aspect), CompatImage.Source.WithValue(AppTheme.create light dark))
+            WidgetBuilder<'msg, IFabCompatImage>(
+                CompatImage.WidgetKey,
+                CompatImage.Aspect.WithValue(aspect),
+                CompatImage.Source.WithValue(AppTheme.create light dark)
+            )
 
         static member inline CompatImage<'msg>(aspect: Aspect, light: string, ?dark: string) =
             let light = ImageSource.FromFile(light)
