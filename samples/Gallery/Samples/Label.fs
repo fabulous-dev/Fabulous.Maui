@@ -20,14 +20,11 @@ module Label =
 
             Border(
                 VStack(8.) {
-                    Label("Custom font regular")
-                        .font(Font.OfSize(Fonts.SourceSansProRegular, 20.))
+                    Label("Custom font regular").font(Font.OfSize(Fonts.SourceSansProRegular, 20.))
 
-                    Label("Custom font bold")
-                        .font(Font.OfSize(Fonts.SourceSansProBold, 20.))
+                    Label("Custom font bold").font(Font.OfSize(Fonts.SourceSansProBold, 20.))
 
-                    Label("Custom font italic")
-                        .font(Font.OfSize(Fonts.SourceSansProItalic, 20.))
+                    Label("Custom font italic").font(Font.OfSize(Fonts.SourceSansProItalic, 20.))
 
                     Label("Custom font italic bold")
                         .font(Font.OfSize(Fonts.SourceSansProBoldItalic, 20.))

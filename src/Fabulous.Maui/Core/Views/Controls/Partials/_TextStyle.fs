@@ -8,7 +8,7 @@ open Fabulous
 module TextStyle =
     let CharacterSpacing =
         Attributes.defineMauiProperty "CharacterSpacing" TextStyleDefaults.CharacterSpacing (fun (target: IFabTextStyle) -> target.SetCharacterSpacing)
-    
+
     let Font =
         Attributes.defineMauiProperty' "Font" TextStyleDefaults.CreateDefaultFont (fun (target: IFabTextStyle) -> target.SetFont)
 

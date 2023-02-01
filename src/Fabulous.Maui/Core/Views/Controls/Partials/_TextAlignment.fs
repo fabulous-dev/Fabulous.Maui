@@ -34,7 +34,7 @@ type TextAlignmentExtraModifiers =
     [<Extension>]
     static member inline centerTextVertical(this: WidgetBuilder<'msg, #IFabTextAlignment>) =
         this.verticalTextAlignment(TextAlignment.Center)
-        
+
     [<Extension>]
     static member inline alignTextStartHorizontal(this: WidgetBuilder<'msg, #IFabTextAlignment>) =
         this.horizontalTextAlignment(TextAlignment.Start)
@@ -42,7 +42,7 @@ type TextAlignmentExtraModifiers =
     [<Extension>]
     static member inline alignTextStartVertical(this: WidgetBuilder<'msg, #IFabTextAlignment>) =
         this.verticalTextAlignment(TextAlignment.Start)
-        
+
     [<Extension>]
     static member inline alignTextEndHorizontal(this: WidgetBuilder<'msg, #IFabTextAlignment>) =
         this.horizontalTextAlignment(TextAlignment.End)
