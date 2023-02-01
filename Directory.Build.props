@@ -13,7 +13,7 @@
   <!-- Shared NuGet Package info -->
   <PropertyGroup Condition="$(IsPackable) == 'true'">
     <Authors>Fabulous contributors</Authors>
-    <PackageTags>Fabulous;F#;Declarative UI;MVU;Maui;Android;iOS;macOS;Windows;Linux</PackageTags>
+    <PackageTags>Fabulous;F#;Declarative-UI;MVU;Maui;Android;iOS;macOS;Windows;Linux</PackageTags>
     <PackageIcon>nuget-icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
