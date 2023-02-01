@@ -12,7 +12,7 @@ type IFabCompatImage =
     inherit IFabCompatView
     inherit IImage
 
-module Image =
+module CompatImage =
     let WidgetKey = CompatWidgets.register<Image>()
 
     let Aspect = Attributes.defineBindableEnum<Aspect> Image.AspectProperty
@@ -27,13 +27,13 @@ module Image =
     let Source = Attributes.defineBindableAppTheme<ImageSource> Image.SourceProperty
 
 [<AutoOpen>]
-module ImageBuilders =
+module CompatImageBuilders =
     type Fabulous.Maui.View with
 
-        static member inline Image<'msg>(aspect: Aspect, light: ImageSource, ?dark: ImageSource) =
-            WidgetBuilder<'msg, IFabCompatImage>(Image.WidgetKey, Image.Aspect.WithValue(aspect), Image.Source.WithValue(AppTheme.create light dark))
+        static member inline CompatImage<'msg>(aspect: Aspect, light: ImageSource, ?dark: ImageSource) =
+            WidgetBuilder<'msg, IFabCompatImage>(CompatImage.WidgetKey, CompatImage.Aspect.WithValue(aspect), CompatImage.Source.WithValue(AppTheme.create light dark))
 
-        static member inline Image<'msg>(aspect: Aspect, light: string, ?dark: string) =
+        static member inline CompatImage<'msg>(aspect: Aspect, light: string, ?dark: string) =
             let light = ImageSource.FromFile(light)
 
             let dark =
@@ -41,9 +41,9 @@ module ImageBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromFile(v))
 
-            View.Image<'msg>(aspect, light, ?dark = dark)
+            View.CompatImage<'msg>(aspect, light, ?dark = dark)
 
-        static member inline Image<'msg>(aspect: Aspect, light: Uri, ?dark: Uri) =
+        static member inline CompatImage<'msg>(aspect: Aspect, light: Uri, ?dark: Uri) =
             let light = ImageSource.FromUri(light)
 
             let dark =
@@ -51,9 +51,9 @@ module ImageBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromUri(v))
 
-            View.Image<'msg>(aspect, light, ?dark = dark)
+            View.CompatImage<'msg>(aspect, light, ?dark = dark)
 
-        static member inline Image<'msg>(aspect: Aspect, light: Stream, ?dark: Stream) =
+        static member inline CompatImage<'msg>(aspect: Aspect, light: Stream, ?dark: Stream) =
             let light = ImageSource.FromStream(fun () -> light)
 
             let dark =
@@ -61,27 +61,27 @@ module ImageBuilders =
                 | None -> None
                 | Some v -> Some(ImageSource.FromStream(fun () -> v))
 
-            View.Image<'msg>(aspect, light, ?dark = dark)
+            View.CompatImage<'msg>(aspect, light, ?dark = dark)
 
 [<Extension>]
-type ImageModifiers =
+type CompatImageModifiers =
     /// <summary>Determines whether an animated GIF is playing or stopped.</summary>
     /// <param name="value">The default value of this property is false.</param>
     [<Extension>]
     static member inline isAnimationPlaying(this: WidgetBuilder<'msg, #IFabCompatImage>, value: bool) =
-        this.AddScalar(Image.IsAnimationPlaying.WithValue(value))
+        this.AddScalar(CompatImage.IsAnimationPlaying.WithValue(value))
 
     /// <summary>Indicates whether the rendering engine may treat the image as opaque while rendering it.</summary>
     /// <param name="value">The default value of this property is false.</param>
     [<Extension>]
     static member inline isOpaque(this: WidgetBuilder<'msg, #IFabCompatImage>, value: bool) =
-        this.AddScalar(Image.IsOpaque.WithValue(value))
+        this.AddScalar(CompatImage.IsOpaque.WithValue(value))
 
     /// <summary>Indicates the loading status of the image.</summary>
     /// <param name="value">The default value of this property is false</param>
     [<Extension>]
     static member inline isLoading(this: WidgetBuilder<'msg, #IFabCompatImage>, value: bool) =
-        this.AddScalar(Image.IsLoading.WithValue(value))
+        this.AddScalar(CompatImage.IsLoading.WithValue(value))
 
     /// <summary>Link a ViewRef to access the direct Image control instance</summary>
     [<Extension>]
