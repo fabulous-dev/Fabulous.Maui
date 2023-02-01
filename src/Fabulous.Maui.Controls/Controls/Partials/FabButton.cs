@@ -30,7 +30,6 @@ namespace Fabulous.Maui.Controls
         public void Clicked() => OnClicked?.Invoke();
         
         
-        
         public void SetPadding(Thickness value) => Padding = value;
         public void SetStrokeColor(Color value) => StrokeColor = value;
         public void SetStrokeThickness(double value) => StrokeThickness = value;
