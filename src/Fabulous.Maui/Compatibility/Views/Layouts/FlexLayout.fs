@@ -51,9 +51,9 @@ module FlexLayoutBuilders =
 
         static member inline FlexLayout<'msg>(?wrap: FlexWrap) =
             match wrap with
-            | None -> CollectionBuilder<'msg, IFabCompatFlexLayout, IView>(FlexLayout.WidgetKey, LayoutOfView.Children)
+            | None -> CollectionBuilder<'msg, IFabCompatFlexLayout, IView>(FlexLayout.WidgetKey, CompatLayoutOfView.Children)
 
-            | Some v -> CollectionBuilder<'msg, IFabCompatFlexLayout, IView>(FlexLayout.WidgetKey, LayoutOfView.Children, FlexLayout.Wrap.WithValue(v))
+            | Some v -> CollectionBuilder<'msg, IFabCompatFlexLayout, IView>(FlexLayout.WidgetKey, CompatLayoutOfView.Children, FlexLayout.Wrap.WithValue(v))
 
 [<Extension>]
 type FlexLayoutModifiers =

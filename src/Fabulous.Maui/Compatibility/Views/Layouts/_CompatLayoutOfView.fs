@@ -5,6 +5,6 @@ open Fabulous
 type IFabCompatLayoutOfView =
     inherit IFabCompatLayout
 
-module LayoutOfView =
+module CompatLayoutOfView =
     let Children =
         Attributes.defineListWidgetCollection "LayoutOfWidget_Children" (fun target -> (target :?> Microsoft.Maui.Controls.Layout).Children)

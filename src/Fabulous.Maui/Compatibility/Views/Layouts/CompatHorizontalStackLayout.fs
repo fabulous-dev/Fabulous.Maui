@@ -12,21 +12,21 @@ module HorizontalStackLayout =
     let WidgetKey = CompatWidgets.register<HorizontalStackLayout>()
 
 [<AutoOpen>]
-module HorizontalStackLayoutBuilders =
+module CompatHorizontalStackLayoutBuilders =
     type Fabulous.Maui.View with
 
         static member inline HStack<'msg>(?spacing: float) =
             match spacing with
-            | None -> CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(HorizontalStackLayout.WidgetKey, LayoutOfView.Children)
+            | None -> CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(HorizontalStackLayout.WidgetKey, CompatLayoutOfView.Children)
             | Some v ->
                 CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(
                     HorizontalStackLayout.WidgetKey,
-                    LayoutOfView.Children,
-                    StackBase.Spacing.WithValue(v)
+                    CompatLayoutOfView.Children,
+                    CompatStackBase.Spacing.WithValue(v)
                 )
 
 [<Extension>]
-type HorizontalStackLayoutModifiers =
+type CompatHorizontalStackLayoutModifiers =
     /// <summary>Link a ViewRef to access the direct HorizontalStackLayout control instance</summary>
     [<Extension>]
     static member inline reference(this: WidgetBuilder<'msg, IFabCompatHorizontalStackLayout>, value: ViewRef<HorizontalStackLayout>) =

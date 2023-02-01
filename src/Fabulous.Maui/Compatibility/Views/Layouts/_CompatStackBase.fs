@@ -7,5 +7,5 @@ type IFabCompatStackBase =
     inherit IFabCompatLayoutOfView
     inherit IStackLayout
 
-module StackBase =
+module CompatStackBase =
     let Spacing = Attributes.defineBindableFloat StackBase.SpacingProperty

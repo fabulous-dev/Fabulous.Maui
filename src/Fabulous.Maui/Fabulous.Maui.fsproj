@@ -104,11 +104,11 @@
     <Compile Include="Compatibility\Views\Layouts\_TemplatedView.fs" />
     <Compile Include="Compatibility\Views\Layouts\ContentView.fs" />
     <Compile Include="Compatibility\Views\Layouts\RefreshView.fs" />
-    <Compile Include="Compatibility\Views\Layouts\_LayoutOfView.fs" />
-    <Compile Include="Compatibility\Views\Layouts\_StackBase.fs" />
-    <Compile Include="Compatibility\Views\Layouts\VerticalStackLayout.fs" />
-    <Compile Include="Compatibility\Views\Layouts\HorizontalStackLayout.fs" />
-    <Compile Include="Compatibility\Views\Layouts\Grid.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_CompatLayoutOfView.fs" />
+    <Compile Include="Compatibility\Views\Layouts\_CompatStackBase.fs" />
+    <Compile Include="Compatibility\Views\Layouts\CompatVerticalStackLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\CompatHorizontalStackLayout.fs" />
+    <Compile Include="Compatibility\Views\Layouts\CompatGrid.fs" />
     <Compile Include="Compatibility\Views\Layouts\ScrollView.fs" />
     <Compile Include="Compatibility\Views\Layouts\Frame.fs" />
     <Compile Include="Compatibility\Views\Layouts\AbsoluteLayout.fs" />

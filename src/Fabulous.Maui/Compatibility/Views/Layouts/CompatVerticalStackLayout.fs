@@ -8,25 +8,25 @@ open Microsoft.Maui.Controls
 type IFabCompatVerticalStackLayout =
     inherit IFabCompatStackBase
 
-module VerticalStackLayout =
+module CompatVerticalStackLayout =
     let WidgetKey = CompatWidgets.register<VerticalStackLayout>()
 
 [<AutoOpen>]
-module VerticalStackLayoutBuilders =
+module CompatVerticalStackLayoutBuilders =
     type Fabulous.Maui.View with
 
         static member inline VStack<'msg>(?spacing: float) =
             match spacing with
-            | None -> CollectionBuilder<'msg, IFabCompatVerticalStackLayout, IView>(VerticalStackLayout.WidgetKey, LayoutOfView.Children)
+            | None -> CollectionBuilder<'msg, IFabCompatVerticalStackLayout, IView>(CompatVerticalStackLayout.WidgetKey, CompatLayoutOfView.Children)
             | Some v ->
                 CollectionBuilder<'msg, IFabCompatVerticalStackLayout, IView>(
-                    VerticalStackLayout.WidgetKey,
-                    LayoutOfView.Children,
-                    StackBase.Spacing.WithValue(v)
+                    CompatVerticalStackLayout.WidgetKey,
+                    CompatLayoutOfView.Children,
+                    CompatStackBase.Spacing.WithValue(v)
                 )
 
 [<Extension>]
-type VerticalStackLayoutModifiers =
+type CompatVerticalStackLayoutModifiers =
     /// <summary>Link a ViewRef to access the direct VerticalStackLayout control instance</summary>
     [<Extension>]
     static member inline reference(this: WidgetBuilder<'msg, IFabCompatVerticalStackLayout>, value: ViewRef<VerticalStackLayout>) =
