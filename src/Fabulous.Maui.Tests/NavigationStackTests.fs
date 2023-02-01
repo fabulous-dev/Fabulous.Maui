@@ -12,20 +12,6 @@ type Path =
 type Msg = Navigated of Path[]
 
 [<TestFixture>]
-type ``NavigationView tests``() =
-    [<Test>]
-    member _.``Basic test``() =
-        let navigationView =
-            NavigationView() {
-                Label("10")
-                Label("Hello")
-            }
-
-        let widget = navigationView.Compile()
-
-        Assert.Pass()
-
-[<TestFixture>]
 type ``NavigationStack tests``() =
     [<Test>]
     member _.``Basic test``() =
