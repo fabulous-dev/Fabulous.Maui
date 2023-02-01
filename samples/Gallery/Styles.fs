@@ -10,6 +10,10 @@ module Fonts =
     let OpenSansRegular = "OpenSansRegular"
     let OpenSansSemibold = "OpenSansSemibold"
     let OpenSansBold = "OpenSansBold"
+    let SourceSansProRegular = "SourceSansProRegular"
+    let SourceSansProBold = "SourceSansProBold"
+    let SourceSansProBoldItalic = "SourceSansProBoldItalic"
+    let SourceSansProItalic = "SourceSansProItalic"
 
 module Styles =
     let inline title (widget: WidgetBuilder<'msg, #IFabLabel>) =

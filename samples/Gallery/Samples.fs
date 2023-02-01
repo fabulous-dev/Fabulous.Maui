@@ -3,4 +3,4 @@ namespace Gallery
 open Gallery.Samples
 
 module RegisteredSamples =
-    let samples = [ TextButton.sample ]
+    let samples = [ Label.sample; TextButton.sample ]
