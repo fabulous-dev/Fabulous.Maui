@@ -8,10 +8,9 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
       <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" />
     </ItemGroup>
     <ItemGroup>
-<!--        <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />-->
+        <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
     </ItemGroup>
 </Project>
