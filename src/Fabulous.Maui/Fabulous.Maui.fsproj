@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
     <UseMaui>true</UseMaui>
+    <UseMauiEssentials>true</UseMauiEssentials>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <!-- NuGet Package -->
@@ -184,13 +185,15 @@
     <Compile Include="AppHostBuilderExtensions.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" />
+    <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
     <!--
       FSharp.Core is fixed to a specific version that is not necessarily the latest one.
       This version will be used as the lower bound in the NuGet package
     -->
+    <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" PrivateAssets="All" />
     <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
     <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
