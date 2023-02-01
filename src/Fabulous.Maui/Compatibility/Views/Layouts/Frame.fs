@@ -23,7 +23,7 @@ module FrameBuilders =
     type Fabulous.Maui.View with
 
         static member inline Frame(content: WidgetBuilder<'msg, #IView>) =
-            WidgetHelpers.buildWidgets<'msg, IFabCompatFrame> Frame.WidgetKey [| ContentView.Content.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatFrame> Frame.WidgetKey [| CompatContentView.Content.WithValue(content.Compile()) |]
 
         static member inline Frame<'msg>() =
             WidgetHelpers.buildWidgets<'msg, IFabCompatFrame> Frame.WidgetKey [||]

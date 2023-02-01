@@ -45,7 +45,7 @@ module SwipeViewBuilders =
     type Fabulous.Maui.View with
 
         static member inline SwipeView(content: WidgetBuilder<'msg, #IView>) =
-            WidgetHelpers.buildWidgets<'msg, IFabCompatSwipeView> SwipeView.WidgetKey [| ContentView.Content.WithValue(content.Compile()) |]
+            WidgetHelpers.buildWidgets<'msg, IFabCompatSwipeView> SwipeView.WidgetKey [| CompatContentView.Content.WithValue(content.Compile()) |]
 
 [<Extension>]
 type SwipeViewModifiers() =
