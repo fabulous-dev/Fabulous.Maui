@@ -9,7 +9,6 @@ open Microsoft.Maui.Controls
 
 type IFabCompatView =
     inherit IFabCompatVisualElement
-    inherit IView
 
 module CompatView =
     let HorizontalOptions =
