@@ -56,16 +56,16 @@ module Grid =
 
 module GridAttachedData =
     let Column =
-        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Column GridLayoutDefaults.Column
+        SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.Column
 
     let ColumnSpan =
-        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.ColumnSpan GridLayoutDefaults.ColumnSpan
+        SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.ColumnSpan
 
     let Row =
-        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Row GridLayoutDefaults.Row
+        SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.Row
 
     let RowSpan =
-        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.RowSpan GridLayoutDefaults.RowSpan
+        SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.RowSpan
 
 [<AutoOpen>]
 module GridBuilders =

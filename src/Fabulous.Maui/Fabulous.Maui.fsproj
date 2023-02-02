@@ -26,6 +26,7 @@
     <Compile Include="ValueEventData.fs" />
     <Compile Include="FabColor.fs" />
     <Compile Include="Dimension.fs" />
+    <Compile Include="SharedAttributes.fs" />
     <Compile Include="VirtualizedCollection.fs" />
     <Compile Include="WidgetHelpers.fs" />
     <Compile Include="View.fs" />
