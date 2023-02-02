@@ -52,11 +52,7 @@ module Attributes =
                 if element.Handler <> null then
                     element.Handler.UpdateValue(propertyName))
 
-    let inline defineMauiFuncBool<'target, 'args>
-        (propertyName: string)
-        (defaultValue: Func<bool>)
-        ([<InlineIfLambda>] set: 'target -> Func<bool> -> unit)
-        =
+    let inline defineMauiFuncBool<'target, 'args> (propertyName: string) (defaultValue: Func<bool>) ([<InlineIfLambda>] set: 'target -> Func<bool> -> unit) =
         Attributes.defineSimpleScalar
             $"{typeof<'target>.Name}_{propertyName}"
             ScalarAttributeComparers.noCompare
@@ -67,7 +63,7 @@ module Attributes =
                 | ValueNone -> set target defaultValue
                 | ValueSome curr ->
                     let fn () =
-                        let r = curr ()
+                        let r = curr()
                         Dispatcher.dispatch node r
                         true
 

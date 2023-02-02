@@ -28,9 +28,8 @@ type TextStyleModifiers =
 [<Extension>]
 type TextStyleExtraModifiers =
     [<Extension>]
-    static member inline textColor(this: WidgetBuilder<'msg, #IFabTextStyle>, value: FabColor) =
-        this.textColor(value.ToMauiColor())
-        
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabTextStyle>, value: FabColor) = this.textColor(value.ToMauiColor())
+
     [<Extension>]
     static member inline font(this: WidgetBuilder<'msg, #IFabTextStyle>, ?size: float, ?fontFamily: string) =
         match size, fontFamily with

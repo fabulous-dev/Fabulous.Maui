@@ -448,9 +448,5 @@ type NavigationPagePlatformModifiers =
 [<Extension>]
 type NavigationPageYieldExtensions =
     [<Extension>]
-    static member inline Yield
-        (
-            _: CollectionBuilder<'msg, 'marker, #IFabCompatPage>,
-            x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
-        ) : Content<'msg> =
+    static member inline Yield(_: CollectionBuilder<'msg, 'marker, #IFabCompatPage>, x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }

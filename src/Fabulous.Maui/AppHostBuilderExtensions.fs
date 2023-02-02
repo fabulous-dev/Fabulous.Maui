@@ -23,7 +23,7 @@ module FabulousHandlers =
         | FabGridLayoutAttachedDataKeys.Row -> Microsoft.Maui.Controls.Grid.RowProperty
         | FabGridLayoutAttachedDataKeys.RowSpan -> Microsoft.Maui.Controls.Grid.RowSpanProperty
         | _ -> failwith $"Unknown key {key}"
-        
+
     let getDefaultValueByKey (key: string) =
         match key with
         | FabGridLayoutAttachedDataKeys.Column -> box GridLayoutDefaults.Column

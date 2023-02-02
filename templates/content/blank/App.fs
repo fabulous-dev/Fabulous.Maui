@@ -43,7 +43,12 @@ module App =
                             .centerTextHorizontal()
 
                         Label("Welcome to .NET Multi-platform App UI powered by Fabulous")
-                            .semantics(Semantics(HeadingLevel = SemanticHeadingLevel.Level2, Description = "Welcome to dot net Multi platform App U I powered by Fabulous"))
+                            .semantics(
+                                Semantics(
+                                    HeadingLevel = SemanticHeadingLevel.Level2,
+                                    Description = "Welcome to dot net Multi platform App U I powered by Fabulous"
+                                )
+                            )
                             .font(Font.SystemFontOfSize(18.))
                             .centerTextHorizontal()
 

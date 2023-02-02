@@ -95,7 +95,7 @@ type CompatViewYieldExtensions =
             x: WidgetBuilder<'msg, #IFabCompatGestureRecognizer>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
-        
+
     [<Extension>]
     static member inline Yield
         (

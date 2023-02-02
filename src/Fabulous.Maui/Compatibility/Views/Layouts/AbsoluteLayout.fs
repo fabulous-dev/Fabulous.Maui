@@ -13,16 +13,19 @@ type IFabCompatAbsoluteLayout =
     inherit IAbsoluteLayout
 
 module FabCompatAbsoluteLayoutAttachedDataKeys =
-    let [<Literal>] LayoutBounds = "FabCompatAbsoluteLayout_LayoutBounds"
-    let [<Literal>] LayoutFlags = "FabCompatAbsoluteLayout_LayoutFlags"
+    [<Literal>]
+    let LayoutBounds = "FabCompatAbsoluteLayout_LayoutBounds"
+
+    [<Literal>]
+    let LayoutFlags = "FabCompatAbsoluteLayout_LayoutFlags"
 
 module AbsoluteLayout =
     let WidgetKey = CompatWidgets.register<AbsoluteLayout>()
-        
+
 module AbsoluteLayoutAttachedData =
     let LayoutBounds =
         SharedAttributes.defineAttachedData<Rect> FabCompatAbsoluteLayoutAttachedDataKeys.LayoutBounds
-        
+
     let LayoutFlags =
         SharedAttributes.defineAttachedData<AbsoluteLayoutFlags> FabCompatAbsoluteLayoutAttachedDataKeys.LayoutFlags
 

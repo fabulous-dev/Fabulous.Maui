@@ -61,8 +61,7 @@ module GridAttachedData =
     let ColumnSpan =
         SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.ColumnSpan
 
-    let Row =
-        SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.Row
+    let Row = SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.Row
 
     let RowSpan =
         SharedAttributes.defineAttachedData FabGridLayoutAttachedDataKeys.RowSpan

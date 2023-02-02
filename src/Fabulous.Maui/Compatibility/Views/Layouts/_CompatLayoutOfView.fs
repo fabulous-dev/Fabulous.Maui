@@ -15,17 +15,9 @@ module CompatLayoutOfView =
 [<Extension>]
 type CompatLayoutOfViewYieldExtensions =
     [<Extension>]
-    static member inline Yield
-        (
-            _: CollectionBuilder<'msg, #IFabCompatLayoutOfView, IView>,
-            x: WidgetBuilder<'msg, 'itemType>
-        ) : Content<'msg> =
+    static member inline Yield(_: CollectionBuilder<'msg, #IFabCompatLayoutOfView, IView>, x: WidgetBuilder<'msg, 'itemType>) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
-        
+
     [<Extension>]
-    static member inline Yield
-        (
-            _: CollectionBuilder<'msg, #IFabCompatLayoutOfView, IView>,
-            x: WidgetBuilder<'msg, Memo.Memoized<#IView>>
-        ) : Content<'msg> =
+    static member inline Yield(_: CollectionBuilder<'msg, #IFabCompatLayoutOfView, IView>, x: WidgetBuilder<'msg, Memo.Memoized<#IView>>) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }

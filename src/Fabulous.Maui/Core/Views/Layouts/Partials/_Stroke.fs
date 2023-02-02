@@ -32,31 +32,31 @@ type StrokeModifiers =
     [<Extension>]
     static member stroke(this: WidgetBuilder<'msg, #IFabStroke>, value: Paint) =
         this.AddScalar(Stroke.Stroke.WithValue(value))
-        
+
     [<Extension>]
     static member strokeThickness(this: WidgetBuilder<'msg, #IFabStroke>, value: float) =
         this.AddScalar(Stroke.StrokeThickness.WithValue(value))
-        
+
     [<Extension>]
     static member strokeLineCap(this: WidgetBuilder<'msg, #IFabStroke>, value: LineCap) =
         this.AddScalar(Stroke.StrokeLineCap.WithValue(value))
-        
+
     [<Extension>]
     static member strokeLineJoin(this: WidgetBuilder<'msg, #IFabStroke>, value: LineJoin) =
         this.AddScalar(Stroke.StrokeLineJoin.WithValue(value))
-        
+
     [<Extension>]
     static member strokeDashPattern(this: WidgetBuilder<'msg, #IFabStroke>, value: float list) =
         this.AddScalar(Stroke.StrokeDashPattern.WithValue(value |> List.map float32 |> List.toArray))
-        
+
     [<Extension>]
     static member strokeDashOffset(this: WidgetBuilder<'msg, #IFabStroke>, value: float) =
         this.AddScalar(Stroke.StrokeDashOffset.WithValue(float32 value))
-        
+
     [<Extension>]
     static member strokeMiterLimit(this: WidgetBuilder<'msg, #IFabStroke>, value: float) =
         this.AddScalar(Stroke.StrokeMiterLimit.WithValue(float32 value))
-        
+
 [<Extension>]
 type StrokeExtraModifiers =
     [<Extension>]

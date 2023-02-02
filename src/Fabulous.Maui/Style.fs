@@ -7,5 +7,4 @@ open Microsoft.Maui
 [<Extension>]
 type StyleExtensions =
     [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IElement>, fn: WidgetBuilder<'msg, #IElement> -> WidgetBuilder<'msg, #IElement>) =
-        fn this
+    static member inline style(this: WidgetBuilder<'msg, #IElement>, fn: WidgetBuilder<'msg, #IElement> -> WidgetBuilder<'msg, #IElement>) = fn this

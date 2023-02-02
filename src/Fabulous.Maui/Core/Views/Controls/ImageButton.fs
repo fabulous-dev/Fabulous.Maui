@@ -18,7 +18,7 @@ module ImageButtonBuilders =
                 ImageSourcePart.Source.WithValue(FabFileImageSource(source)),
                 Button.Clicked.WithValue(fun () -> box onClicked)
             )
-            
+
         static member inline ImageButton<'msg>(source: string, onClicked: 'msg, aspect: Aspect) =
             WidgetBuilder<'msg, IFabImageButton>(
                 ImageButton.WidgetKey,

@@ -51,4 +51,3 @@ type FormattedLabelYieldExtensions =
             x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
-        

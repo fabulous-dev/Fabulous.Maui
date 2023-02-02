@@ -172,9 +172,7 @@ type ViewExtraModifiers =
 
     [<Extension>]
     static member inline center(this: WidgetBuilder<'msg, #IFabView>) =
-        this
-            .centerHorizontal()
-            .centerVertical()
+        this.centerHorizontal().centerVertical()
 
     [<Extension>]
     static member inline alignStartHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
@@ -183,19 +181,19 @@ type ViewExtraModifiers =
     [<Extension>]
     static member inline alignStartVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.verticalLayoutAlignment(LayoutAlignment.Start)
-        
+
     [<Extension>]
     static member inline alignEndHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
         this.horizontalLayoutAlignment(LayoutAlignment.End)
-        
+
     [<Extension>]
     static member inline alignEndVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.verticalLayoutAlignment(LayoutAlignment.End)
-        
+
     [<Extension>]
     static member inline fillHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
         this.horizontalLayoutAlignment(LayoutAlignment.Fill)
-        
+
     [<Extension>]
     static member inline fillVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.verticalLayoutAlignment(LayoutAlignment.Fill)
@@ -210,22 +208,17 @@ type ViewExtraModifiers =
     [<Extension>]
     static member margin(this: WidgetBuilder<'msg, #IFabView>, left: float, top: float, right: float, bottom: float) =
         this.margin(Thickness(left, top, right, bottom))
-        
+
     [<Extension>]
     static member inline size(this: WidgetBuilder<'msg, #IFabView>, ?width: float, ?height: float) =
         match width, height with
         | None, None -> this
         | Some w, None -> this.AddScalar(View'.Width.WithValue(w))
         | None, Some h -> this.AddScalar(View'.Height.WithValue(h))
-        | Some w, Some h ->
-            this
-                .AddScalar(View'.Width.WithValue(w))
-                .AddScalar(View'.Height.WithValue(h))
-                
+        | Some w, Some h -> this.AddScalar(View'.Width.WithValue(w)).AddScalar(View'.Height.WithValue(h))
+
     [<Extension>]
-    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: Color) =
-        this.background(SolidPaint(value))
-                
+    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: Color) = this.background(SolidPaint(value))
+
     [<Extension>]
-    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: FabColor) =
-        this.background(value.ToMauiColor())
+    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: FabColor) = this.background(value.ToMauiColor())
