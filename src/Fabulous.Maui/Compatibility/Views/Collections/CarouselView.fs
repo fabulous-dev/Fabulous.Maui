@@ -79,7 +79,7 @@ module CarouselView =
 module CarouselViewBuilders =
     type Fabulous.Maui.View with
 
-        static member inline CarouselView<'msg, 'itemData, 'itemMarker when 'itemMarker :> IFabCompatView>(items: seq<'itemData>) =
+        static member inline CarouselView<'msg, 'itemData, 'itemMarker when 'itemMarker :> IFabView>(items: seq<'itemData>) =
             WidgetHelpers.buildItems<'msg, IFabCompatCarouselView, 'itemData, 'itemMarker> CarouselView.WidgetKey ItemsView.ItemsSource items
 
 [<Extension>]
