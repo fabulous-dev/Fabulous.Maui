@@ -35,7 +35,7 @@ type FormattedLabelModifiers =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))
 
 [<Extension>]
-type FormattedLabelCollectionBuilderExtensions =
+type FormattedLabelYieldExtensions =
     [<Extension>]
     static member inline Yield<'msg, 'marker, 'itemType when 'marker :> IFabCompatFormattedLabel and 'itemType :> IFabCompatSpan>
         (
