@@ -191,6 +191,14 @@ type ViewExtraModifiers =
     [<Extension>]
     static member inline alignEndVertical(this: WidgetBuilder<'msg, #IFabView>) =
         this.verticalLayoutAlignment(LayoutAlignment.End)
+        
+    [<Extension>]
+    static member inline fillHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
+        this.horizontalLayoutAlignment(LayoutAlignment.Fill)
+        
+    [<Extension>]
+    static member inline fillVertical(this: WidgetBuilder<'msg, #IFabView>) =
+        this.verticalLayoutAlignment(LayoutAlignment.Fill)
 
     [<Extension>]
     static member margin(this: WidgetBuilder<'msg, #IFabView>, uniformSize: float) = this.margin(Thickness(uniformSize))
