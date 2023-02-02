@@ -20,6 +20,10 @@ module AbsoluteLayout =
 
     let LayoutFlags =
         Attributes.defineBindableEnum<AbsoluteLayoutFlags> AbsoluteLayout.LayoutFlagsProperty
+        
+module AbsoluteLayoutAttachedData =
+    let LayoutBounds =
+        Attributes.defineMauiAttachedData FabGridLayoutAttachedDataKeys.Column GridLayoutDefaults.Column
 
 [<AutoOpen>]
 module AbsoluteLayoutBuilders =

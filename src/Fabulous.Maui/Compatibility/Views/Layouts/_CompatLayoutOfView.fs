@@ -13,7 +13,7 @@ module CompatLayoutOfView =
         Attributes.defineListWidgetCollection "LayoutOfWidget_Children" (fun target -> (target :?> Microsoft.Maui.Controls.Layout).Children)
 
 [<Extension>]
-type CollectionBuilderExtensions =
+type CompatLayoutOfViewCollectionBuilderExtensions =
     [<Extension>]
     static member inline Yield
         (
