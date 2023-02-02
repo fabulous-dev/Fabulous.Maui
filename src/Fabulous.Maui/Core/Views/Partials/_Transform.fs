@@ -1,5 +1,6 @@
 namespace Fabulous.Maui
 
+open System.Runtime.CompilerServices
 open Microsoft.Maui.Handlers.Defaults
 open Fabulous.Maui.Controls
 
