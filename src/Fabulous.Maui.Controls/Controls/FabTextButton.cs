@@ -22,6 +22,12 @@ namespace Fabulous.Maui.Controls
         public void SetTextColor(Color? value) => TextColor = value;
         public void SetFont(Font value) => Font = value;
         public void SetCharacterSpacing(double value) => CharacterSpacing = value;
-        public void SetText(string value) => Text = value;
+
+        public void SetText(string value)
+        {
+            if (Text == value) return;
+            Text = value;
+            InvalidateMeasure();
+        }
     }
 }
