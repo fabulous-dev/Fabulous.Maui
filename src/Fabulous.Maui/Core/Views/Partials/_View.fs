@@ -171,6 +171,12 @@ type ViewExtraModifiers =
         this.verticalLayoutAlignment(LayoutAlignment.Center)
 
     [<Extension>]
+    static member inline center(this: WidgetBuilder<'msg, #IFabView>) =
+        this
+            .centerHorizontal()
+            .centerVertical()
+
+    [<Extension>]
     static member inline alignStartHorizontal(this: WidgetBuilder<'msg, #IFabView>) =
         this.horizontalLayoutAlignment(LayoutAlignment.Start)
 
@@ -201,5 +207,9 @@ type ViewExtraModifiers =
                 .AddScalar(View'.Height.WithValue(h))
                 
     [<Extension>]
-    static member background(this: WidgetBuilder<'msg, #IFabView>, value: Color) =
-        this.AddScalar(View'.Background.WithValue(SolidPaint(value)))
+    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: Color) =
+        this.background(SolidPaint(value))
+                
+    [<Extension>]
+    static member inline background(this: WidgetBuilder<'msg, #IFabView>, value: FabColor) =
+        this.background(value.ToMauiColor())

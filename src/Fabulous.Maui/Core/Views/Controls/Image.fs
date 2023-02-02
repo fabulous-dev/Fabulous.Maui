@@ -22,19 +22,21 @@ module Image =
 [<AutoOpen>]
 module ImageBuilders =
     type Fabulous.Maui.View with
-
         static member inline Image(file: string) =
             WidgetBuilder<'msg, IFabImage>(Image.WidgetKey, ImageSourcePart.Source.WithValue(FabFileImageSource(file)))
+            
+        static member inline Image(file: string, aspect: Aspect) =
+            WidgetBuilder<'msg, IFabImage>(
+                Image.WidgetKey,
+                ImageSourcePart.Source.WithValue(FabFileImageSource(file)),
+                Image.Aspect.WithValue(aspect)
+            )
 
 [<Extension>]
 type ImageModifiers =
     [<Extension>]
     static member isAnimationPlaying(this: WidgetBuilder<'msg, #IFabImage>, value: bool) =
         this.AddScalar(Image.IsAnimationPlaying.WithValue(value))
-
-    [<Extension>]
-    static member aspect(this: WidgetBuilder<'msg, #IFabImage>, value: Aspect) =
-        this.AddScalar(Image.Aspect.WithValue(value))
 
     [<Extension>]
     static member isOpaque(this: WidgetBuilder<'msg, #IFabImage>, value: bool) =

@@ -18,7 +18,7 @@ module CompatContentView =
 module CompatContentViewBuilders =
     type Fabulous.Maui.View with
 
-        static member inline ContentView(content: WidgetBuilder<'msg, #IView>) =
+        static member inline CompatContentView(content: WidgetBuilder<'msg, #IView>) =
             WidgetHelpers.buildWidgets<'msg, IFabCompatContentView> CompatContentView.WidgetKey [| CompatContentView.Content.WithValue(content.Compile()) |]
 
 [<Extension>]

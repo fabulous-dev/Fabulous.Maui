@@ -24,3 +24,9 @@ type TextStyleModifiers =
     [<Extension>]
     static member inline textColor(this: WidgetBuilder<'msg, #IFabTextStyle>, value: Microsoft.Maui.Graphics.Color) =
         this.AddScalar(TextStyle.TextColor.WithValue(value))
+
+[<Extension>]
+type TextStyleExtraModifiers =
+    [<Extension>]
+    static member inline textColor(this: WidgetBuilder<'msg, #IFabTextStyle>, value: FabColor) =
+        this.textColor(value.ToMauiColor())

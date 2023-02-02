@@ -22,8 +22,8 @@ type ButtonStrokeModifiers =
         this.AddScalar(ButtonStroke.CornerRadius.WithValue(value))
 
     [<Extension>]
-    static member strokeColor(this: WidgetBuilder<'msg, #IFabButtonStroke>, value: Color) =
-        this.AddScalar(ButtonStroke.StrokeColor.WithValue(value))
+    static member strokeColor(this: WidgetBuilder<'msg, #IFabButtonStroke>, value: FabColor) =
+        this.AddScalar(ButtonStroke.StrokeColor.WithValue(value.ToMauiColor()))
         
     [<Extension>]
     static member strokeThickness(this: WidgetBuilder<'msg, #IFabButtonStroke>, value: float) =

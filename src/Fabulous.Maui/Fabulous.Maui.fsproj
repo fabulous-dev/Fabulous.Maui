@@ -156,7 +156,7 @@
     <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
     <Compile Include="Compatibility\Views\Controls\_GestureElement.fs" />
     <Compile Include="Compatibility\Views\Controls\Span.fs" />
-    <Compile Include="Compatibility\Views\Controls\Border.fs" />
+    <Compile Include="Compatibility\Views\Controls\CompatBorder.fs" />
     <Compile Include="Compatibility\Views\Controls\ActivityIndicator.fs" />
     <Compile Include="Compatibility\Views\Controls\BoxView.fs" />
     <Compile Include="Compatibility\Views\Controls\_InputView.fs" />
@@ -184,6 +184,7 @@
     <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
+    <Compile Include="Style.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" PrivateAssets="all" />
