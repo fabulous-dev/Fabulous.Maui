@@ -1,11 +1,9 @@
 namespace Fabulous.Maui
 
 open System.Runtime.CompilerServices
-open Microsoft.Maui
 open Microsoft.Maui.Graphics
 open Microsoft.Maui.Handlers.Defaults
 open Fabulous
-open Fabulous.Maui.Controls
 
 module ButtonStroke =
     let CornerRadius =

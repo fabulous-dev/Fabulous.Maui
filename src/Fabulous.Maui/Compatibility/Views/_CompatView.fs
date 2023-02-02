@@ -3,6 +3,7 @@ namespace Fabulous.Maui.Compatibility
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui
+open Fabulous.StackAllocatedCollections
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 
@@ -84,4 +85,22 @@ type CompatViewModifiers =
 
     [<Extension>]
     static member inline gestureRecognizers<'msg, 'marker when 'marker :> IFabCompatView>(this: WidgetBuilder<'msg, 'marker>) =
-        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IGestureRecognizer> CompatView.GestureRecognizers this
+        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IFabCompatGestureRecognizer> CompatView.GestureRecognizers this
+
+[<Extension>]
+type CompatViewYieldExtensions =
+    [<Extension>]
+    static member inline Yield
+        (
+            _: AttributeCollectionBuilder<'msg, #IFabCompatView, IFabCompatGestureRecognizer>,
+            x: WidgetBuilder<'msg, #IFabCompatGestureRecognizer>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
+        
+    [<Extension>]
+    static member inline Yield
+        (
+            _: AttributeCollectionBuilder<'msg, #IFabCompatView, IFabCompatGestureRecognizer>,
+            x: WidgetBuilder<'msg, Memo.Memoized<#IFabCompatGestureRecognizer>>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
