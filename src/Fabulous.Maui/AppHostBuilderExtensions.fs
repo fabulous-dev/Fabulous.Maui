@@ -6,11 +6,14 @@ open Microsoft.Extensions.DependencyInjection.Extensions
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.FabCompat.Handlers
+open Microsoft.Maui.Graphics
 open Microsoft.Maui.Handlers
+open Microsoft.Maui.Handlers.Defaults
 open Microsoft.Maui.Hosting
 open Microsoft.Maui.Controls.Hosting
 open Fabulous
 open Fabulous.Maui.Controls
+open Microsoft.Maui.Layouts
 
 module FabulousHandlers =
     let getBindablePropertyByKey (key: string) =
@@ -19,6 +22,16 @@ module FabulousHandlers =
         | FabGridLayoutAttachedDataKeys.ColumnSpan -> Microsoft.Maui.Controls.Grid.ColumnSpanProperty
         | FabGridLayoutAttachedDataKeys.Row -> Microsoft.Maui.Controls.Grid.RowProperty
         | FabGridLayoutAttachedDataKeys.RowSpan -> Microsoft.Maui.Controls.Grid.RowSpanProperty
+        | _ -> failwith $"Unknown key {key}"
+        
+    let getDefaultValueByKey (key: string) =
+        match key with
+        | FabGridLayoutAttachedDataKeys.Column -> box GridLayoutDefaults.Column
+        | FabGridLayoutAttachedDataKeys.ColumnSpan -> box GridLayoutDefaults.ColumnSpan
+        | FabGridLayoutAttachedDataKeys.Row -> box GridLayoutDefaults.Row
+        | FabGridLayoutAttachedDataKeys.RowSpan -> box GridLayoutDefaults.RowSpan
+        | FabCompatAbsoluteLayoutAttachedDataKeys.LayoutBounds -> box Rect.Zero
+        | FabCompatAbsoluteLayoutAttachedDataKeys.LayoutFlags -> box AbsoluteLayoutFlags.None
         | _ -> failwith $"Unknown key {key}"
 
     let getAttachedData (view: IView) (key: string) (defaultValue: obj) =
@@ -35,6 +48,16 @@ module FabulousHandlers =
         | :? IFabCompatView as fabCompatView ->
             let bindableProperty = getBindablePropertyByKey key
             (fabCompatView :?> BindableObject).SetValue(bindableProperty, value)
+        | _ -> failwith $"Unknown view type {view.GetType().Name}"
+
+    let clearAttachedData (view: IView) (key: string) =
+        match view with
+        | :? IFabView as fabView ->
+            let defaultValue = getDefaultValueByKey key
+            fabView.SetAttachedData(key, defaultValue)
+        | :? IFabCompatView as fabCompatView ->
+            let bindableProperty = getBindablePropertyByKey key
+            (fabCompatView :?> BindableObject).ClearValue(bindableProperty)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
 
     let register (collection: IMauiHandlersCollection) =
@@ -75,6 +98,7 @@ type AppHostBuilderExtensions =
         ) =
         AttachedData.Get <- System.Func<_, _, _, _>(FabulousHandlers.getAttachedData)
         AttachedData.Set <- System.Action<_, _, _>(FabulousHandlers.setAttachedData)
+        AttachedData.Clear <- System.Action<_, _>(FabulousHandlers.clearAttachedData)
 
         this.ConfigureMauiHandlers(FabulousHandlers.register) |> ignore
 
