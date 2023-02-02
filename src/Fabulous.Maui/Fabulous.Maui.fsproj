@@ -171,6 +171,7 @@
     <Compile Include="Compatibility\Views\Controls\CheckBox.fs" />
     <Compile Include="Compatibility\Views\Controls\ProgressBar.fs" />
     <Compile Include="Compatibility\Views\Controls\RadioButton.fs" />
+    <Compile Include="Compatibility\Views\Controls\FormattedLabel.fs" />
     <Compile Include="Compatibility\Views\Collections\_ItemsView.fs" />
     <Compile Include="Compatibility\Views\Collections\_ItemsViewOfCell.fs" />
     <Compile Include="Compatibility\Views\Collections\ListView.fs" />

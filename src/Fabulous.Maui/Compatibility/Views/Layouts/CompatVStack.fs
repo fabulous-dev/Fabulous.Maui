@@ -15,7 +15,7 @@ module CompatVerticalStackLayout =
 module CompatVerticalStackLayoutBuilders =
     type Fabulous.Maui.View with
 
-        static member inline VStack<'msg>(?spacing: float) =
+        static member inline CompatVStack<'msg>(?spacing: float) =
             match spacing with
             | None -> CollectionBuilder<'msg, IFabCompatVerticalStackLayout, IView>(CompatVerticalStackLayout.WidgetKey, CompatLayoutOfView.Children)
             | Some v ->

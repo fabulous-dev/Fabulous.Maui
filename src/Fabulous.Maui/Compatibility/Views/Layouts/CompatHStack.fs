@@ -8,19 +8,19 @@ open Microsoft.Maui.Controls
 type IFabCompatHorizontalStackLayout =
     inherit IFabCompatStackBase
 
-module HorizontalStackLayout =
+module CompatHorizontalStackLayout =
     let WidgetKey = CompatWidgets.register<HorizontalStackLayout>()
 
 [<AutoOpen>]
 module CompatHorizontalStackLayoutBuilders =
     type Fabulous.Maui.View with
 
-        static member inline HStack<'msg>(?spacing: float) =
+        static member inline CompatHStack<'msg>(?spacing: float) =
             match spacing with
-            | None -> CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(HorizontalStackLayout.WidgetKey, CompatLayoutOfView.Children)
+            | None -> CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(CompatHorizontalStackLayout.WidgetKey, CompatLayoutOfView.Children)
             | Some v ->
                 CollectionBuilder<'msg, IFabCompatHorizontalStackLayout, IView>(
-                    HorizontalStackLayout.WidgetKey,
+                    CompatHorizontalStackLayout.WidgetKey,
                     CompatLayoutOfView.Children,
                     CompatStackBase.Spacing.WithValue(v)
                 )
