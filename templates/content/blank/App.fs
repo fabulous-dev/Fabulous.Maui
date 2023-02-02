@@ -3,9 +3,7 @@ namespace NewApp
 open Fabulous
 open Fabulous.Maui
 open Microsoft.Maui
-open Microsoft.Maui.Graphics
 open Microsoft.Maui.Accessibility
-open Microsoft.Maui.Primitives
 
 open type Fabulous.Maui.View
 
@@ -30,24 +28,23 @@ module App =
         | Clicked -> { model with Count = model.Count + 1 }, [ SemanticAnnounce $"Clicked {model.Count} times" ]
 
     let view model =
-        Application(
-            ContentPage(
-                "HelloWorld",
+        Application() {
+            Window(
                 ScrollView(
                     (VStack(spacing = 25.) {
-                        Image(Aspect.AspectFit, "dotnet_bot.png")
-                            .semantics(description = "Cute dotnet bot waving hi to you!")
+                        Image("dotnet_bot.png")
+                            .semantics(Semantics(Description = "Cute dotnet bot waving hi to you!"))
                             .height(200.)
                             .centerHorizontal()
 
                         Label("Hello, World!")
-                            .semantics(SemanticHeadingLevel.Level1)
-                            .font(size = 32.)
+                            .semantics(Semantics(HeadingLevel = SemanticHeadingLevel.Level1))
+                            .font(Font.SystemFontOfSize(32.))
                             .centerTextHorizontal()
 
                         Label("Welcome to .NET Multi-platform App UI powered by Fabulous")
-                            .semantics(SemanticHeadingLevel.Level2, "Welcome to dot net Multi platform App U I powered by Fabulous")
-                            .font(size = 18.)
+                            .semantics(Semantics(HeadingLevel = SemanticHeadingLevel.Level2, Description = "Welcome to dot net Multi platform App U I powered by Fabulous"))
+                            .font(Font.SystemFontOfSize(18.))
                             .centerTextHorizontal()
 
                         let text =
@@ -56,14 +53,14 @@ module App =
                             else
                                 $"Clicked {model.Count} times"
 
-                        Button(text, Clicked)
-                            .semantics(hint = "Counts the number of times you click")
+                        TextButton(text, Clicked)
+                            .semantics(Semantics(Hint = "Counts the number of times you click"))
                             .centerHorizontal()
                     })
                         .padding(Thickness(30., 0., 30., 0.))
                         .centerVertical()
                 )
             )
-        )
+        }
 
     let program = Program.statefulWithCmdMsg init update view mapCmd
