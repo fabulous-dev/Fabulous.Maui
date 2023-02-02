@@ -36,28 +36,28 @@ module FabulousHandlers =
 
     let getAttachedData (view: IView) (key: string) (defaultValue: obj) =
         match view with
-        | :? IFabView as fabView -> fabView.GetAttachedData(key, defaultValue)
-        | :? IFabCompatView as fabCompatView ->
+        | :? IFabElement as element -> element.GetAttachedData(key, defaultValue)
+        | :? BindableObject as bindable ->
             let bindableProperty = getBindablePropertyByKey key
-            (fabCompatView :?> BindableObject).GetValue(bindableProperty)
+            bindable.GetValue(bindableProperty)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
 
     let setAttachedData (view: IView) (key: string) (value: obj) =
         match view with
-        | :? IFabView as fabView -> fabView.SetAttachedData(key, value)
-        | :? IFabCompatView as fabCompatView ->
+        | :? IFabElement as element -> element.SetAttachedData(key, value)
+        | :? BindableObject as bindable ->
             let bindableProperty = getBindablePropertyByKey key
-            (fabCompatView :?> BindableObject).SetValue(bindableProperty, value)
+            bindable.SetValue(bindableProperty, value)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
 
     let clearAttachedData (view: IView) (key: string) =
         match view with
-        | :? IFabView as fabView ->
+        | :? IFabElement as element ->
             let defaultValue = getDefaultValueByKey key
-            fabView.SetAttachedData(key, defaultValue)
-        | :? IFabCompatView as fabCompatView ->
+            element.SetAttachedData(key, defaultValue)
+        | :? BindableObject as bindable ->
             let bindableProperty = getBindablePropertyByKey key
-            (fabCompatView :?> BindableObject).ClearValue(bindableProperty)
+            bindable.ClearValue(bindableProperty)
         | _ -> failwith $"Unknown view type {view.GetType().Name}"
 
     let register (collection: IMauiHandlersCollection) =
