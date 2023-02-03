@@ -4,6 +4,7 @@ open System
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui
+open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.ApplicationModel
 
@@ -31,6 +32,7 @@ type CompatApplication() =
 
 type IFabCompatApplication =
     inherit IFabCompatElement
+    inherit IApplication
 
 module CompatApplication =
     let WidgetKey = CompatWidgets.register<CompatApplication>()
