@@ -4,6 +4,8 @@ using Microsoft.Maui.Layouts;
 using Microsoft.Maui.Primitives;
 using Microsoft.Maui.Handlers.Defaults;
 
+using LayoutAlignment = Microsoft.Maui.Primitives.LayoutAlignment;
+
 namespace Fabulous.Maui
 {
     public interface IFabView : IView, IFabElement, IFabTransform

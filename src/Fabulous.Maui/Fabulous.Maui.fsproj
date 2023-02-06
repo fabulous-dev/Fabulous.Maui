@@ -188,6 +188,7 @@
     <Compile Include="Style.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
     <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" PrivateAssets="all" />
   </ItemGroup>
@@ -198,7 +199,6 @@
     -->
     <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" PrivateAssets="All" />
     <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
-    <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

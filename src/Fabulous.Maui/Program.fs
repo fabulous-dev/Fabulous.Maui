@@ -34,9 +34,19 @@ module ViewHelpers =
         false
 
     let getViewNode (target: obj) =
+        let x =
+            match target with
+            | :? IFabElement as element -> Fabulous.Maui.ViewNode.get element
+            | :? BindableObject as bindableObject -> Fabulous.Maui.Compatibility.ViewNode.get bindableObject
+            | _ -> failwith "Unsupported target"
+            
+        if x = Unchecked.defaultof<_> then failwith "ViewNode not found"
+        x
+        
+    let setViewNode (viewNode: IViewNode) (target: obj) =
         match target with
-        | :? FabElement as element -> Fabulous.Maui.ViewNode.get element
-        | :? BindableObject as bindableObject -> Fabulous.Maui.Compatibility.ViewNode.get bindableObject
+        | :? IFabElement as element -> Fabulous.Maui.ViewNode.set viewNode element
+        | :? BindableObject as bindableObject -> Fabulous.Maui.Compatibility.ViewNode.set viewNode bindableObject
         | _ -> failwith "Unsupported target"
 
 module Program =
@@ -77,7 +87,7 @@ module Program =
     let startApplicationWithArgs (arg: 'arg) (program: Program<'arg, 'model, 'msg, #IApplication>) : IApplication =
         let runner = Runners.create program
         runner.Start(arg)
-        let adapter = ViewAdapters.create ViewHelpers.getViewNode runner
+        let adapter = ViewAdapters.create ViewHelpers.getViewNode ViewHelpers.setViewNode runner
         adapter.CreateView() |> unbox
 
     /// Start the program

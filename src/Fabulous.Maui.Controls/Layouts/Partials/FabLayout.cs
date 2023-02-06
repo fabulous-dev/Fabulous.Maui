@@ -7,7 +7,7 @@ using Microsoft.Maui.Layouts;
 
 namespace Fabulous.Maui
 {
-    public interface IFabLayout : ILayout, IFabView, IFabContainer, IFabSafeAreaView, IFabPadding
+    public interface IFabLayout : Microsoft.Maui.ILayout, IFabView, IFabContainer, IFabSafeAreaView, IFabPadding
     {
         void SetClipsToBounds(bool value);
     }
