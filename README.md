@@ -2,6 +2,22 @@
 
 [![build](https://img.shields.io/github/actions/workflow/status/fabulous-dev/Fabulous.Maui/build.yml?branch=main)](https://github.com/fabulous-dev/Fabulous.Maui/actions/workflows/build.yml) [![NuGet version](https://img.shields.io/nuget/v/Fabulous.Maui)](https://www.nuget.org/packages/Fabulous.Maui) [![NuGet downloads](https://img.shields.io/nuget/dt/Fabulous.Maui)](https://www.nuget.org/packages/Fabulous.Maui) [![Discord](https://img.shields.io/discord/716980335593914419?label=discord&logo=discord)](https://discord.gg/bpTJMbSSYK) [![Twitter Follow](https://img.shields.io/twitter/follow/FabulousAppDev?style=social)](https://twitter.com/FabulousAppDev)
 
+------
+
+⚠️⚠️⚠️ Project on-hold due to major blockers in Microsoft.Maui ⚠️⚠️⚠️
+
+This project tried to provide custom MVU-first implementation to the new control interfaces of Maui (`ILabel`, `IButton`, etc.), and not rely on the MVVM-focused controls from `Microsoft.Maui.Controls`. Unfortunately those interfaces are missing a lot of features, and `Microsoft.Maui.Core` is lacking plenty of handlers (eg. `NavigationView` has no iOS implementation).
+
+Since this will very likely be a multi-year effort from the Maui team, it means Fabulous.Maui can't provide a full MVU-first experience for the moment.
+
+Instead, while waiting for the Maui team to fully migrate to the new architecture, we wanted to allow you to mix Fabulous and Microsoft.Maui.Controls-implemented widgets. But this approach is not going to work as any Microsoft.Maui.Controls widgets require child controls to be inherit from the MVVM Microsoft.Maui.Controls.View class, effectively preventing us to mix Fabulous & Maui widgets.
+
+We might reconsider this library in the future.
+
+In the meantime, please use [Fabulous.MauiControls](https://github.com/fabulous-dev/Fabulous.MauiControls)
+
+------
+
 Fabulous.Maui brings the great development experience of Fabulous to .NET MAUI, allowing you to take advantage of the latest cross-platform UI framework from Microsoft with a tailored declarative UI DSL and clean architecture.
 
 Deploy to any platform supported by .NET MAUI, such as Android, iOS, macOS, Windows, Linux and more!
