@@ -26,6 +26,7 @@
     <Compile Include="ValueEventData.fs" />
     <Compile Include="FabColor.fs" />
     <Compile Include="Dimension.fs" />
+    <Compile Include="SharedAttributes.fs" />
     <Compile Include="VirtualizedCollection.fs" />
     <Compile Include="WidgetHelpers.fs" />
     <Compile Include="View.fs" />
@@ -156,7 +157,7 @@
     <Compile Include="Compatibility\Views\Controls\IndicatorView.fs" />
     <Compile Include="Compatibility\Views\Controls\_GestureElement.fs" />
     <Compile Include="Compatibility\Views\Controls\Span.fs" />
-    <Compile Include="Compatibility\Views\Controls\Border.fs" />
+    <Compile Include="Compatibility\Views\Controls\CompatBorder.fs" />
     <Compile Include="Compatibility\Views\Controls\ActivityIndicator.fs" />
     <Compile Include="Compatibility\Views\Controls\BoxView.fs" />
     <Compile Include="Compatibility\Views\Controls\_InputView.fs" />
@@ -171,6 +172,7 @@
     <Compile Include="Compatibility\Views\Controls\CheckBox.fs" />
     <Compile Include="Compatibility\Views\Controls\ProgressBar.fs" />
     <Compile Include="Compatibility\Views\Controls\RadioButton.fs" />
+    <Compile Include="Compatibility\Views\Controls\FormattedLabel.fs" />
     <Compile Include="Compatibility\Views\Collections\_ItemsView.fs" />
     <Compile Include="Compatibility\Views\Collections\_ItemsViewOfCell.fs" />
     <Compile Include="Compatibility\Views\Collections\ListView.fs" />
@@ -183,8 +185,10 @@
     <Compile Include="ThemeAwareness.fs" />
     <Compile Include="Program.fs" />
     <Compile Include="AppHostBuilderExtensions.fs" />
+    <Compile Include="Style.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Fabulous\src\Fabulous\Fabulous.fsproj" />
     <ProjectReference Include="..\Fabulous.Maui.Controls\Fabulous.Maui.Controls.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Microsoft.Maui.FabCompat\Microsoft.Maui.FabCompat.csproj" PrivateAssets="all" />
   </ItemGroup>
@@ -195,7 +199,6 @@
     -->
     <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" PrivateAssets="All" />
     <PackageReference Include="FSharp.Core" VersionOverride="7.0.0" PrivateAssets="All" />
-    <PackageReference Include="Fabulous" VersionOverride="[2.2.0, 2.3.0)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

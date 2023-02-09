@@ -33,7 +33,7 @@ type WidgetDataTemplate(parent: IViewNode, ``type``: Type, templateFn: obj -> Wi
             let viewNode =
                 ViewNode(Some parent, parent.TreeContext, WeakReference(bindableObject))
 
-            bindableObject.SetValue(ViewNode.ViewNodeProperty, viewNode)
+            parent.TreeContext.SetViewNode viewNode bindableObject
 
             let onBindingContextChanged =
                 BindableHelpers.createOnBindingContextChanged parent.TreeContext.CanReuseView parent.TreeContext.GetViewNode templateFn bindableObject

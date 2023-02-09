@@ -13,6 +13,7 @@ namespace Fabulous.Maui
 {
     public interface IFabElement : IElement
     {
+        IViewNode ViewNode { get; set; }
         T? GetAttachedData<T>(string key, T? defaultValue);
         void SetAttachedData<T>(string key, T value);
     }
@@ -20,7 +21,7 @@ namespace Fabulous.Maui
 
 namespace Fabulous.Maui.Controls
 {
-    public abstract class FabElement: IFabElement
+    public abstract class FabElement: Microsoft.Maui.Controls.View, IFabElement
     {
         private IElementHandler? _handler;
         

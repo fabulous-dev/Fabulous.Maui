@@ -2,6 +2,7 @@ namespace Fabulous.Maui.Compatibility
 
 open System.Runtime.CompilerServices
 open Fabulous
+open Fabulous.Maui
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Layouts
@@ -11,15 +12,22 @@ type IFabCompatAbsoluteLayout =
     inherit IFabCompatLayoutOfView
     inherit IAbsoluteLayout
 
-module AbsoluteLayout =
+module FabCompatAbsoluteLayoutAttachedDataKeys =
+    [<Literal>]
+    let LayoutBounds = "FabCompatAbsoluteLayout_LayoutBounds"
 
+    [<Literal>]
+    let LayoutFlags = "FabCompatAbsoluteLayout_LayoutFlags"
+
+module AbsoluteLayout =
     let WidgetKey = CompatWidgets.register<AbsoluteLayout>()
 
+module AbsoluteLayoutAttachedData =
     let LayoutBounds =
-        Attributes.defineBindableWithEquality<Rect> AbsoluteLayout.LayoutBoundsProperty
+        SharedAttributes.defineAttachedData<Rect> FabCompatAbsoluteLayoutAttachedDataKeys.LayoutBounds
 
     let LayoutFlags =
-        Attributes.defineBindableEnum<AbsoluteLayoutFlags> AbsoluteLayout.LayoutFlagsProperty
+        SharedAttributes.defineAttachedData<AbsoluteLayoutFlags> FabCompatAbsoluteLayoutAttachedDataKeys.LayoutFlags
 
 [<AutoOpen>]
 module AbsoluteLayoutBuilders =
@@ -43,11 +51,11 @@ type AbsoluteLayoutAttachedModifiers =
     /// <param name= "width">The width of the bounding rectangle.</param>
     /// <param name= "height">The height of the bounding rectangle.</param>
     [<Extension>]
-    static member inline layoutBounds(this: WidgetBuilder<'msg, #IFabCompatView>, x: float, y: float, width: float, height: float) =
-        this.AddScalar(AbsoluteLayout.LayoutBounds.WithValue(Rect(x, y, width, height)))
+    static member inline layoutBounds(this: WidgetBuilder<'msg, #IFabView>, x: float, y: float, width: float, height: float) =
+        this.AddScalar(AbsoluteLayoutAttachedData.LayoutBounds.WithValue(Rect(x, y, width, height)))
 
     /// <summary>Determines how the values in the list are interpreted to create the bounding rectangle.</summary>
     /// <param name= "value">AbsoluteLayoutFlags enumeration value: All, None, HeightProportional, WidthProportional, SizeProportional, XProportional, YProportional, or PositionProportional.</param>
     [<Extension>]
-    static member inline layoutFlags(this: WidgetBuilder<'msg, #IFabCompatView>, value: AbsoluteLayoutFlags) =
-        this.AddScalar(AbsoluteLayout.LayoutFlags.WithValue(value))
+    static member inline layoutFlags(this: WidgetBuilder<'msg, #IFabView>, value: AbsoluteLayoutFlags) =
+        this.AddScalar(AbsoluteLayoutAttachedData.LayoutFlags.WithValue(value))

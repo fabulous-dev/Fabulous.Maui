@@ -52,6 +52,28 @@ module Attributes =
                 if element.Handler <> null then
                     element.Handler.UpdateValue(propertyName))
 
+    let inline defineMauiFuncBool<'target, 'args> (propertyName: string) (defaultValue: Func<bool>) ([<InlineIfLambda>] set: 'target -> Func<bool> -> unit) =
+        Attributes.defineSimpleScalar
+            $"{typeof<'target>.Name}_{propertyName}"
+            ScalarAttributeComparers.noCompare
+            (fun _ (currOpt: (unit -> obj) voption) node ->
+                let target = node.Target :?> 'target
+
+                match currOpt with
+                | ValueNone -> set target defaultValue
+                | ValueSome curr ->
+                    let fn () =
+                        let r = curr()
+                        Dispatcher.dispatch node r
+                        true
+
+                    set target fn
+
+                let element = node.Target :?> FabElement
+
+                if element.Handler <> null then
+                    element.Handler.UpdateValue(propertyName))
+
     let defineMauiProperty'<'target, 'value when 'value: equality> (propertyName: string) (defaultValueFn: unit -> 'value) (set: 'target -> 'value -> unit) =
         Attributes.defineSimpleScalarWithEquality $"{typeof<'target>.Name}_{propertyName}" (fun _ currOpt node ->
             let target = node.Target :?> 'target
@@ -62,14 +84,11 @@ module Attributes =
 
             let element = node.Target :?> FabElement
 
-            if element.Handler <> null then
+            if element <> null && element.Handler <> null then
                 element.Handler.UpdateValue(propertyName))
 
     let defineMauiProperty<'target, 'value when 'value: equality> (propertyName: string) (defaultValue: 'value) (set: 'target -> 'value -> unit) =
         defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) set
-
-    let defineMauiAttachedData<'target, 'value when 'target :> IView and 'value: equality> (propertyName: string) (defaultValue: 'value) =
-        defineMauiProperty'<'target, 'value> propertyName (fun () -> defaultValue) (fun target value -> target.SetAttachedData(propertyName, value))
 
     let inline defineMauiPropertyWithEvent<'target, 'value when 'value: equality>
         (propertyName: string)

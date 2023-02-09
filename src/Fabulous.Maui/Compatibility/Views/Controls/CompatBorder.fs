@@ -11,7 +11,7 @@ type IFabCompatBorder =
     inherit IFabCompatView
     inherit IBorder
 
-module Border =
+module CompatBorder =
     let WidgetKey = CompatWidgets.register<Border>()
 
     let Stroke = Attributes.defineBindableAppTheme<Brush> Border.StrokeProperty
@@ -75,91 +75,91 @@ module Border =
         Attributes.defineBindableWithEquality<Thickness> Border.PaddingProperty
 
 [<AutoOpen>]
-module BorderBuilders =
+module CompatBorderBuilders =
     type Fabulous.Maui.View with
 
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="light">The color of the stroke in the light theme.</param>
         /// <param name="dark">The color of the stroke in the dark theme.</param>
-        static member inline Border(content: WidgetBuilder<'msg, #IView>, light: Brush, ?dark: Brush) =
+        static member inline CompatBorder(content: WidgetBuilder<'msg, #IView>, light: Brush, ?dark: Brush) =
             WidgetBuilder<'msg, IFabCompatBorder>(
-                Border.WidgetKey,
+                CompatBorder.WidgetKey,
                 AttributesBundle(
                     StackList.two(
-                        Border.Stroke.WithValue(AppTheme.create light dark),
+                        CompatBorder.Stroke.WithValue(AppTheme.create light dark),
                         // By spec we need to set StrokeShape to Rectangle
-                        Border.StrokeShape.WithValue(Rectangle())
+                        CompatBorder.StrokeShape.WithValue(Rectangle())
                     ),
-                    ValueSome [| Border.Content.WithValue(content.Compile()) |],
+                    ValueSome [| CompatBorder.Content.WithValue(content.Compile()) |],
                     ValueNone
                 )
             )
 
         /// <summary>Border is a container control that draws a border, background, or both, around another control. A Border can only contain one child object. If you want to put a border around multiple objects, wrap them in a container object such as a layout</summary>
         /// <param name="stroke">The stroke brush widget</param>
-        static member inline Border(content: WidgetBuilder<'msg, #IView>, stroke: WidgetBuilder<'msg, #IFabCompatBrush>) =
+        static member inline CompatBorder(content: WidgetBuilder<'msg, #IView>, stroke: WidgetBuilder<'msg, #IFabCompatBrush>) =
             WidgetBuilder<'msg, IFabCompatBorder>(
-                Border.WidgetKey,
+                CompatBorder.WidgetKey,
                 AttributesBundle(
                     // By spec we need to set StrokeShape to Rectangle
-                    StackList.one(Border.StrokeShape.WithValue(Rectangle())),
+                    StackList.one(CompatBorder.StrokeShape.WithValue(Rectangle())),
                     ValueSome
-                        [| Border.Content.WithValue(content.Compile())
-                           Border.StrokeWidget.WithValue(stroke.Compile()) |],
+                        [| CompatBorder.Content.WithValue(content.Compile())
+                           CompatBorder.StrokeWidget.WithValue(stroke.Compile()) |],
                     ValueNone
                 )
             )
 
 [<Extension>]
-type BorderModifiers =
+type CompatBorderModifiers =
 
     [<Extension>]
     static member inline strokeShape(this: WidgetBuilder<'msg, #IFabCompatBorder>, content: string) =
-        this.AddScalar(Border.StrokeShapeString.WithValue(content))
+        this.AddScalar(CompatBorder.StrokeShapeString.WithValue(content))
 
     [<Extension>]
     static member inline strokeShape(this: WidgetBuilder<'msg, #IFabCompatBorder>, content: WidgetBuilder<'msg, #IFabCompatShape>) =
-        this.AddWidget(Border.StrokeShapeWidget.WithValue(content.Compile()))
+        this.AddWidget(CompatBorder.StrokeShapeWidget.WithValue(content.Compile()))
 
     [<Extension>]
     static member inline strokeThickness(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
-        this.AddScalar(Border.StrokeThickness.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeThickness.WithValue(value))
 
     [<Extension>]
     static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: string) =
-        this.AddScalar(Border.StrokeDashArrayString.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeDashArrayString.WithValue(value))
 
     [<Extension>]
     static member inline strokeDashArray(this: WidgetBuilder<'msg, #IFabCompatShape>, value: float list) =
-        this.AddScalar(Border.StrokeDashArrayList.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeDashArrayList.WithValue(value))
 
     [<Extension>]
     static member inline strokeDashOffset(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
-        this.AddScalar(Border.StrokeDashOffset.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeDashOffset.WithValue(value))
 
     [<Extension>]
     static member inline strokeLineCap(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: PenLineCap) =
-        this.AddScalar(Border.StrokeLineCap.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeLineCap.WithValue(value))
 
     [<Extension>]
     static member inline strokeLineJoin(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: PenLineJoin) =
-        this.AddScalar(Border.StrokeLineJoin.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeLineJoin.WithValue(value))
 
     [<Extension>]
     static member inline strokeMiterLimit(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
-        this.AddScalar(Border.StrokeMiterLimit.WithValue(value))
+        this.AddScalar(CompatBorder.StrokeMiterLimit.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: Thickness) =
-        this.AddScalar(Border.Padding.WithValue(value))
+        this.AddScalar(CompatBorder.Padding.WithValue(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, value: float) =
-        BorderModifiers.padding(this, Thickness(value))
+        CompatBorderModifiers.padding(this, Thickness(value))
 
     [<Extension>]
     static member inline padding(this: WidgetBuilder<'msg, #IFabCompatBorder>, left: float, top: float, right: float, bottom: float) =
-        BorderModifiers.padding(this, Thickness(left, top, right, bottom))
+        CompatBorderModifiers.padding(this, Thickness(left, top, right, bottom))
 
     /// <summary>Link a ViewRef to access the direct Border control instance</summary>
     [<Extension>]

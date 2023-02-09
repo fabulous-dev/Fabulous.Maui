@@ -4,6 +4,7 @@ open System
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui.Controls
+open Microsoft.Maui
 
 module Widgets =
     let registerWithAdditionalSetup<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> (additionalSetup: 'T -> IViewNode -> unit) =
@@ -27,7 +28,7 @@ module Widgets =
 
                     match parentNode with
                     | None -> ()
-                    | Some node -> view.Parent <- node.Target :?> FabElement
+                    | Some node -> view.Parent <- node.Target :?> IElement
 
                     let node = ViewNode(parentNode, treeContext, weakReference)
 
@@ -63,8 +64,3 @@ module Widgets =
 
     let register<'T when 'T :> FabElement and 'T: (new: unit -> 'T)> () =
         registerWithAdditionalSetup<'T>(fun _ _ -> ())
-
-[<Extension>]
-type FabElementExtensions =
-    [<Extension>]
-    static member inline style(this: WidgetBuilder<'msg, #IFabElement>, fn: WidgetBuilder<'msg, #IFabElement> -> WidgetBuilder<'msg, #IFabElement>) = fn this

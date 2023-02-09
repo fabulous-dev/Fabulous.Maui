@@ -7,6 +7,7 @@ open System.IO
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.Maui
+open Fabulous.StackAllocatedCollections
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Microsoft.Maui.Controls.PlatformConfiguration
@@ -443,3 +444,9 @@ type NavigationPagePlatformModifiers =
     [<Extension>]
     static member inline prefersLargeTitles(this: WidgetBuilder<'msg, #IFabCompatNavigationPage>, value: bool) =
         this.AddScalar(NavigationPage.PrefersLargeTitles.WithValue(value))
+
+[<Extension>]
+type NavigationPageYieldExtensions =
+    [<Extension>]
+    static member inline Yield(_: CollectionBuilder<'msg, 'marker, #IFabCompatPage>, x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }

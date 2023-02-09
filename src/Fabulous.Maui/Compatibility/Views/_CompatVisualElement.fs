@@ -9,6 +9,7 @@ open Microsoft.Maui.Controls
 
 type IFabCompatVisualElement =
     inherit IFabCompatNavigableElement
+    inherit IView
 
 [<Struct>]
 type TranslateToData =

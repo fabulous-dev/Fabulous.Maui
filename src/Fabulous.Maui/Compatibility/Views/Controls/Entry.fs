@@ -80,9 +80,9 @@ type EntryModifiers =
         this.AddScalar(Entry.CursorPosition.WithValue(value))
 
     [<Extension>]
-    static member inline font
+    static member inline font<'msg, 'marker when 'marker :> IFabCompatEntry>
         (
-            this: WidgetBuilder<'msg, #IFabCompatEntry>,
+            this: WidgetBuilder<'msg, 'marker>,
             ?size: float,
             ?attributes: FontAttributes,
             ?fontFamily: string,

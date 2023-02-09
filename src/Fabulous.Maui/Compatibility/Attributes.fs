@@ -161,7 +161,7 @@ module Attributes =
             | ValueSome { Light = light; Dark = dark } -> target.SetAppTheme(bindableProperty, light.ToMauiColor(), dark.ToMauiColor()))
 
     /// Define an attribute storing a Widget for a bindable property
-    let inline defineBindableWidget (bindableProperty: BindableProperty) =
+    let defineBindableWidget (bindableProperty: BindableProperty) =
         Attributes.definePropertyWidget
             bindableProperty.PropertyName
             (fun target -> (target :?> BindableObject).GetValue(bindableProperty))

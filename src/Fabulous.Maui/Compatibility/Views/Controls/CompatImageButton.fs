@@ -78,7 +78,7 @@ module CompatImageButtonBuilders =
 
             View.CompatImageButton<'msg>(aspect, light = light, onClicked = onClicked, ?dark = dark)
 
-        static member inline ImageButton<'msg>(aspect: Aspect, light: Stream, onClicked: 'msg, ?dark: Stream) =
+        static member inline CompatImageButton<'msg>(aspect: Aspect, light: Stream, onClicked: 'msg, ?dark: Stream) =
             let light = ImageSource.FromStream(fun () -> light)
 
             let dark =

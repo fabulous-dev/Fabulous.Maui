@@ -6,27 +6,27 @@ namespace Fabulous.Maui
 {
     public interface IFabWindow : IWindow, IFabTitledElement
     {
-        void SetOnCreated(Action? value);
-        void SetOnResumed(Action? value);
+        void SetContent(IView value);
+        void SetFlowDirection(FlowDirection value);
+        void SetHeight(double value);
+        void SetMaximumHeight(double value);
+        void SetMaximumWidth(double value);
+        void SetMinimumWidth(double value);
+        void SetMinimumHeight(double value);
         void SetOnActivated(Action? value);
-        void SetOnDeactivated(Action? value);
-        void SetOnStopped(Action? value);
-        void SetOnDestroying(Action? value);
-        void SetOnBackgrounding(Action<IPersistedState>? value);
         void SetOnBackButtonClicked(Func<bool>? value);
+        void SetOnBackgrounding(Action<IPersistedState>? value);
+        void SetOnCreated(Action? value);
+        void SetOnDeactivated(Action? value);
+        void SetOnDestroying(Action? value);
         void SetOnDisplayDensityChanged(Action<float>? value);
         void SetOnFrameChanged(Action<Microsoft.Maui.Graphics.Rect>? value);
-        void SetContent(IView value);
+        void SetOnResumed(Action? value);
+        void SetOnStopped(Action? value);
         void SetVisualDiagnosticsOverlay(IVisualDiagnosticsOverlay value);
+        void SetWidth(double value);
         void SetX(double value);
         void SetY(double value);
-        void SetWidth(double value);
-        void SetMinimumWidth(double value);
-        void SetMaximumWidth(double value);
-        void SetHeight(double value);
-        void SetMinimumHeight(double value);
-        void SetMaximumHeight(double value);
-        void SetFlowDirection(FlowDirection value);
     }
 }
 
